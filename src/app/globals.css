@@ -1,26 +1,314 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #090D16;
+  --foreground: #F8FAFC;
+  --card: #111827;
+  --card-border: rgba(38, 81, 185, 0.28);
+  --brand-orange: #FF8500;
+  --brand-orange-dark: #FFA133;
+  --brand-orange-light: #FFB866;
+  --brand-blue: #2651B9;
+  --brand-blue-dark: #1E3A8A;
+  --brand-blue-light: #3B82F6;
+}
+
+.dark {
+  --background: #090D16;
+  --foreground: #F8FAFC;
+  --card: #111827;
+  --card-border: rgba(38, 81, 185, 0.28);
+  --brand-orange: #FF8500;
+  --brand-orange-dark: #FFA133;
+  --brand-orange-light: #FFB866;
+  --brand-blue: #3B82F6;
+  --brand-blue-dark: #2651B9;
+  --brand-blue-light: #60A5FA;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-card: var(--card);
+  --color-card-border: var(--card-border);
+  --color-brand-orange: var(--brand-orange);
+  --color-brand-blue: var(--brand-blue);
+  --font-sans: var(--font-plus-jakarta), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: var(--font-geist-mono), monospace;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
+  color-scheme: light;
+}
+
+html.dark {
+  color-scheme: dark;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  overflow-x: clip;
+  min-height: 100vh;
 }
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #E2E8F0;
+}
+.dark ::-webkit-scrollbar-track {
+  background: #090D16;
+}
+::-webkit-scrollbar-thumb {
+  background: #94A3B8;
+  border-radius: 4px;
+}
+.dark ::-webkit-scrollbar-thumb {
+  background: #334155;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #64748B;
+}
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #475569;
+}
+
+/* 3D Studio Cards & Shadows */
+.studio-card {
+  background: #FFFFFF;
+  border: 1px solid rgba(38, 81, 185, 0.14);
+  box-shadow: 0 10px 30px -5px rgba(15, 23, 42, 0.08), 0 2px 6px -1px rgba(38, 81, 185, 0.04);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dark .studio-card {
+  background: #111827;
+  border: 1px solid rgba(38, 81, 185, 0.28);
+  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.6), 0 2px 6px -1px rgba(38, 81, 185, 0.1);
+}
+
+.studio-card:hover {
+  border-color: rgba(255, 133, 0, 0.5);
+  box-shadow: 0 20px 40px -8px rgba(38, 81, 185, 0.14), 0 4px 12px -2px rgba(255, 133, 0, 0.08);
+  transform: translateY(-2px);
+}
+
+.dark .studio-card:hover {
+  border-color: rgba(255, 133, 0, 0.6);
+  box-shadow: 0 20px 40px -8px rgba(0, 0, 0, 0.75), 0 4px 12px -2px rgba(255, 133, 0, 0.18);
+}
+
+/* Glow effects calibrated to Pixim Logo */
+.glow-orange {
+  box-shadow: 0 10px 30px -5px rgba(255, 133, 0, 0.3);
+}
+
+.glow-blue {
+  box-shadow: 0 10px 30px -5px rgba(38, 81, 185, 0.25);
+}
+
+.glow-pill {
+  box-shadow: 0 4px 16px -4px rgba(38, 81, 185, 0.18), 0 0 0 1px rgba(38, 81, 185, 0.15);
+}
+
+/* Ambient background radial gradient */
+.radial-spotlight {
+  background: radial-gradient(
+    circle at 50% 30%,
+    rgba(38, 81, 185, 0.08) 0%,
+    rgba(255, 133, 0, 0.05) 30%,
+    rgba(229, 236, 246, 0) 70%
+  );
+}
+
+.dark .radial-spotlight {
+  background: radial-gradient(
+    circle at 50% 30%,
+    rgba(38, 81, 185, 0.18) 0%,
+    rgba(255, 133, 0, 0.08) 30%,
+    rgba(9, 13, 22, 0) 70%
+  );
+}
+
+/* Glassmorphism */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(38, 81, 185, 0.15);
+  box-shadow: 0 10px 30px -5px rgba(15, 23, 42, 0.08);
+}
+
+.dark .glass-panel {
+  background: rgba(17, 24, 39, 0.92);
+  border: 1px solid rgba(38, 81, 185, 0.28);
+  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.55);
+}
+
+.glass-card {
+  background: #FFFFFF;
+  border: 1px solid rgba(38, 81, 185, 0.14);
+  box-shadow: 0 8px 24px -4px rgba(15, 23, 42, 0.07);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dark .glass-card {
+  background: #111827;
+  border: 1px solid rgba(38, 81, 185, 0.25);
+  box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.45);
+}
+
+.glass-card:hover {
+  border-color: rgba(255, 133, 0, 0.5);
+  box-shadow: 0 16px 36px -6px rgba(38, 81, 185, 0.12);
+  transform: translateY(-2px);
+}
+
+.dark .glass-card:hover {
+  border-color: rgba(255, 133, 0, 0.6);
+  box-shadow: 0 16px 36px -6px rgba(0, 0, 0, 0.65);
+}
+
+/* Animated subtle pulse for availability badge */
+@keyframes pulseGlow {
+  0%, 100% {
+    opacity: 0.85;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.06);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 2.5s infinite ease-in-out;
+}
+
+/* Infinite Marquee Ribbon Animations */
+@keyframes marqueeLeft {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-33.333333%);
+  }
+}
+
+@keyframes marqueeRight {
+  0% {
+    transform: translateX(-33.333333%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+.animate-marquee-left {
+  animation: marqueeLeft linear infinite;
+}
+
+.animate-marquee-right {
+  animation: marqueeRight linear infinite;
+}
+
+/* Pixxen-Inspired Service Card System */
+.pixxen-service-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 28px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(17, 24, 39, 0.75);
+  backdrop-filter: blur(16px);
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+              border-color 0.4s ease,
+              box-shadow 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.pixxen-service-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 28px;
+  background: radial-gradient(
+    circle at 100% 0%,
+    rgba(255, 133, 0, 0.22) 0%,
+    rgba(38, 81, 185, 0.14) 45%,
+    transparent 80%
+  );
+  clip-path: circle(0% at 100% 0%);
+  transition: clip-path 0.75s cubic-bezier(0.65, 0, 0.35, 1);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.pixxen-service-card:hover::before {
+  clip-path: circle(150% at 100% 0%);
+}
+
+.pixxen-service-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(255, 133, 0, 0.55);
+  box-shadow: 0 20px 45px -15px rgba(255, 133, 0, 0.25),
+              0 0 35px -8px rgba(38, 81, 185, 0.25);
+}
+
+/* Brand Stories Sticky Portfolio Showcase */
+.portfolio-work-item .work-item-overlay {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  bottom: 0;
+  height: 50%;
+  background: linear-gradient(180deg, rgba(9, 13, 22, 0) 0%, rgba(9, 13, 22, 0.75) 35%, rgba(9, 13, 22, 0.98) 100%);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  border-bottom-left-radius: inherit;
+  border-bottom-right-radius: inherit;
+}
+
+.portfolio-work-item .all-portfolio-info {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(16px);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.portfolio-work-item:hover .work-item-overlay {
+  opacity: 1;
+  visibility: visible;
+}
+
+.portfolio-work-item:hover .all-portfolio-info {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.portfolio-work-item .work-box-info {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.3s ease,
+              background-color 0.3s ease;
+}
+
+.portfolio-work-item .work-box-info:hover {
+  transform: translateY(-3px);
+  border-color: rgba(255, 133, 0, 0.55);
+}
+
+
+
+
+
