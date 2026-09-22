@@ -263,16 +263,12 @@ export const GsapReviewsInfiniteSlider: React.FC<GsapReviewsInfiniteSliderProps>
         </div>
       </div>
 
-      {/* Left/Right Edge Fade Masks */}
-      <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-20 sm:w-44 bg-gradient-to-r from-[#081330] via-[#081330]/90 to-transparent z-10" />
-      <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-20 sm:w-44 bg-gradient-to-l from-[#081330] via-[#081330]/90 to-transparent z-10" />
-
-      {/* Slider Container */}
+      {/* Slider Container with clean edge alpha fade (zero black shadow overlay) */}
       <div
         ref={containerRef}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
-        className="relative w-full overflow-hidden select-none flex flex-col gap-6"
+        className="relative w-full overflow-hidden select-none flex flex-col gap-6 [mask-image:linear-gradient(to_right,transparent_0%,black_36px,black_calc(100%-36px),transparent_100%)] [-webkit-mask-image:linear-gradient(to_right,transparent_0%,black_36px,black_calc(100%-36px),transparent_100%)]"
       >
         {/* Track 1: Moving left */}
         <div
