@@ -1,8 +1,7 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
-import lottie, { AnimationItem } from "lottie-web";
-import { AnimatedServiceIcon } from "./AnimatedServiceIcon";
+import React, { useRef, useEffect } from "react";
+import type { AnimationItem } from "lottie-web";
 
 interface PixxenLottieIconProps {
   type: string;
@@ -11,13 +10,36 @@ interface PixxenLottieIconProps {
   isHovered?: boolean;
 }
 
+// 1:1 Mapping to the Pixxen-style brand-colored Lottie animations in /public/lottie
 const LOTTIE_MAP: Record<string, string> = {
+  // 1. Logo & Brand Identity -> branding.json
   "logo-design": "/lottie/branding.json",
+  "branding": "/lottie/branding.json",
+  "brand-identity": "/lottie/branding.json",
+
+  // 2. Website Design & Dev -> website-design.json
   "web-design": "/lottie/website-design.json",
+  "website-design": "/lottie/website-design.json",
+
+  // 3. Package & Label Design -> saas-design.json
   "package-design": "/lottie/saas-design.json",
+  "saas-design": "/lottie/saas-design.json",
+  "packaging": "/lottie/saas-design.json",
+
+  // 4. Social Media & Posters -> mobile-app.json
   "social-media": "/lottie/mobile-app.json",
+  "mobile-app": "/lottie/mobile-app.json",
+  "mobile-app-design": "/lottie/mobile-app.json",
+
+  // 5. Motion Graphics & 3D Intro -> web-app.json
   "motion-video": "/lottie/web-app.json",
+  "web-app": "/lottie/web-app.json",
+  "motion-graphics": "/lottie/web-app.json",
+
+  // 6. Technical SEO & Growth -> dashboard-design.json
   "seo-growth": "/lottie/dashboard-design.json",
+  "dashboard-design": "/lottie/dashboard-design.json",
+  "technical-seo": "/lottie/dashboard-design.json",
 };
 
 export const PixxenLottieIcon: React.FC<PixxenLottieIconProps> = ({
@@ -28,86 +50,88 @@ export const PixxenLottieIcon: React.FC<PixxenLottieIconProps> = ({
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const animRef = useRef<AnimationItem | null>(null);
-  const [hasError, setHasError] = useState(false);
-  const [isLoaded, setIsLoaded] = useState(false);
+  const isLoadedRef = useRef(false);
 
-  const lottiePath = LOTTIE_MAP[type];
+  const jsonPath = LOTTIE_MAP[type] || "/lottie/branding.json";
 
   useEffect(() => {
-    if (!containerRef.current || !lottiePath) return;
+    let isMounted = true;
+    isLoadedRef.current = false;
 
-    // Clean up any previous animation
+    // Clean up previous instance if any
     if (animRef.current) {
       animRef.current.destroy();
       animRef.current = null;
     }
 
-    try {
-      const anim = lottie.loadAnimation({
-        container: containerRef.current,
-        renderer: "svg",
-        loop: true,
-        autoplay: false,
-        path: lottiePath,
-      });
+    import("lottie-web").then((lottieModule) => {
+      if (!isMounted || !containerRef.current) return;
+      const lottie = lottieModule.default || lottieModule;
 
-      anim.addEventListener("DOMLoaded", () => {
-        setIsLoaded(true);
-        anim.goToAndStop(0, true);
-      });
+      try {
+        const anim = lottie.loadAnimation({
+          container: containerRef.current,
+          renderer: "svg",
+          loop: true,
+          autoplay: false,
+          path: jsonPath,
+        });
 
-      anim.addEventListener("data_failed", () => {
-        setHasError(true);
-      });
+        anim.addEventListener("DOMLoaded", () => {
+          if (!isMounted) return;
+          isLoadedRef.current = true;
+          // Freeze at frame 0 ready for hover interaction
+          anim.goToAndStop(0, true);
+        });
 
-      animRef.current = anim;
-    } catch {
-      setTimeout(() => {
-        setHasError(true);
-      }, 0);
-    }
+        animRef.current = anim;
+      } catch (err) {
+        console.error("Failed to load lottie animation:", jsonPath, err);
+      }
+    });
 
     return () => {
+      isMounted = false;
       if (animRef.current) {
         animRef.current.destroy();
         animRef.current = null;
       }
     };
-  }, [lottiePath]);
+  }, [jsonPath]);
 
-  // Only animate when the card is hovered, pause at frame 0 when not hovered
+  // Trigger animation on card hover or direct hover
   useEffect(() => {
-    if (animRef.current && isLoaded) {
-      if (isHovered) {
-        animRef.current.setSpeed(1.2);
-        animRef.current.goToAndPlay(0, true);
-      } else {
-        animRef.current.goToAndStop(0, true);
-      }
-    }
-  }, [isHovered, isLoaded]);
+    const anim = animRef.current;
+    if (!anim) return;
 
-  if (hasError || !lottiePath) {
-    return <AnimatedServiceIcon type={type} size={size} className={className} />;
-  }
+    if (isHovered) {
+      anim.goToAndPlay(0, true);
+    } else {
+      // Pause smoothly when hover leaves
+      anim.pause();
+    }
+  }, [isHovered]);
+
+  const handleMouseEnter = () => {
+    if (animRef.current) {
+      animRef.current.goToAndPlay(0, true);
+    }
+  };
+
+  const handleMouseLeave = () => {
+    if (animRef.current && !isHovered) {
+      animRef.current.pause();
+    }
+  };
 
   return (
     <div
-      className={`relative flex items-center justify-center transition-transform duration-500 select-none ${
-        isHovered ? "scale-110" : "scale-100"
-      } ${className}`}
+      ref={containerRef}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      className={`relative flex items-center justify-center select-none pointer-events-auto transition-transform duration-300 group-hover:scale-105 ${className}`}
       style={{ width: size, height: size }}
-    >
-      <div
-        ref={containerRef}
-        className="w-full h-full flex items-center justify-center pointer-events-none drop-shadow-[0_4px_16px_rgba(255,133,0,0.35)]"
-      />
-      {/* Fallback while Lottie is loading */}
-      {!isLoaded && (
-        <div className="absolute inset-0 flex items-center justify-center">
-          <AnimatedServiceIcon type={type} size={size} />
-        </div>
-      )}
-    </div>
+      aria-hidden="true"
+    />
   );
 };

@@ -185,7 +185,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
               </span>
             </div>
 
-            <h1 className="relative inline-block text-3xl sm:text-5xl font-extrabold text-[#0F172A] dark:text-[#F8FAFC] tracking-tight leading-tight">
+            <h1 className="font-agency relative inline-block text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#0F172A] dark:text-[#F8FAFC] tracking-tight leading-tight">
               {service.title}
               <span className="block w-48 mt-1 pointer-events-none">
                 <GsapDrawSvg
@@ -246,8 +246,8 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
       {/* Deliverables & Tools Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 mb-20">
         {/* Deliverables */}
-        <div className="lg:col-span-7 p-8 rounded-3xl bg-white dark:bg-[#111827] border border-[#2651B9]/15 dark:border-[#2651B9]/25 shadow-sm">
-          <h2 className="text-xl font-bold text-[#0F172A] dark:text-[#F8FAFC] mb-6 flex items-center gap-2">
+        <div className="lg:col-span-7 p-8 rounded-3xl bg-white dark:bg-[#0C1E4E] border border-[#2651B9]/15 dark:border-[#2651B9]/25 shadow-sm">
+          <h2 className="font-agency text-xl sm:text-2xl font-bold text-[#0F172A] dark:text-[#F8FAFC] mb-6 flex items-center gap-2">
             <Award className="w-5 h-5 text-[#FF8500]" />
             <span>Tangible Deliverables Included</span>
           </h2>
@@ -265,9 +265,9 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
         </div>
 
         {/* Tools & Workflow */}
-        <div className="lg:col-span-5 p-8 rounded-3xl bg-white dark:bg-[#111827] border border-[#2651B9]/15 dark:border-[#2651B9]/25 shadow-sm flex flex-col justify-between">
+        <div className="lg:col-span-5 p-8 rounded-3xl bg-white dark:bg-[#0C1E4E] border border-[#2651B9]/15 dark:border-[#2651B9]/25 shadow-sm flex flex-col justify-between">
           <div>
-            <h2 className="text-xl font-bold text-[#0F172A] dark:text-[#F8FAFC] mb-6 flex items-center gap-2">
+            <h2 className="font-agency text-xl sm:text-2xl font-bold text-[#0F172A] dark:text-[#F8FAFC] mb-6 flex items-center gap-2">
               <Sparkles className="w-5 h-5 text-blue-600 dark:text-blue-400" />
               <span>Tools & Tech Stack</span>
             </h2>
@@ -303,7 +303,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
       {/* Pricing Tiers for this Service */}
       <div className="mb-20">
         <div className="text-center max-w-2xl mx-auto mb-10">
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0F172A] dark:text-[#F8FAFC]">
+          <h2 className="font-agency text-2xl sm:text-3xl font-extrabold text-[#0F172A] dark:text-[#F8FAFC]">
             Available Service Packages
           </h2>
           <p className="mt-2 text-sm text-slate-500 dark:text-slate-400">
@@ -313,10 +313,10 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* Basic */}
-          <div className="p-6 rounded-2xl bg-white dark:bg-[#111827] border border-[#2651B9]/15 dark:border-[#2651B9]/25 shadow-sm flex flex-col justify-between">
+          <div className="p-6 rounded-2xl bg-white dark:bg-[#0C1E4E] border border-[#2651B9]/15 dark:border-[#2651B9]/25 shadow-sm flex flex-col justify-between">
             <div>
               <div className="text-sm font-bold text-slate-800 dark:text-slate-200">Basic Tier</div>
-              <div className="mt-3 text-2xl font-black text-[#0F172A] dark:text-[#F8FAFC]">{details.pricing.basic.usd}</div>
+              <div className="font-agency mt-3 text-3xl font-black text-[#0F172A] dark:text-[#F8FAFC]">{details.pricing.basic.usd}</div>
               <div className="text-xs font-mono text-emerald-600 dark:text-emerald-400 mt-0.5">{details.pricing.basic.bdt}</div>
               <p className="text-xs text-slate-600 dark:text-slate-400 mt-3">{details.pricing.basic.desc}</p>
             </div>
@@ -329,13 +329,13 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
           </div>
 
           {/* Standard */}
-          <div className="p-6 rounded-2xl bg-white dark:bg-[#111827] border-2 border-[#FF8500] shadow-lg flex flex-col justify-between relative overflow-hidden">
+          <div className="p-6 rounded-2xl bg-white dark:bg-[#0C1E4E] border-2 border-[#FF8500] shadow-lg flex flex-col justify-between relative overflow-hidden">
             <div className="absolute top-0 right-0 px-3 py-0.5 rounded-bl-xl bg-[#FF8500] text-white font-bold text-[10px] uppercase tracking-wider">
               Most Popular
             </div>
             <div>
               <div className="text-sm font-bold text-[#FF8500]">Standard Tier</div>
-              <div className="mt-3 text-2xl font-black text-[#0F172A] dark:text-[#F8FAFC]">{details.pricing.standard.usd}</div>
+              <div className="font-agency mt-3 text-3xl font-black text-[#0F172A] dark:text-[#F8FAFC]">{details.pricing.standard.usd}</div>
               <div className="text-xs font-mono text-emerald-600 dark:text-emerald-400 mt-0.5">{details.pricing.standard.bdt}</div>
               <p className="text-xs text-slate-600 dark:text-slate-400 mt-3">{details.pricing.standard.desc}</p>
             </div>
@@ -348,10 +348,10 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
           </div>
 
           {/* Premium */}
-          <div className="p-6 rounded-2xl bg-white dark:bg-[#111827] border border-[#2651B9]/15 dark:border-[#2651B9]/25 shadow-sm flex flex-col justify-between">
+          <div className="p-6 rounded-2xl bg-white dark:bg-[#0C1E4E] border border-[#2651B9]/15 dark:border-[#2651B9]/25 shadow-sm flex flex-col justify-between">
             <div>
               <div className="text-sm font-bold text-slate-800 dark:text-slate-200">Premium Tier</div>
-              <div className="mt-3 text-2xl font-black text-[#0F172A] dark:text-[#F8FAFC]">{details.pricing.premium.usd}</div>
+              <div className="font-agency mt-3 text-3xl font-black text-[#0F172A] dark:text-[#F8FAFC]">{details.pricing.premium.usd}</div>
               <div className="text-xs font-mono text-emerald-600 dark:text-emerald-400 mt-0.5">{details.pricing.premium.bdt}</div>
               <p className="text-xs text-slate-600 dark:text-slate-400 mt-3">{details.pricing.premium.desc}</p>
             </div>
@@ -375,8 +375,8 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
       </div>
 
       {/* Direct Contact CTA */}
-      <div className="p-8 sm:p-12 rounded-3xl bg-white dark:bg-[#111827] border border-[#2651B9]/15 dark:border-[#2651B9]/25 shadow-xl dark:shadow-2xl text-center">
-        <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0F172A] dark:text-[#F8FAFC]">
+      <div className="p-8 sm:p-12 rounded-3xl bg-white dark:bg-[#0C1E4E] border border-[#2651B9]/15 dark:border-[#2651B9]/25 shadow-xl dark:shadow-2xl text-center">
+        <h2 className="font-agency text-xl sm:text-2xl md:text-3xl font-extrabold text-[#0F172A] dark:text-[#F8FAFC]">
           Ready to kickstart your {service.title}?
         </h2>
         <p className="mt-3 text-sm text-slate-600 dark:text-slate-300 max-w-lg mx-auto">

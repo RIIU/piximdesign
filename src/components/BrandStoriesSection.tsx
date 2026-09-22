@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -141,13 +141,20 @@ interface BrandStoriesSectionProps {
 export const BrandStoriesSection: React.FC<BrandStoriesSectionProps> = ({ onOpenContact }) => {
   const [activeCaseStudy, setActiveCaseStudy] = useState<CaseStudy | null>(null);
 
+  const sectionRef = useRef<HTMLElement>(null);
+  const leftContentRef = useRef<HTMLDivElement>(null);
+  const rightColRef = useRef<HTMLDivElement>(null);
+
+
+
   return (
     <section
+      ref={sectionRef}
       id="portfolioSection"
-      className="steps-section relative py-20 sm:py-24 lg:py-28 bg-[#090D16]"
+      className="steps-section relative py-20 sm:py-24 lg:py-28 overflow-x-clip bg-gradient-to-b from-[#081330] via-[#0B1E52] to-[#081330]"
       style={{
         backgroundImage:
-          "radial-gradient(ellipse 65% 50% at 20% 30%, rgba(255, 133, 0, 0.08) 0%, rgba(38, 81, 185, 0.06) 50%, transparent 80%)",
+          "radial-gradient(ellipse 65% 50% at 20% 30%, rgba(255, 133, 0, 0.12) 0%, rgba(38, 81, 185, 0.16) 50%, transparent 80%)",
       }}
     >
       {/* Decorative background workshape line */}
@@ -161,21 +168,24 @@ export const BrandStoriesSection: React.FC<BrandStoriesSectionProps> = ({ onOpen
         />
       </div>
 
-      {/* Main Split Layout Container (1280px max-width, matching all flagship sections) */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20">
-        <div className="flex flex-col lg:flex-row items-start justify-between gap-10 lg:gap-12 xl:gap-14">
+      {/* Main Split Layout Container */}
+      <div className="max-w-[1550px] mx-auto px-4 sm:px-8 lg:px-12 relative z-20">
+        <div className="flex flex-col lg:flex-row items-stretch justify-between gap-10 lg:gap-16">
           
-          {/* Left Column: Fixed / Sticky Text & CTA at Top Left */}
-          <div className="steps-left w-full lg:w-[42%] xl:w-[40%] lg:sticky lg:top-28 xl:top-32 self-start z-10">
-            <div className="left-content flex flex-col justify-start py-2 sm:py-4">
-              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-[40px] xl:text-[46px] font-bold text-white tracking-tight leading-[1.16] mb-4 sm:mb-6 text-left">
+          {/* Left Column: Fixed / Sticky Text & CTA on Top Left */}
+          <div className="steps-left w-full lg:w-[42%] xl:w-[40%] flex flex-col relative z-10 self-stretch">
+            <div
+              ref={leftContentRef}
+              className="left-content lg:sticky lg:top-28 xl:top-32 flex flex-col justify-start py-4"
+            >
+              <h2 className="font-agency text-2xl sm:text-3xl md:text-4xl lg:text-[44px] font-extrabold text-white tracking-tight leading-[1.15] mb-6 text-left">
                 Experience Brand <br />
                 <span className="bg-gradient-to-r from-white via-slate-100 to-slate-400 bg-clip-text text-transparent">
                   Stories in Design
                 </span>
               </h2>
 
-              <p className="text-base sm:text-lg text-[#A7BDB5] leading-relaxed mb-6 sm:mb-8 max-w-lg font-normal text-left">
+              <p className="text-base lg:text-lg text-[#A7BDB5] leading-relaxed mb-8 max-w-lg font-normal text-left">
                 At Pixim, we believe design is more than just look and feel. It takes the end user through a mesmerizing journey that ends in conversion without any friction.
               </p>
 
@@ -195,20 +205,23 @@ export const BrandStoriesSection: React.FC<BrandStoriesSectionProps> = ({ onOpen
           </div>
 
           {/* Right Column: Scrolling Case Studies Image Cards (Scrolls past naturally) */}
-          <div className="steps-right w-full lg:w-[58%] xl:w-[60%] flex flex-col gap-8 sm:gap-12 relative z-10">
+          <div
+            ref={rightColRef}
+            className="steps-right w-full lg:w-[58%] xl:w-[60%] flex flex-col gap-10 sm:gap-14 relative z-10"
+          >
             {CASE_STUDIES.map((study) => (
               <div
                 key={study.id}
                 onClick={() => setActiveCaseStudy(study)}
                 className="step-content portfolio-card cursor-pointer group w-full"
               >
-                <div className="portfolio-work-item relative rounded-3xl overflow-hidden border border-white/10 hover:border-[#FF8500]/60 transition-all duration-500 shadow-2xl bg-[#090D16]">
+                <div className="portfolio-work-item relative rounded-3xl overflow-hidden border border-blue-400/20 hover:border-[#FF8500]/60 transition-all duration-500 shadow-2xl bg-[#0C1E4E]">
                   {/* Top Badge: Number and Category */}
-                  <div className="absolute top-4 sm:top-5 left-4 sm:left-5 right-4 sm:right-5 z-30 flex items-center justify-between pointer-events-none">
-                    <span className="font-mono text-[11px] sm:text-xs font-black tracking-widest text-[#FFA133] px-3 sm:px-3.5 py-1 sm:py-1.5 rounded-full bg-[#090D16]/85 backdrop-blur-md border border-[#FF8500]/30 shadow-lg">
+                  <div className="absolute top-5 left-5 right-5 z-30 flex items-center justify-between pointer-events-none">
+                    <span className="font-mono text-xs font-black tracking-widest text-[#FFA133] px-3.5 py-1.5 rounded-full bg-[#081330]/85 backdrop-blur-md border border-[#FF8500]/30 shadow-lg">
                       {study.number} / 05
                     </span>
-                    <span className="text-[11px] sm:text-xs font-semibold text-slate-200 px-3 sm:px-3.5 py-1 sm:py-1.5 rounded-full bg-[#090D16]/85 backdrop-blur-md border border-white/15 shadow-lg">
+                    <span className="text-xs font-semibold text-slate-200 px-3.5 py-1.5 rounded-full bg-[#081330]/85 backdrop-blur-md border border-white/15 shadow-lg">
                       {study.category}
                     </span>
                   </div>
@@ -225,61 +238,61 @@ export const BrandStoriesSection: React.FC<BrandStoriesSectionProps> = ({ onOpen
                     />
                   </div>
 
-                  {/* Backdrop Blur Overlay on Hover: Strictly bottom half (50%), top half remains completely normal */}
-                  <div className="work-item-overlay absolute inset-x-0 bottom-0 top-1/2 h-1/2 pointer-events-none z-10" />
+                  {/* Backdrop Blur Overlay on Hover - only bottom half */}
+                  <div className="work-item-overlay absolute inset-x-0 bottom-0 h-[56%] pointer-events-none z-10 rounded-b-3xl" />
 
                   {/* Hover Information Box with 3 Metric Pills + View Details */}
-                  <div className="all-portfolio-info absolute inset-x-0 bottom-0 p-4 sm:p-6 xl:p-7 z-20 flex flex-col justify-end">
+                  <div className="all-portfolio-info absolute inset-x-0 bottom-0 p-5 sm:p-7 xl:p-8 z-20 flex flex-col justify-end">
                     {/* Top Stats Row: 3 metric highlight boxes */}
-                    <div className="grid grid-cols-3 gap-2 sm:gap-3 mb-3.5 sm:mb-4">
+                    <div className="grid grid-cols-3 gap-2.5 sm:gap-3.5 mb-5">
                       {/* Box 1 */}
-                      <div className="work-box-info bg-[#090D16]/80 backdrop-blur-md border border-white/15 p-2.5 sm:p-3.5 rounded-2xl flex flex-col justify-between shadow-xl">
-                        <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-lg bg-white/5 flex items-center justify-center mb-1.5">
+                      <div className="work-box-info bg-[#081330]/95 border border-blue-400/25 p-3 sm:p-4 rounded-2xl flex flex-col justify-between shadow-xl">
+                        <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-white/5 flex items-center justify-center mb-2">
                           <Image
                             src={study.stat1.icon}
                             alt=""
-                            width={24}
-                            height={24}
-                            className="w-4 h-4 sm:w-5 sm:h-5"
+                            width={28}
+                            height={28}
+                            className="w-5 h-5 sm:w-6 sm:h-6"
                           />
                         </div>
                         <div>
-                          <p className="text-white text-sm sm:text-base xl:text-lg font-bold leading-tight">
+                          <p className="text-white text-base sm:text-xl font-bold leading-tight">
                             {study.stat1.value}
                           </p>
-                          <p className="text-slate-400 text-[10px] sm:text-[11px] xl:text-xs line-clamp-1 mt-0.5">
+                          <p className="text-slate-400 text-[11px] sm:text-xs line-clamp-1 mt-0.5">
                             {study.stat1.label}
                           </p>
                         </div>
                       </div>
 
                       {/* Box 2 */}
-                      <div className="work-box-info bg-[#090D16]/80 backdrop-blur-md border border-white/15 p-2.5 sm:p-3.5 rounded-2xl flex flex-col justify-between shadow-xl">
-                        <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-lg bg-white/5 flex items-center justify-center mb-1.5">
+                      <div className="work-box-info bg-[#081330]/95 border border-blue-400/25 p-3 sm:p-4 rounded-2xl flex flex-col justify-between shadow-xl">
+                        <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-white/5 flex items-center justify-center mb-2">
                           <Image
                             src={study.stat2.icon}
                             alt=""
-                            width={24}
-                            height={24}
-                            className="w-4 h-4 sm:w-5 sm:h-5"
+                            width={28}
+                            height={28}
+                            className="w-5 h-5 sm:w-6 sm:h-6"
                           />
                         </div>
                         <div>
-                          <p className="text-white text-sm sm:text-base xl:text-lg font-bold leading-tight">
+                          <p className="text-white text-base sm:text-xl font-bold leading-tight">
                             {study.stat2.value}
                           </p>
-                          <p className="text-slate-400 text-[10px] sm:text-[11px] xl:text-xs line-clamp-1 mt-0.5">
+                          <p className="text-slate-400 text-[11px] sm:text-xs line-clamp-1 mt-0.5">
                             {study.stat2.label}
                           </p>
                         </div>
                       </div>
 
                       {/* Box 3: View Details CTA */}
-                      <div className="work-box-info bg-gradient-to-br from-[#FF8500]/30 to-[#2651B9]/30 backdrop-blur-md border border-[#FF8500]/50 p-2.5 sm:p-3.5 rounded-2xl flex flex-col items-center justify-center text-center group/btn hover:bg-[#FF8500]/40 transition-colors shadow-xl">
-                        <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-gradient-to-r from-[#FF8500] to-[#FFA133] text-white flex items-center justify-center mb-1 shadow-md shadow-[#FF8500]/30 transition-transform group-hover/btn:scale-110">
-                          <ArrowUpRight className="w-3.5 h-3.5" />
+                      <div className="work-box-info bg-gradient-to-br from-[#FF8500]/30 to-[#2651B9]/30 border border-[#FF8500]/50 p-3 sm:p-4 rounded-2xl flex flex-col items-center justify-center text-center group/btn hover:bg-[#FF8500]/40 transition-colors shadow-xl">
+                        <div className="w-8 h-8 rounded-full bg-gradient-to-r from-[#FF8500] to-[#FFA133] text-white flex items-center justify-center mb-1.5 shadow-md shadow-[#FF8500]/30 transition-transform group-hover/btn:scale-110">
+                          <ArrowUpRight className="w-4 h-4" />
                         </div>
-                        <p className="text-white text-[11px] sm:text-xs xl:text-sm font-semibold whitespace-nowrap">
+                        <p className="text-white text-xs sm:text-sm font-semibold whitespace-nowrap">
                           View details
                         </p>
                       </div>
@@ -287,7 +300,7 @@ export const BrandStoriesSection: React.FC<BrandStoriesSectionProps> = ({ onOpen
 
                     {/* Title & Tagline inside Hover Overlay */}
                     <div className="text-left">
-                      <h3 className="text-white text-base sm:text-xl font-bold mb-1 line-clamp-1 text-[#FFA133]">
+                      <h3 className="font-agency text-white text-base sm:text-xl font-bold mb-1.5 line-clamp-1 text-[#FFA133]">
                         {study.title}
                       </h3>
                       <p className="text-slate-200 text-xs sm:text-sm line-clamp-2 font-normal">
@@ -320,7 +333,7 @@ export const BrandStoriesSection: React.FC<BrandStoriesSectionProps> = ({ onOpen
           onClick={() => setActiveCaseStudy(null)}
         >
           <div
-            className="relative w-full max-w-3xl rounded-3xl bg-[#0F172A] border border-white/10 shadow-2xl p-6 sm:p-8 max-h-[90vh] overflow-y-auto text-left"
+            className="relative w-full max-w-3xl rounded-3xl bg-[#0C1E4E] border border-blue-400/25 shadow-2xl p-6 sm:p-8 max-h-[90vh] overflow-y-auto text-left"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Close Button */}

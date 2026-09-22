@@ -73,7 +73,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenContact }) => {
   return (
     <section
       ref={heroRef}
-      className="relative min-h-[90vh] md:min-h-screen w-full flex flex-col items-center justify-start pt-16 sm:pt-20 md:pt-16 pb-10 md:pb-16 overflow-hidden bg-[#090D16]"
+      className="relative min-h-[90vh] md:min-h-screen w-full flex flex-col items-center justify-start pt-16 sm:pt-20 md:pt-16 pb-10 md:pb-16 overflow-hidden bg-[#081330]"
     >
       {/* Ambient background glows (GPU-native radial gradients, zero blur cost) */}
       <div 
@@ -105,7 +105,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenContact }) => {
       />
 
       {/* Soft radial vignette to preserve central typography legibility */}
-      <div className="absolute inset-0 bg-radial from-transparent via-[#090D16]/40 to-[#090D16] pointer-events-none z-10" />
+      <div className="absolute inset-0 bg-radial from-transparent via-[#081330]/40 to-[#081330] pointer-events-none z-10" />
 
       {/* Foreground Hero Content */}
       <div
@@ -114,36 +114,38 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenContact }) => {
       >
         <div className="relative w-full flex items-center justify-center">
           <ConcentricOrbitHero>
-            <h1 className="hero-title-elem text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-[#0F172A] dark:text-white leading-[1.15] max-w-2xl px-2">
-              One Stop Solution for{" "}
-              <span className="relative inline-block bg-gradient-to-r from-[#2651B9] via-[#FF8500] to-[#FF8500] bg-clip-text text-transparent">
-                Branding
-                <span className="absolute -bottom-2 left-0 w-full pointer-events-none">
-                  <GsapDrawSvg
-                    type="underline"
-                    strokeColor="#FF8500"
-                    strokeWidth={3}
-                    duration={1.2}
-                    delay={0.5}
-                  />
+            <div className="-translate-y-2 sm:-translate-y-4 flex flex-col items-center">
+              <h1 className="hero-title-elem font-agency font-black text-4xl sm:text-5xl md:text-6xl lg:text-[68px] tracking-tight text-[#0F172A] dark:text-white leading-[1.08] max-w-2xl px-2">
+                One Stop Solution for{" "}
+                <span className="relative inline-block bg-gradient-to-r from-[#2651B9] via-[#FF8500] to-[#FF8500] bg-clip-text text-transparent">
+                  Branding
+                  <span className="absolute -bottom-2 left-0 w-full pointer-events-none">
+                    <GsapDrawSvg
+                      type="underline"
+                      strokeColor="#FF8500"
+                      strokeWidth={3}
+                      duration={1.2}
+                      delay={0.5}
+                    />
+                  </span>
                 </span>
-              </span>
-            </h1>
+              </h1>
 
-            <p className="hero-desc-elem mt-3 sm:mt-5 text-sm sm:text-base md:text-lg text-slate-700 dark:text-slate-300 max-w-md sm:max-w-xl font-normal leading-relaxed px-2">
-              We craft iconic brand identities and high-performing web platforms for ambitious founders and market leaders.
-            </p>
+              <p className="hero-desc-elem font-sherika mt-3 sm:mt-5 text-sm sm:text-base md:text-lg text-slate-700 dark:text-slate-300 max-w-md sm:max-w-xl font-normal leading-relaxed px-2">
+                We craft iconic brand identities and high-performing web platforms for ambitious founders and market leaders.
+              </p>
 
-            <div className="hero-cta-elem mt-5 sm:mt-8 flex flex-col items-center w-full px-4 sm:px-0">
-              <GsapMagneticButton
-                onClick={handleQuoteClick}
-                variant="primary"
-                strength={0.28}
-                className="w-full sm:w-auto px-8 py-4 text-base sm:text-lg font-bold shadow-xl shadow-orange-500/25"
-              >
-                <span>Get Your Free Quote</span>
-                <ArrowRight className="w-5 h-5 transition-transform duration-200 group-hover:translate-x-1" />
-              </GsapMagneticButton>
+              <div className="hero-cta-elem mt-5 sm:mt-8 flex flex-col items-center w-full px-4 sm:px-0">
+                <GsapMagneticButton
+                  onClick={handleQuoteClick}
+                  variant="primary"
+                  strength={0.28}
+                  className="w-full sm:w-auto px-8 py-4 text-base sm:text-lg font-bold shadow-xl shadow-orange-500/25"
+                >
+                  <span>Get Your Free Quote</span>
+                  <ArrowRight className="w-5 h-5 transition-transform duration-200 group-hover:translate-x-1" />
+                </GsapMagneticButton>
+              </div>
             </div>
           </ConcentricOrbitHero>
         </div>

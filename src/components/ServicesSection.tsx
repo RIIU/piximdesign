@@ -4,21 +4,15 @@ import React, { useState, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import { SERVICES } from "@/data/agencyData";
 import { ArrowRight } from "lucide-react";
 import { PixxenLottieIcon } from "./PixxenLottieIcon";
-import { SERVICES } from "@/data/agencyData";
 
 interface ServicesSectionProps {
   onSelectService?: (serviceTitle: string) => void;
-  className?: string;
-  titleAs?: "h1" | "h2";
 }
 
-export const ServicesSection: React.FC<ServicesSectionProps> = ({
-  onSelectService,
-  className = "relative py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto",
-  titleAs = "h2",
-}) => {
+export const ServicesSection: React.FC<ServicesSectionProps> = ({ onSelectService }) => {
   const [activeTab, setActiveTab] = useState<string>("all");
   const [hoveredId, setHoveredId] = useState<string | null>(null);
   const sectionRef = useRef<HTMLElement>(null);
@@ -79,7 +73,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
     <section
       id="services"
       ref={sectionRef}
-      className={className}
+      className="relative py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto"
     >
       {/* Background ambient lighting (GPU-native radial gradient) */}
       <div
@@ -97,21 +91,12 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
 
       {/* Section Header */}
       <div className="text-center max-w-3xl mx-auto mb-14">
-        {titleAs === "h1" ? (
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#0F172A] dark:text-white tracking-tight leading-[1.18]">
-            One-Stop Solution For <br />
-            <span className="bg-gradient-to-r from-[#FF8500] via-amber-500 to-[#2651B9] bg-clip-text text-transparent">
-              Your Brand&apos;s Digital Growth
-            </span>
-          </h1>
-        ) : (
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#0F172A] dark:text-white tracking-tight leading-[1.18]">
-            One-Stop Solution For <br />
-            <span className="bg-gradient-to-r from-[#FF8500] via-amber-500 to-[#2651B9] bg-clip-text text-transparent">
-              Your Brand&apos;s Digital Growth
-            </span>
-          </h2>
-        )}
+        <h2 className="font-agency text-2xl sm:text-3xl md:text-4xl lg:text-[44px] font-extrabold text-[#0F172A] dark:text-white tracking-tight leading-tight">
+          One-Stop Solution For <br />
+          <span className="bg-gradient-to-r from-[#FF8500] via-[#FFA229] to-amber-300 bg-clip-text text-transparent">
+            Your Brand&apos;s Digital Growth
+          </span>
+        </h2>
         <p className="mt-4 text-slate-400 text-base sm:text-lg">
           We provide complete branding and digital solutions to turn your idea into a successful online brand. Built with 8+ years of expertise.
         </p>
@@ -171,7 +156,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
                 </div>
 
                 {/* Service Title */}
-                <h3 className="text-xl sm:text-2xl font-extrabold text-white group-hover:text-[#FFA133] transition-colors tracking-tight">
+                <h3 className="font-agency text-lg sm:text-xl font-extrabold text-white group-hover:text-[#FFA133] transition-colors tracking-tight">
                   {service.title}
                 </h3>
 

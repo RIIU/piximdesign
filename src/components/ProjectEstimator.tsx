@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Calculator, ArrowRight, Check, DollarSign, Coins } from "lucide-react";
+import { ArrowRight, Check, DollarSign, Coins } from "lucide-react";
 import { GsapMagneticButton } from "./animations";
 
 interface ProjectEstimatorProps {
@@ -63,7 +63,7 @@ export const ProjectEstimator: React.FC<ProjectEstimatorProps> = ({ onEstimateSu
 
   return (
     <section id="estimator" className="relative py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-      <div className="relative p-8 sm:p-14 rounded-3xl bg-white/80 dark:bg-[#111827]/80 backdrop-blur-xl ring-1 ring-inset ring-white/60 dark:ring-white/[0.08] border border-[#FF8500]/25 dark:border-[#FF8500]/35 shadow-[0_12px_40px_rgba(15,23,42,0.08)] dark:shadow-[0_12px_40px_rgba(0,0,0,0.5)] overflow-hidden">
+      <div className="relative p-8 sm:p-14 rounded-3xl bg-white/80 dark:bg-[#0C1E4E]/85 backdrop-blur-xl ring-1 ring-inset ring-white/60 dark:ring-white/[0.08] border border-[#FF8500]/25 dark:border-[#FF8500]/35 shadow-[0_12px_40px_rgba(15,23,42,0.08)] dark:shadow-[0_12px_40px_rgba(8,19,48,0.5)] overflow-hidden">
         {/* Ambient background glow (GPU-native radial gradient) */}
         <div 
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] rounded-full pointer-events-none"
@@ -75,12 +75,7 @@ export const ProjectEstimator: React.FC<ProjectEstimatorProps> = ({ onEstimateSu
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
           {/* Controls Column */}
           <div className="lg:col-span-7">
-            <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FF8500]/12 dark:bg-[#FF8500]/20 border border-[#FF8500]/30 text-[#C25E00] dark:text-[#FFA133] text-xs font-bold uppercase tracking-wider">
-                <Calculator className="w-3.5 h-3.5" />
-                <span>Claim Our Plan • Instant Estimator</span>
-              </div>
-
+            <div className="flex flex-wrap items-center justify-end gap-3 mb-4">
               {/* Currency Switcher */}
               <div className="flex items-center p-1 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
                 <button
@@ -110,9 +105,9 @@ export const ProjectEstimator: React.FC<ProjectEstimatorProps> = ({ onEstimateSu
               </div>
             </div>
 
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0F172A] dark:text-white tracking-tight">
+            <h2 className="font-agency text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#0F172A] dark:text-white tracking-tight leading-tight">
               Calculate Your Scope <br />
-              <span className="bg-gradient-to-r from-[#FF8500] via-amber-500 to-[#2651B9] bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-[#FF8500] via-[#FFA229] to-amber-300 bg-clip-text text-transparent">
                 With Transparent Budget Tiers.
               </span>
             </h2>

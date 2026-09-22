@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
-import { ArrowUpRight, Star, Sparkles, Award, TrendingUp } from "lucide-react";
+import { ArrowUpRight, Star, Award, TrendingUp } from "lucide-react";
 import Link from "next/link";
 
 export interface SliderCardItem {
@@ -172,23 +172,17 @@ export const GsapInfiniteCardSlider: React.FC<GsapInfiniteCardSliderProps> = ({
     <div className={`relative w-full py-6 overflow-hidden ${className}`}>
       {(title || subtitle) && (
         <div className="max-w-7xl mx-auto px-4 sm:px-6 mb-8 text-center">
-          {subtitle && (
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-[#FF8500]/12 text-[#C25E00] border border-[#FF8500]/30 mb-3">
-              <Sparkles className="w-3.5 h-3.5" />
-              <span>{subtitle}</span>
-            </span>
-          )}
           {title && (
-            <h3 className="text-2xl sm:text-3xl font-extrabold text-[#0F172A] dark:text-white tracking-tight">
+            <h3 className="font-agency text-xl sm:text-2xl font-extrabold text-[#0F172A] dark:text-white tracking-tight">
               {title}
             </h3>
           )}
         </div>
       )}
 
-      {/* Left/Right Edge Fade Mask */}
-      <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-24 sm:w-40 bg-gradient-to-r from-[#090D16] via-[#090D16]/80 to-transparent z-10" />
-      <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-24 sm:w-40 bg-gradient-to-l from-[#090D16] via-[#090D16]/80 to-transparent z-10" />
+      {/* Left/Right Edge Fade Masks */}
+      <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-24 sm:w-40 bg-gradient-to-r from-[#081330] via-[#081330]/80 to-transparent z-10" />
+      <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-24 sm:w-40 bg-gradient-to-l from-[#081330] via-[#081330]/80 to-transparent z-10" />
 
       {/* Slider Container */}
       <div

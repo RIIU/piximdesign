@@ -3,7 +3,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import Link from "next/link";
-import { ArrowUpRight, ChevronLeft, ChevronRight, Sparkles, TrendingUp, Award, Layers } from "lucide-react";
+import { ArrowUpRight, ChevronLeft, ChevronRight, TrendingUp, Award, Layers } from "lucide-react";
 
 
 export interface LoopedPanelItem {
@@ -119,7 +119,7 @@ interface GsapInfiniteLoopedPanelsProps {
 export const GsapInfiniteLoopedPanels: React.FC<GsapInfiniteLoopedPanelsProps> = ({
   items = DEFAULT_PANELS,
   title = "Infinite Capability Showcase",
-  subtitle = "",
+  subtitle = "Interactive Looped Panels",
   speed = 36,
   className = "",
 }) => {
@@ -234,14 +234,8 @@ export const GsapInfiniteLoopedPanels: React.FC<GsapInfiniteLoopedPanelsProps> =
       {/* Header & Controls Bar */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
         <div>
-          {subtitle && (
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-[#FF8500]/12 text-[#C25E00] border border-[#FF8500]/30 mb-3">
-              <Sparkles className="w-3.5 h-3.5 animate-pulse" />
-              <span>{subtitle}</span>
-            </div>
-          )}
           {title && (
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#0F172A] dark:text-white tracking-tight">
+            <h2 className="font-agency text-xl sm:text-2xl md:text-3xl font-extrabold text-[#0F172A] dark:text-white tracking-tight">
               {title}
             </h2>
           )}
@@ -274,9 +268,9 @@ export const GsapInfiniteLoopedPanels: React.FC<GsapInfiniteLoopedPanelsProps> =
         </div>
       </div>
 
-      {/* Left/Right Edge Fade Masks */}
-      <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-16 sm:w-36 bg-gradient-to-r from-[#090D16] via-[#090D16]/90 to-transparent z-10" />
-      <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-16 sm:w-36 bg-gradient-to-l from-[#090D16] via-[#090D16]/90 to-transparent z-10" />
+      {/* Left/Right Edge Gradient Fade Masks */}
+      <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-16 sm:w-36 bg-gradient-to-r from-[#081330] via-[#081330]/90 to-transparent z-10" />
+      <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-16 sm:w-36 bg-gradient-to-l from-[#081330] via-[#081330]/90 to-transparent z-10" />
 
       {/* Infinite Panels Container */}
       <div

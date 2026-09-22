@@ -3,7 +3,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import Image from "next/image";
-import { Star, Sparkles, Quote, CheckCircle2, Pause, Play } from "lucide-react";
+import { Star, Quote, CheckCircle2, Pause, Play } from "lucide-react";
 import { TESTIMONIALS } from "@/data/agencyData";
 
 export interface ReviewItem {
@@ -33,7 +33,7 @@ export const GsapReviewsInfiniteSlider: React.FC<GsapReviewsInfiniteSliderProps>
   reverse = false,
   className = "",
   title = "What Global Brands & Founders Say",
-  subtitle = "",
+  subtitle = "VERIFIED CLIENT REVIEWS",
   twoRows = false,
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -235,14 +235,8 @@ export const GsapReviewsInfiniteSlider: React.FC<GsapReviewsInfiniteSliderProps>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-10">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
           <div>
-            {subtitle && (
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/10 border border-orange-500/20 text-orange-600 text-xs font-semibold uppercase tracking-wider mb-3">
-                <Sparkles className="w-3.5 h-3.5 animate-pulse" />
-                <span>{subtitle}</span>
-              </div>
-            )}
             {title && (
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#0F172A] dark:text-white tracking-tight">
+              <h2 className="font-agency text-xl sm:text-2xl md:text-3xl font-extrabold text-[#0F172A] dark:text-white tracking-tight">
                 {title}
               </h2>
             )}
@@ -269,9 +263,9 @@ export const GsapReviewsInfiniteSlider: React.FC<GsapReviewsInfiniteSliderProps>
         </div>
       </div>
 
-      {/* Left/Right Edge Gradient Fade Masks */}
-      <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-20 sm:w-44 bg-gradient-to-r from-[#090D16] via-[#090D16]/90 to-transparent z-10" />
-      <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-20 sm:w-44 bg-gradient-to-l from-[#090D16] via-[#090D16]/90 to-transparent z-10" />
+      {/* Left/Right Edge Fade Masks */}
+      <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-20 sm:w-44 bg-gradient-to-r from-[#081330] via-[#081330]/90 to-transparent z-10" />
+      <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-20 sm:w-44 bg-gradient-to-l from-[#081330] via-[#081330]/90 to-transparent z-10" />
 
       {/* Slider Container */}
       <div

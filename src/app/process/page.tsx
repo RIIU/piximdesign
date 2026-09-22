@@ -42,7 +42,8 @@ export default function ProcessPage() {
       {/* Header */}
       <div className="text-center max-w-3xl mx-auto mb-16 relative">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-[#FF8500]/10 via-[#2651B9]/10 to-transparent rounded-full blur-[120px] pointer-events-none" />
-        <h1 className="relative z-10 text-4xl sm:text-5xl md:text-6xl font-extrabold text-[#0F172A] dark:text-[#F8FAFC] tracking-tight leading-tight">
+
+        <h1 className="font-agency relative z-10 text-3xl sm:text-4xl md:text-5xl lg:text-[54px] font-extrabold text-[#0F172A] dark:text-[#F8FAFC] tracking-tight leading-[1.08]">
           Our 4-Step Working Process <br />
           <span className="relative inline-block bg-gradient-to-r from-[#FF8500] via-amber-500 to-[#FFA133] bg-clip-text text-transparent">
             From Idea to Market Handover
@@ -102,7 +103,7 @@ export default function ProcessPage() {
       </div>
 
       {/* Active Step Deep Dive Card */}
-      <div className="relative p-8 sm:p-14 rounded-3xl bg-white/80 dark:bg-[#111827]/80 backdrop-blur-xl ring-1 ring-inset ring-white/60 dark:ring-white/[0.08] border border-[#FF8500]/25 dark:border-[#FF8500]/35 shadow-[0_16px_48px_-8px_rgba(15,23,42,0.08)] dark:shadow-[0_16px_48px_-8px_rgba(0,0,0,0.5)] overflow-hidden mb-20">
+      <div className="relative p-8 sm:p-14 rounded-3xl bg-white/80 dark:bg-[#0C1E4E]/85 backdrop-blur-xl ring-1 ring-inset ring-white/60 dark:ring-white/[0.08] border border-[#FF8500]/25 dark:border-[#FF8500]/35 shadow-[0_16px_48px_-8px_rgba(15,23,42,0.08)] dark:shadow-[0_16px_48px_-8px_rgba(8,19,48,0.5)] overflow-hidden mb-20">
         <div className="absolute top-0 right-0 w-80 h-80 bg-[#FF8500]/10 rounded-full blur-[100px] pointer-events-none" />
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
@@ -114,7 +115,7 @@ export default function ProcessPage() {
               <span>{PROCESS_STEPS[activeStep].timeframe}</span>
             </div>
 
-            <h2 className="text-2xl sm:text-4xl font-extrabold text-[#0F172A] dark:text-[#F8FAFC]">
+            <h2 className="font-agency text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#0F172A] dark:text-[#F8FAFC]">
               {PROCESS_STEPS[activeStep].title}
             </h2>
 
@@ -203,8 +204,8 @@ export default function ProcessPage() {
       </div>
 
       {/* CTA */}
-      <div className="p-8 sm:p-12 rounded-3xl bg-white dark:bg-[#111827] border border-[#2651B9]/15 dark:border-[#2651B9]/25 shadow-xl dark:shadow-2xl text-center">
-        <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0F172A] dark:text-[#F8FAFC]">
+      <div className="p-8 sm:p-12 rounded-3xl bg-white dark:bg-[#0C1E4E] border border-[#2651B9]/15 dark:border-[#2651B9]/25 shadow-xl dark:shadow-2xl text-center">
+        <h2 className="font-agency text-xl sm:text-2xl md:text-3xl font-extrabold text-[#0F172A] dark:text-[#F8FAFC]">
           Ready to kick off Phase 01 for your brand?
         </h2>
         <p className="mt-3 text-sm text-slate-600 dark:text-slate-300 max-w-xl mx-auto">

@@ -170,7 +170,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenContact }) => {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b border-transparent ${
         isScrolled
-          ? "bg-white/95 dark:bg-[#090D16]/95 backdrop-blur-xl py-3 shadow-[0_4px_20px_-2px_rgba(15,23,42,0.06)] dark:shadow-[0_4px_20px_-2px_rgba(0,0,0,0.5)]"
+          ? "bg-white/95 dark:bg-[#081330]/90 backdrop-blur-xl py-3 shadow-[0_4px_20px_-2px_rgba(15,23,42,0.06)] dark:shadow-[0_4px_20px_-2px_rgba(8,19,48,0.5)] border-b border-blue-500/15"
           : "bg-transparent py-4 md:py-5"
       }`}
     >

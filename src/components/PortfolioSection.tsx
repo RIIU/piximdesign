@@ -26,9 +26,9 @@ export const PortfolioSection: React.FC<PortfolioSectionProps> = ({ onOpenContac
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-end justify-between mb-14 gap-6">
         <div>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#0F172A] dark:text-white tracking-tight">
+          <h2 className="font-agency text-2xl sm:text-3xl md:text-4xl lg:text-[42px] font-extrabold text-[#0F172A] dark:text-white tracking-tight leading-tight">
             Proof of Execution. <br />
-            <span className="bg-gradient-to-r from-[#FF8500] via-amber-500 to-[#2651B9] bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#FF8500] via-[#FFA229] to-amber-300 bg-clip-text text-transparent">
               Built for Scale & Impact.
             </span>
           </h2>
@@ -101,7 +101,7 @@ export const PortfolioSection: React.FC<PortfolioSectionProps> = ({ onOpenContac
             <div className="relative z-10 p-6 sm:p-8 flex-1 flex flex-col justify-between">
               <div>
                 <div className="flex items-center justify-between mb-2">
-                  <h3 className="text-2xl font-bold text-[#0F172A] dark:text-white group-hover:text-[#FF8500] transition-colors">
+                  <h3 className="font-agency text-xl font-bold text-[#0F172A] dark:text-white group-hover:text-[#FF8500] transition-colors">
                     {project.title}
                   </h3>
                   <div className="p-2 rounded-full bg-[#FF8500]/12 dark:bg-[#FF8500]/20 text-[#C25E00] dark:text-[#FFA133] border border-[#FF8500]/30 group-hover:bg-[#FF8500] group-hover:text-white transition-colors">

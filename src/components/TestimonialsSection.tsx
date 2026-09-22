@@ -8,6 +8,7 @@ export const TestimonialsSection: React.FC = () => {
     <section id="testimonials" className="relative py-16 overflow-hidden">
       <GsapReviewsInfiniteSlider
         title="What Our Clients Say About Pixim Design"
+        subtitle="AUTHENTIC REVIEWS & RESULTS"
         speed={38}
         twoRows={true}
       />

@@ -6,6 +6,7 @@ import { HeroSection } from "@/components/HeroSection";
 import { VideoShowcaseSection } from "@/components/VideoShowcaseSection";
 import { StatsBar } from "@/components/StatsBar";
 import { ServicesSection } from "@/components/ServicesSection";
+import { ReadyForLogoSection } from "@/components/ReadyForLogoSection";
 import { BrandStoriesSection } from "@/components/BrandStoriesSection";
 import { ProcessSection } from "@/components/ProcessSection";
 import { TestimonialsSection } from "@/components/TestimonialsSection";
@@ -20,7 +21,7 @@ export default function Home() {
   };
 
   return (
-    <div className="w-full">
+    <main className="w-full overflow-x-clip">
       {/* 1. Flagship Hero Section */}
       <HeroSection onOpenContact={() => openContact()} />
 
@@ -33,7 +34,10 @@ export default function Home() {
       {/* 4. Core Capabilities & Services Bento Grid */}
       <ServicesSection onSelectService={handleSelectService} />
 
-      {/* 5. Experience Brand Stories in Design (Pixxen-style Sticky Split Showcase) */}
+      {/* 5. Ready for a Professional Logo? Video Showcase CTA */}
+      <ReadyForLogoSection onOpenContact={(service, note) => openContact(service, note)} />
+
+      {/* 6. Experience Brand Stories in Design (Pixxen-style Sticky Split Showcase) */}
       <BrandStoriesSection onOpenContact={() => openContact()} />
 
       {/* 6. 4-Step Agile Delivery Process ("Quick Delivery, Faster Results") */}
@@ -47,6 +51,6 @@ export default function Home() {
 
       {/* 9. Direct Project Brief & Consultation Form */}
       <ContactSection />
-    </div>
+    </main>
   );
 }

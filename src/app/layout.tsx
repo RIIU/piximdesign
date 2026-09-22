@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans, Geist_Mono } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 
 const plusJakartaSans = Plus_Jakarta_Sans({
@@ -11,6 +12,18 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+});
+
+const agency = localFont({
+  src: "../../public/fonts/agency.otf",
+  variable: "--font-agency",
+  display: "swap",
+});
+
+const sherika = localFont({
+  src: "../../public/fonts/sherika-regular.otf",
+  variable: "--font-sherika",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -34,7 +47,7 @@ export default function RootLayout({
       lang="en"
       suppressHydrationWarning
       data-scroll-behavior="smooth"
-      className={`${plusJakartaSans.variable} ${geistMono.variable} dark h-full antialiased selection:bg-[#FF8500]/25 selection:text-white`}
+      className={`${plusJakartaSans.variable} ${geistMono.variable} ${agency.variable} ${sherika.variable} dark h-full antialiased selection:bg-[#FF8500]/25 selection:text-white`}
     >
       <head>
         <script
@@ -51,7 +64,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="min-h-full flex flex-col bg-[#090D16] text-[#F8FAFC] font-sans">
+      <body className="min-h-full flex flex-col bg-[#081330] text-[#F8FAFC] font-sans">
         <AppLayoutWrapper>{children}</AppLayoutWrapper>
       </body>
     </html>

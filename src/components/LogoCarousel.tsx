@@ -74,8 +74,8 @@ export const LogoCarousel: React.FC = () => {
       onMouseLeave={() => setIsPaused(false)}
     >
       {/* Left and Right vignette fade gradients */}
-      <div className="absolute top-0 bottom-0 left-0 w-20 sm:w-36 bg-gradient-to-r from-[#090D16] via-[#090D16]/90 to-transparent z-20 pointer-events-none" />
-      <div className="absolute top-0 bottom-0 right-0 w-20 sm:w-36 bg-gradient-to-l from-[#090D16] via-[#090D16]/90 to-transparent z-20 pointer-events-none" />
+      <div className="absolute top-0 bottom-0 left-0 w-20 sm:w-36 bg-gradient-to-r from-[#081330] via-[#081330]/90 to-transparent z-20 pointer-events-none" />
+      <div className="absolute top-0 bottom-0 right-0 w-20 sm:w-36 bg-gradient-to-l from-[#081330] via-[#081330]/90 to-transparent z-20 pointer-events-none" />
 
       {/* Just 1 Single Line of Pure Client Logos (No boxes/backgrounds) */}
       <div

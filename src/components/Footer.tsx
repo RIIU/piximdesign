@@ -12,10 +12,10 @@ export const Footer: React.FC = () => {
 
   return (
     <footer
-      className="relative bg-white dark:bg-[#070A11] border-t border-[#2651B9]/15 dark:border-slate-800 pt-16 pb-12 overflow-hidden shadow-[0_-4px_20px_-2px_rgba(15,23,42,0.04)] dark:shadow-[0_-4px_20px_-2px_rgba(0,0,0,0.5)] transition-colors duration-300"
+      className="relative bg-white dark:bg-gradient-to-b dark:from-[#081330] dark:to-[#050D21] border-t border-[#2651B9]/20 dark:border-blue-500/20 pt-16 pb-12 overflow-hidden shadow-[0_-4px_20px_-2px_rgba(15,23,42,0.04)] dark:shadow-[0_-4px_20px_-2px_rgba(8,19,48,0.5)] transition-colors duration-300"
     >
       {/* Background glow */}
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-48 bg-gradient-to-t from-[#2651B9]/5 via-[#FF8500]/5 to-transparent blur-3xl pointer-events-none" />
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-48 bg-gradient-to-t from-[#2651B9]/20 via-[#FF8500]/12 to-transparent blur-3xl pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 pb-12 border-b border-slate-200 dark:border-slate-800">

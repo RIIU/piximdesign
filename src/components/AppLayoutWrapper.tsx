@@ -39,7 +39,7 @@ export const AppLayoutWrapper: React.FC<{ children: React.ReactNode }> = ({ chil
   return (
     <ThemeProvider>
       <ContactContext.Provider value={{ openContact, closeContact }}>
-        <div className="relative min-h-screen flex flex-col bg-[#090D16] text-[#F8FAFC] selection:bg-[#FF8500]/25 selection:text-white overflow-x-clip">
+        <div className="relative min-h-screen flex flex-col bg-[#081330] text-[#F8FAFC] selection:bg-[#FF8500]/25 selection:text-white overflow-x-clip">
           {/* Global Dynamic Ambient Background Animation across all pages */}
           <GlobalBackgroundAnimation />
 

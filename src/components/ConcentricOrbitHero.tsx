@@ -307,7 +307,7 @@ export const ConcentricOrbitHero: React.FC<ConcentricOrbitHeroProps> = ({
       */}
       <div 
         className="absolute z-20 pointer-events-auto flex flex-col items-center justify-center text-center px-4 max-w-2xl w-full"
-        style={{ top: CENTER_Y, transform: "translateY(-50%)" }}
+        style={{ top: isMobile ? CENTER_Y - 20 : CENTER_Y - 40, transform: "translateY(-50%)" }}
       >
         {children}
       </div>

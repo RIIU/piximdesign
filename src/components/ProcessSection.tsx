@@ -177,16 +177,16 @@ export const ProcessSection: React.FC<ProcessSectionProps> = () => {
     <section
       id="process"
       ref={sectionRef}
-      className="work-progress workprocess-section relative overflow-hidden py-20 sm:py-24 lg:py-28 select-none bg-[#090D16]"
+      className="work-progress workprocess-section relative overflow-hidden py-20 sm:py-24 lg:py-28 select-none bg-gradient-to-b from-[#081330] via-[#091840] to-[#081330]"
       style={{
         backgroundImage:
-          "radial-gradient(ellipse 65% 50% at 70% 15%, rgba(255, 133, 0, 0.08) 0%, rgba(38, 81, 185, 0.05) 50%, transparent 75%)",
+          "radial-gradient(ellipse 65% 50% at 70% 15%, rgba(255, 133, 0, 0.12) 0%, rgba(38, 81, 185, 0.14) 50%, transparent 75%)",
       }}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="max-w-[1535px] mx-auto px-5 sm:px-9 md:px-14 lg:px-20 relative z-10">
         <div className="workprocess-wrap relative z-10">
-          {/* Section Header - Fits cleanly in 1280px max-width container */}
-          <h2 className="sm:text-start text-center text-3xl sm:text-4xl md:text-[42px] lg:text-[46px] font-medium text-white mb-4 tracking-tight max-w-3xl">
+          {/* Section Header - Fits on single line exactly like pixxen */}
+          <h2 className="font-agency sm:text-start text-center text-2xl sm:text-3xl md:text-4xl lg:text-[42px] font-extrabold text-white mb-4 tracking-tight max-w-4xl">
             Quick Delivery, Faster Results
           </h2>
 
@@ -223,7 +223,7 @@ export const ProcessSection: React.FC<ProcessSectionProps> = () => {
                 <IconDiscovery />
               </div>
               <div className="max-w-[212px]">
-                <h3 className="text-white text-2xl md:text-[28px] font-medium py-3 md:py-4">
+                <h3 className="font-agency text-white text-xl md:text-2xl font-bold py-2 md:py-3">
                   Discovery
                 </h3>
                 <p className="text-[#A7BDB5] text-xs md:text-sm lg:text-base leading-relaxed font-normal">
@@ -238,7 +238,7 @@ export const ProcessSection: React.FC<ProcessSectionProps> = () => {
                 <IconDefine />
               </div>
               <div className="max-w-[212px]">
-                <h3 className="text-white text-2xl md:text-[28px] font-medium py-3 md:py-4">
+                <h3 className="font-agency text-white text-xl md:text-2xl font-bold py-2 md:py-3">
                   Define
                 </h3>
                 <p className="text-[#A7BDB5] text-xs md:text-sm lg:text-base leading-relaxed font-normal">
@@ -253,7 +253,7 @@ export const ProcessSection: React.FC<ProcessSectionProps> = () => {
                 <IconDesign />
               </div>
               <div className="max-w-[212px]">
-                <h3 className="text-white text-2xl md:text-[28px] font-medium py-3 md:py-4">
+                <h3 className="font-agency text-white text-xl md:text-2xl font-bold py-2 md:py-3">
                   UI Design &amp; Testing
                 </h3>
                 <p className="text-[#A7BDB5] text-xs md:text-sm lg:text-base leading-relaxed font-normal">
@@ -268,7 +268,7 @@ export const ProcessSection: React.FC<ProcessSectionProps> = () => {
                 <IconDelivery />
               </div>
               <div className="max-w-[212px]">
-                <h3 className="text-white text-2xl md:text-[28px] font-medium py-3 md:py-4">
+                <h3 className="font-agency text-white text-xl md:text-2xl font-bold py-2 md:py-3">
                   Delivery &amp; Support
                 </h3>
                 <p className="text-[#A7BDB5] text-xs md:text-sm lg:text-base leading-relaxed font-normal">

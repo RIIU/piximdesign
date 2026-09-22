@@ -3,7 +3,7 @@
 import React, { useEffect, useRef, useState, useCallback } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Sparkles, RotateCcw, Sliders, Flame } from "lucide-react";
+import { RotateCcw, Sliders, Flame } from "lucide-react";
 import { GsapMagneticButton } from "./GsapMagneticButton";
 
 interface GsapExplosiveTextScrollProps {
@@ -201,12 +201,7 @@ export const GsapExplosiveTextScroll: React.FC<GsapExplosiveTextScrollProps> = (
 
       {/* Header Badge & Title */}
       <div className="relative z-10 max-w-4xl mx-auto text-center mb-12">
-        <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#FF8500]/12 border border-[#FF8500]/30 text-[#C25E00] text-xs font-semibold uppercase tracking-wider mb-4">
-          <Sparkles className="w-3.5 h-3.5 animate-pulse" />
-          <span>{subtitle}</span>
-        </div>
-
-        <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#0F172A] tracking-tight">
+        <h2 className="font-agency text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#0F172A] tracking-tight">
           {title}
         </h2>
         <p className="mt-3 text-xs sm:text-sm text-slate-500 max-w-lg mx-auto">

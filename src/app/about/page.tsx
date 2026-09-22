@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Award, CheckCircle2 } from "lucide-react";
+import { CheckCircle2 } from "lucide-react";
 import { AGENCY_STATS } from "@/data/agencyData";
 import { useContactModal } from "@/components/AppLayoutWrapper";
 import { GsapDrawSvg, GsapMagneticButton, GsapReviewsInfiniteSlider } from "@/components/animations";
@@ -41,7 +41,8 @@ export default function AboutPage() {
       {/* Hero Section */}
       <div className="relative text-center max-w-3xl mx-auto mb-20">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-[#FF8500]/15 via-[#2651B9]/15 to-transparent rounded-full blur-[120px] pointer-events-none" />
-        <h1 className="relative z-10 text-4xl sm:text-5xl md:text-6xl font-extrabold text-[#0F172A] dark:text-[#F8FAFC] tracking-tight leading-[1.12]">
+
+        <h1 className="font-agency relative z-10 text-3xl sm:text-4xl md:text-5xl lg:text-[54px] font-extrabold text-[#0F172A] dark:text-[#F8FAFC] tracking-tight leading-[1.08]">
           Turning Bold Ideas Into <br />
           <span className="relative inline-block bg-gradient-to-r from-[#FF8500] via-amber-500 to-[#FFA133] bg-clip-text text-transparent">
             Market-Leading Brands.
@@ -62,29 +63,39 @@ export default function AboutPage() {
         </p>
       </div>
 
-      {/* Stats Strip */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-24">
-        {AGENCY_STATS.map((stat) => (
-          <div
-            key={stat.label}
-            className="p-6 rounded-2xl bg-white dark:bg-[#111827] border border-[#2651B9]/15 dark:border-[#2651B9]/25 shadow-[0_10px_30px_-5px_rgba(15,23,42,0.08)] dark:shadow-[0_10px_30px_-5px_rgba(0,0,0,0.4)] text-center"
-          >
-            <div className="text-3xl sm:text-4xl font-extrabold text-[#0F172A] dark:text-[#F8FAFC]">{stat.value}</div>
-            <div className="text-sm font-bold text-[#C25E00] dark:text-[#FFA133] mt-1">{stat.label}</div>
-            <div className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">{stat.detail}</div>
-          </div>
-        ))}
+      {/* Stats Strip - Sleek & Box-Free */}
+      <div className="py-8 sm:py-10 border-y border-white/[0.08] mb-24">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-0">
+          {AGENCY_STATS.map((stat, index) => (
+            <div
+              key={stat.label}
+              className={`flex flex-col ${
+                index === 0
+                  ? "lg:pr-8"
+                  : index === AGENCY_STATS.length - 1
+                  ? "lg:pl-8 lg:border-l lg:border-white/[0.08]"
+                  : "lg:px-8 lg:border-l lg:border-white/[0.08]"
+              }`}
+            >
+              <div className="font-agency text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white">
+                <span>{stat.value.replace(/(\+|%|★)$/, "")}</span>
+                <span className="text-[#FF8500] ml-0.5">{stat.value.match(/(\+|%|★)$/)?.[0] || ""}</span>
+              </div>
+              <div className="text-sm sm:text-base font-bold text-slate-200 mt-2">
+                {stat.label}
+              </div>
+              <p className="text-xs sm:text-sm text-slate-400 mt-1 leading-relaxed">
+                {stat.detail}
+              </p>
+            </div>
+          ))}
+        </div>
       </div>
 
       {/* Story & Duality Section */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center mb-24">
         <div className="lg:col-span-6">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#2651B9]/10 dark:bg-[#2651B9]/25 border border-[#2651B9]/25 dark:border-[#2651B9]/40 text-[#2651B9] dark:text-[#60A5FA] text-xs font-semibold uppercase tracking-wider mb-4">
-            <Award className="w-3.5 h-3.5" />
-            <span>Our Journey & Philosophy</span>
-          </div>
-
-          <h2 className="text-3xl sm:text-4xl font-bold text-[#0F172A] dark:text-[#F8FAFC] tracking-tight leading-tight">
+          <h2 className="font-agency text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#0F172A] dark:text-[#F8FAFC] tracking-tight leading-tight">
             Where Precision Design Meets <br />
             <span className="text-[#C25E00] dark:text-[#FFA133]">Engineering Excellence.</span>
           </h2>
@@ -122,7 +133,7 @@ export default function AboutPage() {
               <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-[#C25E00] dark:text-[#FFA133] px-2.5 py-0.5 rounded-full bg-[#FF8500]/12 dark:bg-[#FF8500]/20 border border-[#FF8500]/25">
                 {p.highlight}
               </span>
-              <h3 className="text-base font-bold text-[#0F172A] dark:text-[#F8FAFC] mt-3">{p.title}</h3>
+              <h3 className="font-agency text-lg font-bold text-[#0F172A] dark:text-[#F8FAFC] mt-3">{p.title}</h3>
               <p className="text-xs text-slate-600 dark:text-slate-400 mt-2 leading-relaxed">{p.desc}</p>
             </div>
           ))}
@@ -138,9 +149,9 @@ export default function AboutPage() {
       />
 
       {/* CTA Banner */}
-      <div className="relative p-8 sm:p-12 rounded-3xl bg-white/80 dark:bg-[#111827]/80 backdrop-blur-xl ring-1 ring-inset ring-white/60 dark:ring-white/[0.08] border border-[#FF8500]/25 dark:border-[#FF8500]/35 text-center overflow-hidden shadow-xl">
+      <div className="relative p-8 sm:p-12 rounded-3xl bg-white/80 dark:bg-[#0C1E4E]/85 backdrop-blur-xl ring-1 ring-inset ring-white/60 dark:ring-white/[0.08] border border-[#FF8500]/25 dark:border-[#FF8500]/35 text-center overflow-hidden shadow-xl">
         <div className="absolute -inset-px rounded-3xl bg-gradient-to-r from-[#2651B9]/10 via-[#FF8500]/10 to-transparent pointer-events-none" />
-        <h2 className="relative z-10 text-2xl sm:text-4xl font-extrabold text-[#0F172A] dark:text-[#F8FAFC]">
+        <h2 className="font-agency relative z-10 text-xl sm:text-3xl md:text-4xl font-extrabold text-[#0F172A] dark:text-[#F8FAFC]">
           Ready to Elevate Your Brand&apos;s Identity?
         </h2>
         <p className="mt-3 text-sm sm:text-base text-slate-600 dark:text-slate-300 max-w-xl mx-auto">

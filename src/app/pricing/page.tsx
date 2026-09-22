@@ -76,7 +76,8 @@ export default function PricingPage() {
       {/* Header */}
       <div className="text-center max-w-3xl mx-auto mb-16 relative">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-amber-500/10 via-orange-500/10 to-transparent rounded-full blur-[120px] pointer-events-none" />
-        <h1 className="relative z-10 text-4xl sm:text-5xl md:text-6xl font-extrabold text-[#0F172A] dark:text-[#F8FAFC] tracking-tight leading-tight">
+
+        <h1 className="font-agency relative z-10 text-3xl sm:text-4xl md:text-5xl lg:text-[54px] font-extrabold text-[#0F172A] dark:text-[#F8FAFC] tracking-tight leading-[1.08]">
           Flexible Plans & <br />
           <span className="relative inline-block bg-gradient-to-r from-[#FF8500] via-amber-500 to-[#FFA133] bg-clip-text text-transparent">
             Transparent Investment Tiers
@@ -98,7 +99,7 @@ export default function PricingPage() {
 
         {/* Currency Switcher */}
         <div className="relative z-10 mt-8 flex items-center justify-center">
-          <div className="inline-flex items-center p-1 rounded-2xl bg-white dark:bg-[#111827] border border-[#2651B9]/15 dark:border-[#2651B9]/30 shadow-sm">
+          <div className="inline-flex items-center p-1 rounded-2xl bg-white dark:bg-[#0C1E4E] border border-[#2651B9]/15 dark:border-[#2651B9]/30 shadow-sm">
             <button
               onClick={() => setCurrency("USD")}
               className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
@@ -132,8 +133,8 @@ export default function PricingPage() {
             key={plan.name}
             className={`relative rounded-3xl p-8 flex flex-col justify-between transition-all duration-300 backdrop-blur-xl ring-1 ring-inset ring-white/60 dark:ring-white/[0.08] ${
               plan.popular
-                ? "bg-white/95 dark:bg-[#111827]/95 border-2 border-[#FF8500] shadow-[0_20px_50px_-10px_rgba(255,133,0,0.22)] scale-[1.02] z-10"
-                : "bg-white/80 dark:bg-[#111827]/80 border border-[#FF8500]/25 dark:border-[#FF8500]/35 hover:border-[#FF8500]/60 shadow-[0_8px_32px_rgba(15,23,42,0.06)] dark:shadow-[0_8px_32px_rgba(0,0,0,0.4)] hover:shadow-xl"
+                ? "bg-white/95 dark:bg-[#0C1E4E]/95 border-2 border-[#FF8500] shadow-[0_20px_50px_-10px_rgba(255,133,0,0.22)] scale-[1.02] z-10"
+                : "bg-white/80 dark:bg-[#0C1E4E]/80 border border-[#FF8500]/25 dark:border-[#FF8500]/35 hover:border-[#FF8500]/60 shadow-[0_8px_32px_rgba(15,23,42,0.06)] dark:shadow-[0_8px_32px_rgba(8,19,48,0.5)] hover:shadow-xl"
             }`}
           >
             {plan.popular && (
@@ -144,7 +145,7 @@ export default function PricingPage() {
 
             <div>
               <div className="flex items-center justify-between mb-3">
-                <h3 className="text-xl font-bold text-[#0F172A] dark:text-[#F8FAFC]">{plan.name}</h3>
+                <h3 className="font-agency text-xl font-bold text-[#0F172A] dark:text-[#F8FAFC]">{plan.name}</h3>
                 <span className="text-xs px-2.5 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 font-mono">
                   {plan.badge}
                 </span>

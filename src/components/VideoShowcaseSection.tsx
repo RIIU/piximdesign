@@ -127,14 +127,14 @@ export const VideoShowcaseSection: React.FC<VideoShowcaseSectionProps> = () => {
   return (
     <section
       ref={sectionRef}
-      className="relative w-full pt-2 sm:pt-4 md:pt-6 pb-6 sm:pb-8 md:pb-10 bg-[#090D16] overflow-hidden"
+      className="relative w-full pt-2 sm:pt-4 md:pt-6 pb-6 sm:pb-8 md:pb-10 bg-gradient-to-b from-[#081330] via-[#0A1A46] to-[#081330] overflow-hidden"
     >
       {/* Background ambient radial lighting */}
       <div
-        className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[95vw] md:w-[1100px] h-[450px] rounded-full pointer-events-none opacity-40 blur-3xl"
+        className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[95vw] md:w-[1100px] h-[450px] rounded-full pointer-events-none opacity-50 blur-3xl"
         style={{
           background:
-            "radial-gradient(ellipse at center, rgba(38, 81, 185, 0.25) 0%, rgba(255, 133, 0, 0.15) 45%, transparent 70%)",
+            "radial-gradient(ellipse at center, rgba(38, 81, 185, 0.35) 0%, rgba(255, 133, 0, 0.18) 45%, transparent 70%)",
         }}
       />
 
@@ -146,7 +146,7 @@ export const VideoShowcaseSection: React.FC<VideoShowcaseSectionProps> = () => {
         >
           <div
             ref={videoBoxRef}
-            className="group relative overflow-hidden bg-black/80 shadow-[0_20px_70px_-15px_rgba(0,0,0,0.8),0_0_50px_-10px_rgba(38,81,185,0.3)] ring-1 ring-white/15 transition-all duration-300 will-change-[width,border-radius,transform]"
+            className="group relative overflow-hidden bg-[#06102B]/95 shadow-[0_20px_70px_-15px_rgba(4,10,28,0.85),0_0_50px_-10px_rgba(38,81,185,0.4)] ring-1 ring-blue-400/30 transition-all duration-300 will-change-[width,border-radius,transform]"
             onMouseEnter={() => setShowControls(true)}
             onMouseLeave={() => setShowControls(false)}
           >

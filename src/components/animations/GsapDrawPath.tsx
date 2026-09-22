@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useState, useCallback } from "react";
 import gsap from "gsap";
-import { Sparkles, Play, RotateCcw, CheckCircle2, Sliders } from "lucide-react";
+import { Play, RotateCcw, CheckCircle2, Sliders } from "lucide-react";
 import { GsapMagneticButton } from "./GsapMagneticButton";
 
 export interface PathMilestone {
@@ -271,10 +271,6 @@ export const GsapDrawPath: React.FC<GsapDrawPathProps> = ({
       {/* Header Banner */}
       <div className="relative z-10 flex flex-col md:flex-row md:items-end justify-between gap-4 pb-8 border-b border-slate-200">
         <div>
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#FF8500]/12 border border-[#FF8500]/30 text-[#C25E00] text-xs font-semibold uppercase tracking-wider mb-3">
-            <Sparkles className="w-3.5 h-3.5 animate-pulse" />
-            <span>GSAP DrawSVG & MotionPath Engine</span>
-          </div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#0F172A] tracking-tight">
             Interactive Project Roadmap: <span className="bg-gradient-to-r from-[#FF8500] via-amber-500 to-[#2651B9] bg-clip-text text-transparent">&quot;Draw A Path&quot;</span>
           </h2>

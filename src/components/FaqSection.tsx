@@ -18,9 +18,9 @@ export const FaqSection: React.FC = () => {
 
       {/* Section Header */}
       <div className="text-center max-w-3xl mx-auto mb-16 relative z-10">
-        <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#0F172A] dark:text-white tracking-tight">
+        <h2 className="font-agency text-2xl sm:text-3xl md:text-4xl lg:text-[42px] font-extrabold text-[#0F172A] dark:text-white tracking-tight leading-tight">
           Frequently Asked <br />
-          <span className="bg-gradient-to-r from-[#FF8500] via-amber-500 to-[#2651B9] bg-clip-text text-transparent">
+          <span className="bg-gradient-to-r from-[#FF8500] via-[#FFA229] to-amber-300 bg-clip-text text-transparent">
             Questions
           </span>
         </h2>
@@ -38,8 +38,8 @@ export const FaqSection: React.FC = () => {
               key={idx}
               className={`rounded-2xl border transition-all duration-300 overflow-hidden backdrop-blur-xl ring-1 ring-inset ring-white/60 dark:ring-white/[0.08] ${
                 isOpen
-                  ? "bg-white/95 dark:bg-[#111827]/95 border-[#FF8500]/60 shadow-[0_8px_30px_rgba(255,133,0,0.1)] ring-2 ring-[#FF8500]/30"
-                  : "bg-white/80 dark:bg-[#111827]/80 border-[#2651B9]/20 dark:border-[#2651B9]/30 hover:border-[#FF8500]/40 shadow-[0_4px_20px_rgba(15,23,42,0.04)] dark:shadow-[0_4px_20px_rgba(0,0,0,0.3)]"
+                  ? "bg-white/95 dark:bg-[#0C1E4E]/95 border-[#FF8500]/60 shadow-[0_8px_30px_rgba(255,133,0,0.15)] ring-2 ring-[#FF8500]/30"
+                  : "bg-white/80 dark:bg-[#0C1E4E]/80 border-[#2651B9]/20 dark:border-[#2651B9]/30 hover:border-[#FF8500]/40 shadow-[0_4px_20px_rgba(15,23,42,0.04)] dark:shadow-[0_4px_20px_rgba(8,19,48,0.4)]"
               }`}
             >
               <button

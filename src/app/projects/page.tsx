@@ -24,7 +24,8 @@ export default function ProjectsPage() {
       {/* Header */}
       <div className="text-center max-w-3xl mx-auto mb-16 relative">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-[#FF8500]/10 via-[#2651B9]/15 to-transparent rounded-full blur-[120px] pointer-events-none" />
-        <h1 className="relative z-10 text-4xl sm:text-5xl md:text-6xl font-extrabold text-[#0F172A] dark:text-[#F8FAFC] tracking-tight leading-tight">
+
+        <h1 className="font-agency relative z-10 text-3xl sm:text-4xl md:text-5xl lg:text-[54px] font-extrabold text-[#0F172A] dark:text-[#F8FAFC] tracking-tight leading-[1.08]">
           Featured Work & <br />
           <span className="relative inline-block bg-gradient-to-r from-[#FF8500] via-amber-500 to-[#FFA133] bg-clip-text text-transparent">
             Digital Case Studies
@@ -76,7 +77,7 @@ export default function ProjectsPage() {
           <div
             key={project.id}
             onClick={() => setSelectedProject(project)}
-            className="group relative rounded-3xl bg-white/80 dark:bg-[#111827]/80 backdrop-blur-xl ring-1 ring-inset ring-white/60 dark:ring-white/[0.08] border border-[#FF8500]/30 dark:border-[#FF8500]/40 hover:border-[#FF8500]/70 overflow-hidden transition-all duration-500 hover:-translate-y-1.5 shadow-[0_8px_32px_rgba(15,23,42,0.06)] dark:shadow-[0_8px_32px_rgba(0,0,0,0.4)] hover:shadow-2xl cursor-pointer flex flex-col justify-between"
+            className="group relative rounded-3xl bg-white/80 dark:bg-[#0C1E4E]/85 backdrop-blur-xl ring-1 ring-inset ring-white/60 dark:ring-white/[0.08] border border-[#FF8500]/30 dark:border-[#FF8500]/40 hover:border-[#FF8500]/70 overflow-hidden transition-all duration-500 hover:-translate-y-1.5 shadow-[0_8px_32px_rgba(15,23,42,0.06)] dark:shadow-[0_8px_32px_rgba(8,19,48,0.5)] hover:shadow-2xl cursor-pointer flex flex-col justify-between"
           >
             {/* Ambient Apple accent glow (normally visible) */}
             <div className="absolute -inset-px rounded-3xl bg-gradient-to-br from-[#FF8500]/10 via-[#2651B9]/5 to-transparent opacity-60 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
@@ -90,24 +91,24 @@ export default function ProjectsPage() {
                 sizes="(max-width: 768px) 100vw, 50vw"
                 className="object-cover group-hover:scale-105 transition-transform duration-700"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-white/90 dark:from-[#111827]/90 via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-white/90 dark:from-[#0C1E4E]/90 via-transparent to-transparent" />
 
               {/* Badges on image */}
               <div className="absolute top-4 left-4 flex items-center gap-2">
                 <span className="text-xs px-3 py-1 rounded-full bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-200 font-mono font-medium shadow-sm">
                   {project.categoryBadge}
                 </span>
-                <span className="text-xs px-2.5 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 text-emerald-700 dark:text-emerald-400 font-mono font-medium shadow-sm">
+                <span className="text-xs px-3 py-1 rounded-full bg-emerald-500/10 dark:bg-emerald-500/20 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400 font-mono font-bold">
                   {project.metrics}
                 </span>
               </div>
             </div>
 
-            {/* Content Details */}
-            <div className="p-6 sm:p-8 flex flex-col justify-between flex-1">
+            {/* Bottom Meta */}
+            <div className="relative z-10 p-6 sm:p-8 flex-1 flex flex-col justify-between">
               <div>
                 <div className="flex items-center justify-between mb-3">
-                  <h3 className="text-xl sm:text-2xl font-bold text-[#0F172A] dark:text-[#F8FAFC] group-hover:text-[#FF8500] transition-colors">
+                  <h3 className="font-agency text-lg sm:text-xl font-bold text-[#0F172A] dark:text-[#F8FAFC] group-hover:text-[#FF8500] transition-colors">
                     {project.title}
                   </h3>
                   <div className="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center group-hover:bg-[#FF8500] text-slate-600 dark:text-slate-300 group-hover:text-white transition-colors">
@@ -226,8 +227,8 @@ export default function ProjectsPage() {
       </div>
 
       {/* Callout */}
-      <div className="p-8 sm:p-12 rounded-3xl bg-white dark:bg-[#111827] border border-[#2651B9]/15 dark:border-[#2651B9]/25 shadow-[0_12px_36px_-6px_rgba(15,23,42,0.09)] dark:shadow-[0_12px_36px_-6px_rgba(0,0,0,0.5)] text-center">
-        <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0F172A] dark:text-[#F8FAFC]">
+      <div className="p-8 sm:p-12 rounded-3xl bg-white dark:bg-[#0C1E4E] border border-[#2651B9]/15 dark:border-[#2651B9]/25 shadow-[0_12px_36px_-6px_rgba(15,23,42,0.09)] dark:shadow-[0_12px_36px_-6px_rgba(8,19,48,0.5)] text-center">
+        <h2 className="font-agency text-xl sm:text-2xl md:text-3xl font-extrabold text-[#0F172A] dark:text-[#F8FAFC]">
           Have an upcoming product launch or rebrand?
         </h2>
         <p className="mt-3 text-sm text-slate-600 dark:text-slate-300 max-w-xl mx-auto">

@@ -3,10 +3,10 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 :root {
-  --background: #090D16;
+  --background: #081330;
   --foreground: #F8FAFC;
-  --card: #111827;
-  --card-border: rgba(38, 81, 185, 0.28);
+  --card: #0C1E4E;
+  --card-border: rgba(59, 130, 246, 0.25);
   --brand-orange: #FF8500;
   --brand-orange-dark: #FFA133;
   --brand-orange-light: #FFB866;
@@ -16,10 +16,10 @@
 }
 
 .dark {
-  --background: #090D16;
+  --background: #081330;
   --foreground: #F8FAFC;
-  --card: #111827;
-  --card-border: rgba(38, 81, 185, 0.28);
+  --card: #0C1E4E;
+  --card-border: rgba(59, 130, 246, 0.25);
   --brand-orange: #FF8500;
   --brand-orange-dark: #FFA133;
   --brand-orange-light: #FFB866;
@@ -37,6 +37,35 @@
   --color-brand-blue: var(--brand-blue);
   --font-sans: var(--font-plus-jakarta), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-mono: var(--font-geist-mono), monospace;
+  --font-agency: var(--font-agency), 'Agency', system-ui, sans-serif;
+  --font-sherika: var(--font-sherika), 'Sherika', system-ui, sans-serif;
+}
+
+@font-face {
+  font-family: 'Agency';
+  src: url('/fonts/agency.otf') format('opentype');
+  font-display: swap;
+  font-weight: 400 900;
+}
+
+@font-face {
+  font-family: 'Sherika';
+  src: url('/fonts/sherika-regular.otf') format('opentype');
+  font-display: swap;
+  font-weight: 400 700;
+}
+
+.font-agency {
+  font-family: var(--font-agency), 'Agency', system-ui, sans-serif;
+}
+
+.font-sherika {
+  font-family: var(--font-sherika), 'Sherika', system-ui, sans-serif;
+}
+
+/* Global Headings: All headings across all pages strictly use Agency Font */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-agency), 'Agency', system-ui, sans-serif !important;
 }
 
 html {
@@ -52,7 +81,7 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans);
-  overflow-x: clip;
+  overflow-x: hidden;
   min-height: 100vh;
 }
 
@@ -64,7 +93,7 @@ body {
   background: #E2E8F0;
 }
 .dark ::-webkit-scrollbar-track {
-  background: #090D16;
+  background: #081330;
 }
 ::-webkit-scrollbar-thumb {
   background: #94A3B8;
@@ -222,8 +251,8 @@ body {
   position: relative;
   overflow: hidden;
   border-radius: 28px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  background: rgba(17, 24, 39, 0.75);
+  border: 1px solid rgba(59, 130, 246, 0.25);
+  background: rgba(12, 30, 78, 0.82);
   backdrop-filter: blur(16px);
   transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1),
               border-color 0.4s ease,
@@ -262,21 +291,27 @@ body {
 }
 
 /* Brand Stories Sticky Portfolio Showcase */
+@media (min-width: 1024px) {
+  .steps-section .steps-left {
+    min-height: 100%;
+    align-self: stretch;
+  }
+  .steps-section .left-content {
+    position: sticky;
+    top: 110px;
+    align-self: flex-start;
+  }
+}
+
 .portfolio-work-item .work-item-overlay {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  bottom: 0;
-  height: 50%;
-  background: linear-gradient(180deg, rgba(9, 13, 22, 0) 0%, rgba(9, 13, 22, 0.75) 35%, rgba(9, 13, 22, 0.98) 100%);
+  background: linear-gradient(180deg, rgba(9, 13, 22, 0) 0%, rgba(9, 13, 22, 0.88) 35%, rgba(9, 13, 22, 0.98) 100%);
   -webkit-backdrop-filter: blur(16px);
   backdrop-filter: blur(16px);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.6) 20%, black 100%);
+  mask-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.6) 20%, black 100%);
   opacity: 0;
   visibility: hidden;
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  border-bottom-left-radius: inherit;
-  border-bottom-right-radius: inherit;
 }
 
 .portfolio-work-item .all-portfolio-info {
