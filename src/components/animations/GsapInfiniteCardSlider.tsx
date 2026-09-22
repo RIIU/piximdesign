@@ -195,7 +195,7 @@ export const GsapInfiniteCardSlider: React.FC<GsapInfiniteCardSliderProps> = ({
           {repeatedItems.map((item, idx) => (
             <div
               key={`${item.id}-${idx}`}
-              className="w-[320px] sm:w-[380px] shrink-0 rounded-2xl bg-white dark:bg-[#111827] border border-[#2651B9]/15 dark:border-[#2651B9]/25 hover:border-[#FF8500]/60 p-6 transition-all duration-300 hover:shadow-xl shadow-[0_10px_30px_-5px_rgba(15,23,42,0.08)] dark:shadow-[0_10px_30px_-5px_rgba(0,0,0,0.5)] group flex flex-col justify-between"
+              className="w-[320px] sm:w-[380px] shrink-0 rounded-2xl bg-white dark:bg-[#0C1E4E] border border-[#2651B9]/15 dark:border-[#2651B9]/35 hover:border-[#FF8500]/60 p-6 transition-all duration-300 hover:shadow-xl shadow-[0_10px_30px_-5px_rgba(15,23,42,0.08)] dark:shadow-[0_15px_40px_-10px_rgba(4,10,28,0.7)] group flex flex-col justify-between"
             >
               <div>
                 {/* Header with Tag & Rating */}

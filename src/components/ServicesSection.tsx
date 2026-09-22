@@ -110,7 +110,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onSelectServic
               className={`px-4 py-1.5 rounded-full text-xs sm:text-sm font-medium transition-all duration-300 cursor-pointer ${
                 activeTab === cat.id
                   ? "bg-gradient-to-r from-[#FF8500] to-[#FFA133] text-white shadow-md shadow-[#FF8500]/25 font-semibold"
-                  : "bg-white/5 text-slate-300 hover:text-white border border-white/10 hover:border-[#FF8500]/40 shadow-sm"
+                  : "bg-[#0C1E4E]/80 text-slate-300 hover:text-white border border-[#2651B9]/30 hover:border-[#FF8500]/50 shadow-sm"
               }`}
             >
               {cat.label}
@@ -136,7 +136,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onSelectServic
               <div className="relative z-10">
                 <div className="flex items-start justify-between mb-6">
                   {/* Pixxen-Style Prominent Animated Lottie Icon */}
-                  <div className="p-1 rounded-2xl bg-white/[0.04] border border-white/[0.08] group-hover:border-[#FF8500]/40 group-hover:bg-[#FF8500]/5 transition-all duration-300">
+                  <div className="p-1 rounded-2xl bg-[#081330]/70 border border-[#2651B9]/25 group-hover:border-[#FF8500]/40 group-hover:bg-[#FF8500]/10 transition-all duration-300">
                     <PixxenLottieIcon
                       type={service.id}
                       size={68}
@@ -146,7 +146,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onSelectServic
 
                   {/* Pill Badge & Number */}
                   <div className="flex items-center gap-2">
-                    <span className="text-xs px-3 py-1 rounded-full bg-white/[0.06] text-slate-300 border border-white/10 font-mono">
+                    <span className="text-xs px-3 py-1 rounded-full bg-[#081330]/80 text-slate-300 border border-[#2651B9]/30 font-mono">
                       {service.badge}
                     </span>
                     <span className="text-sm font-bold font-mono text-slate-500 group-hover:text-[#FFA133] transition-colors">
@@ -167,12 +167,12 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onSelectServic
               </div>
 
               {/* Bottom Row: Pixxen-Style Slide-Arrow Action Button */}
-              <div className="relative z-10 mt-8 pt-5 border-t border-white/10 flex items-center justify-between">
+              <div className="relative z-10 mt-8 pt-5 border-t border-[#2651B9]/25 flex items-center justify-between">
                 <span className="text-xs sm:text-sm font-bold text-slate-300 group-hover:text-white transition-colors">
                   Request Scope & Estimate
                 </span>
 
-                <div className="w-10 h-10 rounded-full bg-white/[0.08] group-hover:bg-[#FF8500] text-white flex items-center justify-center transition-all duration-300 shadow-sm overflow-hidden shrink-0">
+                <div className="w-10 h-10 rounded-full bg-[#081330] border border-[#2651B9]/30 group-hover:bg-[#FF8500] group-hover:border-[#FF8500] text-white flex items-center justify-center transition-all duration-300 shadow-sm overflow-hidden shrink-0">
                   <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
                 </div>
               </div>

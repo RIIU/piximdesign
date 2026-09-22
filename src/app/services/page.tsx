@@ -110,7 +110,7 @@ export default function ServicesPage() {
               className={`px-4 py-1.5 rounded-full text-xs sm:text-sm font-medium transition-all duration-300 cursor-pointer ${
                 activeCategory === cat.id
                   ? "bg-gradient-to-r from-[#FF8500] to-[#FFA133] text-white shadow-md shadow-[#FF8500]/25 font-semibold"
-                  : "bg-white/5 text-slate-300 hover:text-white border border-white/10 hover:border-[#FF8500]/40 shadow-sm"
+                  : "bg-[#0C1E4E]/80 text-slate-300 hover:text-white border border-[#2651B9]/30 hover:border-[#FF8500]/50 shadow-sm"
               }`}
             >
               {cat.label}
@@ -136,7 +136,7 @@ export default function ServicesPage() {
               <div className="relative z-10">
                 <div className="flex items-start justify-between mb-6">
                   {/* Pixxen-Style Prominent Animated Lottie Icon */}
-                  <div className="p-1 rounded-2xl bg-white/[0.04] border border-white/[0.08] group-hover:border-[#FF8500]/40 group-hover:bg-[#FF8500]/5 transition-all duration-300">
+                  <div className="p-1 rounded-2xl bg-[#081330]/70 border border-[#2651B9]/25 group-hover:border-[#FF8500]/40 group-hover:bg-[#FF8500]/10 transition-all duration-300">
                     <PixxenLottieIcon
                       type={service.id}
                       size={68}
@@ -146,7 +146,7 @@ export default function ServicesPage() {
 
                   {/* Pill Badge & Number */}
                   <div className="flex items-center gap-2">
-                    <span className="text-xs px-3 py-1 rounded-full bg-white/[0.06] text-slate-300 border border-white/10 font-mono">
+                    <span className="text-xs px-3 py-1 rounded-full bg-[#081330]/80 text-slate-300 border border-[#2651B9]/30 font-mono">
                       {service.badge}
                     </span>
                     <span className="text-sm font-bold font-mono text-slate-500 group-hover:text-[#FFA133] transition-colors">
@@ -167,7 +167,7 @@ export default function ServicesPage() {
 
                 {/* Key Deliverables Highlights */}
                 {service.features && service.features.length > 0 && (
-                  <ul className="mt-5 pt-4 border-t border-white/[0.08] space-y-2">
+                  <ul className="mt-5 pt-4 border-t border-[#2651B9]/20 space-y-2">
                     {service.features.map((feature, i) => (
                       <li key={i} className="flex items-center gap-2 text-xs sm:text-sm text-slate-300">
                         <CheckCircle2 className="w-3.5 h-3.5 text-[#FF8500] shrink-0" />
@@ -179,12 +179,12 @@ export default function ServicesPage() {
               </div>
 
               {/* Bottom Row: Slide-Arrow Action Button */}
-              <div className="relative z-10 mt-6 pt-5 border-t border-white/10 flex items-center justify-between">
+              <div className="relative z-10 mt-6 pt-5 border-t border-[#2651B9]/25 flex items-center justify-between">
                 <span className="text-xs sm:text-sm font-bold text-slate-300 group-hover:text-white transition-colors">
                   Explore Deliverables & Scope
                 </span>
 
-                <div className="w-10 h-10 rounded-full bg-white/[0.08] group-hover:bg-[#FF8500] text-white flex items-center justify-center transition-all duration-300 shadow-sm overflow-hidden shrink-0">
+                <div className="w-10 h-10 rounded-full bg-[#081330] border border-[#2651B9]/30 group-hover:bg-[#FF8500] group-hover:border-[#FF8500] text-white flex items-center justify-center transition-all duration-300 shadow-sm overflow-hidden shrink-0">
                   <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
                 </div>
               </div>
@@ -211,12 +211,20 @@ export default function ServicesPage() {
         />
       </div>
 
-      {/* Bottom Consultation Strip */}
-      <div className="relative p-8 sm:p-12 rounded-3xl bg-[#111827]/80 border border-white/10 backdrop-blur-xl shadow-2xl text-center overflow-hidden z-10">
+      {/* Bottom Consultation Strip - Rich Brand Blue Container (Black-Free) */}
+      <div className="relative p-8 sm:p-12 rounded-3xl bg-gradient-to-br from-[#0C1E4E] via-[#0D2258] to-[#081330] border border-[#2651B9]/35 backdrop-blur-xl shadow-[0_25px_70px_-15px_rgba(4,10,28,0.85)] text-center overflow-hidden z-10">
+        {/* Ambient Top Glow */}
         <div
-          className="absolute -top-24 left-1/2 -translate-x-1/2 w-80 h-80 rounded-full pointer-events-none opacity-20 blur-3xl"
+          className="absolute -top-24 left-1/2 -translate-x-1/2 w-80 h-80 rounded-full pointer-events-none opacity-25 blur-3xl"
           style={{
             background: "radial-gradient(circle at center, #FF8500 0%, transparent 70%)",
+          }}
+        />
+        {/* Ambient Blue Bottom Glow */}
+        <div
+          className="absolute -bottom-24 right-1/4 w-80 h-80 rounded-full pointer-events-none opacity-30 blur-3xl"
+          style={{
+            background: "radial-gradient(circle at center, #2651B9 0%, transparent 70%)",
           }}
         />
 
@@ -239,7 +247,7 @@ export default function ServicesPage() {
           <GsapMagneticButton
             href="/pricing"
             variant="secondary"
-            className="px-6 py-3 bg-white/5 hover:bg-white/10 text-white border border-white/15 font-medium text-xs sm:text-sm transition-colors"
+            className="px-6 py-3 bg-[#081330] hover:bg-[#0A183D] text-white border border-[#2651B9]/40 hover:border-[#FF8500]/50 font-medium text-xs sm:text-sm transition-all shadow-sm"
           >
             <span>View Pricing & Packages →</span>
           </GsapMagneticButton>

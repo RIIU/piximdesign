@@ -181,7 +181,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenContact }) => {
         </Link>
 
         {/* Desktop Nav Links */}
-        <nav className="hidden md:flex items-center gap-1 p-1.5 rounded-full bg-white dark:bg-[#111827]/90 border border-[#2651B9]/20 dark:border-[#2651B9]/30 shadow-[0_4px_16px_-2px_rgba(15,23,42,0.06)] dark:shadow-[0_4px_16px_-2px_rgba(0,0,0,0.4)]">
+        <nav className="hidden md:flex items-center gap-1 p-1.5 rounded-full bg-white dark:bg-[#0C1E4E]/90 border border-[#2651B9]/20 dark:border-[#2651B9]/35 shadow-[0_4px_16px_-2px_rgba(15,23,42,0.06)] dark:shadow-[0_4px_20px_-2px_rgba(4,10,28,0.6)]">
           {navLinks.map((link, idx) => {
             const isActive = pathname === link.href || (link.href !== "/" && pathname?.startsWith(link.href));
             return (
@@ -192,7 +192,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenContact }) => {
                 className={`desktop-nav-link px-3.5 py-1.5 text-xs lg:text-sm rounded-full transition-all duration-200 cursor-pointer ${
                   isActive
                     ? "bg-[#2651B9]/12 dark:bg-[#2651B9]/30 text-[#2651B9] dark:text-[#60A5FA] font-bold shadow-xs border border-[#2651B9]/30 dark:border-[#2651B9]/50"
-                    : "text-slate-700 dark:text-slate-300 hover:text-[#2651B9] dark:hover:text-[#60A5FA] hover:bg-slate-100 dark:hover:bg-slate-800/60 font-medium"
+                    : "text-slate-700 dark:text-slate-300 hover:text-[#2651B9] dark:hover:text-[#60A5FA] hover:bg-slate-100 dark:hover:bg-[#081330]/60 font-medium"
                 }`}
               >
                 {link.name}
@@ -217,7 +217,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenContact }) => {
         <div className="flex items-center gap-2 md:hidden">
           <button
             onClick={handleMenuToggle}
-            className="relative w-10 h-10 rounded-xl bg-white dark:bg-[#111827] border border-[#2651B9]/20 dark:border-[#2651B9]/35 flex flex-col items-center justify-center gap-1.5 focus:outline-none transition-all duration-200 active:scale-90 cursor-pointer hover:border-[#FF8500]/50 shadow-sm"
+            className="relative w-10 h-10 rounded-xl bg-white dark:bg-[#0C1E4E] border border-[#2651B9]/20 dark:border-[#2651B9]/35 flex flex-col items-center justify-center gap-1.5 focus:outline-none transition-all duration-200 active:scale-90 cursor-pointer hover:border-[#FF8500]/50 shadow-sm"
             aria-label="Toggle Menu"
           >
             <span
@@ -243,7 +243,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenContact }) => {
       <div
         ref={drawerRef}
         style={{ display: "none" }}
-        className="md:hidden bg-white/98 dark:bg-[#0D1322]/98 border-b border-slate-200/50 dark:border-white/5 backdrop-blur-3xl px-6 py-6 overflow-hidden will-change-[height,opacity] shadow-2xl"
+        className="md:hidden bg-white/98 dark:bg-[#081330]/98 border-b border-slate-200/50 dark:border-[#2651B9]/30 backdrop-blur-3xl px-6 py-6 overflow-hidden will-change-[height,opacity] shadow-2xl"
       >
         <div className="flex flex-col gap-2.5">
           {navLinks.map((link) => {

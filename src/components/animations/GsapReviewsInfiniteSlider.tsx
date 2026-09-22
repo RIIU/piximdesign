@@ -151,10 +151,10 @@ export const GsapReviewsInfiniteSlider: React.FC<GsapReviewsInfiniteSliderProps>
   const renderCard = (t: ReviewItem, idx: number) => (
     <div
       key={`${t.author}-${idx}`}
-      className="group relative w-[320px] sm:w-[410px] shrink-0 p-6 sm:p-8 rounded-3xl bg-white/80 dark:bg-[#111827]/80 backdrop-blur-xl ring-1 ring-inset ring-white/60 dark:ring-white/[0.08] border border-[#FF8500]/25 dark:border-[#FF8500]/35 hover:border-[#FF8500]/60 transition-all duration-300 shadow-[0_8px_30px_rgba(15,23,42,0.06)] dark:shadow-[0_8px_30px_rgba(0,0,0,0.4)] hover:shadow-xl flex flex-col justify-between overflow-hidden cursor-default"
+      className="group relative w-[320px] sm:w-[410px] shrink-0 p-6 sm:p-8 rounded-3xl bg-white/80 dark:bg-[#0C1E4E]/90 backdrop-blur-xl ring-1 ring-inset ring-white/60 dark:ring-[#2651B9]/25 border border-[#FF8500]/25 dark:border-[#2651B9]/35 hover:border-[#FF8500]/60 transition-all duration-300 shadow-[0_8px_30px_rgba(15,23,42,0.06)] dark:shadow-[0_15px_40px_-10px_rgba(4,10,28,0.7)] hover:shadow-xl flex flex-col justify-between overflow-hidden cursor-default"
     >
       {/* Pixim Brand Ambient Glow (normally visible) */}
-      <div className="absolute -inset-px rounded-3xl bg-gradient-to-br from-[#FF8500]/12 via-[#2651B9]/6 to-transparent opacity-60 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+      <div className="absolute -inset-px rounded-3xl bg-gradient-to-br from-[#FF8500]/12 via-[#2651B9]/10 to-transparent opacity-60 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
 
       <div className="relative z-10">
         {/* Top Meta Row: Stars & Highlight Badge */}
@@ -253,7 +253,7 @@ export const GsapReviewsInfiniteSlider: React.FC<GsapReviewsInfiniteSliderProps>
               className={`px-3.5 py-1.5 rounded-full border text-xs font-mono font-medium transition-all duration-300 flex items-center gap-2 cursor-pointer ${
                 isPaused
                   ? "bg-amber-500/15 text-amber-700 dark:text-amber-400 border-amber-500/30"
-                  : "bg-white dark:bg-[#111827] hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-200 border-slate-200 dark:border-slate-700 shadow-sm"
+                  : "bg-white dark:bg-[#0C1E4E] hover:bg-slate-50 dark:hover:bg-[#081330] text-slate-700 dark:text-slate-200 border-slate-200 dark:border-[#2651B9]/30 shadow-sm"
               }`}
             >
               {isPaused ? <Play className="w-3 h-3 fill-current" /> : <Pause className="w-3 h-3" />}

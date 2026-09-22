@@ -171,7 +171,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
       </div>
 
       {/* Hero Banner */}
-      <div className={`relative p-8 sm:p-14 rounded-3xl bg-white/80 dark:bg-[#111827]/80 backdrop-blur-xl ring-1 ring-inset ring-white/60 dark:ring-white/[0.08] border ${service.border || "border-[#FF8500]/30"} shadow-[0_16px_48px_-8px_rgba(15,23,42,0.08)] dark:shadow-[0_16px_48px_-8px_rgba(0,0,0,0.5)] overflow-hidden mb-16`}>
+      <div className={`relative p-8 sm:p-14 rounded-3xl bg-white/80 dark:bg-[#0C1E4E]/90 backdrop-blur-xl ring-1 ring-inset ring-white/60 dark:ring-[#2651B9]/25 border ${service.border || "border-[#2651B9]/30"} shadow-[0_16px_48px_-8px_rgba(15,23,42,0.08)] dark:shadow-[0_20px_50px_-10px_rgba(4,10,28,0.8)] overflow-hidden mb-16`}>
         <div className={`absolute -inset-px rounded-3xl bg-gradient-to-br ${service.accent} opacity-40 pointer-events-none`} />
 
         <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
@@ -180,7 +180,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
               <span className="text-xs px-3 py-1 rounded-full bg-[#FF8500]/12 dark:bg-[#FF8500]/20 border border-[#FF8500]/30 text-[#C25E00] dark:text-[#FFA133] font-mono font-bold">
                 Service {service.number} • {service.badge}
               </span>
-              <span className="text-xs px-2.5 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 font-semibold">
+              <span className="text-xs px-2.5 py-1 rounded-full bg-slate-100 dark:bg-[#081330] text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-[#2651B9]/30 font-semibold">
                 8+ Years Proven Craft
               </span>
             </div>
@@ -218,7 +218,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
               <GsapMagneticButton
                 href="/contact"
                 variant="secondary"
-                className="px-6 py-3.5 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-700 font-medium text-sm transition-colors"
+                className="px-6 py-3.5 bg-slate-100 hover:bg-slate-200 dark:bg-[#081330] dark:hover:bg-[#0A183D] text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-[#2651B9]/35 font-medium text-sm transition-colors"
               >
                 <span>Book 30-Min Consultation</span>
               </GsapMagneticButton>
@@ -226,9 +226,9 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
           </div>
 
           {/* Icon Showcase Column */}
-          <div className="lg:col-span-4 flex items-center justify-center p-8 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700">
+          <div className="lg:col-span-4 flex items-center justify-center p-8 rounded-2xl bg-slate-50 dark:bg-[#081330]/60 border border-slate-200 dark:border-[#2651B9]/25">
             <div className="flex flex-col items-center text-center">
-              <div className="p-6 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 shadow-sm">
+              <div className="p-6 rounded-3xl bg-white dark:bg-[#0C1E4E] border border-slate-200 dark:border-[#2651B9]/30 shadow-sm">
                 <AnimatedServiceIcon type={service.id} size={90} />
               </div>
               <div className="text-xs font-mono uppercase tracking-widest text-slate-500 dark:text-slate-400 mt-4">
@@ -254,7 +254,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
 
           <div className="space-y-3.5">
             {details.deliverables.map((item, i) => (
-              <div key={i} className="flex items-start gap-3 p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 text-sm text-slate-700 dark:text-slate-300">
+              <div key={i} className="flex items-start gap-3 p-3.5 rounded-xl bg-slate-50 dark:bg-[#081330]/60 border border-slate-200 dark:border-[#2651B9]/25 text-sm text-slate-700 dark:text-slate-300">
                 <div className="p-0.5 rounded bg-emerald-50 dark:bg-emerald-950/40 text-emerald-600 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800 mt-0.5 shrink-0">
                   <Check className="w-4 h-4" />
                 </div>
@@ -276,14 +276,14 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
               {details.tools.map((t, idx) => (
                 <span
                   key={idx}
-                  className="px-3.5 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs font-medium text-slate-800 dark:text-slate-200"
+                  className="px-3.5 py-1.5 rounded-xl bg-slate-100 dark:bg-[#081330] border border-slate-200 dark:border-[#2651B9]/30 text-xs font-medium text-slate-800 dark:text-slate-200"
                 >
                   {t}
                 </span>
               ))}
             </div>
 
-            <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700">
+            <div className="p-4 rounded-xl bg-slate-50 dark:bg-[#081330]/60 border border-slate-200 dark:border-[#2651B9]/25">
               <div className="text-xs font-bold text-slate-800 dark:text-slate-200 uppercase tracking-wider mb-2">
                 Our Guarantee
               </div>
@@ -293,7 +293,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
             </div>
           </div>
 
-          <div className="mt-6 pt-6 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs text-slate-500 dark:text-slate-400">
+          <div className="mt-6 pt-6 border-t border-slate-100 dark:border-[#2651B9]/25 flex items-center justify-between text-xs text-slate-500 dark:text-slate-400">
             <span>Turnaround Time:</span>
             <span className="text-slate-900 dark:text-white font-semibold">3 to 7 business days</span>
           </div>
@@ -322,7 +322,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
             </div>
             <Link
               href="/contact"
-              className="mt-6 w-full text-center py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-xs font-semibold text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-700 transition-colors"
+              className="mt-6 w-full text-center py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-[#081330] dark:hover:bg-[#0A183D] text-xs font-semibold text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-[#2651B9]/30 transition-colors"
             >
               Select Basic
             </Link>
@@ -357,7 +357,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
             </div>
             <Link
               href="/contact"
-              className="mt-6 w-full text-center py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-xs font-semibold text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-700 transition-colors"
+              className="mt-6 w-full text-center py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-[#081330] dark:hover:bg-[#0A183D] text-xs font-semibold text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-[#2651B9]/30 transition-colors"
             >
               Select Premium
             </Link>
@@ -395,7 +395,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
           <GsapMagneticButton
             href="/projects"
             variant="secondary"
-            className="px-6 py-3.5 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-700 font-medium text-sm transition-colors"
+            className="px-6 py-3.5 bg-slate-100 hover:bg-slate-200 dark:bg-[#081330] dark:hover:bg-[#0A183D] text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-[#2651B9]/35 font-medium text-sm transition-colors"
           >
             <span>View Related Portfolio Work →</span>
           </GsapMagneticButton>
