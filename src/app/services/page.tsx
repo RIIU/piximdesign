@@ -247,7 +247,8 @@ export default function ServicesPage() {
           <GsapMagneticButton
             href="/pricing"
             variant="secondary"
-            className="px-6 py-3 bg-[#081330] hover:bg-[#0A183D] text-white border border-[#2651B9]/40 hover:border-[#FF8500]/50 font-medium text-xs sm:text-sm transition-all shadow-sm"
+            strength={0.3}
+            className="px-6 py-3 !bg-[#081330] hover:!bg-[#0C1E4E] !text-white border border-[#2651B9]/50 hover:border-[#FF8500]/60 font-semibold text-xs sm:text-sm transition-all shadow-md"
           >
             <span>View Pricing & Packages →</span>
           </GsapMagneticButton>

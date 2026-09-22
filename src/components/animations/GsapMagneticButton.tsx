@@ -201,12 +201,12 @@ export const GsapMagneticButton: React.FC<GsapMagneticButtonProps> = ({
       break;
     case "secondary":
       variantStyles =
-        "bg-white hover:bg-slate-50 text-[#0F172A] border border-slate-200 hover:border-[#2651B9]/30 shadow-sm";
-      fillStyles = "bg-slate-100";
+        "bg-white dark:bg-[#081330] hover:bg-slate-50 dark:hover:bg-[#0C1E4E] text-[#0F172A] dark:text-white border border-slate-200 dark:border-[#2651B9]/40 hover:border-[#2651B9]/30 dark:hover:border-[#FF8500]/50 shadow-sm";
+      fillStyles = "bg-slate-100 dark:bg-[#2651B9]/25";
       break;
     case "outline":
       variantStyles =
-        "bg-transparent text-[#0F172A] border border-slate-300 hover:border-[#FF8500] hover:text-[#FF8500]";
+        "bg-transparent text-[#0F172A] dark:text-white border border-slate-300 dark:border-[#2651B9]/40 hover:border-[#FF8500] hover:text-[#FF8500] dark:hover:text-[#FFA133]";
       fillStyles = "bg-[#FF8500]/10";
       break;
   }
