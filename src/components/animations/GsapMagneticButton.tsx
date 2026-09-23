@@ -14,6 +14,7 @@ interface GsapMagneticButtonProps {
   textStrengthMultiplier?: number; // Parallax multiplier for inner text (default 1.55)
   showOverwriteFill?: boolean; // Liquid overwrite hover sweep
   type?: "button" | "submit" | "reset";
+  disabled?: boolean;
 }
 
 export const GsapMagneticButton: React.FC<GsapMagneticButtonProps> = ({
@@ -26,6 +27,7 @@ export const GsapMagneticButton: React.FC<GsapMagneticButtonProps> = ({
   textStrengthMultiplier = 1.55,
   showOverwriteFill = true,
   type = "button",
+  disabled = false,
 }) => {
   const buttonRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLSpanElement>(null);
@@ -259,7 +261,7 @@ export const GsapMagneticButton: React.FC<GsapMagneticButtonProps> = ({
   }
 
   return (
-    <button type={type} onClick={onClick} className={wrapperClasses}>
+    <button type={type} onClick={onClick} disabled={disabled} className={`${wrapperClasses} ${disabled ? "opacity-60 cursor-not-allowed pointer-events-none" : ""}`}>
       {renderedContent}
     </button>
   );

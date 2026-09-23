@@ -10,6 +10,7 @@ import { ReadyForLogoSection } from "@/components/ReadyForLogoSection";
 import { BrandStoriesSection } from "@/components/BrandStoriesSection";
 import { ProcessSection } from "@/components/ProcessSection";
 import { TestimonialsSection } from "@/components/TestimonialsSection";
+import { FreeConsultationSection } from "@/components/FreeConsultationSection";
 import { FaqSection } from "@/components/FaqSection";
 import { ContactSection } from "@/components/ContactSection";
 
@@ -34,19 +35,22 @@ export default function Home() {
       {/* 4. Core Capabilities & Services Bento Grid */}
       <ServicesSection onSelectService={handleSelectService} />
 
-      {/* 5. Ready for a Professional Logo? Video Showcase CTA */}
-      <ReadyForLogoSection onOpenContact={(service, note) => openContact(service, note)} />
-
-      {/* 6. Experience Brand Stories in Design (Pixxen-style Sticky Split Showcase) */}
+      {/* 5. Experience Brand Stories in Design (Pixxen-style Sticky Split Showcase) */}
       <BrandStoriesSection onOpenContact={() => openContact()} />
 
-      {/* 6. 4-Step Agile Delivery Process ("Quick Delivery, Faster Results") */}
+      {/* 6. Ready for a Professional Logo? Video Showcase CTA */}
+      <ReadyForLogoSection onOpenContact={(service, note) => openContact(service, note)} />
+
+      {/* 7. 4-Step Agile Delivery Process ("Quick Delivery, Faster Results") */}
       <ProcessSection onOpenContact={() => openContact()} />
 
       {/* 7. Client Testimonials & Social Proof */}
       <TestimonialsSection />
 
-      {/* 8. Frequently Asked Questions */}
+      {/* 8. 30-Minute Free Consultation & Calendly Schedule */}
+      <FreeConsultationSection />
+
+      {/* 9. Frequently Asked Questions */}
       <FaqSection />
 
       {/* 9. Direct Project Brief & Consultation Form */}

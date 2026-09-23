@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useRef } from "react";
+import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
@@ -125,11 +126,11 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onSelectServic
           const isCardHovered = hoveredId === service.id;
 
           return (
-            <div
+            <Link
               key={service.id}
+              href={`/services/${service.id}`}
               onMouseEnter={() => setHoveredId(service.id)}
               onMouseLeave={() => setHoveredId(null)}
-              onClick={() => onSelectService && onSelectService(service.title)}
               className="pixxen-service-card group flex flex-col justify-between p-7 sm:p-8 cursor-pointer"
             >
               {/* Top Row: Prominent Animated Icon & Badge/Number */}
@@ -169,14 +170,14 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onSelectServic
               {/* Bottom Row: Pixxen-Style Slide-Arrow Action Button */}
               <div className="relative z-10 mt-8 pt-5 border-t border-[#2651B9]/25 flex items-center justify-between">
                 <span className="text-xs sm:text-sm font-bold text-slate-300 group-hover:text-white transition-colors">
-                  Request Scope & Estimate
+                  Read More
                 </span>
 
                 <div className="w-10 h-10 rounded-full bg-[#081330] border border-[#2651B9]/30 group-hover:bg-[#FF8500] group-hover:border-[#FF8500] text-white flex items-center justify-center transition-all duration-300 shadow-sm overflow-hidden shrink-0">
                   <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
                 </div>
               </div>
-            </div>
+            </Link>
           );
         })}
       </div>

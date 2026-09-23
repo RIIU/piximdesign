@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import Image from "next/image";
 
 // Client logos from the public/client logo directory
 export const CLIENT_LOGOS = [
@@ -90,13 +89,12 @@ export const LogoCarousel: React.FC = () => {
             key={`${logo.id}-${idx}`}
             className="group relative flex items-center justify-center mx-3 sm:mx-4 md:mx-6 shrink-0 transition-transform duration-300 hover:scale-110 cursor-pointer"
           >
-            <Image
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
               src={logo.src}
               alt={logo.name}
-              width={180}
-              height={52}
-              style={{ width: "auto" }}
-              className="h-9 sm:h-11 md:h-13 max-w-[130px] sm:max-w-[160px] md:max-w-[190px] object-contain opacity-80 hover:opacity-100 transition-all duration-300 drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)]"
+              className="h-9 sm:h-11 md:h-13 w-auto max-w-[130px] sm:max-w-[160px] md:max-w-[190px] object-contain opacity-80 hover:opacity-100 transition-all duration-300 drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)]"
+              loading="lazy"
             />
           </div>
         ))}

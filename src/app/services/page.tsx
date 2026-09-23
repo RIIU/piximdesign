@@ -7,7 +7,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { SERVICES } from "@/data/agencyData";
 import { PixxenLottieIcon } from "@/components/PixxenLottieIcon";
-import { ArrowRight, CheckCircle2 } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { useContactModal } from "@/components/AppLayoutWrapper";
 import {
   GsapInfiniteLoopedPanels,
@@ -164,24 +164,12 @@ export default function ServicesPage() {
                 <p className="mt-2.5 text-sm sm:text-base text-slate-400 leading-relaxed group-hover:text-slate-300 transition-colors">
                   {service.tagline}
                 </p>
-
-                {/* Key Deliverables Highlights */}
-                {service.features && service.features.length > 0 && (
-                  <ul className="mt-5 pt-4 border-t border-[#2651B9]/20 space-y-2">
-                    {service.features.map((feature, i) => (
-                      <li key={i} className="flex items-center gap-2 text-xs sm:text-sm text-slate-300">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-[#FF8500] shrink-0" />
-                        <span className="line-clamp-1">{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-                )}
               </div>
 
               {/* Bottom Row: Slide-Arrow Action Button */}
-              <div className="relative z-10 mt-6 pt-5 border-t border-[#2651B9]/25 flex items-center justify-between">
+              <div className="relative z-10 mt-8 pt-5 border-t border-[#2651B9]/25 flex items-center justify-between">
                 <span className="text-xs sm:text-sm font-bold text-slate-300 group-hover:text-white transition-colors">
-                  Explore Deliverables & Scope
+                  Read More
                 </span>
 
                 <div className="w-10 h-10 rounded-full bg-[#081330] border border-[#2651B9]/30 group-hover:bg-[#FF8500] group-hover:border-[#FF8500] text-white flex items-center justify-center transition-all duration-300 shadow-sm overflow-hidden shrink-0">

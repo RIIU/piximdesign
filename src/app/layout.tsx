@@ -59,12 +59,45 @@ export default function RootLayout({
                   document.documentElement.style.colorScheme = 'dark';
                   localStorage.setItem('pixim_theme', 'dark');
                 } catch (e) {}
+
+                // Suppress browser extension unhandled rejections/errors from triggering Next.js dev overlay
+                if (typeof window !== 'undefined') {
+                  window.addEventListener('unhandledrejection', function(event) {
+                    var reason = event && event.reason;
+                    var stack = (reason && reason.stack) || '';
+                    var msg = (reason && reason.message) || String(reason || '');
+                    if (
+                      stack.includes('chrome-extension://') ||
+                      msg.includes('M_ID') ||
+                      msg.includes('bis_skin_checked')
+                    ) {
+                      event.stopImmediatePropagation();
+                      event.preventDefault();
+                    }
+                  }, true);
+
+                  window.addEventListener('error', function(event) {
+                    var filename = (event && event.filename) || '';
+                    var msg = (event && event.message) || '';
+                    if (
+                      filename.includes('chrome-extension://') ||
+                      msg.includes('M_ID') ||
+                      msg.includes('bis_skin_checked')
+                    ) {
+                      event.stopImmediatePropagation();
+                      event.preventDefault();
+                    }
+                  }, true);
+                }
               })();
             `,
           }}
         />
       </head>
-      <body className="min-h-full flex flex-col bg-[#081330] text-[#F8FAFC] font-sans">
+      <body
+        suppressHydrationWarning
+        className="min-h-full flex flex-col bg-[#081330] text-[#F8FAFC] font-sans"
+      >
         <AppLayoutWrapper>{children}</AppLayoutWrapper>
       </body>
     </html>
