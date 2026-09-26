@@ -8,3 +8,4 @@ export * from "./GsapDrawPath";
 export * from "./GsapReviewsInfiniteSlider";
 export * from "./GsapExplosiveTextScroll";
 export * from "./GsapExplodingHeading";
+export * from "./LiquidMetal";
