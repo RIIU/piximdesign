@@ -3,7 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import { PiximLogo } from "./PiximLogo";
-import { ArrowUp, Heart, Sparkles } from "lucide-react";
+import { ArrowUp, Heart } from "lucide-react";
 
 export const Footer: React.FC = () => {
   const scrollToTop = () => {
@@ -26,10 +26,6 @@ export const Footer: React.FC = () => {
               <p className="mt-4 text-sm text-slate-700 dark:text-slate-300 max-w-sm leading-relaxed">
                 With 8+ years of experience and 500+ happy clients, Pixim Design creates futuristic brand identities, logos, and modern websites that stand out and connect with your audience.
               </p>
-              <div className="mt-3 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FF8500]/12 dark:bg-[#FF8500]/20 border border-[#FF8500]/30 text-[#C25E00] dark:text-[#FFA133] text-xs font-bold">
-                <Sparkles className="w-3.5 h-3.5 animate-spin" style={{ animationDuration: "6s" }} />
-                <span>Pixim Studio • Guaranteed Delivery</span>
-              </div>
             </div>
 
             <div className="mt-6 flex items-center gap-3">
@@ -194,7 +190,16 @@ export const Footer: React.FC = () => {
         {/* Bottom Bar */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500 dark:text-slate-400">
           <div>
-            &copy; {new Date().getFullYear()} Pixim Design. All rights reserved. Built with Next.js & GSAP.
+            &copy; {new Date().getFullYear()} Pixim Design. All rights reserved. Built by{" "}
+            <a
+              href="https://shokhertech.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[#2651B9] dark:text-[#60A5FA] hover:text-[#FF8500] dark:hover:text-[#FFA133] transition-colors font-medium hover:underline"
+            >
+              Shokher Tech Solutions
+            </a>
+            .
           </div>
 
           <div className="flex items-center gap-1">

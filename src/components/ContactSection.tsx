@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Mail, Send, CheckCircle2, Clock, ShieldCheck } from "lucide-react";
+import { Mail, Send, CheckCircle2, Clock, ShieldCheck, Loader2, AlertCircle } from "lucide-react";
 import { GsapMagneticButton } from "./animations";
 
 interface ContactSectionProps {
@@ -14,12 +14,14 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
   initialNotes = "",
 }) => {
   const [selectedServices, setSelectedServices] = useState<string[]>(
-    initialService ? [initialService] : ["Next.js & Full-Stack Web"]
+    initialService ? [initialService] : ["Logo & Brand Identity"]
   );
-  const [budget, setBudget] = useState("$5k - $15k");
+  const [budget, setBudget] = useState("$100 - $200");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState(initialNotes || "");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const availableServices = [
@@ -41,20 +43,50 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!name || !email) return;
+    if (!name.trim() || !email.trim()) return;
+
+    setIsSubmitting(true);
+    setErrorMessage("");
 
     try {
-      const confettiModule = await import("canvas-confetti");
-      const confetti = confettiModule.default || confettiModule;
-      confetti({
-        particleCount: 100,
-        spread: 80,
-        origin: { y: 0.6 },
-        colors: ["#ff7a00", "#2563eb", "#38bdf8", "#10b981"],
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: name.trim(),
+          email: email.trim(),
+          services: selectedServices,
+          budget,
+          message: message.trim(),
+        }),
       });
-    } catch {}
 
-    setIsSubmitted(true);
+      const data = await res.json();
+
+      if (!res.ok || !data.success) {
+        throw new Error(data.message || "Failed to send inquiry. Please try again.");
+      }
+
+      try {
+        const confettiModule = await import("canvas-confetti");
+        const confetti = confettiModule.default || confettiModule;
+        confetti({
+          particleCount: 100,
+          spread: 80,
+          origin: { y: 0.6 },
+          colors: ["#ff7a00", "#2563eb", "#38bdf8", "#10b981"],
+        });
+      } catch {}
+
+      setIsSubmitted(true);
+    } catch (err: any) {
+      console.error("Submit error:", err);
+      setErrorMessage(err.message || "Failed to send inquiry. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -142,7 +174,13 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                   Thank you, <span className="text-slate-900 dark:text-white font-semibold">{name}</span>. Our lead architect will review your project requirements and follow up at <span className="text-[#FF8500] font-semibold">{email}</span> within 4 hours.
                 </p>
                 <button
-                  onClick={() => setIsSubmitted(false)}
+                  onClick={() => {
+                    setIsSubmitted(false);
+                    setName("");
+                    setEmail("");
+                    setMessage("");
+                    setErrorMessage("");
+                  }}
                   className="mt-6 px-6 py-2 rounded-full bg-slate-200 dark:bg-[#0E235E] text-xs font-semibold text-slate-800 dark:text-white hover:bg-slate-300 dark:hover:bg-[#153282] transition-colors cursor-pointer"
                 >
                   Send Another Inquiry
@@ -150,56 +188,15 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-6">
-                {/* 1. Services Required */}
-                <div>
-                  <label className="text-xs uppercase font-mono font-bold tracking-wider text-slate-600 dark:text-blue-200/90 block mb-2.5">
-                    What services do you need?
-                  </label>
-                  <div className="flex flex-wrap gap-2">
-                    {availableServices.map((srv) => {
-                      const isSelected = selectedServices.includes(srv);
-                      return (
-                        <button
-                          type="button"
-                          key={srv}
-                          onClick={() => toggleService(srv)}
-                          className={`px-3.5 py-2 rounded-xl text-xs font-medium border transition-all duration-200 cursor-pointer ${
-                            isSelected
-                              ? "bg-[#FF8500]/15 border-[#FF8500] text-slate-900 dark:bg-[#FF8500]/25 dark:border-[#FF8500] dark:text-[#FFA133] font-semibold shadow-[0_0_15px_rgba(255,133,0,0.2)] ring-1 ring-[#FF8500]/40"
-                              : "bg-slate-50 border-slate-200 text-slate-700 hover:bg-slate-100 hover:border-[#2651B9]/40 dark:bg-[#081538]/70 dark:border-[#2651B9]/30 dark:text-slate-200 dark:hover:bg-[#0E235E]/80 dark:hover:border-[#2651B9]/60 dark:hover:text-white"
-                          }`}
-                        >
-                          {srv}
-                        </button>
-                      );
-                    })}
+                {/* Error Banner */}
+                {errorMessage && (
+                  <div className="p-3.5 rounded-xl bg-red-500/10 border border-red-500/30 text-red-600 dark:text-red-400 text-xs flex items-center gap-2.5">
+                    <AlertCircle className="w-4 h-4 shrink-0" />
+                    <span>{errorMessage}</span>
                   </div>
-                </div>
+                )}
 
-                {/* 2. Budget Tier */}
-                <div>
-                  <label className="text-xs uppercase font-mono font-bold tracking-wider text-slate-600 dark:text-blue-200/90 block mb-2.5">
-                    Estimated Project Budget
-                  </label>
-                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-                    {budgetTiers.map((tier) => (
-                      <button
-                        type="button"
-                        key={tier}
-                        onClick={() => setBudget(tier)}
-                        className={`py-2 px-3 rounded-xl text-xs font-medium border text-center transition-all duration-200 cursor-pointer ${
-                          budget === tier
-                            ? "bg-[#2651B9]/15 border-[#2651B9] text-[#2651B9] dark:bg-[#2651B9]/30 dark:border-[#3B82F6] dark:text-[#93C5FD] font-semibold shadow-[0_0_15px_rgba(38,81,185,0.25)] ring-1 ring-[#3B82F6]/40"
-                            : "bg-slate-50 border-slate-200 text-slate-700 hover:bg-slate-100 hover:border-[#2651B9]/40 dark:bg-[#081538]/70 dark:border-[#2651B9]/30 dark:text-slate-200 dark:hover:bg-[#0E235E]/80 dark:hover:border-[#2651B9]/60 dark:hover:text-white"
-                        }`}
-                      >
-                        {tier}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
-                {/* 3. Name & Email Inputs */}
+                {/* 1. Name & Email Inputs */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="text-xs uppercase font-mono font-bold tracking-wider text-slate-600 dark:text-blue-200/90 block mb-1.5">
@@ -230,6 +227,55 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                   </div>
                 </div>
 
+                {/* 2. Services Required */}
+                <div>
+                  <label className="text-xs uppercase font-mono font-bold tracking-wider text-slate-600 dark:text-blue-200/90 block mb-2.5">
+                    What services do you need?
+                  </label>
+                  <div className="flex flex-wrap gap-2">
+                    {availableServices.map((srv) => {
+                      const isSelected = selectedServices.includes(srv);
+                      return (
+                        <button
+                          type="button"
+                          key={srv}
+                          onClick={() => toggleService(srv)}
+                          className={`px-3.5 py-2 rounded-xl text-xs font-medium border transition-all duration-200 cursor-pointer ${
+                            isSelected
+                              ? "bg-[#FF8500]/15 border-[#FF8500] text-slate-900 dark:bg-[#FF8500]/25 dark:border-[#FF8500] dark:text-[#FFA133] font-semibold shadow-[0_0_15px_rgba(255,133,0,0.2)] ring-1 ring-[#FF8500]/40"
+                              : "bg-slate-50 border-slate-200 text-slate-700 hover:bg-slate-100 hover:border-[#2651B9]/40 dark:bg-[#081538]/70 dark:border-[#2651B9]/30 dark:text-slate-200 dark:hover:bg-[#0E235E]/80 dark:hover:border-[#2651B9]/60 dark:hover:text-white"
+                          }`}
+                        >
+                          {srv}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {/* 3. Budget Tier */}
+                <div>
+                  <label className="text-xs uppercase font-mono font-bold tracking-wider text-slate-600 dark:text-blue-200/90 block mb-2.5">
+                    Estimated Project Budget
+                  </label>
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                    {budgetTiers.map((tier) => (
+                      <button
+                        type="button"
+                        key={tier}
+                        onClick={() => setBudget(tier)}
+                        className={`py-2 px-3 rounded-xl text-xs font-medium border text-center transition-all duration-200 cursor-pointer ${
+                          budget === tier
+                            ? "bg-[#2651B9]/15 border-[#2651B9] text-[#2651B9] dark:bg-[#2651B9]/30 dark:border-[#3B82F6] dark:text-[#93C5FD] font-semibold shadow-[0_0_15px_rgba(38,81,185,0.25)] ring-1 ring-[#3B82F6]/40"
+                            : "bg-slate-50 border-slate-200 text-slate-700 hover:bg-slate-100 hover:border-[#2651B9]/40 dark:bg-[#081538]/70 dark:border-[#2651B9]/30 dark:text-slate-200 dark:hover:bg-[#0E235E]/80 dark:hover:border-[#2651B9]/60 dark:hover:text-white"
+                        }`}
+                      >
+                        {tier}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
                 {/* 4. Message / Project Notes */}
                 <div>
                   <label className="text-xs uppercase font-mono font-bold tracking-wider text-slate-600 dark:text-blue-200/90 block mb-1.5">
@@ -249,10 +295,22 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                   type="submit"
                   variant="primary"
                   strength={0.2}
-                  className="w-full py-4 !bg-gradient-to-r !from-[#FF8500] !to-[#FFA133] hover:!from-[#e67700] hover:!to-[#FF8500] !text-white font-bold text-sm shadow-[0_8px_25px_rgba(255,133,0,0.35)] transition-all cursor-pointer"
+                  disabled={isSubmitting}
+                  className={`w-full py-4 !bg-gradient-to-r !from-[#FF8500] !to-[#FFA133] hover:!from-[#e67700] hover:!to-[#FF8500] !text-white font-bold text-sm shadow-[0_8px_25px_rgba(255,133,0,0.35)] transition-all cursor-pointer flex items-center justify-center gap-2 ${
+                    isSubmitting ? "opacity-75 cursor-not-allowed" : ""
+                  }`}
                 >
-                  <Send className="w-4 h-4" />
-                  <span>Send Project Brief</span>
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="w-4 h-4 animate-spin inline-block" />
+                      <span>Sending Project Brief...</span>
+                    </>
+                  ) : (
+                    <>
+                      <Send className="w-4 h-4 inline-block" />
+                      <span>Send Project Brief</span>
+                    </>
+                  )}
                 </GsapMagneticButton>
               </form>
             )}
