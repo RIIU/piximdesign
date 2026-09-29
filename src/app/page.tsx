@@ -1,18 +1,21 @@
 "use client";
 
 import React from "react";
+import dynamic from "next/dynamic";
 import { useContactModal } from "@/components/AppLayoutWrapper";
 import { HeroSection } from "@/components/HeroSection";
-import { VideoShowcaseSection } from "@/components/VideoShowcaseSection";
-import { StatsBar } from "@/components/StatsBar";
-import { ServicesSection } from "@/components/ServicesSection";
-import { ReadyForLogoSection } from "@/components/ReadyForLogoSection";
-import { BrandStoriesSection } from "@/components/BrandStoriesSection";
-import { ProcessSection } from "@/components/ProcessSection";
-import { TestimonialsSection } from "@/components/TestimonialsSection";
-import { FreeConsultationSection } from "@/components/FreeConsultationSection";
-import { FaqSection } from "@/components/FaqSection";
-import { ContactSection } from "@/components/ContactSection";
+
+// Lazy load below-the-fold sections — only load when needed
+const VideoShowcaseSection = dynamic(() => import("@/components/VideoShowcaseSection").then(m => ({ default: m.VideoShowcaseSection })), { ssr: false });
+const StatsBar = dynamic(() => import("@/components/StatsBar").then(m => ({ default: m.StatsBar })), { ssr: false });
+const ServicesSection = dynamic(() => import("@/components/ServicesSection").then(m => ({ default: m.ServicesSection })), { ssr: false });
+const ReadyForLogoSection = dynamic(() => import("@/components/ReadyForLogoSection").then(m => ({ default: m.ReadyForLogoSection })), { ssr: false });
+const BrandStoriesSection = dynamic(() => import("@/components/BrandStoriesSection").then(m => ({ default: m.BrandStoriesSection })), { ssr: false });
+const ProcessSection = dynamic(() => import("@/components/ProcessSection").then(m => ({ default: m.ProcessSection })), { ssr: false });
+const TestimonialsSection = dynamic(() => import("@/components/TestimonialsSection").then(m => ({ default: m.TestimonialsSection })), { ssr: false });
+const FreeConsultationSection = dynamic(() => import("@/components/FreeConsultationSection").then(m => ({ default: m.FreeConsultationSection })), { ssr: false });
+const FaqSection = dynamic(() => import("@/components/FaqSection").then(m => ({ default: m.FaqSection })), { ssr: false });
+const ContactSection = dynamic(() => import("@/components/ContactSection").then(m => ({ default: m.ContactSection })), { ssr: false });
 
 export default function Home() {
   const { openContact } = useContactModal();
@@ -58,3 +61,4 @@ export default function Home() {
     </main>
   );
 }
+

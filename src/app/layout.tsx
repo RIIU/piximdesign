@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Plus_Jakarta_Sans, Geist_Mono } from "next/font/google";
+import { Plus_Jakarta_Sans, Geist_Mono, Jersey_25 } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
 
@@ -12,6 +12,12 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+});
+
+const jersey25 = Jersey_25({
+  variable: "--font-jersey-25",
+  subsets: ["latin"],
+  weight: "400",
 });
 
 const agency = localFont({
@@ -47,7 +53,7 @@ export default function RootLayout({
       lang="en"
       suppressHydrationWarning
       data-scroll-behavior="smooth"
-      className={`${plusJakartaSans.variable} ${geistMono.variable} ${agency.variable} ${sherika.variable} dark h-full antialiased selection:bg-[#FF8500]/25 selection:text-white`}
+      className={`${plusJakartaSans.variable} ${geistMono.variable} ${jersey25.variable} ${agency.variable} ${sherika.variable} dark h-full antialiased selection:bg-[#FF8500]/25 selection:text-white`}
     >
       <head>
         <script

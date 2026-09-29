@@ -203,6 +203,82 @@ export const Footer: React.FC = () => {
           </div>
         </div>
       </div>
+
+      {/* Giant Brand Text — cover style with scroll animation */}
+      <FooterBrandText />
     </footer>
+  );
+};
+
+/** Animated giant brand text at the very bottom */
+const FooterBrandText: React.FC = () => {
+  const containerRef = React.useRef<HTMLDivElement>(null);
+  const textRef = React.useRef<HTMLHeadingElement>(null);
+
+  React.useEffect(() => {
+    const loadGsap = async () => {
+      const gsapModule = await import("gsap");
+      const scrollModule = await import("gsap/ScrollTrigger");
+      const gsap = gsapModule.default;
+      const ScrollTrigger = scrollModule.ScrollTrigger;
+      gsap.registerPlugin(ScrollTrigger);
+
+      if (!textRef.current || !containerRef.current) return;
+
+      gsap.fromTo(
+        textRef.current,
+        {
+          y: 60,
+          opacity: 0,
+          scale: 0.9,
+        },
+        {
+          y: 0,
+          opacity: 1,
+          scale: 1,
+          duration: 0.4,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top 95%",
+            end: "top 80%",
+            scrub: 0.3,
+          },
+        }
+      );
+    };
+
+    loadGsap();
+  }, []);
+
+  return (
+    <div
+      ref={containerRef}
+      className="relative w-full mt-12 overflow-hidden select-none pointer-events-none"
+      aria-hidden="true"
+    >
+      {/* Glow behind text */}
+      <div className="absolute inset-0 flex items-center justify-center">
+        <div className="w-3/4 h-full bg-gradient-to-t from-[#2651B9]/15 via-[#FF8500]/10 to-transparent blur-3xl" />
+      </div>
+
+      <h2
+        ref={textRef}
+        className="relative text-center font-[family-name:var(--font-jersey-25)] uppercase leading-[0.69em] tracking-[0.01em] whitespace-nowrap pb-0"
+        style={{
+          fontSize: "clamp(3rem, 12vw, 14rem)",
+          background:
+            "linear-gradient(180deg, rgba(38,81,185,0.35) 0%, rgba(38,81,185,0.08) 100%)",
+          WebkitBackgroundClip: "text",
+          WebkitTextFillColor: "transparent",
+          backgroundClip: "text",
+        }}
+      >
+        PIXIM DESIGN
+      </h2>
+
+      {/* Bottom fade overlay */}
+      <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-white dark:from-[#050D21] to-transparent" />
+    </div>
   );
 };

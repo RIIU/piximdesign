@@ -6,7 +6,6 @@ import { usePathname, useRouter } from "next/navigation";
 import { PiximLogo } from "./PiximLogo";
 import { ArrowUpRight, Sparkles } from "lucide-react";
 import { GsapMagneticButton } from "./animations";
-import gsap from "gsap";
 
 interface NavbarProps {
   onOpenContact: () => void;
