@@ -91,37 +91,37 @@ export const Footer: React.FC = () => {
             </h4>
             <ul className="space-y-2.5 text-xs sm:text-sm text-slate-600 dark:text-slate-300">
               <li>
-                <Link href="/" className="hover:text-[#2651B9] transition-colors">
+                <Link href="/" prefetch={true} className="hover:text-[#2651B9] transition-colors">
                   Home
                 </Link>
               </li>
               <li>
-                <Link href="/services" className="hover:text-[#2651B9] transition-colors">
+                <Link href="/services" prefetch={true} className="hover:text-[#2651B9] transition-colors">
                   Our Services
                 </Link>
               </li>
               <li>
-                <Link href="/projects" className="hover:text-[#2651B9] transition-colors">
+                <Link href="/projects" prefetch={true} className="hover:text-[#2651B9] transition-colors">
                   Portfolio / Work
                 </Link>
               </li>
               <li>
-                <Link href="/process" className="hover:text-[#2651B9] transition-colors">
+                <Link href="/process" prefetch={true} className="hover:text-[#2651B9] transition-colors">
                   4-Step Process
                 </Link>
               </li>
               <li>
-                <Link href="/pricing" className="hover:text-[#2651B9] transition-colors">
+                <Link href="/pricing" prefetch={true} className="hover:text-[#2651B9] transition-colors">
                   Pricing Plans
                 </Link>
               </li>
               <li>
-                <Link href="/about" className="hover:text-[#2651B9] transition-colors">
+                <Link href="/about" prefetch={true} className="hover:text-[#2651B9] transition-colors">
                   About Pixim
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="hover:text-[#2651B9] transition-colors">
+                <Link href="/contact" prefetch={true} className="hover:text-[#2651B9] transition-colors">
                   Contact Us
                 </Link>
               </li>
@@ -135,32 +135,32 @@ export const Footer: React.FC = () => {
             </h4>
             <ul className="space-y-2.5 text-xs sm:text-sm text-slate-600 dark:text-slate-300">
               <li>
-                <Link href="/services/logo-design" className="hover:text-[#FF8500] transition-colors">
+                <Link href="/services/logo-design" prefetch={true} className="hover:text-[#FF8500] transition-colors">
                   Logo & Brand Identity
                 </Link>
               </li>
               <li>
-                <Link href="/services/web-design" className="hover:text-[#FF8500] transition-colors">
+                <Link href="/services/web-design" prefetch={true} className="hover:text-[#FF8500] transition-colors">
                   Website Design & Dev
                 </Link>
               </li>
               <li>
-                <Link href="/services/package-design" className="hover:text-[#FF8500] transition-colors">
+                <Link href="/services/package-design" prefetch={true} className="hover:text-[#FF8500] transition-colors">
                   Package & Label Design
                 </Link>
               </li>
               <li>
-                <Link href="/services/social-media" className="hover:text-[#FF8500] transition-colors">
+                <Link href="/services/social-media" prefetch={true} className="hover:text-[#FF8500] transition-colors">
                   Social Media & Posters
                 </Link>
               </li>
               <li>
-                <Link href="/services/motion-video" className="hover:text-[#FF8500] transition-colors">
+                <Link href="/services/motion-video" prefetch={true} className="hover:text-[#FF8500] transition-colors">
                   Motion Graphics & Video
                 </Link>
               </li>
               <li>
-                <Link href="/services/seo-growth" className="hover:text-[#FF8500] transition-colors">
+                <Link href="/services/seo-growth" prefetch={true} className="hover:text-[#FF8500] transition-colors">
                   SEO & Organic Traffic
                 </Link>
               </li>

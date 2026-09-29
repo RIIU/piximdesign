@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import confetti from "canvas-confetti";
 import { Mail, MessageSquare, Send, CheckCircle2, Clock, MapPin } from "lucide-react";
 import { FaqSection } from "@/components/FaqSection";
 import { GsapDrawSvg, GsapMagneticButton, GsapReviewsInfiniteSlider } from "@/components/animations";
@@ -33,16 +32,20 @@ export default function ContactPage() {
     );
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!name || !email) return;
 
-    confetti({
-      particleCount: 100,
-      spread: 80,
-      origin: { y: 0.6 },
-      colors: ["#ff7a00", "#2563eb", "#38bdf8", "#10b981"],
-    });
+    try {
+      const confettiModule = await import("canvas-confetti");
+      const confetti = confettiModule.default || confettiModule;
+      confetti({
+        particleCount: 100,
+        spread: 80,
+        origin: { y: 0.6 },
+        colors: ["#ff7a00", "#2563eb", "#38bdf8", "#10b981"],
+      });
+    } catch {}
 
     setIsSubmitted(true);
   };

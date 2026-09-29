@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import confetti from "canvas-confetti";
 import { Mail, Send, CheckCircle2, Clock, ShieldCheck } from "lucide-react";
 import { GsapMagneticButton } from "./animations";
 
@@ -40,16 +39,20 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
     );
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!name || !email) return;
 
-    confetti({
-      particleCount: 100,
-      spread: 80,
-      origin: { y: 0.6 },
-      colors: ["#ff7a00", "#2563eb", "#38bdf8", "#10b981"],
-    });
+    try {
+      const confettiModule = await import("canvas-confetti");
+      const confetti = confettiModule.default || confettiModule;
+      confetti({
+        particleCount: 100,
+        spread: 80,
+        origin: { y: 0.6 },
+        colors: ["#ff7a00", "#2563eb", "#38bdf8", "#10b981"],
+      });
+    } catch {}
 
     setIsSubmitted(true);
   };

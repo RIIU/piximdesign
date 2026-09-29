@@ -21,6 +21,33 @@ export const VideoShowcaseSection: React.FC<VideoShowcaseSectionProps> = () => {
   const [isMuted, setIsMuted] = useState(true);
   const [progress, setProgress] = useState(0);
   const [showControls, setShowControls] = useState(false);
+  const [shouldLoadVideo, setShouldLoadVideo] = useState(false);
+
+  // Lazy load video and pause when offscreen
+  React.useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0];
+        if (entry.isIntersecting) {
+          setShouldLoadVideo(true);
+          if (videoRef.current && isPlaying) {
+            videoRef.current.play().catch(() => {});
+          }
+        } else {
+          if (videoRef.current) {
+            videoRef.current.pause();
+          }
+        }
+      },
+      { rootMargin: "300px 0px" }
+    );
+
+    io.observe(el);
+    return () => io.disconnect();
+  }, [isPlaying]);
 
   // GSAP ScrollTrigger setup for scroll-expanding width
   useGSAP(
@@ -157,7 +184,8 @@ export const VideoShowcaseSection: React.FC<VideoShowcaseSectionProps> = () => {
             <div className="relative aspect-video w-full overflow-hidden">
               <video
                 ref={videoRef}
-                src="/video/Grow-Your-Business-with-Creative-Design-_-Pixim-Design-Agency.mp4"
+                src={shouldLoadVideo ? "/video/Grow-Your-Business-with-Creative-Design-_-Pixim-Design-Agency.mp4" : undefined}
+                preload="none"
                 autoPlay
                 muted={isMuted}
                 loop

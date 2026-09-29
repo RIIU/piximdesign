@@ -7,17 +7,23 @@ const plusJakartaSans = Plus_Jakarta_Sans({
   variable: "--font-plus-jakarta",
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700", "800"],
+  display: "swap",
+  preload: true,
 });
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+  display: "swap",
+  preload: false,
 });
 
 const jersey25 = Jersey_25({
   variable: "--font-jersey-25",
   subsets: ["latin"],
   weight: "400",
+  display: "swap",
+  preload: false,
 });
 
 const agency = localFont({

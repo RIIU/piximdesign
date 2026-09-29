@@ -193,6 +193,7 @@ export const BrandStoriesSection: React.FC<BrandStoriesSectionProps> = ({ onOpen
               <div>
                 <Link
                   href="/projects"
+                  prefetch={true}
                   className="group relative inline-flex items-center gap-3.5 px-6 py-3.5 sm:py-4 rounded-xl bg-gradient-to-r from-[#FF8500] to-[#FFA133] text-white font-bold text-sm sm:text-base uppercase tracking-wider shadow-lg shadow-[#FF8500]/25 transition-all duration-300 hover:shadow-[#FF8500]/40 hover:scale-[1.02] active:scale-95"
                 >
                   <span>See More Projects</span>
@@ -234,7 +235,6 @@ export const BrandStoriesSection: React.FC<BrandStoriesSectionProps> = ({ onOpen
                       fill
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 736px, 736px"
                       className="object-cover w-full h-full transition-transform duration-700 ease-out group-hover:scale-105"
-                      priority={study.id === "skyra-flight"}
                     />
                   </div>
 
@@ -410,6 +410,7 @@ export const BrandStoriesSection: React.FC<BrandStoriesSectionProps> = ({ onOpen
               )}
               <Link
                 href="/projects"
+                prefetch={true}
                 onClick={() => setActiveCaseStudy(null)}
                 className="px-6 py-3 rounded-xl bg-white/10 hover:bg-white/15 text-white font-semibold text-sm transition-colors flex items-center gap-1.5"
               >

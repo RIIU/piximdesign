@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect, useMemo } from "react";
 import Image from "next/image";
-import confetti from "canvas-confetti";
 import {
   Check,
   ChevronLeft,
@@ -147,15 +146,19 @@ export const FreeConsultationSection: React.FC = () => {
     if (!name || !email) return;
 
     setIsSubmitting(true);
-    setTimeout(() => {
+    setTimeout(async () => {
       setIsSubmitting(false);
       setViewState("confirmed");
-      confetti({
-        particleCount: 120,
-        spread: 90,
-        origin: { y: 0.5 },
-        colors: ["#FF8500", "#FFA229", "#2651B9", "#3B82F6", "#10B981"],
-      });
+      try {
+        const confettiModule = await import("canvas-confetti");
+        const confetti = confettiModule.default || confettiModule;
+        confetti({
+          particleCount: 120,
+          spread: 90,
+          origin: { y: 0.5 },
+          colors: ["#FF8500", "#FFA229", "#2651B9", "#3B82F6", "#10B981"],
+        });
+      } catch {}
     }, 600);
   };
 
@@ -249,7 +252,6 @@ export const FreeConsultationSection: React.FC = () => {
                   fill
                   sizes="(max-width: 768px) 100vw, 490px"
                   className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.02]"
-                  priority
                 />
 
                 {/* Interactive Video Controls in Pixim Brand Navy */}

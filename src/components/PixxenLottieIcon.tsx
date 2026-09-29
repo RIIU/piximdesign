@@ -64,34 +64,56 @@ export const PixxenLottieIcon: React.FC<PixxenLottieIconProps> = ({
       animRef.current = null;
     }
 
-    import("lottie-web").then((lottieModule) => {
-      if (!isMounted || !containerRef.current) return;
-      const lottie = lottieModule.default || lottieModule;
+    const container = containerRef.current;
+    if (!container) return;
 
-      try {
-        const anim = lottie.loadAnimation({
-          container: containerRef.current,
-          renderer: "svg",
-          loop: true,
-          autoplay: false,
-          path: jsonPath,
-        });
+    let io: IntersectionObserver | null = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0];
+        if (entry.isIntersecting) {
+          // Disconnect observer once triggered
+          if (io) {
+            io.disconnect();
+            io = null;
+          }
 
-        anim.addEventListener("DOMLoaded", () => {
-          if (!isMounted) return;
-          isLoadedRef.current = true;
-          // Freeze at frame 0 ready for hover interaction
-          anim.goToAndStop(0, true);
-        });
+          import("lottie-web").then((lottieModule) => {
+            if (!isMounted || !containerRef.current) return;
+            const lottie = lottieModule.default || lottieModule;
 
-        animRef.current = anim;
-      } catch (err) {
-        console.error("Failed to load lottie animation:", jsonPath, err);
-      }
-    });
+            try {
+              const anim = lottie.loadAnimation({
+                container: containerRef.current,
+                renderer: "svg",
+                loop: true,
+                autoplay: false,
+                path: jsonPath,
+              });
+
+              anim.addEventListener("DOMLoaded", () => {
+                if (!isMounted) return;
+                isLoadedRef.current = true;
+                // Freeze at frame 0 ready for hover interaction
+                anim.goToAndStop(0, true);
+              });
+
+              animRef.current = anim;
+            } catch (err) {
+              console.error("Failed to load lottie animation:", jsonPath, err);
+            }
+          });
+        }
+      },
+      { rootMargin: "250px 0px" }
+    );
+
+    io.observe(container);
 
     return () => {
       isMounted = false;
+      if (io) {
+        io.disconnect();
+      }
       if (animRef.current) {
         animRef.current.destroy();
         animRef.current = null;

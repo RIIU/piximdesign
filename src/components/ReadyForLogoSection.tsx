@@ -14,10 +14,38 @@ export const ReadyForLogoSection: React.FC<ReadyForLogoSectionProps> = ({
   onOpenContact,
   colorVariant = "blue",
 }) => {
+  const containerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(true);
   const [isMuted, setIsMuted] = useState(true);
   const [progress, setProgress] = useState(0);
+  const [shouldLoadVideo, setShouldLoadVideo] = useState(false);
+
+  // Lazy load video and pause when offscreen
+  React.useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0];
+        if (entry.isIntersecting) {
+          setShouldLoadVideo(true);
+          if (videoRef.current && isPlaying) {
+            videoRef.current.play().catch(() => {});
+          }
+        } else {
+          if (videoRef.current) {
+            videoRef.current.pause();
+          }
+        }
+      },
+      { rootMargin: "300px 0px" }
+    );
+
+    io.observe(el);
+    return () => io.disconnect();
+  }, [isPlaying]);
 
   // Toggle Play / Pause
   const togglePlay = () => {
@@ -178,6 +206,7 @@ export const ReadyForLogoSection: React.FC<ReadyForLogoSectionProps> = ({
             {/* Right Column: Video Showcase Card */}
             <div className="lg:col-span-6 xl:col-span-7 flex items-center justify-center">
               <div
+                ref={containerRef}
                 className={`relative w-full aspect-video rounded-2xl md:rounded-3xl overflow-hidden border group transition-all duration-300 ring-1 ring-white/10 ${
                   isOrange
                     ? "border-orange-300/35 bg-[#2A0E05] shadow-[0_20px_50px_-10px_rgba(30,10,3,0.7),0_0_35px_rgba(255,133,0,0.3)]"
@@ -187,7 +216,8 @@ export const ReadyForLogoSection: React.FC<ReadyForLogoSectionProps> = ({
                 {/* Video Element */}
                 <video
                   ref={videoRef}
-                  src="/video/Creative-Logo-Branding-Solutions-for-Your-Business-_-Pixim-Design.mp4"
+                  src={shouldLoadVideo ? "/video/Creative-Logo-Branding-Solutions-for-Your-Business-_-Pixim-Design.mp4" : undefined}
+                  preload="none"
                   autoPlay
                   muted={isMuted}
                   loop

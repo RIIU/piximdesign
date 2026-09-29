@@ -187,6 +187,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenContact }) => {
               <Link
                 key={link.name}
                 href={link.href}
+                prefetch={true}
                 onClick={() => handleDesktopNavClick(idx)}
                 className={`desktop-nav-link px-3.5 py-1.5 text-xs lg:text-sm rounded-full transition-all duration-200 cursor-pointer ${
                   isActive
@@ -248,9 +249,11 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenContact }) => {
           {navLinks.map((link) => {
             const isActive = pathname === link.href || (link.href !== "/" && pathname?.startsWith(link.href));
             return (
-              <button
+              <Link
                 key={link.name}
-                onClick={() => handleMobileLinkClick(link.href)}
+                href={link.href}
+                prefetch={true}
+                onClick={() => closeMenuOrchestratedEaseReverse()}
                 className={`orchestrated-menu-item group text-left text-base font-semibold py-2.5 px-4 rounded-2xl transition-all cursor-pointer flex items-center justify-between will-change-transform ${
                   isActive
                     ? "bg-[#2651B9]/10 dark:bg-[#2651B9]/25 text-[#2651B9] dark:text-[#60A5FA] border border-[#2651B9]/25 dark:border-[#2651B9]/40 font-bold shadow-xs"
@@ -261,7 +264,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenContact }) => {
                 <span className="text-xs text-[#FF8500] opacity-60 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all">
                   →
                 </span>
-              </button>
+              </Link>
             );
           })}
 

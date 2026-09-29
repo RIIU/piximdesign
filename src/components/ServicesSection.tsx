@@ -129,6 +129,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onSelectServic
             <Link
               key={service.id}
               href={`/services/${service.id}`}
+              prefetch={true}
               onMouseEnter={() => setHoveredId(service.id)}
               onMouseLeave={() => setHoveredId(null)}
               className="pixxen-service-card group flex flex-col justify-between p-7 sm:p-8 cursor-pointer"

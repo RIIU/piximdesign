@@ -3,7 +3,6 @@
 import React, { useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import confetti from "canvas-confetti";
 import { Sparkles, ShieldCheck, Star, ArrowRight } from "lucide-react";
 import { GsapDrawSvg, GsapMagneticButton, LiquidMetal } from "./animations";
 
@@ -15,13 +14,17 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenContact }) => {
   const heroRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
 
-  const handleQuoteClick = () => {
-    confetti({
-      particleCount: 50,
-      spread: 70,
-      origin: { y: 0.65 },
-      colors: ["#2563eb", "#38bdf8", "#ff7a00", "#ffffff"],
-    });
+  const handleQuoteClick = async () => {
+    try {
+      const confettiModule = await import("canvas-confetti");
+      const confetti = confettiModule.default || confettiModule;
+      confetti({
+        particleCount: 50,
+        spread: 70,
+        origin: { y: 0.65 },
+        colors: ["#2563eb", "#38bdf8", "#ff7a00", "#ffffff"],
+      });
+    } catch {}
     onOpenContact?.();
   };
 

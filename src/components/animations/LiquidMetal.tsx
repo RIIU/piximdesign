@@ -609,7 +609,7 @@ export const LiquidMetal: React.FC<LiquidMetalProps> = ({
       const height = rect.height;
       if (width === 0 || height === 0) return;
 
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
       const pixelWidth = Math.round(width * dpr);
       const pixelHeight = Math.round(height * dpr);
 
@@ -632,9 +632,20 @@ export const LiquidMetal: React.FC<LiquidMetalProps> = ({
     let startTime = performance.now();
     let currentFrame = 0;
     let lastTime = startTime;
+    let isVisible = true;
+    let isTabActive = true;
+
+    const prefersReducedMotion =
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     const render = (now: number) => {
-      const delta = now - lastTime;
+      if (!isVisible || !isTabActive) {
+        animFrameIdRef.current = null;
+        return;
+      }
+
+      const delta = Math.min(now - lastTime, 64);
       lastTime = now;
 
       const currentProps = propsRef.current;
@@ -677,15 +688,57 @@ export const LiquidMetal: React.FC<LiquidMetalProps> = ({
 
       gl.drawArrays(gl.TRIANGLES, 0, 6);
 
-      animFrameIdRef.current = requestAnimationFrame(render);
+      if (!prefersReducedMotion) {
+        animFrameIdRef.current = requestAnimationFrame(render);
+      }
     };
 
-    animFrameIdRef.current = requestAnimationFrame(render);
+    const startRendering = () => {
+      if (!animFrameIdRef.current && isVisible && isTabActive) {
+        lastTime = performance.now();
+        animFrameIdRef.current = requestAnimationFrame(render);
+      }
+    };
 
-    return () => {
+    const stopRendering = () => {
       if (animFrameIdRef.current) {
         cancelAnimationFrame(animFrameIdRef.current);
+        animFrameIdRef.current = null;
       }
+    };
+
+    // IntersectionObserver to freeze WebGL when out of viewport
+    const io = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0];
+        isVisible = entry?.isIntersecting ?? true;
+        if (isVisible) {
+          startRendering();
+        } else {
+          stopRendering();
+        }
+      },
+      { rootMargin: "100px" }
+    );
+    io.observe(container);
+
+    // Tab visibility handling
+    const handleVisibilityChange = () => {
+      isTabActive = !document.hidden;
+      if (isTabActive && isVisible) {
+        startRendering();
+      } else {
+        stopRendering();
+      }
+    };
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
+    startRendering();
+
+    return () => {
+      stopRendering();
+      io.disconnect();
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
       resizeObserver.disconnect();
       if (canvas && canvas.parentNode) {
         canvas.parentNode.removeChild(canvas);
