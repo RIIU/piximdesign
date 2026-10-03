@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
+import gsap from "gsap";
 import { PiximLogo } from "./PiximLogo";
 import { ArrowUpRight, Sparkles } from "lucide-react";
 import { GsapMagneticButton } from "./animations";
