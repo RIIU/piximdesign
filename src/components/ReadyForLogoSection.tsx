@@ -217,6 +217,7 @@ export const ReadyForLogoSection: React.FC<ReadyForLogoSectionProps> = ({
                 <video
                   ref={videoRef}
                   src={shouldLoadVideo ? "/video/Creative-Logo-Branding-Solutions-for-Your-Business-_-Pixim-Design.mp4" : undefined}
+                  poster="/video/posters/Creative-Logo-Branding-Solutions-for-Your-Business-_-Pixim-Design.webp"
                   preload="none"
                   autoPlay
                   muted={isMuted}

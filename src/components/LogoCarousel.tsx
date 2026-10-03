@@ -7,52 +7,52 @@ export const CLIENT_LOGOS = [
   {
     id: "elite-motors",
     name: "Elite Motors",
-    src: "/client logo/website_clients_logo_photo_home_page-removebg-preview.png",
+    src: "/client logo/elite-motors.webp",
   },
   {
     id: "tripshop",
     name: "TripShop Travels",
-    src: "/client logo/website_clients_logo_photo_home_page_2- (1).png",
+    src: "/client logo/tripshop.webp",
   },
   {
     id: "grameen-swad",
     name: "গ্রামীণ স্বাদ",
-    src: "/client logo/website_clients_logo_photo_home_page_3- (1).png",
+    src: "/client logo/grameen-swad.webp",
   },
   {
     id: "zarvila",
     name: "Zarvila",
-    src: "/client logo/website_clients_logo_photo_home_page_3-removebg-preview.png",
+    src: "/client logo/zarvila.webp",
   },
   {
     id: "eon-education",
     name: "EON Education & Immigration",
-    src: "/client logo/website_clients_logo_photo_home_page_4- (1).png",
+    src: "/client logo/eon-education.webp",
   },
   {
     id: "guddi-studio",
     name: "Guddi Studio",
-    src: "/client logo/website_clients_logo_photo_home_page_5- (1).png",
+    src: "/client logo/guddi-studio.webp",
   },
   {
     id: "optix-photography",
     name: "Optix Photography",
-    src: "/client logo/website_clients_logo_photo_home_page_6- (1).png",
+    src: "/client logo/optix-photography.webp",
   },
   {
     id: "nextgen-it",
     name: "NextGen IT",
-    src: "/client logo/website_clients_logo_photo_home_page_7- (1).png",
+    src: "/client logo/nextgen-it.webp",
   },
   {
     id: "minivon-shop",
     name: "Minivon Shop",
-    src: "/client logo/website_clients_logo_photo_home_page_8- (1).png",
+    src: "/client logo/minivon-shop.webp",
   },
   {
     id: "movexa",
     name: "Movexa",
-    src: "/client logo/website_clients_logo_photo_home_page_9- (1).png",
+    src: "/client logo/movexa.webp",
   },
 ];
 
@@ -93,6 +93,9 @@ export const LogoCarousel: React.FC = () => {
             <img
               src={logo.src}
               alt={logo.name}
+              width={300}
+              height={120}
+              decoding="async"
               className="h-9 sm:h-11 md:h-13 w-auto max-w-[130px] sm:max-w-[160px] md:max-w-[190px] object-contain opacity-80 hover:opacity-100 transition-all duration-300 drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)]"
               loading="lazy"
             />

@@ -77,7 +77,8 @@ export const PixxenLottieIcon: React.FC<PixxenLottieIconProps> = ({
             io = null;
           }
 
-          import("lottie-web").then((lottieModule) => {
+          // SVG-only light player: these animations use no expressions
+          import("lottie-web/build/player/lottie_light").then((lottieModule) => {
             if (!isMounted || !containerRef.current) return;
             const lottie = lottieModule.default || lottieModule;
 
@@ -104,7 +105,7 @@ export const PixxenLottieIcon: React.FC<PixxenLottieIconProps> = ({
           });
         }
       },
-      { rootMargin: "250px 0px" }
+      { rootMargin: "600px 0px" }
     );
 
     io.observe(container);

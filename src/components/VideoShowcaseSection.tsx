@@ -185,6 +185,7 @@ export const VideoShowcaseSection: React.FC<VideoShowcaseSectionProps> = () => {
               <video
                 ref={videoRef}
                 src={shouldLoadVideo ? "/video/Grow-Your-Business-with-Creative-Design-_-Pixim-Design-Agency.mp4" : undefined}
+                poster="/video/posters/Grow-Your-Business-with-Creative-Design-_-Pixim-Design-Agency.webp"
                 preload="none"
                 autoPlay
                 muted={isMuted}
