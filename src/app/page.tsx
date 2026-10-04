@@ -9,6 +9,8 @@ import { HeroSection } from "@/components/HeroSection";
 const VideoShowcaseSection = dynamic(() => import("@/components/VideoShowcaseSection").then(m => ({ default: m.VideoShowcaseSection })));
 const StatsBar = dynamic(() => import("@/components/StatsBar").then(m => ({ default: m.StatsBar })));
 const ServicesSection = dynamic(() => import("@/components/ServicesSection").then(m => ({ default: m.ServicesSection })));
+const IndustriesSection = dynamic(() => import("@/components/IndustriesSection").then(m => ({ default: m.IndustriesSection })));
+const WhyPiximSection = dynamic(() => import("@/components/WhyPiximSection").then(m => ({ default: m.WhyPiximSection })));
 const ReadyForLogoSection = dynamic(() => import("@/components/ReadyForLogoSection").then(m => ({ default: m.ReadyForLogoSection })));
 const BrandStoriesSection = dynamic(() => import("@/components/BrandStoriesSection").then(m => ({ default: m.BrandStoriesSection })));
 const ProcessSection = dynamic(() => import("@/components/ProcessSection").then(m => ({ default: m.ProcessSection })));
@@ -38,25 +40,31 @@ export default function Home() {
       {/* 4. Core Capabilities & Services Bento Grid */}
       <ServicesSection onSelectService={handleSelectService} />
 
-      {/* 5. Experience Brand Stories in Design (Pixxen-style Sticky Split Showcase) */}
+      {/* 5. Industry Playbooks: tailored service stacks per market */}
+      <IndustriesSection onOpenContact={(service, note) => openContact(service, note)} />
+
+      {/* 6. Experience Brand Stories in Design (Pixxen-style Sticky Split Showcase) */}
       <BrandStoriesSection onOpenContact={() => openContact()} />
 
-      {/* 6. Ready for a Professional Logo? Video Showcase CTA */}
+      {/* 7. Ready for a Professional Logo? Video Showcase CTA */}
       <ReadyForLogoSection onOpenContact={(service, note) => openContact(service, note)} />
 
-      {/* 7. 4-Step Agile Delivery Process ("Quick Delivery, Faster Results") */}
+      {/* 8. 4-Step Agile Delivery Process ("Quick Delivery, Faster Results") */}
       <ProcessSection onOpenContact={() => openContact()} />
 
-      {/* 7. Client Testimonials & Social Proof */}
+      {/* 9. Why Pixim: Freelancer vs Pixim vs Big Agency comparison */}
+      <WhyPiximSection onOpenContact={(service, note) => openContact(service, note)} />
+
+      {/* 10. Client Testimonials & Social Proof */}
       <TestimonialsSection />
 
-      {/* 8. 30-Minute Free Consultation & Calendly Schedule */}
+      {/* 11. 30-Minute Free Consultation & Calendly Schedule */}
       <FreeConsultationSection />
 
-      {/* 9. Frequently Asked Questions */}
+      {/* 12. Frequently Asked Questions */}
       <FaqSection />
 
-      {/* 9. Direct Project Brief & Consultation Form */}
+      {/* 13. Direct Project Brief & Consultation Form */}
       <ContactSection />
     </main>
   );
