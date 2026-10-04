@@ -20,17 +20,17 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onSelectServic
   const gridRef = useRef<HTMLDivElement>(null);
 
   const categories = [
-    { id: "all", label: "All Capabilities" },
-    { id: "branding", label: "Branding & Identity" },
-    { id: "web", label: "Web & Engineering" },
-    { id: "marketing", label: "Marketing & SEO" },
+    { id: "all", label: "All 7 Capabilities" },
+    { id: "branding", label: "Branding & Packaging" },
+    { id: "digital", label: "Social & Digital Marketing" },
+    { id: "web-video", label: "Web, Video & SEO" },
   ];
 
   const filteredServices = SERVICES.filter((s) => {
     if (activeTab === "all") return true;
     if (activeTab === "branding") return s.id === "logo-design" || s.id === "package-design";
-    if (activeTab === "web") return s.id === "web-design" || s.id === "motion-video";
-    if (activeTab === "marketing") return s.id === "social-media" || s.id === "seo-growth";
+    if (activeTab === "digital") return s.id === "social-media" || s.id === "digital-marketing";
+    if (activeTab === "web-video") return s.id === "web-design" || s.id === "motion-video" || s.id === "seo-growth";
     return true;
   });
 
@@ -166,6 +166,18 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onSelectServic
                 <p className="mt-2.5 text-sm sm:text-base text-slate-400 leading-relaxed group-hover:text-slate-300 transition-colors">
                   {service.tagline}
                 </p>
+
+                {/* Sub-services / Core Features from specification */}
+                <div className="mt-4 pt-3 border-t border-[#2651B9]/15 flex flex-wrap gap-1.5">
+                  {service.features.map((feat) => (
+                    <span
+                      key={feat}
+                      className="inline-flex items-center text-[11px] font-medium text-slate-300 bg-white/5 px-2.5 py-1 rounded-md border border-white/5 group-hover:border-[#FF8500]/25 transition-colors"
+                    >
+                      • {feat}
+                    </span>
+                  ))}
+                </div>
               </div>
 
               {/* Bottom Row: Pixxen-Style Slide-Arrow Action Button */}

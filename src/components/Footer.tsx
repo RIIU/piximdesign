@@ -136,28 +136,33 @@ export const Footer: React.FC = () => {
                 </Link>
               </li>
               <li>
-                <Link href="/services/web-design" prefetch={true} className="hover:text-[#FF8500] transition-colors">
-                  Website Design & Dev
+                <Link href="/services/social-media" prefetch={true} className="hover:text-[#FF8500] transition-colors">
+                  Social Media & Content Design
                 </Link>
               </li>
               <li>
                 <Link href="/services/package-design" prefetch={true} className="hover:text-[#FF8500] transition-colors">
-                  Package & Label Design
-                </Link>
-              </li>
-              <li>
-                <Link href="/services/social-media" prefetch={true} className="hover:text-[#FF8500] transition-colors">
-                  Social Media & Posters
+                  Packaging Design
                 </Link>
               </li>
               <li>
                 <Link href="/services/motion-video" prefetch={true} className="hover:text-[#FF8500] transition-colors">
-                  Motion Graphics & Video
+                  Video & Motion Design
+                </Link>
+              </li>
+              <li>
+                <Link href="/services/digital-marketing" prefetch={true} className="hover:text-[#FF8500] transition-colors">
+                  Digital Marketing & Ads
+                </Link>
+              </li>
+              <li>
+                <Link href="/services/web-design" prefetch={true} className="hover:text-[#FF8500] transition-colors">
+                  Website Design & Development
                 </Link>
               </li>
               <li>
                 <Link href="/services/seo-growth" prefetch={true} className="hover:text-[#FF8500] transition-colors">
-                  SEO & Organic Traffic
+                  SEO & Organic Growth
                 </Link>
               </li>
             </ul>

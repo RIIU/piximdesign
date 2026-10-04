@@ -136,6 +136,23 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
         premium: { usd: "$450+", bdt: "৳55,000+", desc: "Full 60s explainer video with custom 3D motion" },
       },
     },
+    "digital-marketing": {
+      overview:
+        "Scale your customer acquisition and revenue with high-ROI targeted paid advertising. We design, launch, and manage data-driven ad campaigns on Meta (Facebook & Instagram) and Google Ads with relentless A/B testing and conversion rate optimization.",
+      tools: ["Meta Ads Manager", "Google Ads", "Google Analytics 4", "Looker Studio", "Hotjar"],
+      deliverables: [
+        "Data-driven Meta Ads (Facebook & Instagram) campaign setup",
+        "Google Search & Performance Max ad campaigns",
+        "Target audience segmentation & pixel tracking installation",
+        "Ad creative copy and visual design optimization",
+        "Weekly performance reporting & ROI attribution tracking",
+      ],
+      pricing: {
+        basic: { usd: "$150 - $250/mo", bdt: "৳18,000 - ৳30,000/mo", desc: "Single channel campaign management (Meta or Google)" },
+        standard: { usd: "$350 - $600/mo", bdt: "৳42,000 - ৳75,000/mo", desc: "Multi-channel ad funnels + audience retargeting" },
+        premium: { usd: "$800+/mo", bdt: "৳100,000+/mo", desc: "Full-scale growth marketing & scale management" },
+      },
+    },
     "seo-growth": {
       overview:
         "Having a beautiful website is meaningless if customers can't find you. Our comprehensive organic SEO strategy optimizes your technical architecture, search rankings, content, and conversion funnels to bring sustainable high-intent traffic.",

@@ -15,10 +15,11 @@ export const ProjectEstimatorSection: React.FC<ProjectEstimatorSectionProps> = (
 
   const services = [
     { id: "logo-design", title: "Logo & Brand Identity", icon: "🎨" },
-    { id: "web-design", title: "Website Design & Dev", icon: "💻" },
-    { id: "package-design", title: "Package & Label Design", icon: "📦" },
-    { id: "social-media", title: "Social Media & Posters", icon: "📱" },
-    { id: "motion-video", title: "Motion Video & 3D Intros", icon: "🎬" },
+    { id: "social-media", title: "Social Media & Content Design", icon: "📱" },
+    { id: "package-design", title: "Packaging Design", icon: "📦" },
+    { id: "motion-video", title: "Video & Motion Design", icon: "🎬" },
+    { id: "digital-marketing", title: "Digital Marketing & Ads", icon: "🎯" },
+    { id: "web-design", title: "Website Design & Development", icon: "💻" },
     { id: "seo-growth", title: "SEO & Organic Growth", icon: "📈" },
   ];
 
@@ -124,6 +125,26 @@ export const ProjectEstimatorSection: React.FC<ProjectEstimatorSectionProps> = (
         bdt: "৳36,000 – ৳75,000+",
         timeline: "10–14 Days",
         deliverables: ["Complete 3D Commercial Product Video", "Kinetic Typography & Social Cuts", "Full Source Project Files"],
+      },
+    },
+    "digital-marketing": {
+      basic: {
+        usd: "$80 – $150",
+        bdt: "৳10,000 – ৳18,000",
+        timeline: "3–5 Days",
+        deliverables: ["Meta / Google Ad Campaign Setup", "Target Audience & Pixel Integration", "High-Converting Ad Copy & Creative"],
+      },
+      standard: {
+        usd: "$150 – $350",
+        bdt: "৳18,000 – ৳42,000",
+        timeline: "Monthly Sprint",
+        deliverables: ["Full Meta & Google Ads Funnel", "A/B Testing & Retargeting Strategy", "Conversion Tracking & ROAS Optimization"],
+      },
+      enterprise: {
+        usd: "$350 – $700+",
+        bdt: "৳42,000 – ৳85,000+",
+        timeline: "Ongoing Sprint",
+        deliverables: ["Omnichannel Scale (Meta, Google, TikTok)", "Full Creative Testing & Scaling Sprints", "Dedicated Growth Manager & Weekly Reporting"],
       },
     },
     "seo-growth": {

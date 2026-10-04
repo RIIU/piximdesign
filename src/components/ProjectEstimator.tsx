@@ -17,11 +17,12 @@ export const ProjectEstimator: React.FC<ProjectEstimatorProps> = ({ onEstimateSu
 
   const services = [
     { id: "logo-design", title: "Logo & Brand Identity", icon: "🎨" },
-    { id: "web-design", title: "Website Design & Dev", icon: "💻" },
-    { id: "package-design", title: "Package & Label Design", icon: "📦" },
-    { id: "social-media", title: "Social Media & Posters", icon: "📱" },
-    { id: "motion-video", title: "Motion Video & Intros", icon: "🎬" },
-    { id: "seo-growth", title: "SEO & Organic Traffic", icon: "📈" },
+    { id: "social-media", title: "Social Media & Content Design", icon: "📱" },
+    { id: "package-design", title: "Packaging Design", icon: "📦" },
+    { id: "motion-video", title: "Video & Motion Design", icon: "🎬" },
+    { id: "digital-marketing", title: "Digital Marketing & Ads", icon: "🎯" },
+    { id: "web-design", title: "Website Design & Development", icon: "💻" },
+    { id: "seo-growth", title: "SEO & Organic Growth", icon: "📈" },
   ];
 
   const packages = [

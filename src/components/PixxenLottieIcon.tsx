@@ -36,6 +36,10 @@ const LOTTIE_MAP: Record<string, string> = {
   "web-app": "/lottie/web-app.json",
   "motion-graphics": "/lottie/web-app.json",
 
+  // 5. Digital Marketing & Ads -> mobile-app.json
+  "digital-marketing": "/lottie/mobile-app.json",
+  "digital-marketing-ads": "/lottie/mobile-app.json",
+
   // 6. Technical SEO & Growth -> dashboard-design.json
   "seo-growth": "/lottie/dashboard-design.json",
   "dashboard-design": "/lottie/dashboard-design.json",

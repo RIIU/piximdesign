@@ -7,7 +7,7 @@ import { GsapDrawSvg, GsapMagneticButton, GsapReviewsInfiniteSlider } from "@/co
 import { PIXIM_SERVICE_AREAS } from "@/components/ContactSection";
 
 export default function ContactPage() {
-  const [selectedService, setSelectedService] = useState<string>("01. Logo & Brand Identity (Complete)");
+  const [selectedService, setSelectedService] = useState<string>("01. Logo & Brand Identity");
   const [budget, setBudget] = useState("$100 - $200");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -169,39 +169,26 @@ export default function ContactPage() {
                       className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-300 text-sm font-medium text-[#0F172A] focus:outline-none focus:border-[#FF8500] focus:bg-white focus:ring-2 focus:ring-[#FF8500]/20 transition-all shadow-sm dark:bg-[#081538]/85 dark:border-[#2651B9]/35 dark:text-white dark:focus:border-[#FF8500] dark:focus:ring-2 dark:focus:ring-[#FF8500]/25 dark:focus:bg-[#0B1D4F] appearance-none cursor-pointer pr-10"
                     >
                       {PIXIM_SERVICE_AREAS.map((area) => (
-                        <optgroup
+                        <option
                           key={area.number}
-                          label={`${area.number}. ${area.category}`}
-                          className="bg-white dark:bg-[#081538] font-bold text-[#FF8500] dark:text-[#FFA133]"
+                          value={`${area.number}. ${area.category}`}
+                          className="bg-white dark:bg-[#081538] text-slate-900 dark:text-white py-2 font-medium"
                         >
-                          <option
-                            value={`${area.number}. ${area.category} (Complete)`}
-                            className="font-semibold text-slate-900 dark:text-white py-1.5 pl-2"
-                          >
-                            {area.number}. {area.category} (Complete Package)
-                          </option>
-                          {area.items.map((item) => (
-                            <option
-                              key={item}
-                              value={item}
-                              className="font-normal text-slate-700 dark:text-slate-200 py-1 pl-4"
-                            >
-                              &nbsp;&nbsp;• {item}
-                            </option>
-                          ))}
-                        </optgroup>
+                          {area.number}. {area.category}
+                        </option>
                       ))}
-                      <optgroup
-                        label="Special Inquiries"
-                        className="bg-white dark:bg-[#081538] font-bold text-slate-500"
+                      <option
+                        value="All-in-One Complete Branding"
+                        className="bg-white dark:bg-[#081538] text-slate-900 dark:text-white py-2 font-medium"
                       >
-                        <option value="All-in-One Complete Branding" className="text-slate-900 dark:text-white py-1">
-                          All-in-One Complete Branding
-                        </option>
-                        <option value="Custom Project / Other Inquiry" className="text-slate-900 dark:text-white py-1">
-                          Custom Project / Other Inquiry
-                        </option>
-                      </optgroup>
+                        All-in-One Complete Branding
+                      </option>
+                      <option
+                        value="Other / Custom Requirement"
+                        className="bg-white dark:bg-[#081538] text-slate-900 dark:text-white py-2 font-medium"
+                      >
+                        Other / Custom Requirement
+                      </option>
                     </select>
                     <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3.5 text-slate-500 dark:text-slate-400">
                       <ChevronDown className="w-4 h-4" />
