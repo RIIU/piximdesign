@@ -649,3 +649,90 @@ export const FAQS = [
     answer: "Every project includes a 30-day post-delivery warranty covering complimentary adjustments, technical questions, and deployment assistance.",
   },
 ];
+
+export const INDUSTRIES = [
+  {
+    id: "ecommerce",
+    name: "E-commerce & Retail",
+    shortName: "E-commerce",
+    headline: "Turn browsers into repeat buyers",
+    challenge:
+      "Online shoppers judge a store in seconds. A trustworthy brand, fast product pages and scroll-stopping ads decide who checks out.",
+    outcomes: [
+      "Conversion-focused storefront with mobile-first checkout",
+      "Unboxing-worthy packaging & product labels",
+      "Ready-to-run ad creative for Meta & Instagram",
+    ],
+    services: ["web-design", "package-design", "social-media"],
+  },
+  {
+    id: "food",
+    name: "Food & Restaurant",
+    shortName: "Restaurant",
+    headline: "A brand people can almost taste",
+    challenge:
+      "From the shelf to the delivery app, food brands win on appetite appeal and instant recognition in a crowded feed.",
+    outcomes: [
+      "Memorable logo & menu-ready identity system",
+      "Food-safe, print-ready packaging & label designs",
+      "Weekly social posts & promotional posters",
+    ],
+    services: ["logo-design", "package-design", "social-media"],
+  },
+  {
+    id: "education",
+    name: "Education & Coaching",
+    shortName: "Education",
+    headline: "Build trust before the first class",
+    challenge:
+      "Parents and learners compare dozens of options online. Credibility, clarity and search visibility bring enrolments in.",
+    outcomes: [
+      "Credible identity for institutes, courses & coaches",
+      "Enrolment-ready website with clear course pages",
+      "Local SEO to rank for the courses people search",
+    ],
+    services: ["logo-design", "web-design", "seo-growth"],
+  },
+  {
+    id: "tech",
+    name: "Tech & SaaS Startups",
+    shortName: "Startup",
+    headline: "Look funded from day one",
+    challenge:
+      "Investors and early users expect a polished product story. Your brand and landing page have to explain the value instantly.",
+    outcomes: [
+      "Modern brand mark & scalable design tokens",
+      "High-speed Next.js landing page built to convert",
+      "Product explainer & 3D logo reveal animations",
+    ],
+    services: ["logo-design", "web-design", "motion-video"],
+  },
+  {
+    id: "fashion",
+    name: "Fashion & Lifestyle",
+    shortName: "Fashion",
+    headline: "Make your aesthetic unmistakable",
+    challenge:
+      "Lifestyle brands live on Instagram and in short-form video. A consistent visual voice turns followers into a community.",
+    outcomes: [
+      "Signature logo, typography & brand moodboard",
+      "Editorial campaign graphics & lookbook posters",
+      "Reels-ready motion content & brand stings",
+    ],
+    services: ["logo-design", "social-media", "motion-video"],
+  },
+  {
+    id: "realestate",
+    name: "Real Estate & Automotive",
+    shortName: "Real Estate",
+    headline: "Premium presence for high-value decisions",
+    challenge:
+      "Big-ticket buyers research long before they call. A premium website, cinematic visuals and search ranking keep you on the shortlist.",
+    outcomes: [
+      "Listing-ready website with lead capture forms",
+      "Cinematic promo videos & 3D property or vehicle visuals",
+      "Technical SEO to own high-intent local searches",
+    ],
+    services: ["web-design", "motion-video", "seo-growth"],
+  },
+];

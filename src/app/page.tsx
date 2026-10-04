@@ -9,6 +9,7 @@ import { HeroSection } from "@/components/HeroSection";
 const VideoShowcaseSection = dynamic(() => import("@/components/VideoShowcaseSection").then(m => ({ default: m.VideoShowcaseSection })));
 const StatsBar = dynamic(() => import("@/components/StatsBar").then(m => ({ default: m.StatsBar })));
 const ServicesSection = dynamic(() => import("@/components/ServicesSection").then(m => ({ default: m.ServicesSection })));
+const IndustriesSection = dynamic(() => import("@/components/IndustriesSection").then(m => ({ default: m.IndustriesSection })));
 const WhyPiximSection = dynamic(() => import("@/components/WhyPiximSection").then(m => ({ default: m.WhyPiximSection })));
 const ReadyForLogoSection = dynamic(() => import("@/components/ReadyForLogoSection").then(m => ({ default: m.ReadyForLogoSection })));
 const BrandStoriesSection = dynamic(() => import("@/components/BrandStoriesSection").then(m => ({ default: m.BrandStoriesSection })));
@@ -44,31 +45,34 @@ export default function Home() {
       {/* 4. Core Capabilities & Services Bento Grid */}
       <ServicesSection onSelectService={handleSelectService} />
 
-      {/* 5. The Pixim Difference: 3-Way Comparison Matrix vs Traditional Agencies & Freelancers */}
+      {/* 5. Industry Playbooks: tailored service stacks per market */}
+      <IndustriesSection onOpenContact={(service, note) => openContact(service, note)} />
+
+      {/* 6. The Pixim Difference: 3-Way Comparison Matrix vs Traditional Agencies & Freelancers */}
       <WhyPiximSection onOpenContact={(service, notes) => openContact(service, notes)} />
 
-      {/* 6. Experience Brand Stories in Design (Pixxen-style Sticky Split Showcase) */}
+      {/* 7. Experience Brand Stories in Design (Pixxen-style Sticky Split Showcase) */}
       <BrandStoriesSection onOpenContact={() => openContact()} />
 
-      {/* 7. Ready for a Professional Logo? Video Showcase CTA */}
+      {/* 8. Ready for a Professional Logo? Video Showcase CTA */}
       <ReadyForLogoSection onOpenContact={(service, note) => openContact(service, note)} />
 
-      {/* 8. 4-Step Agile Delivery Process ("Quick Delivery, Faster Results") */}
+      {/* 9. 4-Step Agile Delivery Process ("Quick Delivery, Faster Results") */}
       <ProcessSection onOpenContact={() => openContact()} />
 
-      {/* 9. Interactive Scope Builder & Transparent Pricing Estimator (USD/BDT) */}
+      {/* 10. Interactive Scope Builder & Transparent Pricing Estimator (USD/BDT) */}
       <ProjectEstimatorSection onEstimateSubmit={handleEstimateSubmit} />
 
-      {/* 10. Client Testimonials & Social Proof */}
+      {/* 11. Client Testimonials & Social Proof */}
       <TestimonialsSection />
 
-      {/* 11. 30-Minute Free Consultation & Calendly Schedule */}
+      {/* 12. 30-Minute Free Consultation & Calendly Schedule */}
       <FreeConsultationSection />
 
-      {/* 12. Frequently Asked Questions */}
+      {/* 13. Frequently Asked Questions */}
       <FaqSection />
 
-      {/* 13. Direct Project Brief & Consultation Form */}
+      {/* 14. Direct Project Brief & Consultation Form */}
       <ContactSection />
     </main>
   );
