@@ -2,9 +2,9 @@
 
 import React from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { PiximLogo } from "./PiximLogo";
-import { ArrowUp, Heart, ShieldCheck } from "lucide-react";
+import { ArrowUp, Heart } from "lucide-react";
+import { FooterPaymentMethods } from "./FooterPaymentMethods";
 
 export const Footer: React.FC = () => {
   const scrollToTop = () => {
@@ -188,40 +188,8 @@ export const Footer: React.FC = () => {
           </div>
         </div>
 
-        {/* Supported Payment Methods (from piximdesign.com) */}
-        <div className="pt-8 pb-4">
-          <div className="rounded-2xl p-4 sm:p-5 bg-slate-50/80 dark:bg-white/[0.03] border border-slate-200/80 dark:border-white/10 backdrop-blur-sm">
-            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2.5 mb-3.5">
-              <div className="flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                <span className="text-xs uppercase font-mono font-semibold tracking-wider text-slate-700 dark:text-slate-300">
-                  Supported Payment Methods
-                </span>
-              </div>
-              <div className="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400 font-medium">
-                <span className="inline-flex items-center gap-1 text-emerald-600 dark:text-emerald-400">
-                  <ShieldCheck className="w-3.5 h-3.5" />
-                  SSLCOMMERZ Verified
-                </span>
-                <span>•</span>
-                <span>Cards, Mobile Banking &amp; Net Banking</span>
-              </div>
-            </div>
-
-            {/* Official Pixim Payment Banner */}
-            <div className="w-full overflow-x-auto rounded-xl bg-white p-3 sm:py-3.5 sm:px-6 border border-slate-200/80 shadow-sm scrollbar-thin">
-              <div className="min-w-[620px] sm:min-w-0 flex items-center justify-center">
-                <Image
-                  src="/images/pixim-payment-banner.png"
-                  alt="Supported Payment Methods - Visa, Mastercard, AMEX, bKash, Nagad, Rocket, Bank Transfer, SSLCOMMERZ"
-                  width={1600}
-                  height={179}
-                  className="w-full h-auto max-h-16 sm:max-h-20 object-contain"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
+        {/* Supported Payment Methods Component */}
+        <FooterPaymentMethods />
 
         {/* Bottom Bar */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500 dark:text-slate-400">
