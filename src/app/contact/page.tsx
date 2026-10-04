@@ -1,12 +1,13 @@
 "use client";
 
 import React, { useState } from "react";
-import { Mail, MessageSquare, Send, CheckCircle2, Clock, MapPin } from "lucide-react";
+import { Mail, MessageSquare, Send, CheckCircle2, Clock, MapPin, ChevronDown } from "lucide-react";
 import { FaqSection } from "@/components/FaqSection";
 import { GsapDrawSvg, GsapMagneticButton, GsapReviewsInfiniteSlider } from "@/components/animations";
+import { PIXIM_SERVICE_AREAS } from "@/components/ContactSection";
 
 export default function ContactPage() {
-  const [selectedServices, setSelectedServices] = useState<string[]>(["Logo & Brand Identity"]);
+  const [selectedService, setSelectedService] = useState<string>("01. Logo & Brand Identity (Complete)");
   const [budget, setBudget] = useState("$100 - $200");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -15,22 +16,7 @@ export default function ContactPage() {
   const [message, setMessage] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const availableServices = [
-    "Logo & Brand Identity",
-    "Website Design & Dev",
-    "Package & Label Design",
-    "Social Media & Posters",
-    "Motion Graphics & Intro",
-    "SEO & Organic Traffic",
-  ];
-
   const budgetTiers = ["<$100", "$100 - $200", "$200 - $500", "$500+"];
-
-  const toggleService = (srv: string) => {
-    setSelectedServices((prev) =>
-      prev.includes(srv) ? prev.filter((s) => s !== srv) : [...prev, srv]
-    );
-  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -170,29 +156,56 @@ export default function ContactPage() {
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-6">
-                {/* 1. Services Required */}
+                {/* 1. Services Required (Dropdown Option) */}
                 <div>
-                  <label className="text-xs uppercase font-mono font-bold tracking-wider text-slate-600 dark:text-blue-200/90 block mb-2.5">
+                  <label htmlFor="service-select" className="text-xs uppercase font-mono font-bold tracking-wider text-slate-600 dark:text-blue-200/90 block mb-1.5">
                     1. Choose Services Needed
                   </label>
-                  <div className="flex flex-wrap gap-2">
-                    {availableServices.map((srv) => {
-                      const isSelected = selectedServices.includes(srv);
-                      return (
-                        <button
-                          type="button"
-                          key={srv}
-                          onClick={() => toggleService(srv)}
-                          className={`px-3.5 py-2 rounded-xl text-xs font-medium border transition-all duration-200 cursor-pointer ${
-                            isSelected
-                              ? "bg-[#FF8500]/15 dark:bg-[#FF8500]/25 border-[#FF8500] text-[#C25E00] dark:text-[#FFA133] font-bold shadow-[0_0_15px_rgba(255,133,0,0.2)] ring-1 ring-[#FF8500]/40"
-                              : "bg-slate-50 dark:bg-[#081538]/70 border-slate-200 dark:border-[#2651B9]/30 text-slate-700 dark:text-slate-200 hover:text-[#0F172A] dark:hover:text-white hover:border-[#2651B9]/30 dark:hover:bg-[#0E235E]/80 dark:hover:border-[#2651B9]/60"
-                          }`}
+                  <div className="relative">
+                    <select
+                      id="service-select"
+                      value={selectedService}
+                      onChange={(e) => setSelectedService(e.target.value)}
+                      className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-300 text-sm font-medium text-[#0F172A] focus:outline-none focus:border-[#FF8500] focus:bg-white focus:ring-2 focus:ring-[#FF8500]/20 transition-all shadow-sm dark:bg-[#081538]/85 dark:border-[#2651B9]/35 dark:text-white dark:focus:border-[#FF8500] dark:focus:ring-2 dark:focus:ring-[#FF8500]/25 dark:focus:bg-[#0B1D4F] appearance-none cursor-pointer pr-10"
+                    >
+                      {PIXIM_SERVICE_AREAS.map((area) => (
+                        <optgroup
+                          key={area.number}
+                          label={`${area.number}. ${area.category}`}
+                          className="bg-white dark:bg-[#081538] font-bold text-[#FF8500] dark:text-[#FFA133]"
                         >
-                          {srv}
-                        </button>
-                      );
-                    })}
+                          <option
+                            value={`${area.number}. ${area.category} (Complete)`}
+                            className="font-semibold text-slate-900 dark:text-white py-1.5 pl-2"
+                          >
+                            {area.number}. {area.category} (Complete Package)
+                          </option>
+                          {area.items.map((item) => (
+                            <option
+                              key={item}
+                              value={item}
+                              className="font-normal text-slate-700 dark:text-slate-200 py-1 pl-4"
+                            >
+                              &nbsp;&nbsp;• {item}
+                            </option>
+                          ))}
+                        </optgroup>
+                      ))}
+                      <optgroup
+                        label="Special Inquiries"
+                        className="bg-white dark:bg-[#081538] font-bold text-slate-500"
+                      >
+                        <option value="All-in-One Complete Branding" className="text-slate-900 dark:text-white py-1">
+                          All-in-One Complete Branding
+                        </option>
+                        <option value="Custom Project / Other Inquiry" className="text-slate-900 dark:text-white py-1">
+                          Custom Project / Other Inquiry
+                        </option>
+                      </optgroup>
+                    </select>
+                    <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3.5 text-slate-500 dark:text-slate-400">
+                      <ChevronDown className="w-4 h-4" />
+                    </div>
                   </div>
                 </div>
 

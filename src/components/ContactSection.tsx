@@ -4,6 +4,81 @@ import React, { useState, useMemo, useEffect } from "react";
 import { Mail, Send, CheckCircle2, Clock, ShieldCheck, Loader2, AlertCircle, ChevronDown } from "lucide-react";
 import { GsapMagneticButton } from "./animations";
 
+export interface ServiceArea {
+  number: string;
+  category: string;
+  items: string[];
+}
+
+export const PIXIM_SERVICE_AREAS: ServiceArea[] = [
+  {
+    number: "01",
+    category: "Logo & Brand Identity",
+    items: [
+      "Logo Design",
+      "Brand Identity Design",
+      "Stationery Design",
+      "Business Card Design",
+      "Brand Guidelines",
+    ],
+  },
+  {
+    number: "02",
+    category: "Social Media & Content Design",
+    items: [
+      "Social Media Post Design",
+      "Social Media Cover Design",
+      "Facebook Page Setup & Optimization",
+    ],
+  },
+  {
+    number: "03",
+    category: "Packaging Design",
+    items: [
+      "Product Packaging",
+      "Label Design",
+      "Box & Pouch Design",
+    ],
+  },
+  {
+    number: "04",
+    category: "Video & Motion Design",
+    items: [
+      "Motion Graphics",
+      "Brand Intro Video",
+      "Reels & Short-form Video Editing",
+    ],
+  },
+  {
+    number: "05",
+    category: "Digital Marketing & Ads",
+    items: [
+      "Meta Ads",
+      "Google Ads",
+      "Campaign Strategy & Management",
+    ],
+  },
+  {
+    number: "06",
+    category: "Website Design & Development",
+    items: [
+      "Business Website",
+      "Landing Page",
+      "E-commerce Website",
+    ],
+  },
+  {
+    number: "07",
+    category: "SEO & Organic Growth",
+    items: [
+      "On-Page SEO",
+      "Keyword Research",
+      "Technical SEO",
+      "Organic Traffic Growth",
+    ],
+  },
+];
+
 interface ContactSectionProps {
   initialService?: string;
   initialNotes?: string;
@@ -13,29 +88,8 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
   initialService = "",
   initialNotes = "",
 }) => {
-  const availableServices = [
-    "Logo Design & Brand Identity",
-    "Website Design & Development",
-    "Package & Label Design",
-    "Social Media Post & Banner Design",
-    "Motion Graphics & Video Editing",
-    "Visiting Card & Stationery Design",
-    "Cover & Brochure Design",
-    "Clipping Path & Photo Retouching",
-    "SEO & Digital Marketing",
-    "Full Brand Identity Package",
-    "Other / Custom Requirement",
-  ];
-
-  const servicesList = useMemo(() => {
-    if (initialService && !availableServices.includes(initialService)) {
-      return [initialService, ...availableServices];
-    }
-    return availableServices;
-  }, [initialService]);
-
   const [selectedService, setSelectedService] = useState<string>(
-    initialService || availableServices[0]
+    initialService || "01. Logo & Brand Identity (Complete)"
   );
 
   useEffect(() => {
@@ -255,15 +309,45 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                       onChange={(e) => setSelectedService(e.target.value)}
                       className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-300 text-sm font-medium text-[#0F172A] focus:outline-none focus:border-[#FF8500] focus:bg-white focus:ring-2 focus:ring-[#FF8500]/20 transition-all shadow-sm dark:bg-[#081538]/85 dark:border-[#2651B9]/35 dark:text-white dark:focus:border-[#FF8500] dark:focus:ring-2 dark:focus:ring-[#FF8500]/25 dark:focus:bg-[#0B1D4F] appearance-none cursor-pointer pr-10"
                     >
-                      {servicesList.map((srv) => (
-                        <option
-                          key={srv}
-                          value={srv}
-                          className="bg-white dark:bg-[#081538] text-slate-900 dark:text-white py-2"
-                        >
-                          {srv}
+                      {initialService && (
+                        <option value={initialService} className="bg-white dark:bg-[#081538] text-slate-900 dark:text-white font-semibold">
+                          {initialService}
                         </option>
+                      )}
+                      {PIXIM_SERVICE_AREAS.map((area) => (
+                        <optgroup
+                          key={area.number}
+                          label={`${area.number}. ${area.category}`}
+                          className="bg-white dark:bg-[#081538] font-bold text-[#FF8500] dark:text-[#FFA133]"
+                        >
+                          <option
+                            value={`${area.number}. ${area.category} (Complete)`}
+                            className="font-semibold text-slate-900 dark:text-white py-1.5 pl-2"
+                          >
+                            {area.number}. {area.category} (Complete Package)
+                          </option>
+                          {area.items.map((item) => (
+                            <option
+                              key={item}
+                              value={item}
+                              className="font-normal text-slate-700 dark:text-slate-200 py-1 pl-4"
+                            >
+                              &nbsp;&nbsp;• {item}
+                            </option>
+                          ))}
+                        </optgroup>
                       ))}
+                      <optgroup
+                        label="Special Inquiries"
+                        className="bg-white dark:bg-[#081538] font-bold text-slate-500"
+                      >
+                        <option value="All-in-One Complete Branding" className="text-slate-900 dark:text-white py-1">
+                          All-in-One Complete Branding
+                        </option>
+                        <option value="Custom Project / Other Inquiry" className="text-slate-900 dark:text-white py-1">
+                          Custom Project / Other Inquiry
+                        </option>
+                      </optgroup>
                     </select>
                     <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3.5 text-slate-500 dark:text-slate-400">
                       <ChevronDown className="w-4 h-4" />
