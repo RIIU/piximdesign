@@ -9,7 +9,7 @@ interface PaymentItem {
   badge: React.ReactNode;
 }
 
-export const FooterPaymentMethods: React.FC = () => {
+export const PaymentMethodsSection: React.FC = () => {
   // Row 1: Exactly 11 items
   const row1: PaymentItem[] = [
     {
@@ -274,75 +274,80 @@ export const FooterPaymentMethods: React.FC = () => {
   ];
 
   return (
-    <div className="pt-8 pb-4">
-      <div className="rounded-2xl p-4 sm:p-5 bg-slate-50/80 dark:bg-white/[0.03] border border-slate-200/80 dark:border-white/10 backdrop-blur-sm transition-all">
-        {/* Banner Layout Container (Pay With on left, 2 perfectly aligned rows in center, SSLCOMMERZ on right) */}
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-4">
-          
-          {/* Left Column: Pay With */}
-          <div className="flex lg:flex-col items-center lg:items-center justify-center gap-1 flex-shrink-0 lg:pr-5 lg:border-r border-slate-200 dark:border-slate-800">
-            <span className="text-sm font-bold text-[#1E3A8A] dark:text-[#93C5FD] tracking-tight whitespace-nowrap">
-              Pay With
-            </span>
-            <span className="hidden lg:inline text-[10px] font-mono text-slate-400 dark:text-slate-500 whitespace-nowrap">
-              Methods
-            </span>
-          </div>
-
-          {/* Middle: Strictly 2-Line Perfectly Aligned Grid */}
-          <div className="w-full lg:w-auto overflow-x-auto scrollbar-none py-1 flex justify-start lg:justify-center">
-            <div className="min-w-[700px] sm:min-w-[760px] lg:min-w-0 flex flex-col gap-2">
-              
-              {/* Row 1: Exactly 11 cards */}
-              <div className="grid grid-cols-11 gap-1.5 sm:gap-2">
-                {row1.map((pm) => (
-                  <div
-                    key={pm.id}
-                    title={pm.name}
-                    className="w-[58px] sm:w-[64px] md:w-[68px] h-[34px] sm:h-[38px] flex items-center justify-center rounded-lg bg-white border border-slate-200/90 shadow-[0_1px_2px_rgba(0,0,0,0.04)] hover:shadow-md hover:border-[#FF8500]/60 hover:-translate-y-0.5 transition-all duration-150 cursor-pointer select-none"
-                  >
-                    {pm.badge}
-                  </div>
-                ))}
-              </div>
-
-              {/* Row 2: Exactly 11 cards (Aligns 1:1 under Row 1) */}
-              <div className="grid grid-cols-11 gap-1.5 sm:gap-2">
-                {row2.map((pm) => (
-                  <div
-                    key={pm.id}
-                    title={pm.name}
-                    className="w-[58px] sm:w-[64px] md:w-[68px] h-[34px] sm:h-[38px] flex items-center justify-center rounded-lg bg-white border border-slate-200/90 shadow-[0_1px_2px_rgba(0,0,0,0.04)] hover:shadow-md hover:border-[#FF8500]/60 hover:-translate-y-0.5 transition-all duration-150 cursor-pointer select-none"
-                  >
-                    {pm.badge}
-                  </div>
-                ))}
-              </div>
-
+    <section
+      aria-label="Supported Payment Methods"
+      className="relative z-10 w-full py-6 sm:py-8 bg-slate-50/70 dark:bg-[#071029]/80 border-t border-slate-200/80 dark:border-white/5 transition-colors"
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="rounded-2xl p-4 sm:p-5 bg-white dark:bg-white/[0.03] border border-slate-200/90 dark:border-white/10 shadow-sm backdrop-blur-sm transition-all">
+          {/* Banner Layout Container (Pay With on left, 2 perfectly aligned rows in center, SSLCOMMERZ on right) */}
+          <div className="flex flex-col lg:flex-row items-center justify-between gap-4">
+            
+            {/* Left Column: Pay With */}
+            <div className="flex lg:flex-col items-center lg:items-center justify-center gap-1 flex-shrink-0 lg:pr-5 lg:border-r border-slate-200 dark:border-slate-800">
+              <span className="text-sm font-bold text-[#1E3A8A] dark:text-[#93C5FD] tracking-tight whitespace-nowrap">
+                Pay With
+              </span>
+              <span className="hidden lg:inline text-[10px] font-mono text-slate-400 dark:text-slate-500 whitespace-nowrap">
+                Methods
+              </span>
             </div>
-          </div>
 
-          {/* Right Column: Verified By SSLCOMMERZ */}
-          <div className="flex lg:flex-col items-center justify-center gap-1.5 flex-shrink-0 lg:pl-5 lg:border-l border-slate-200 dark:border-slate-800">
-            <div className="text-center">
-              <div className="text-[9px] uppercase font-mono font-semibold tracking-wider text-slate-400 dark:text-slate-500">
-                Verified By
-              </div>
-              <div className="mt-1 flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-[#013571] text-white shadow-xs hover:opacity-95 transition-opacity">
-                <Lock className="w-2.5 h-2.5 text-[#FF8500]" />
-                <span className="font-extrabold tracking-wider text-[10px] font-sans">
-                  SSLCOMMERZ
-                </span>
+            {/* Middle: Strictly 2-Line Perfectly Aligned Grid */}
+            <div className="w-full lg:w-auto overflow-x-auto scrollbar-none py-1 flex justify-start lg:justify-center">
+              <div className="min-w-[700px] sm:min-w-[760px] lg:min-w-0 flex flex-col gap-2">
+                
+                {/* Row 1: Exactly 11 cards */}
+                <div className="grid grid-cols-11 gap-1.5 sm:gap-2">
+                  {row1.map((pm) => (
+                    <div
+                      key={pm.id}
+                      title={pm.name}
+                      className="w-[58px] sm:w-[64px] md:w-[68px] h-[34px] sm:h-[38px] flex items-center justify-center rounded-lg bg-white border border-slate-200/90 shadow-[0_1px_2px_rgba(0,0,0,0.04)] hover:shadow-md hover:border-[#FF8500]/60 hover:-translate-y-0.5 transition-all duration-150 cursor-pointer select-none"
+                    >
+                      {pm.badge}
+                    </div>
+                  ))}
+                </div>
+
+                {/* Row 2: Exactly 11 cards (Aligns 1:1 under Row 1) */}
+                <div className="grid grid-cols-11 gap-1.5 sm:gap-2">
+                  {row2.map((pm) => (
+                    <div
+                      key={pm.id}
+                      title={pm.name}
+                      className="w-[58px] sm:w-[64px] md:w-[68px] h-[34px] sm:h-[38px] flex items-center justify-center rounded-lg bg-white border border-slate-200/90 shadow-[0_1px_2px_rgba(0,0,0,0.04)] hover:shadow-md hover:border-[#FF8500]/60 hover:-translate-y-0.5 transition-all duration-150 cursor-pointer select-none"
+                    >
+                      {pm.badge}
+                    </div>
+                  ))}
+                </div>
+
               </div>
             </div>
-            <div className="hidden sm:flex items-center gap-1 text-[9px] text-emerald-600 dark:text-emerald-400 font-medium">
-              <ShieldCheck className="w-3 h-3" />
-              <span>256-bit Secure</span>
-            </div>
-          </div>
 
+            {/* Right Column: Verified By SSLCOMMERZ */}
+            <div className="flex lg:flex-col items-center justify-center gap-1.5 flex-shrink-0 lg:pl-5 lg:border-l border-slate-200 dark:border-slate-800">
+              <div className="text-center">
+                <div className="text-[9px] uppercase font-mono font-semibold tracking-wider text-slate-400 dark:text-slate-500">
+                  Verified By
+                </div>
+                <div className="mt-1 flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-[#013571] text-white shadow-xs hover:opacity-95 transition-opacity">
+                  <Lock className="w-2.5 h-2.5 text-[#FF8500]" />
+                  <span className="font-extrabold tracking-wider text-[10px] font-sans">
+                    SSLCOMMERZ
+                  </span>
+                </div>
+              </div>
+              <div className="hidden sm:flex items-center gap-1 text-[9px] text-emerald-600 dark:text-emerald-400 font-medium">
+                <ShieldCheck className="w-3 h-3" />
+                <span>256-bit Secure</span>
+              </div>
+            </div>
+
+          </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };

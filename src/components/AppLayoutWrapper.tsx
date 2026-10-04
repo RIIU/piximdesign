@@ -4,6 +4,7 @@ import React, { useState, createContext, useContext } from "react";
 import { ThemeProvider } from "@/context/ThemeContext";
 import { Navbar } from "./Navbar";
 import { Footer } from "./Footer";
+import { PaymentMethodsSection } from "./PaymentMethodsSection";
 import { ContactModal } from "./ContactModal";
 import { GlobalBackgroundAnimation } from "./animations";
 
@@ -50,6 +51,9 @@ export const AppLayoutWrapper: React.FC<{ children: React.ReactNode }> = ({ chil
 
           {/* Page Content */}
           <main className="flex-1 w-full">{children}</main>
+
+          {/* Supported Payment Methods Section (Directly before Footer) */}
+          <PaymentMethodsSection />
 
           {/* Persistent Footer across all pages */}
           <Footer />

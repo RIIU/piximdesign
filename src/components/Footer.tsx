@@ -4,7 +4,6 @@ import React from "react";
 import Link from "next/link";
 import { PiximLogo } from "./PiximLogo";
 import { ArrowUp, Heart } from "lucide-react";
-import { FooterPaymentMethods } from "./FooterPaymentMethods";
 
 export const Footer: React.FC = () => {
   const scrollToTop = () => {
@@ -187,9 +186,6 @@ export const Footer: React.FC = () => {
             </button>
           </div>
         </div>
-
-        {/* Supported Payment Methods Component */}
-        <FooterPaymentMethods />
 
         {/* Bottom Bar */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500 dark:text-slate-400">
