@@ -57,11 +57,6 @@ export const WhyPiximSection: React.FC<WhyPiximSectionProps> = ({ onOpenContact 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#2651B9]/15 border border-[#2651B9]/35 text-[#60A5FA] text-xs font-mono font-bold uppercase tracking-wider mb-4 shadow-sm">
-            <span className="w-2 h-2 rounded-full bg-[#FF8500] animate-pulse" />
-            <span>The Pixim Standard</span>
-          </div>
-
           <h2 className="font-agency text-3xl sm:text-4xl md:text-5xl lg:text-[52px] font-extrabold text-white tracking-tight leading-[1.08]">
             Built For Speed. <br />
             <span className="bg-gradient-to-r from-[#FF8500] via-[#FFA229] to-amber-300 bg-clip-text text-transparent">

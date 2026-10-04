@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { ArrowRight, Check, DollarSign, Coins, Sliders, ShieldCheck } from "lucide-react";
+import { ArrowRight, Check, DollarSign, Coins, ShieldCheck } from "lucide-react";
 import { GsapMagneticButton } from "./animations";
 
 interface ProjectEstimatorSectionProps {
@@ -171,11 +171,6 @@ export const ProjectEstimatorSection: React.FC<ProjectEstimatorSectionProps> = (
       <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-14">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FF8500]/15 border border-[#FF8500]/30 text-[#FFA133] text-xs font-mono font-bold uppercase tracking-wider mb-3">
-            <Sliders className="w-3.5 h-3.5" />
-            <span>Instant Scope Estimator</span>
-          </div>
-
           <h2 className="font-agency text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight leading-[1.08]">
             Calculate Your Scope <br />
             <span className="bg-gradient-to-r from-[#FF8500] via-[#FFA229] to-amber-300 bg-clip-text text-transparent">
