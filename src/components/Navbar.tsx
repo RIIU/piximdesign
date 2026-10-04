@@ -43,7 +43,6 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenContact }) => {
     { name: "Home", href: "/" },
     { name: "Services", href: "/services" },
     { name: "Projects", href: "/projects" },
-    { name: "Process", href: "/process" },
     { name: "Pricing", href: "/pricing" },
     { name: "About", href: "/about" },
     { name: "Contact", href: "/contact" },

@@ -102,11 +102,6 @@ export const Footer: React.FC = () => {
                 </Link>
               </li>
               <li>
-                <Link href="/process" prefetch={true} className="hover:text-[#2651B9] transition-colors">
-                  4-Step Process
-                </Link>
-              </li>
-              <li>
                 <Link href="/pricing" prefetch={true} className="hover:text-[#2651B9] transition-colors">
                   Pricing Plans
                 </Link>

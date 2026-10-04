@@ -245,11 +245,11 @@ export default function ProjectsPage() {
             <span>Start Your Project Brief</span>
           </GsapMagneticButton>
           <GsapMagneticButton
-            href="/process"
+            href="/pricing"
             variant="secondary"
             className="px-6 py-3.5 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-700 font-medium text-sm transition-colors"
           >
-            <span>See Our 4-Step Process →</span>
+            <span>View Transparent Pricing →</span>
           </GsapMagneticButton>
         </div>
       </div>
