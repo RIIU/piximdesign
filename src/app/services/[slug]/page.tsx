@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import { SERVICES } from "@/data/agencyData";
 import { AnimatedServiceIcon } from "@/components/AnimatedServiceIcon";
 import { Check, ArrowLeft, Sparkles, ShieldCheck, Award } from "lucide-react";
-import { GsapDrawSvg, GsapMagneticButton, GsapReviewsInfiniteSlider } from "@/components/animations";
+import { GsapMagneticButton, GsapReviewsInfiniteSlider } from "@/components/animations";
 
 interface ServicePageProps {
   params: Promise<{
@@ -202,17 +202,8 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
               </span>
             </div>
 
-            <h1 className="font-agency relative inline-block text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#0F172A] dark:text-[#F8FAFC] tracking-tight leading-tight">
+            <h1 className="font-agency text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#0F172A] dark:text-[#F8FAFC] tracking-tight leading-tight">
               {service.title}
-              <span className="block w-48 mt-1 pointer-events-none">
-                <GsapDrawSvg
-                  type="underline"
-                  strokeColor="#FF8500"
-                  strokeWidth={3}
-                  duration={1.2}
-                  delay={0.2}
-                />
-              </span>
             </h1>
 
             <p className="mt-4 text-base sm:text-lg text-slate-700 dark:text-slate-300 leading-relaxed max-w-2xl">

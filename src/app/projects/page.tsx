@@ -5,7 +5,7 @@ import Image from "next/image";
 import { PORTFOLIO_PROJECTS } from "@/data/agencyData";
 import { ArrowUpRight, X } from "lucide-react";
 import { useContactModal } from "@/components/AppLayoutWrapper";
-import { GsapDrawSvg, GsapMagneticButton, GsapInfiniteLoopedPanels, GsapReviewsInfiniteSlider } from "@/components/animations";
+import { GsapMagneticButton, GsapInfiniteLoopedPanels, GsapReviewsInfiniteSlider } from "@/components/animations";
 
 export default function ProjectsPage() {
   const [activeFilter, setActiveFilter] = useState("All");
@@ -27,17 +27,8 @@ export default function ProjectsPage() {
 
         <h1 className="font-agency relative z-10 text-3xl sm:text-4xl md:text-5xl lg:text-[54px] font-extrabold text-[#0F172A] dark:text-[#F8FAFC] tracking-tight leading-[1.08]">
           Featured Work & <br />
-          <span className="relative inline-block bg-gradient-to-r from-[#FF8500] via-amber-500 to-[#FFA133] bg-clip-text text-transparent">
+          <span className="bg-gradient-to-r from-[#FF8500] via-amber-500 to-[#FFA133] bg-clip-text text-transparent">
             Digital Case Studies
-            <span className="absolute -bottom-2.5 left-0 w-full pointer-events-none">
-              <GsapDrawSvg
-                type="underline"
-                strokeColor="#FF8500"
-                strokeWidth={3}
-                duration={1.2}
-                delay={0.3}
-              />
-            </span>
           </span>
         </h1>
 

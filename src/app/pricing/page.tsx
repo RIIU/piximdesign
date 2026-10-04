@@ -5,7 +5,7 @@ import { ProjectEstimator } from "@/components/ProjectEstimator";
 import { FaqSection } from "@/components/FaqSection";
 import { Sparkles, Check, DollarSign, Coins, ShieldCheck, HelpCircle } from "lucide-react";
 import { useContactModal } from "@/components/AppLayoutWrapper";
-import { GsapDrawSvg, GsapMagneticButton, GsapReviewsInfiniteSlider } from "@/components/animations";
+import { GsapMagneticButton, GsapReviewsInfiniteSlider } from "@/components/animations";
 
 export default function PricingPage() {
   const [currency, setCurrency] = useState<"USD" | "BDT">("USD");
@@ -79,17 +79,8 @@ export default function PricingPage() {
 
         <h1 className="font-agency relative z-10 text-3xl sm:text-4xl md:text-5xl lg:text-[54px] font-extrabold text-[#0F172A] dark:text-[#F8FAFC] tracking-tight leading-[1.08]">
           Flexible Plans & <br />
-          <span className="relative inline-block bg-gradient-to-r from-[#FF8500] via-amber-500 to-[#FFA133] bg-clip-text text-transparent">
+          <span className="bg-gradient-to-r from-[#FF8500] via-amber-500 to-[#FFA133] bg-clip-text text-transparent">
             Transparent Investment Tiers
-            <span className="absolute -bottom-2.5 left-0 w-full pointer-events-none">
-              <GsapDrawSvg
-                type="underline"
-                strokeColor="#FF8500"
-                strokeWidth={3}
-                duration={1.2}
-                delay={0.3}
-              />
-            </span>
           </span>
         </h1>
 
