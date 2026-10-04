@@ -9,9 +9,11 @@ import { HeroSection } from "@/components/HeroSection";
 const VideoShowcaseSection = dynamic(() => import("@/components/VideoShowcaseSection").then(m => ({ default: m.VideoShowcaseSection })));
 const StatsBar = dynamic(() => import("@/components/StatsBar").then(m => ({ default: m.StatsBar })));
 const ServicesSection = dynamic(() => import("@/components/ServicesSection").then(m => ({ default: m.ServicesSection })));
+const WhyPiximSection = dynamic(() => import("@/components/WhyPiximSection").then(m => ({ default: m.WhyPiximSection })));
 const ReadyForLogoSection = dynamic(() => import("@/components/ReadyForLogoSection").then(m => ({ default: m.ReadyForLogoSection })));
 const BrandStoriesSection = dynamic(() => import("@/components/BrandStoriesSection").then(m => ({ default: m.BrandStoriesSection })));
 const ProcessSection = dynamic(() => import("@/components/ProcessSection").then(m => ({ default: m.ProcessSection })));
+const ProjectEstimatorSection = dynamic(() => import("@/components/ProjectEstimatorSection").then(m => ({ default: m.ProjectEstimatorSection })));
 const TestimonialsSection = dynamic(() => import("@/components/TestimonialsSection").then(m => ({ default: m.TestimonialsSection })));
 const FreeConsultationSection = dynamic(() => import("@/components/FreeConsultationSection").then(m => ({ default: m.FreeConsultationSection })));
 const FaqSection = dynamic(() => import("@/components/FaqSection").then(m => ({ default: m.FaqSection })));
@@ -22,6 +24,10 @@ export default function Home() {
 
   const handleSelectService = (serviceTitle: string) => {
     openContact(serviceTitle, `Interested in getting a scope for ${serviceTitle}`);
+  };
+
+  const handleEstimateSubmit = (serviceTitle: string, summary: string) => {
+    openContact(serviceTitle, summary);
   };
 
   return (
@@ -38,25 +44,31 @@ export default function Home() {
       {/* 4. Core Capabilities & Services Bento Grid */}
       <ServicesSection onSelectService={handleSelectService} />
 
-      {/* 5. Experience Brand Stories in Design (Pixxen-style Sticky Split Showcase) */}
+      {/* 5. The Pixim Difference: 3-Way Comparison Matrix vs Traditional Agencies & Freelancers */}
+      <WhyPiximSection onOpenContact={(service, notes) => openContact(service, notes)} />
+
+      {/* 6. Experience Brand Stories in Design (Pixxen-style Sticky Split Showcase) */}
       <BrandStoriesSection onOpenContact={() => openContact()} />
 
-      {/* 6. Ready for a Professional Logo? Video Showcase CTA */}
+      {/* 7. Ready for a Professional Logo? Video Showcase CTA */}
       <ReadyForLogoSection onOpenContact={(service, note) => openContact(service, note)} />
 
-      {/* 7. 4-Step Agile Delivery Process ("Quick Delivery, Faster Results") */}
+      {/* 8. 4-Step Agile Delivery Process ("Quick Delivery, Faster Results") */}
       <ProcessSection onOpenContact={() => openContact()} />
 
-      {/* 7. Client Testimonials & Social Proof */}
+      {/* 9. Interactive Scope Builder & Transparent Pricing Estimator (USD/BDT) */}
+      <ProjectEstimatorSection onEstimateSubmit={handleEstimateSubmit} />
+
+      {/* 10. Client Testimonials & Social Proof */}
       <TestimonialsSection />
 
-      {/* 8. 30-Minute Free Consultation & Calendly Schedule */}
+      {/* 11. 30-Minute Free Consultation & Calendly Schedule */}
       <FreeConsultationSection />
 
-      {/* 9. Frequently Asked Questions */}
+      {/* 12. Frequently Asked Questions */}
       <FaqSection />
 
-      {/* 9. Direct Project Brief & Consultation Form */}
+      {/* 13. Direct Project Brief & Consultation Form */}
       <ContactSection />
     </main>
   );
