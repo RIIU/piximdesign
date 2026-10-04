@@ -736,18 +736,3 @@ export const INDUSTRIES = [
     services: ["web-design", "motion-video", "seo-growth"],
   },
 ];
-
-export const COMPARISON_COLUMNS = ["Freelancer", "Pixim Design", "Big Agency"];
-
-export const COMPARISON_ROWS: {
-  label: string;
-  values: [string | boolean, string | boolean, string | boolean];
-}[] = [
-  { label: "Logo, web, packaging, motion & SEO under one roof", values: [false, true, true] },
-  { label: "Dedicated lead designer & direct chat channel", values: ["Varies", true, "Account manager"] },
-  { label: "Brand identity turnaround", values: ["Unpredictable", "3–7 business days", "4–8 weeks"] },
-  { label: "Revisions", values: ["Limited", "Until 100% satisfied", "Billed per round"] },
-  { label: "Master source files & full IP ownership", values: ["Often extra", true, "Licensing fees"] },
-  { label: "Post-launch support", values: [false, "30-day warranty", "Paid retainer"] },
-  { label: "Pricing", values: ["Low, inconsistent", "From $75, transparent", "Premium retainers"] },
-];
