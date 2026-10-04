@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useState } from "react";
-import { Mail, Send, CheckCircle2, Clock, ShieldCheck, Loader2, AlertCircle } from "lucide-react";
+import React, { useState, useMemo, useEffect } from "react";
+import { Mail, Send, CheckCircle2, Clock, ShieldCheck, Loader2, AlertCircle, ChevronDown } from "lucide-react";
 import { GsapMagneticButton } from "./animations";
 
 interface ContactSectionProps {
@@ -13,9 +13,37 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
   initialService = "",
   initialNotes = "",
 }) => {
-  const [selectedServices, setSelectedServices] = useState<string[]>(
-    initialService ? [initialService] : ["Logo & Brand Identity"]
+  const availableServices = [
+    "Logo Design & Brand Identity",
+    "Website Design & Development",
+    "Package & Label Design",
+    "Social Media Post & Banner Design",
+    "Motion Graphics & Video Editing",
+    "Visiting Card & Stationery Design",
+    "Cover & Brochure Design",
+    "Clipping Path & Photo Retouching",
+    "SEO & Digital Marketing",
+    "Full Brand Identity Package",
+    "Other / Custom Requirement",
+  ];
+
+  const servicesList = useMemo(() => {
+    if (initialService && !availableServices.includes(initialService)) {
+      return [initialService, ...availableServices];
+    }
+    return availableServices;
+  }, [initialService]);
+
+  const [selectedService, setSelectedService] = useState<string>(
+    initialService || availableServices[0]
   );
+
+  useEffect(() => {
+    if (initialService) {
+      setSelectedService(initialService);
+    }
+  }, [initialService]);
+
   const [budget, setBudget] = useState("$100 - $200");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -24,22 +52,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
   const [errorMessage, setErrorMessage] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const availableServices = [
-    "Logo & Brand Identity",
-    "Website Design & Dev",
-    "Package & Label Design",
-    "Social Media & Posters",
-    "Motion Graphics & Intro",
-    "SEO & Organic Traffic",
-  ];
-
   const budgetTiers = ["<$100", "$100 - $200", "$200 - $500", "$500+"];
-
-  const toggleService = (srv: string) => {
-    setSelectedServices((prev) =>
-      prev.includes(srv) ? prev.filter((s) => s !== srv) : [...prev, srv]
-    );
-  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -57,7 +70,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
         body: JSON.stringify({
           name: name.trim(),
           email: email.trim(),
-          services: selectedServices,
+          services: [selectedService],
           budget,
           message: message.trim(),
         }),
@@ -227,29 +240,34 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                   </div>
                 </div>
 
-                {/* 2. Services Required */}
+                {/* 2. Services Required (Dropdown Option) */}
                 <div>
-                  <label className="text-xs uppercase font-mono font-bold tracking-wider text-slate-600 dark:text-blue-200/90 block mb-2.5">
+                  <label
+                    htmlFor="service-select"
+                    className="text-xs uppercase font-mono font-bold tracking-wider text-slate-600 dark:text-blue-200/90 block mb-1.5"
+                  >
                     What services do you need?
                   </label>
-                  <div className="flex flex-wrap gap-2">
-                    {availableServices.map((srv) => {
-                      const isSelected = selectedServices.includes(srv);
-                      return (
-                        <button
-                          type="button"
+                  <div className="relative">
+                    <select
+                      id="service-select"
+                      value={selectedService}
+                      onChange={(e) => setSelectedService(e.target.value)}
+                      className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-300 text-sm font-medium text-[#0F172A] focus:outline-none focus:border-[#FF8500] focus:bg-white focus:ring-2 focus:ring-[#FF8500]/20 transition-all shadow-sm dark:bg-[#081538]/85 dark:border-[#2651B9]/35 dark:text-white dark:focus:border-[#FF8500] dark:focus:ring-2 dark:focus:ring-[#FF8500]/25 dark:focus:bg-[#0B1D4F] appearance-none cursor-pointer pr-10"
+                    >
+                      {servicesList.map((srv) => (
+                        <option
                           key={srv}
-                          onClick={() => toggleService(srv)}
-                          className={`px-3.5 py-2 rounded-xl text-xs font-medium border transition-all duration-200 cursor-pointer ${
-                            isSelected
-                              ? "bg-[#FF8500]/15 border-[#FF8500] text-slate-900 dark:bg-[#FF8500]/25 dark:border-[#FF8500] dark:text-[#FFA133] font-semibold shadow-[0_0_15px_rgba(255,133,0,0.2)] ring-1 ring-[#FF8500]/40"
-                              : "bg-slate-50 border-slate-200 text-slate-700 hover:bg-slate-100 hover:border-[#2651B9]/40 dark:bg-[#081538]/70 dark:border-[#2651B9]/30 dark:text-slate-200 dark:hover:bg-[#0E235E]/80 dark:hover:border-[#2651B9]/60 dark:hover:text-white"
-                          }`}
+                          value={srv}
+                          className="bg-white dark:bg-[#081538] text-slate-900 dark:text-white py-2"
                         >
                           {srv}
-                        </button>
-                      );
-                    })}
+                        </option>
+                      ))}
+                    </select>
+                    <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3.5 text-slate-500 dark:text-slate-400">
+                      <ChevronDown className="w-4 h-4" />
+                    </div>
                   </div>
                 </div>
 
