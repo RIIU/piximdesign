@@ -219,6 +219,26 @@ body {
   animation: pulseGlow 2.5s infinite ease-in-out;
 }
 
+/* Gentle vertical bob for floating UI chips */
+@keyframes floatY {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.animate-float-y {
+  animation: floatY 5s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-float-y {
+    animation: none;
+  }
+}
+
 /* Infinite Marquee Ribbon Animations */
 @keyframes marqueeLeft {
   0% {

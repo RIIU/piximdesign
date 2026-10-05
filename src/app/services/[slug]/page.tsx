@@ -177,7 +177,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
 
   // Branding gets its own full-length landing page layout
   if (service.id === "logo-design") {
-    return <BrandingServicePage pricing={details.pricing} deliverables={details.deliverables} />;
+    return <BrandingServicePage pricing={details.pricing} />;
   }
 
   return (
