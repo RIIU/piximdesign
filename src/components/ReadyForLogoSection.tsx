@@ -8,11 +8,30 @@ import { GsapMagneticButton } from "@/components/animations";
 interface ReadyForLogoSectionProps {
   onOpenContact?: (service?: string, note?: string) => void;
   colorVariant?: "blue" | "orange";
+  /** Optional overrides so service pages can reuse this CTA; defaults keep the logo copy */
+  titleLead?: string;
+  titleHighlight?: string;
+  description?: string;
+  primaryService?: string;
+  primaryNote?: string;
+  secondaryService?: string;
+  secondaryNote?: string;
+  videoSrc?: string;
+  posterSrc?: string;
 }
 
 export const ReadyForLogoSection: React.FC<ReadyForLogoSectionProps> = ({
   onOpenContact,
   colorVariant = "blue",
+  titleLead = "Ready for a",
+  titleHighlight = "Professional Logo?",
+  description = "With 8+ years of experience and 500+ happy clients, Piximdesign creates Premium brand identities, logos, and modern websites that stand out.",
+  primaryService = "Logo Design",
+  primaryNote = "I'm ready to get started on my professional logo design.",
+  secondaryService = "Logo Consultation",
+  secondaryNote = "I would like to book a consultation for logo branding.",
+  videoSrc = "/video/Creative-Logo-Branding-Solutions-for-Your-Business-_-Pixim-Design.mp4",
+  posterSrc = "/video/posters/Creative-Logo-Branding-Solutions-for-Your-Business-_-Pixim-Design.webp",
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -139,7 +158,7 @@ export const ReadyForLogoSection: React.FC<ReadyForLogoSectionProps> = ({
             {/* Left Column: Heading, Description & Action Buttons */}
             <div className="lg:col-span-6 xl:col-span-5 flex flex-col justify-center text-left">
               <h2 className="font-agency text-2xl sm:text-3xl md:text-4xl lg:text-[42px] font-extrabold text-white tracking-tight leading-[1.15]">
-                Ready for a{" "}
+                {titleLead}{" "}
                 <span
                   className={`block sm:inline bg-clip-text text-transparent drop-shadow-sm ${
                     isOrange
@@ -147,7 +166,7 @@ export const ReadyForLogoSection: React.FC<ReadyForLogoSectionProps> = ({
                       : "bg-gradient-to-r from-[#FF8500] via-[#FFA133] to-[#FF8500]"
                   }`}
                 >
-                  Professional Logo?
+                  {titleHighlight}
                 </span>
               </h2>
 
@@ -156,7 +175,7 @@ export const ReadyForLogoSection: React.FC<ReadyForLogoSectionProps> = ({
                   isOrange ? "text-orange-50/95" : "text-slate-300"
                 }`}
               >
-                With 8+ years of experience and 500+ happy clients, Piximdesign creates Premium brand identities, logos, and modern websites that stand out.
+                {description}
               </p>
 
               {/* Action Buttons */}
@@ -164,10 +183,7 @@ export const ReadyForLogoSection: React.FC<ReadyForLogoSectionProps> = ({
                 {/* Primary Button: Get Started */}
                 <GsapMagneticButton
                   onClick={() =>
-                    onOpenContact?.(
-                      "Logo Design",
-                      "I'm ready to get started on my professional logo design."
-                    )
+                    onOpenContact?.(primaryService, primaryNote)
                   }
                   variant={isOrange ? "secondary" : "primary"}
                   strength={0.28}
@@ -184,10 +200,7 @@ export const ReadyForLogoSection: React.FC<ReadyForLogoSectionProps> = ({
                 {/* Secondary Button: Book Now */}
                 <GsapMagneticButton
                   onClick={() =>
-                    onOpenContact?.(
-                      "Logo Consultation",
-                      "I would like to book a consultation for logo branding."
-                    )
+                    onOpenContact?.(secondaryService, secondaryNote)
                   }
                   variant="secondary"
                   strength={0.28}
@@ -216,8 +229,8 @@ export const ReadyForLogoSection: React.FC<ReadyForLogoSectionProps> = ({
                 {/* Video Element */}
                 <video
                   ref={videoRef}
-                  src={shouldLoadVideo ? "/video/Creative-Logo-Branding-Solutions-for-Your-Business-_-Pixim-Design.mp4" : undefined}
-                  poster="/video/posters/Creative-Logo-Branding-Solutions-for-Your-Business-_-Pixim-Design.webp"
+                  src={shouldLoadVideo ? videoSrc : undefined}
+                  poster={posterSrc}
                   preload="none"
                   autoPlay
                   muted={isMuted}
