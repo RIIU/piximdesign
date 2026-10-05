@@ -1,4 +1,5 @@
 import type { FaqItem, ProcessStep } from "@/components/page-kit/types";
+import { COMPANY } from "./company";
 
 // Copy shared by the overview pages (services, pricing, about, contact).
 
@@ -6,10 +7,6 @@ export const CTA_VIDEOS = {
   grow: {
     videoSrc: "/video/Grow-Your-Business-with-Creative-Design-_-Pixim-Design-Agency.mp4",
     posterSrc: "/video/posters/Grow-Your-Business-with-Creative-Design-_-Pixim-Design-Agency.webp",
-  },
-  branding: {
-    videoSrc: "/video/Creative-Logo-Branding-Solutions-for-Your-Business-_-Pixim-Design.mp4",
-    posterSrc: "/video/posters/Creative-Logo-Branding-Solutions-for-Your-Business-_-Pixim-Design.webp",
   },
 };
 
@@ -56,6 +53,4 @@ export const INTERNATIONAL_FAQ: FaqItem = {
   a: "Yes. We're based in Dhaka, Bangladesh, and work remotely with clients worldwide over email, WhatsApp, Google Meet and Zoom. International projects are quoted and billed in US dollars.",
 };
 
-export const CONTACT_EMAIL = "contact@piximdesign.com";
-// Placeholder number until the real WhatsApp line is added
-export const WHATSAPP_URL = "https://wa.me/8801700000000";
+export const CONTACT_EMAIL = COMPANY.email;

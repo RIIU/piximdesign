@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { COMPANY } from "@/data/company";
 
 // Set NEXT_PUBLIC_SITE_URL to the custom domain once it is live (e.g. https://piximdesign.com)
 export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || "https://piximdesign.vercel.app").replace(/\/+$/, "");
@@ -62,7 +63,7 @@ export const SITE_JSON_LD = {
       logo: `${SITE_URL}/images/logo.png`,
       image: `${SITE_URL}${OG_IMAGE.url}`,
       description: SITE_DESCRIPTION,
-      email: "contact@piximdesign.com",
+      email: COMPANY.email,
       address: { "@type": "PostalAddress", addressLocality: "Dhaka", addressCountry: "BD" },
       areaServed: "Worldwide",
       currenciesAccepted: "BDT, USD",
