@@ -4,10 +4,10 @@ import React, { useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
-import { SectionHeading, GradientText } from "./shared";
-import { PROCESS_STEPS } from "./brandingData";
+import { SectionHeading } from "../shared";
+import type { ServiceConfig } from "../types";
 
-export const BrandProcessTimeline: React.FC = () => {
+export const ServiceProcess: React.FC<{ process: ServiceConfig["process"] }> = ({ process }) => {
   const sectionRef = useRef<HTMLElement>(null);
 
   // Orange progress line grows with scroll and lights up each step node as it is reached
@@ -38,16 +38,7 @@ export const BrandProcessTimeline: React.FC = () => {
 
   return (
     <section ref={sectionRef} className="relative py-20 sm:py-28 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
-      <SectionHeading
-        eyebrow="How We Work"
-        title={
-          <>
-            From First Call to <GradientText>Final Brand Kit</GradientText>
-          </>
-        }
-        desc="A clear, collaborative process so you always know what happens next, and what you receive at every step."
-        className="mb-14 sm:mb-20"
-      />
+      <SectionHeading eyebrow="How We Work" title={process.title} desc={process.description} className="mb-14 sm:mb-20" />
 
       <ol className="timeline-list relative space-y-10 lg:space-y-14">
         {/* Track + progress */}
@@ -57,7 +48,7 @@ export const BrandProcessTimeline: React.FC = () => {
           aria-hidden
         />
 
-        {PROCESS_STEPS.map((step, i) => {
+        {process.steps.map((step, i) => {
           const cardOnLeft = i % 2 === 0;
           return (
             <li key={step.title} className="relative grid grid-cols-1 lg:grid-cols-2 lg:gap-24 items-center">
@@ -70,11 +61,7 @@ export const BrandProcessTimeline: React.FC = () => {
               </span>
 
               {/* Card */}
-              <div
-                className={`brand-reveal pl-16 lg:pl-0 lg:row-start-1 ${
-                  cardOnLeft ? "lg:col-start-1 lg:text-right" : "lg:col-start-2"
-                }`}
-              >
+              <div className={`svc-reveal pl-16 lg:pl-0 lg:row-start-1 ${cardOnLeft ? "lg:col-start-1 lg:text-right" : "lg:col-start-2"}`}>
                 <div className="rounded-3xl border border-[#2651B9]/30 bg-[#0C1E4E]/70 p-6 sm:p-7 transition-colors hover:border-[#FF8500]/45">
                   <span className="font-mono text-xs text-slate-500">Step 0{i + 1}</span>
                   <h3 className="mt-1 font-agency text-2xl font-extrabold text-white">{step.title}</h3>
@@ -87,13 +74,8 @@ export const BrandProcessTimeline: React.FC = () => {
               </div>
 
               {/* Oversized step number on the opposite side */}
-              <div
-                className={`hidden lg:flex lg:row-start-1 ${cardOnLeft ? "lg:col-start-2" : "lg:col-start-1 justify-end"}`}
-                aria-hidden
-              >
-                <span className="font-agency text-[120px] font-extrabold leading-none text-white/[0.04] select-none">
-                  0{i + 1}
-                </span>
+              <div className={`hidden lg:flex lg:row-start-1 ${cardOnLeft ? "lg:col-start-2" : "lg:col-start-1 justify-end"}`} aria-hidden>
+                <span className="font-agency text-[120px] font-extrabold leading-none text-white/[0.04] select-none">0{i + 1}</span>
               </div>
             </li>
           );
