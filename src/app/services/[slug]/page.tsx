@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { SERVICES } from "@/data/agencyData";
 import { AnimatedServiceIcon } from "@/components/AnimatedServiceIcon";
+import { BrandingServicePage } from "@/components/BrandingServicePage";
 import { Check, ArrowLeft, Sparkles, ShieldCheck, Award } from "lucide-react";
 import { GsapMagneticButton, GsapReviewsInfiniteSlider } from "@/components/animations";
 
@@ -173,6 +174,11 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
   };
 
   const details = serviceDetailsMap[service.id] || serviceDetailsMap["logo-design"];
+
+  // Branding gets its own full-length landing page layout
+  if (service.id === "logo-design") {
+    return <BrandingServicePage pricing={details.pricing} deliverables={details.deliverables} />;
+  }
 
   return (
     <main className="pt-28 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
