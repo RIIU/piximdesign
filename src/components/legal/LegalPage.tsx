@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { Mail, MapPin } from "lucide-react";
 import { CONTACT_EMAIL } from "@/data/studioContent";
+import { COMPANY } from "@/data/company";
 
 export interface LegalSection {
   id: string;
@@ -138,7 +139,7 @@ export const LegalPage: React.FC<LegalPageProps> = ({ title, path, intro, sectio
               </a>
               <span className="inline-flex items-center gap-2 text-slate-300">
                 <MapPin className="w-4 h-4 text-[#FFA133]" />
-                Pixim Design, Dhaka, Bangladesh
+                {COMPANY.name}, {COMPANY.address}
               </span>
             </div>
           </div>

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Mail, Send, CheckCircle2, Clock, ShieldCheck, Loader2, AlertCircle, ChevronDown } from "lucide-react";
 import { GsapMagneticButton } from "./animations";
 import { useCurrency } from "@/lib/currency";
+import { COMPANY } from "@/data/company";
 
 export interface ServiceArea {
   number: string;
@@ -406,8 +407,8 @@ export const ContactSection: React.FC<ContactFormProps> = ({ initialService = ""
                 </div>
                 <div>
                   <div className="text-xs text-slate-500 dark:text-slate-400">Direct Email</div>
-                  <a href="mailto:contact@piximdesign.com" className="font-semibold text-slate-900 dark:text-white hover:text-[#FF8500] transition-colors">
-                    contact@piximdesign.com
+                  <a href={`mailto:${COMPANY.email}`} className="font-semibold text-slate-900 dark:text-white hover:text-[#FF8500] transition-colors">
+                    {COMPANY.email}
                   </a>
                 </div>
               </div>
