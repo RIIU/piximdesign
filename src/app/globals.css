@@ -219,6 +219,15 @@ body {
   animation: pulseGlow 2.5s infinite ease-in-out;
 }
 
+/* Currency: both prices render; <html data-currency> (set before paint) shows the visitor's one */
+html:not([data-currency="BDT"]) .cur-bdt {
+  display: none !important;
+}
+
+html[data-currency="BDT"] .cur-usd {
+  display: none !important;
+}
+
 /* Gentle vertical bob for floating UI chips */
 @keyframes floatY {
   0%, 100% {

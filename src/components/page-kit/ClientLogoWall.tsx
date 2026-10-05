@@ -3,14 +3,14 @@ import { CLIENT_LOGOS } from "@/components/LogoCarousel";
 
 export const ClientLogoWall: React.FC = () => (
   <section className="relative px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto pb-6">
-    <div className="svc-reveal flex flex-col sm:flex-row sm:items-end justify-between gap-2 mb-5">
+    <div className="reveal-up flex flex-col sm:flex-row sm:items-end justify-between gap-2 mb-5">
       <p className="text-xs uppercase tracking-[0.2em] text-slate-500 font-semibold">Trusted by growing brands</p>
       <p className="text-sm text-slate-400">
         <strong className="text-white">500+</strong> businesses have trusted Pixim with their brand
       </p>
     </div>
 
-    <div className="svc-reveal grid grid-cols-2 sm:grid-cols-5 gap-px overflow-hidden rounded-3xl border border-[#2651B9]/25 bg-[#2651B9]/20">
+    <div className="reveal-up grid grid-cols-2 sm:grid-cols-5 gap-px overflow-hidden rounded-3xl border border-[#2651B9]/25 bg-[#2651B9]/20">
       {CLIENT_LOGOS.map((logo) => (
         <div
           key={logo.id}

@@ -15,9 +15,12 @@ import {
   User,
 } from "lucide-react";
 import { ServiceLandingPage } from "../ServiceLandingPage";
-import { GradientText, SampleMark, Wordmark } from "../shared";
-import { ChipIconBox, FloatingChip, Lines, MonoLabel, TILE_DARK } from "../primitives";
+import { GradientText, SampleMark, Wordmark } from "@/components/page-kit/shared";
+import { ChipIconBox, FloatingChip, Lines, MonoLabel, TILE_DARK } from "@/components/page-kit/primitives";
 import type { ServiceConfig } from "../types";
+import { SERVICE_PRICING } from "@/data/servicePricing";
+
+const PRICING = SERVICE_PRICING["motion-video"];
 
 const GROW_VIDEO = "/video/Grow-Your-Business-with-Creative-Design-_-Pixim-Design-Agency.mp4";
 const GROW_POSTER = "/video/posters/Grow-Your-Business-with-Creative-Design-_-Pixim-Design-Agency.webp";
@@ -514,16 +517,12 @@ const config: ServiceConfig = {
     description: "Pick the scope that fits your launch today. No hidden fees, ever.",
     tiers: {
       basic: {
-        usd: "$90 - $160",
-        bdt: "৳11,000 - ৳20,000",
-        desc: "Short 5-10s animated logo sting / stinger",
+        ...PRICING.basic,
         tagline: "Put your logo in motion",
         features: ["5–10s animated logo sting", "1080p & 4K exports", "Sound effect included", "2 rounds of revisions"],
       },
       standard: {
-        usd: "$200 - $380",
-        bdt: "৳25,000 - ৳48,000",
-        desc: "30s promotional commercial video / reel",
+        ...PRICING.standard,
         tagline: "A promo that converts",
         features: [
           "30s promo video or reel",
@@ -534,9 +533,7 @@ const config: ServiceConfig = {
         ],
       },
       premium: {
-        usd: "$450+",
-        bdt: "৳55,000+",
-        desc: "Full 60s explainer video with custom 3D motion",
+        ...PRICING.premium,
         tagline: "A complete brand story",
         features: [
           "60s explainer with custom 3D motion",

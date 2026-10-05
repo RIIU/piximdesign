@@ -3,9 +3,12 @@
 import React from "react";
 import { ArrowRight, Check, Clock, FileCheck, FileText, Gem, MessagesSquare } from "lucide-react";
 import { ServiceLandingPage } from "../ServiceLandingPage";
-import { GradientText, SAMPLE_MARK_PATH, SampleMark, Wordmark } from "../shared";
-import { ChipDot, ChipIconBox, FloatingChip, MonoLabel, TILE_DARK } from "../primitives";
+import { GradientText, SAMPLE_MARK_PATH, SampleMark, Wordmark } from "@/components/page-kit/shared";
+import { ChipDot, ChipIconBox, FloatingChip, MonoLabel, TILE_DARK } from "@/components/page-kit/primitives";
 import type { ServiceConfig } from "../types";
+import { SERVICE_PRICING } from "@/data/servicePricing";
+
+const PRICING = SERVICE_PRICING["logo-design"];
 
 /* ---------- Hero composition ---------- */
 
@@ -536,16 +539,12 @@ const config: ServiceConfig = {
     description: "Pick the scope that fits where your business is today. No hidden fees, ever.",
     tiers: {
       basic: {
-        usd: "$75 - $120",
-        bdt: "৳9,000 - ৳15,000",
-        desc: "Essential logo mark + basic color palette",
+        ...PRICING.basic,
         tagline: "Launch with a professional mark",
         features: ["1 initial logo concept", "Basic colour palette", "PNG, JPG & SVG exports", "2 rounds of revisions", "3–5 business day delivery"],
       },
       standard: {
-        usd: "$150 - $250",
-        bdt: "৳18,000 - ৳30,000",
-        desc: "Full brand identity kit + source files + guidelines",
+        ...PRICING.standard,
         tagline: "A complete identity system",
         features: [
           "Multiple logo concepts",
@@ -557,9 +556,7 @@ const config: ServiceConfig = {
         ],
       },
       premium: {
-        usd: "$350+",
-        bdt: "৳45,000+",
-        desc: "Complete 360° corporate rebrand + stationery + 3D mockups",
+        ...PRICING.premium,
         tagline: "A full 360° brand rollout",
         features: [
           "Everything in Standard",

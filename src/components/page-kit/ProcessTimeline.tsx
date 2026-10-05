@@ -4,10 +4,17 @@ import React, { useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
-import { SectionHeading } from "../shared";
-import type { ServiceConfig } from "../types";
+import { SectionHeading } from "./shared";
+import type { ProcessStep } from "./types";
 
-export const ServiceProcess: React.FC<{ process: ServiceConfig["process"] }> = ({ process }) => {
+interface ProcessTimelineProps {
+  eyebrow?: string;
+  title: React.ReactNode;
+  description: string;
+  steps: ProcessStep[];
+}
+
+export const ProcessTimeline: React.FC<ProcessTimelineProps> = ({ eyebrow = "How We Work", title, description, steps }) => {
   const sectionRef = useRef<HTMLElement>(null);
 
   // Orange progress line grows with scroll and lights up each step node as it is reached
@@ -38,7 +45,7 @@ export const ServiceProcess: React.FC<{ process: ServiceConfig["process"] }> = (
 
   return (
     <section ref={sectionRef} className="relative py-20 sm:py-28 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
-      <SectionHeading eyebrow="How We Work" title={process.title} desc={process.description} className="mb-14 sm:mb-20" />
+      <SectionHeading eyebrow={eyebrow} title={title} desc={description} className="mb-14 sm:mb-20" />
 
       <ol className="timeline-list relative space-y-10 lg:space-y-14">
         {/* Track + progress */}
@@ -48,7 +55,7 @@ export const ServiceProcess: React.FC<{ process: ServiceConfig["process"] }> = (
           aria-hidden
         />
 
-        {process.steps.map((step, i) => {
+        {steps.map((step, i) => {
           const cardOnLeft = i % 2 === 0;
           return (
             <li key={step.title} className="relative grid grid-cols-1 lg:grid-cols-2 lg:gap-24 items-center">
@@ -61,7 +68,7 @@ export const ServiceProcess: React.FC<{ process: ServiceConfig["process"] }> = (
               </span>
 
               {/* Card */}
-              <div className={`svc-reveal pl-16 lg:pl-0 lg:row-start-1 ${cardOnLeft ? "lg:col-start-1 lg:text-right" : "lg:col-start-2"}`}>
+              <div className={`reveal-up pl-16 lg:pl-0 lg:row-start-1 ${cardOnLeft ? "lg:col-start-1 lg:text-right" : "lg:col-start-2"}`}>
                 <div className="rounded-3xl border border-[#2651B9]/30 bg-[#0C1E4E]/70 p-6 sm:p-7 transition-colors hover:border-[#FF8500]/45">
                   <span className="font-mono text-xs text-slate-500">Step 0{i + 1}</span>
                   <h3 className="mt-1 font-agency text-2xl font-extrabold text-white">{step.title}</h3>

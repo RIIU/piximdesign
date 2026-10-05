@@ -1,22 +1,14 @@
 import type { ReactNode } from "react";
-import type { LucideIcon } from "lucide-react";
-
-export interface PackageTier {
-  usd: string;
-  bdt: string;
-  desc: string;
-  tagline: string;
-  features: string[];
-}
+import type {
+  FaqItem,
+  PackagesContent,
+  ProcessStep,
+  ShowcasePanel,
+  StatementContent,
+  WhyContent,
+} from "@/components/page-kit/types";
 
 export interface BentoTile {
-  title: string;
-  desc: string;
-  visual: ReactNode;
-}
-
-export interface ShowcasePanel {
-  id: string;
   title: string;
   desc: string;
   visual: ReactNode;
@@ -37,13 +29,7 @@ export interface ServiceConfig {
     primaryCta: string;
     visual: ReactNode;
   };
-  statement: {
-    eyebrow: string;
-    text: string;
-    /** Exact words (including punctuation) rendered in orange */
-    highlights: string[];
-    pillars: { title: string; desc: string }[];
-  };
+  statement: StatementContent;
   bento: {
     eyebrow: string;
     title: ReactNode;
@@ -61,22 +47,12 @@ export interface ServiceConfig {
   process: {
     title: ReactNode;
     description: string;
-    steps: { title: string; desc: string; output: string }[];
+    steps: ProcessStep[];
   };
-  why: {
-    title: ReactNode;
-    items: { icon: LucideIcon; title: string; desc: string }[];
-    tools: string[];
-    /** Service-specific stat tile shown under the agency stats */
-    highlight: { value: string; label: string; chips: string[] };
-  };
-  packages: {
-    title: ReactNode;
-    description: string;
-    tiers: { basic: PackageTier; standard: PackageTier; premium: PackageTier };
-  };
+  why: WhyContent;
+  packages: PackagesContent;
   reviewsTitle: string;
-  faqs: { q: string; a: string }[];
+  faqs: FaqItem[];
   cta: {
     titleLead: string;
     titleHighlight: string;

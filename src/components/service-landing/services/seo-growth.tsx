@@ -3,9 +3,12 @@
 import React from "react";
 import { ChartColumn, Check, FileSearch, Gauge, MapPin, Search, Star, Target, TrendingUp, X } from "lucide-react";
 import { ServiceLandingPage } from "../ServiceLandingPage";
-import { GradientText, SampleMark } from "../shared";
-import { ChipDot, ChipIconBox, FloatingChip, Lines, MonoLabel, Ring, Sparkline, TILE_DARK } from "../primitives";
+import { GradientText, SampleMark } from "@/components/page-kit/shared";
+import { ChipDot, ChipIconBox, FloatingChip, Lines, MonoLabel, Ring, Sparkline, TILE_DARK } from "@/components/page-kit/primitives";
 import type { ServiceConfig } from "../types";
+import { SERVICE_PRICING } from "@/data/servicePricing";
+
+const PRICING = SERVICE_PRICING["seo-growth"];
 
 const GROW_VIDEO = "/video/Grow-Your-Business-with-Creative-Design-_-Pixim-Design-Agency.mp4";
 const GROW_POSTER = "/video/posters/Grow-Your-Business-with-Creative-Design-_-Pixim-Design-Agency.webp";
@@ -502,16 +505,12 @@ const config: ServiceConfig = {
     description: "Start with a one-time setup or grow with an ongoing retainer. No hidden fees, ever.",
     tiers: {
       basic: {
-        usd: "$120 - $200",
-        bdt: "৳15,000 - ৳25,000",
-        desc: "One-time technical & on-page SEO setup",
+        ...PRICING.basic,
         tagline: "Fix the foundations",
         features: ["Full technical SEO audit", "On-page title, meta & heading fixes", "Core Web Vitals review", "Search Console setup & indexing"],
       },
       standard: {
-        usd: "$250 - $450",
-        bdt: "৳30,000 - ৳55,000",
-        desc: "Full on-page + local SEO + ranking roadmap",
+        ...PRICING.standard,
         tagline: "Rank locally & beyond",
         features: [
           "Everything in Basic",
@@ -523,9 +522,7 @@ const config: ServiceConfig = {
         ],
       },
       premium: {
-        usd: "$500+/mo",
-        bdt: "৳65,000+/mo",
-        desc: "Complete ongoing SEO retainer & organic lead gen",
+        ...PRICING.premium,
         tagline: "Compounding growth",
         features: [
           "Ongoing monthly SEO retainer",

@@ -1,7 +1,11 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Plus_Jakarta_Sans, Geist_Mono, Jersey_25 } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
+import { AppLayoutWrapper } from "@/components/AppLayoutWrapper";
+import { CURRENCY_BOOTSTRAP_SCRIPT } from "@/lib/currency-bootstrap";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { BASE_OPEN_GRAPH, OG_IMAGE, SITE_DESCRIPTION, SITE_JSON_LD, SITE_NAME, SITE_TITLE, SITE_URL } from "@/lib/seo";
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   variable: "--font-plus-jakarta",
@@ -39,15 +43,37 @@ const sherika = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Pixim Design | Digital Product & Development Studio",
-  description:
-    "Pixim Design is an elite design & development agency craft category-defining web apps, high-performance digital products, and brand systems.",
-  icons: {
-    icon: "/images/logo.webp",
+  metadataBase: new URL(SITE_URL),
+  title: { default: SITE_TITLE, template: `%s | ${SITE_NAME}` },
+  description: SITE_DESCRIPTION,
+  applicationName: SITE_NAME,
+  keywords: [
+    "branding agency Bangladesh",
+    "logo design Bangladesh",
+    "graphic design agency Dhaka",
+    "packaging design",
+    "website design Bangladesh",
+    "social media design",
+    "digital marketing agency",
+    "SEO services",
+  ],
+  authors: [{ name: SITE_NAME, url: SITE_URL }],
+  creator: SITE_NAME,
+  publisher: SITE_NAME,
+  formatDetection: { telephone: false, email: false, address: false },
+  openGraph: { ...BASE_OPEN_GRAPH, title: SITE_TITLE, description: SITE_DESCRIPTION, images: [OG_IMAGE] },
+  twitter: { card: "summary_large_image", title: SITE_TITLE, description: SITE_DESCRIPTION, images: [OG_IMAGE.url] },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1, "max-video-preview": -1 },
   },
 };
 
-import { AppLayoutWrapper } from "@/components/AppLayoutWrapper";
+export const viewport: Viewport = {
+  themeColor: "#081330",
+  colorScheme: "dark",
+};
 
 export default function RootLayout({
   children,
@@ -105,6 +131,8 @@ export default function RootLayout({
             `,
           }}
         />
+        <script dangerouslySetInnerHTML={{ __html: CURRENCY_BOOTSTRAP_SCRIPT }} />
+        <JsonLd data={SITE_JSON_LD} />
       </head>
       <body
         suppressHydrationWarning

@@ -3,16 +3,32 @@
 import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { Eyebrow, SectionTitle } from "../shared";
-import type { ServiceConfig } from "../types";
+import { Eyebrow, SectionTitle } from "./shared";
+import type { ShowcasePanel } from "./types";
 
-interface ServiceShowcaseProps {
-  showcase: ServiceConfig["showcase"];
+interface StickyShowcaseProps {
+  eyebrow: string;
+  title: React.ReactNode;
+  description: string;
+  panels: ShowcasePanel[];
+  ctaLabel: string;
   onStart: () => void;
+  secondary?: { label: string; href: string };
+  id?: string;
 }
 
 /** Sticky split: index on the left stays pinned while visual panels scroll past on the right. */
-export const ServiceShowcase: React.FC<ServiceShowcaseProps> = ({ showcase, onStart }) => {
+export const StickyShowcase: React.FC<StickyShowcaseProps> = ({
+  eyebrow,
+  title,
+  description,
+  panels,
+  ctaLabel,
+  onStart,
+  secondary = { label: "See our projects", href: "/projects" },
+  id = "showcase",
+}) => {
+  const showcase = { eyebrow, title, description, panels, ctaLabel };
   const [active, setActive] = useState(0);
   const panelRefs = useRef<(HTMLDivElement | null)[]>([]);
 
@@ -38,7 +54,7 @@ export const ServiceShowcase: React.FC<ServiceShowcaseProps> = ({ showcase, onSt
 
   return (
     <section
-      id="service-showcase"
+      id={id}
       className="relative py-20 sm:py-28"
       style={{
         backgroundImage:
@@ -49,7 +65,7 @@ export const ServiceShowcase: React.FC<ServiceShowcaseProps> = ({ showcase, onSt
         {/* Sticky intro + index */}
         <div className="lg:col-span-5">
           <div className="lg:sticky lg:top-28">
-            <div className="svc-reveal">
+            <div className="reveal-up">
               <Eyebrow>{showcase.eyebrow}</Eyebrow>
               <SectionTitle className="mt-4">{showcase.title}</SectionTitle>
               <p className="mt-4 text-slate-400 text-base sm:text-lg leading-relaxed">{showcase.description}</p>
@@ -97,7 +113,7 @@ export const ServiceShowcase: React.FC<ServiceShowcaseProps> = ({ showcase, onSt
               })}
             </ol>
 
-            <div className="svc-reveal mt-8 flex flex-wrap items-center gap-4">
+            <div className="reveal-up mt-8 flex flex-wrap items-center gap-4">
               <button
                 type="button"
                 onClick={onStart}
@@ -107,10 +123,10 @@ export const ServiceShowcase: React.FC<ServiceShowcaseProps> = ({ showcase, onSt
                 <ArrowRight className="w-4 h-4" />
               </button>
               <Link
-                href="/projects"
+                href={secondary.href}
                 className="group inline-flex items-center gap-2 text-sm font-bold text-slate-300 hover:text-white transition-colors"
               >
-                See our projects
+                {secondary.label}
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               </Link>
             </div>
@@ -126,7 +142,7 @@ export const ServiceShowcase: React.FC<ServiceShowcaseProps> = ({ showcase, onSt
                 panelRefs.current[i] = el;
               }}
               data-index={i}
-              className={`svc-reveal rounded-[28px] border bg-[#0C1E4E]/80 backdrop-blur-xl p-5 sm:p-7 transition-colors duration-500 ${
+              className={`reveal-up rounded-[28px] border bg-[#0C1E4E]/80 backdrop-blur-xl p-5 sm:p-7 transition-colors duration-500 ${
                 active === i ? "border-[#FF8500]/45" : "border-[#2651B9]/30"
               }`}
             >

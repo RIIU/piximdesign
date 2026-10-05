@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { name, email, services, budget, message } = body;
+    const { name, email, phone, services, budget, message } = body;
 
     if (!name || !email) {
       return NextResponse.json(
@@ -26,6 +26,7 @@ New Project Brief from Pixim Design Contact Form:
 --------------------------------------------------
 Client Name:    ${name}
 Client Email:   ${email}
+Phone/WhatsApp: ${phone || "Not provided"}
 Services:       ${formattedServices}
 Budget:         ${budget || "Not specified"}
 Message/Goals:  ${message || "No message provided"}
@@ -48,6 +49,7 @@ Sent to: contact@piximdesign.com
           to_email: "contact@piximdesign.com",
           name,
           email,
+          phone: phone || "Not provided",
           services: formattedServices,
           budget: budget || "Not specified",
           message: message || "No message provided",
@@ -85,6 +87,7 @@ Sent to: contact@piximdesign.com
         body: JSON.stringify({
           name,
           email,
+          phone,
           services: formattedServices,
           budget,
           message,
