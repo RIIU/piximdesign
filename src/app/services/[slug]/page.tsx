@@ -1,6 +1,10 @@
 import React from "react";
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { SERVICES } from "@/data/agencyData";
+import { startingFrom } from "@/data/servicePricing";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { ORGANIZATION_ID, absoluteUrl, breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
 import { BrandingServicePage } from "@/components/service-landing/services/branding";
 import { SocialMediaServicePage } from "@/components/service-landing/services/social-media";
 import { PackagingServicePage } from "@/components/service-landing/services/packaging";
@@ -32,24 +36,59 @@ export async function generateStaticParams() {
   }));
 }
 
-export async function generateMetadata({ params }: ServicePageProps) {
+export async function generateMetadata({ params }: ServicePageProps): Promise<Metadata> {
   const { slug } = await params;
   const service = SERVICES.find((s) => s.id === slug);
-  if (!service) return { title: "Service Not Found | Pixim Design" };
+  if (!service) return { title: "Service Not Found" };
 
-  return {
-    title: `${service.title} | Pixim Design`,
-    description: service.tagline,
-  };
+  const from = startingFrom(slug);
+  return pageMetadata({
+    title: service.title,
+    description: from ? `${service.tagline} Packages from ${from.bdt} / ${from.usd}.` : service.tagline,
+    path: `/services/${slug}`,
+  });
 }
+
+const priceNumber = (price: string) => price.replace(/[^0-9.]/g, "");
 
 export default async function ServiceDetailPage({ params }: ServicePageProps) {
   const { slug } = await params;
   const ServicePage = SERVICE_PAGES[slug];
+  const service = SERVICES.find((s) => s.id === slug);
 
-  if (!ServicePage) {
+  if (!ServicePage || !service) {
     notFound();
   }
 
-  return <ServicePage />;
+  const path = `/services/${slug}`;
+  const from = startingFrom(slug);
+  const serviceJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: service.title,
+    serviceType: service.badge,
+    description: service.tagline,
+    url: absoluteUrl(path),
+    provider: { "@id": ORGANIZATION_ID },
+    areaServed: [{ "@type": "Country", name: "Bangladesh" }, "Worldwide"],
+    ...(from && {
+      offers: [
+        { "@type": "AggregateOffer", priceCurrency: "BDT", lowPrice: priceNumber(from.bdt), offerCount: 3 },
+        { "@type": "AggregateOffer", priceCurrency: "USD", lowPrice: priceNumber(from.usd), offerCount: 3 },
+      ],
+    }),
+  };
+
+  return (
+    <>
+      <JsonLd data={serviceJsonLd} />
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "Services", path: "/services" },
+          { name: service.title, path },
+        ])}
+      />
+      <ServicePage />
+    </>
+  );
 }

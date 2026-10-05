@@ -3,6 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import { PiximLogo } from "./PiximLogo";
+import { CurrencyToggle } from "./currency/CurrencyToggle";
 import { ArrowUp, Heart } from "lucide-react";
 
 export const Footer: React.FC = () => {
@@ -188,23 +189,41 @@ export const Footer: React.FC = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500 dark:text-slate-400">
-          <div>
-            &copy; {new Date().getFullYear()} Pixim Design. All rights reserved. Built by{" "}
-            <a
-              href="https://shokhertech.vercel.app/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-[#2651B9] dark:text-[#60A5FA] hover:text-[#FF8500] dark:hover:text-[#FFA133] transition-colors font-medium hover:underline"
-            >
-              Shokher Tech Solutions
-            </a>
-            .
+        <div className="pt-8 flex flex-col lg:flex-row items-center justify-between gap-5 text-xs text-slate-500 dark:text-slate-400">
+          <div className="text-center lg:text-left space-y-1">
+            <div>
+              &copy; {new Date().getFullYear()} Pixim Design. All rights reserved. Built by{" "}
+              <a
+                href="https://shokhertech.vercel.app/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#2651B9] dark:text-[#60A5FA] hover:text-[#FF8500] dark:hover:text-[#FFA133] transition-colors font-medium hover:underline"
+              >
+                Shokher Tech Solutions
+              </a>
+              .
+            </div>
+            <div className="flex items-center justify-center lg:justify-start gap-1">
+              <span>Crafted with passion & precision</span>
+              <Heart className="w-3 h-3 text-[#FF8500] fill-[#FF8500] inline" />
+            </div>
           </div>
 
-          <div className="flex items-center gap-1">
-            <span>Crafted with passion & precision</span>
-            <Heart className="w-3 h-3 text-[#FF8500] fill-[#FF8500] inline" />
+          <nav aria-label="Legal" className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2">
+            <Link href="/privacy-policy" className="hover:text-[#FFA133] transition-colors">
+              Privacy Policy
+            </Link>
+            <Link href="/terms" className="hover:text-[#FFA133] transition-colors">
+              Terms & Conditions
+            </Link>
+            <Link href="/refund-policy" className="hover:text-[#FFA133] transition-colors">
+              Refund Policy
+            </Link>
+          </nav>
+
+          <div className="flex items-center gap-3">
+            <span>Currency</span>
+            <CurrencyToggle size="sm" />
           </div>
         </div>
       </div>

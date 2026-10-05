@@ -3,9 +3,12 @@
 import React from "react";
 import { ArrowRight, Check, MousePointer2, MousePointerClick, Rocket, ShieldCheck, ShoppingCart, SquarePen, Zap } from "lucide-react";
 import { ServiceLandingPage } from "../ServiceLandingPage";
-import { GradientText, SampleMark, Wordmark } from "../shared";
-import { BrowserFrame, ChipIconBox, FloatingChip, Lines, MonoLabel, PhoneFrame, Ring, TILE_DARK } from "../primitives";
+import { GradientText, SampleMark, Wordmark } from "@/components/page-kit/shared";
+import { BrowserFrame, ChipIconBox, FloatingChip, Lines, MonoLabel, PhoneFrame, Ring, TILE_DARK } from "@/components/page-kit/primitives";
 import type { ServiceConfig } from "../types";
+import { SERVICE_PRICING } from "@/data/servicePricing";
+
+const PRICING = SERVICE_PRICING["web-design"];
 
 const GROW_VIDEO = "/video/Grow-Your-Business-with-Creative-Design-_-Pixim-Design-Agency.mp4";
 const GROW_POSTER = "/video/posters/Grow-Your-Business-with-Creative-Design-_-Pixim-Design-Agency.webp";
@@ -475,16 +478,12 @@ const config: ServiceConfig = {
     description: "Pick the scope that fits your business today. No hidden fees, ever.",
     tiers: {
       basic: {
-        usd: "$180 - $350",
-        bdt: "৳22,000 - ৳42,000",
-        desc: "High-converting modern landing page",
+        ...PRICING.basic,
         tagline: "Launch fast",
         features: ["High-converting landing page", "Mobile-first responsive design", "Contact or lead form", "Basic on-page SEO", "2 rounds of revisions"],
       },
       standard: {
-        usd: "$450 - $800",
-        bdt: "৳55,000 - ৳98,000",
-        desc: "Full multi-page corporate website + CMS",
+        ...PRICING.standard,
         tagline: "Your complete website",
         features: [
           "Multi-page corporate website",
@@ -496,9 +495,7 @@ const config: ServiceConfig = {
         ],
       },
       premium: {
-        usd: "$1,200+",
-        bdt: "৳145,000+",
-        desc: "Custom web app / SaaS portal with dynamic database",
+        ...PRICING.premium,
         tagline: "Custom web apps",
         features: [
           "Custom web app or SaaS portal",

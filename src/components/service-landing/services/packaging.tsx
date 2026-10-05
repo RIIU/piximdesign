@@ -3,9 +3,12 @@
 import React from "react";
 import { Box, Check, Layers, Printer, ShieldCheck } from "lucide-react";
 import { ServiceLandingPage } from "../ServiceLandingPage";
-import { GradientText, SAMPLE_MARK_PATH, SampleMark, Wordmark } from "../shared";
-import { ChipDot, ChipIconBox, FloatingChip, Lines, MonoLabel, TILE_DARK } from "../primitives";
+import { GradientText, SAMPLE_MARK_PATH, SampleMark, Wordmark } from "@/components/page-kit/shared";
+import { ChipDot, ChipIconBox, FloatingChip, Lines, MonoLabel, TILE_DARK } from "@/components/page-kit/primitives";
 import type { ServiceConfig } from "../types";
+import { SERVICE_PRICING } from "@/data/servicePricing";
+
+const PRICING = SERVICE_PRICING["package-design"];
 
 const GROW_VIDEO = "/video/Grow-Your-Business-with-Creative-Design-_-Pixim-Design-Agency.mp4";
 const GROW_POSTER = "/video/posters/Grow-Your-Business-with-Creative-Design-_-Pixim-Design-Agency.webp";
@@ -511,16 +514,12 @@ const config: ServiceConfig = {
     description: "Pick the scope that fits your product range today. No hidden fees, ever.",
     tiers: {
       basic: {
-        usd: "$80 - $150",
-        bdt: "৳10,000 - ৳18,000",
-        desc: "Single product label or sticker design",
+        ...PRICING.basic,
         tagline: "One label, done right",
         features: ["1 label or sticker design", "Print-ready vector file with bleed", "CMYK colour setup", "2 rounds of revisions"],
       },
       standard: {
-        usd: "$180 - $320",
-        bdt: "৳22,000 - ৳40,000",
-        desc: "Full retail box/pouch layout + 3D mockup",
+        ...PRICING.standard,
         tagline: "A complete retail pack",
         features: [
           "Full box or pouch layout",
@@ -532,9 +531,7 @@ const config: ServiceConfig = {
         ],
       },
       premium: {
-        usd: "$400+",
-        bdt: "৳50,000+",
-        desc: "Complete product line packaging series (3+ SKUs)",
+        ...PRICING.premium,
         tagline: "A full product line",
         features: [
           "Packaging series for 3+ SKUs",

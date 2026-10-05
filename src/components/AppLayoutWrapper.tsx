@@ -46,11 +46,21 @@ export const AppLayoutWrapper: React.FC<{ children: React.ReactNode }> = ({ chil
 
         {/* Content Layer */}
         <div className="relative z-10 flex flex-col min-h-screen w-full">
+          {/* Keyboard users can jump straight past the navigation */}
+          <a
+            href="#main-content"
+            className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-[#FF8500] focus:px-5 focus:py-2.5 focus:text-sm focus:font-bold focus:text-white focus:shadow-lg"
+          >
+            Skip to main content
+          </a>
+
           {/* Persistent Sticky Navbar across all pages */}
           <Navbar onOpenContact={() => openContact()} />
 
           {/* Page Content */}
-          <main className="flex-1 w-full">{children}</main>
+          <main id="main-content" tabIndex={-1} className="flex-1 w-full focus:outline-none">
+            {children}
+          </main>
 
           {/* Supported Payment Methods Section (Directly before Footer) */}
           <PaymentMethodsSection />

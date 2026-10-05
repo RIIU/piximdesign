@@ -4,10 +4,11 @@ import React, { useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
-import { Eyebrow } from "../shared";
-import type { ServiceConfig } from "../types";
+import { Eyebrow } from "./shared";
+import type { StatementContent } from "./types";
 
-export const ServiceStatement: React.FC<{ statement: ServiceConfig["statement"] }> = ({ statement }) => {
+/** Large statement whose words fill in on scroll, followed by three numbered pillars. */
+export const ScrollStatement: React.FC<{ statement: StatementContent }> = ({ statement }) => {
   const sectionRef = useRef<HTMLElement>(null);
   const highlights = new Set(statement.highlights);
 
@@ -46,7 +47,7 @@ export const ServiceStatement: React.FC<{ statement: ServiceConfig["statement"] 
 
       <div className="mt-12 sm:mt-16 grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-10">
         {statement.pillars.map((pillar, i) => (
-          <div key={pillar.title} className="svc-reveal border-t border-white/10 pt-5">
+          <div key={pillar.title} className="reveal-up border-t border-white/10 pt-5">
             <span className="font-mono text-xs text-[#FFA133]">0{i + 1}</span>
             <h3 className="mt-2 font-agency text-xl font-extrabold text-white">{pillar.title}</h3>
             <p className="mt-1.5 text-sm text-slate-400 leading-relaxed">{pillar.desc}</p>

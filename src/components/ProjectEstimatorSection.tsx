@@ -3,13 +3,14 @@
 import React, { useState } from "react";
 import { ArrowRight, Check, DollarSign, Coins, ShieldCheck } from "lucide-react";
 import { GsapMagneticButton } from "./animations";
+import { useCurrency } from "@/lib/currency";
 
 interface ProjectEstimatorSectionProps {
   onEstimateSubmit: (serviceTitle: string, summary: string) => void;
 }
 
 export const ProjectEstimatorSection: React.FC<ProjectEstimatorSectionProps> = ({ onEstimateSubmit }) => {
-  const [currency, setCurrency] = useState<"USD" | "BDT">("USD");
+  const { currency, setCurrency } = useCurrency();
   const [selectedService, setSelectedService] = useState("logo-design");
   const [selectedTier, setSelectedTier] = useState<"basic" | "standard" | "enterprise">("standard");
 

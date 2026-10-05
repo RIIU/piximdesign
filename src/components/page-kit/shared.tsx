@@ -46,7 +46,7 @@ export const SectionHeading: React.FC<{
   align?: "center" | "left";
   className?: string;
 }> = ({ eyebrow, title, desc, align = "center", className = "" }) => (
-  <div className={`svc-reveal max-w-3xl ${align === "center" ? "mx-auto text-center" : ""} ${className}`}>
+  <div className={`reveal-up max-w-3xl ${align === "center" ? "mx-auto text-center" : ""} ${className}`}>
     <Eyebrow>{eyebrow}</Eyebrow>
     <SectionTitle className="mt-4">{title}</SectionTitle>
     {desc && <p className="mt-4 text-slate-400 text-base sm:text-lg leading-relaxed">{desc}</p>}

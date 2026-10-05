@@ -16,9 +16,12 @@ import {
   Star,
 } from "lucide-react";
 import { ServiceLandingPage } from "../ServiceLandingPage";
-import { GradientText, SampleMark, Wordmark } from "../shared";
-import { ChipDot, ChipIconBox, FloatingChip, Lines, MonoLabel, PhoneFrame, Ring, TILE_DARK } from "../primitives";
+import { GradientText, SampleMark, Wordmark } from "@/components/page-kit/shared";
+import { ChipDot, ChipIconBox, FloatingChip, Lines, MonoLabel, PhoneFrame, Ring, TILE_DARK } from "@/components/page-kit/primitives";
 import type { ServiceConfig } from "../types";
+import { SERVICE_PRICING } from "@/data/servicePricing";
+
+const PRICING = SERVICE_PRICING["social-media"];
 
 const GROW_VIDEO = "/video/Grow-Your-Business-with-Creative-Design-_-Pixim-Design-Agency.mp4";
 const GROW_POSTER = "/video/posters/Grow-Your-Business-with-Creative-Design-_-Pixim-Design-Agency.webp";
@@ -581,16 +584,12 @@ const config: ServiceConfig = {
     description: "Pick the scope that fits where your brand is today. No hidden fees, ever.",
     tiers: {
       basic: {
-        usd: "$60 - $100",
-        bdt: "৳7,500 - ৳12,000",
-        desc: "Pack of 5 promotional social media banners",
+        ...PRICING.basic,
         tagline: "Kick-start your feed",
         features: ["5 promotional post or banner designs", "Sized for Facebook & Instagram", "High-res PNG & JPG exports", "2 rounds of revisions"],
       },
       standard: {
-        usd: "$140 - $220",
-        bdt: "৳17,000 - ৳28,000",
-        desc: "Monthly campaign kit (15 posts + story templates)",
+        ...PRICING.standard,
         tagline: "A month of on-brand content",
         features: [
           "15 posts + story templates per month",
@@ -601,9 +600,7 @@ const config: ServiceConfig = {
         ],
       },
       premium: {
-        usd: "$300+",
-        bdt: "৳38,000+",
-        desc: "Complete 30-day content calendar & multi-channel ads",
+        ...PRICING.premium,
         tagline: "A full social presence",
         features: [
           "Complete 30-day content calendar",

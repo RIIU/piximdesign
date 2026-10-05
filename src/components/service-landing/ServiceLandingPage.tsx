@@ -1,62 +1,33 @@
 "use client";
 
 import React, { useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useGSAP } from "@gsap/react";
 import { useContactModal } from "@/components/AppLayoutWrapper";
 import { ReadyForLogoSection } from "@/components/ReadyForLogoSection";
 import { GsapReviewsInfiniteSlider } from "@/components/animations";
+import { ClientLogoWall } from "@/components/page-kit/ClientLogoWall";
+import { StickyShowcase } from "@/components/page-kit/StickyShowcase";
+import { ProcessTimeline } from "@/components/page-kit/ProcessTimeline";
+import { FaqSplit } from "@/components/page-kit/FaqSplit";
+import { ScrollStatement } from "@/components/page-kit/ScrollStatement";
+import { WhySplit } from "@/components/page-kit/WhySplit";
+import { PackageTiers } from "@/components/page-kit/PackageTiers";
+import { GradientText } from "@/components/page-kit/shared";
+import { useRevealAnimations } from "@/components/page-kit/useRevealAnimations";
 import { ServiceHero } from "./sections/ServiceHero";
-import { ClientLogoWall } from "./sections/ClientLogoWall";
-import { ServiceStatement } from "./sections/ServiceStatement";
 import { ServiceBento } from "./sections/ServiceBento";
-import { ServiceShowcase } from "./sections/ServiceShowcase";
-import { ServiceProcess } from "./sections/ServiceProcess";
-import { ServiceWhy } from "./sections/ServiceWhy";
-import { ServicePackages } from "./sections/ServicePackages";
-import { ServiceFaq } from "./sections/ServiceFaq";
 import type { ServiceConfig } from "./types";
 
 export const ServiceLandingPage: React.FC<{ config: ServiceConfig }> = ({ config }) => {
   const { openContact } = useContactModal();
-  const rootRef = useRef<HTMLElement>(null);
+  const rootRef = useRef<HTMLDivElement>(null);
   const { serviceName, shortName, projectLabel } = config;
 
-  // Shared entrance animations for every section on the page
-  useGSAP(
-    () => {
-      gsap.registerPlugin(ScrollTrigger);
-      const mm = gsap.matchMedia();
-      mm.add("(prefers-reduced-motion: no-preference)", () => {
-        gsap.fromTo(
-          ".svc-hero-item",
-          { opacity: 0, y: 24 },
-          { opacity: 1, y: 0, duration: 0.7, stagger: 0.08, ease: "power3.out", clearProps: "transform" }
-        );
-        gsap.utils.toArray<HTMLElement>(".svc-reveal").forEach((el) => {
-          gsap.fromTo(
-            el,
-            { opacity: 0, y: 28 },
-            {
-              opacity: 1,
-              y: 0,
-              duration: 0.7,
-              ease: "power3.out",
-              clearProps: "transform",
-              scrollTrigger: { trigger: el, start: "top 90%", toggleActions: "play none none none" },
-            }
-          );
-        });
-      });
-    },
-    { scope: rootRef }
-  );
+  useRevealAnimations(rootRef);
 
   const start = (note: string) => openContact(serviceName, note);
 
   return (
-    <main ref={rootRef} className="w-full overflow-x-clip">
+    <div ref={rootRef} className="w-full overflow-x-clip">
       {/* 1. Hero with service composition */}
       <ServiceHero shortName={shortName} hero={config.hero} onStart={() => start(`I'd like to start ${projectLabel}.`)} />
 
@@ -64,7 +35,7 @@ export const ServiceLandingPage: React.FC<{ config: ServiceConfig }> = ({ config
       <ClientLogoWall />
 
       {/* 3. Scroll-filled statement + pillars */}
-      <ServiceStatement statement={config.statement} />
+      <ScrollStatement statement={config.statement} />
 
       {/* 4. Offerings bento */}
       <ServiceBento
@@ -74,16 +45,20 @@ export const ServiceLandingPage: React.FC<{ config: ServiceConfig }> = ({ config
       />
 
       {/* 5. Sticky deliverables showcase */}
-      <ServiceShowcase showcase={config.showcase} onStart={() => start(`I'd like to get started with ${serviceName}.`)} />
+      <StickyShowcase
+        id="service-showcase"
+        {...config.showcase}
+        onStart={() => start(`I'd like to get started with ${serviceName}.`)}
+      />
 
       {/* 6. Vertical process timeline */}
-      <ServiceProcess process={config.process} />
+      <ProcessTimeline {...config.process} />
 
       {/* 7. Why Pixim + stats bento */}
-      <ServiceWhy why={config.why} />
+      <WhySplit why={config.why} />
 
       {/* 8. Packages with USD / BDT toggle */}
-      <ServicePackages
+      <PackageTiers
         packages={config.packages}
         onChoose={(name, price) => start(`I'm interested in the ${name} ${shortName} package (${price}).`)}
         onCustom={() => start(`I'd like a tailored quote for ${projectLabel}.`)}
@@ -95,8 +70,12 @@ export const ServiceLandingPage: React.FC<{ config: ServiceConfig }> = ({ config
       </section>
 
       {/* 10. Two-column FAQ */}
-      <ServiceFaq
-        shortName={shortName}
+      <FaqSplit
+        title={
+          <>
+            {shortName} Questions, <GradientText>Answered</GradientText>
+          </>
+        }
         faqs={config.faqs}
         onAsk={() => start(`I have a few questions before starting ${projectLabel}.`)}
       />
@@ -114,6 +93,6 @@ export const ServiceLandingPage: React.FC<{ config: ServiceConfig }> = ({ config
         videoSrc={config.cta.videoSrc}
         posterSrc={config.cta.posterSrc}
       />
-    </main>
+    </div>
   );
 };

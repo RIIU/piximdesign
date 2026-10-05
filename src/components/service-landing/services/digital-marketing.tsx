@@ -16,9 +16,12 @@ import {
   TrendingUp,
 } from "lucide-react";
 import { ServiceLandingPage } from "../ServiceLandingPage";
-import { GradientText, SampleMark, Wordmark } from "../shared";
-import { Bars, ChipDot, ChipIconBox, FloatingChip, Lines, MonoLabel, Sparkline, TILE_DARK } from "../primitives";
+import { GradientText, SampleMark, Wordmark } from "@/components/page-kit/shared";
+import { Bars, ChipDot, ChipIconBox, FloatingChip, Lines, MonoLabel, Sparkline, TILE_DARK } from "@/components/page-kit/primitives";
 import type { ServiceConfig } from "../types";
+import { SERVICE_PRICING } from "@/data/servicePricing";
+
+const PRICING = SERVICE_PRICING["digital-marketing"];
 
 const GROW_VIDEO = "/video/Grow-Your-Business-with-Creative-Design-_-Pixim-Design-Agency.mp4";
 const GROW_POSTER = "/video/posters/Grow-Your-Business-with-Creative-Design-_-Pixim-Design-Agency.webp";
@@ -557,16 +560,12 @@ const config: ServiceConfig = {
     description: "Monthly management plans for every stage of growth. Ad spend is paid directly to Meta or Google.",
     tiers: {
       basic: {
-        usd: "$150 - $250/mo",
-        bdt: "৳18,000 - ৳30,000/mo",
-        desc: "Single channel campaign management (Meta or Google)",
+        ...PRICING.basic,
         tagline: "Start with one channel",
         features: ["One channel: Meta or Google", "Campaign setup & targeting", "Pixel / conversion tracking", "Weekly performance report"],
       },
       standard: {
-        usd: "$350 - $600/mo",
-        bdt: "৳42,000 - ৳75,000/mo",
-        desc: "Multi-channel ad funnels + audience retargeting",
+        ...PRICING.standard,
         tagline: "Full-funnel growth",
         features: [
           "Meta + Google multi-channel funnels",
@@ -577,9 +576,7 @@ const config: ServiceConfig = {
         ],
       },
       premium: {
-        usd: "$800+/mo",
-        bdt: "৳100,000+/mo",
-        desc: "Full-scale growth marketing & scale management",
+        ...PRICING.premium,
         tagline: "Scale with confidence",
         features: [
           "Full-scale growth marketing",
