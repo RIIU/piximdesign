@@ -215,50 +215,51 @@ export const Footer: React.FC = () => {
   );
 };
 
+/** Distance (px) before the end of the page over which the brand text rises in */
+const BRAND_REVEAL_DISTANCE = 300;
+
 /** Animated giant brand text at the very bottom */
 const FooterBrandText: React.FC = () => {
-  const containerRef = React.useRef<HTMLDivElement>(null);
   const textRef = React.useRef<HTMLHeadingElement>(null);
 
+  // The footer persists across client-side navigations and page heights change (route changes,
+  // accordions), so drive the reveal from the live distance to the page bottom instead of
+  // scroll positions measured once at mount, which went stale and left the text invisible.
   React.useEffect(() => {
-    const loadGsap = async () => {
-      const gsapModule = await import("gsap");
-      const scrollModule = await import("gsap/ScrollTrigger");
-      const gsap = gsapModule.default;
-      const ScrollTrigger = scrollModule.ScrollTrigger;
-      gsap.registerPlugin(ScrollTrigger);
+    const text = textRef.current;
+    if (!text || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-      if (!textRef.current || !containerRef.current) return;
-
-      gsap.fromTo(
-        textRef.current,
-        {
-          y: 60,
-          opacity: 0,
-          scale: 0.9,
-        },
-        {
-          y: 0,
-          opacity: 1,
-          scale: 1,
-          duration: 0.4,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: "top 95%",
-            end: "top 80%",
-            scrub: 0.3,
-          },
-        }
-      );
+    let frame = 0;
+    const update = () => {
+      frame = 0;
+      const doc = document.documentElement;
+      const scrollable = doc.scrollHeight - window.innerHeight;
+      const remaining = scrollable - window.scrollY;
+      const distance = Math.min(BRAND_REVEAL_DISTANCE, scrollable);
+      const progress = distance <= 0 ? 1 : Math.min(1, Math.max(0, 1 - remaining / distance));
+      text.style.opacity = String(progress);
+      text.style.transform = `translateY(${(1 - progress) * 60}px) scale(${0.9 + progress * 0.1})`;
+    };
+    const schedule = () => {
+      if (!frame) frame = requestAnimationFrame(update);
     };
 
-    loadGsap();
+    update();
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule);
+    const resizeObserver = new ResizeObserver(schedule);
+    resizeObserver.observe(document.body);
+
+    return () => {
+      if (frame) cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", schedule);
+      window.removeEventListener("resize", schedule);
+      resizeObserver.disconnect();
+    };
   }, []);
 
   return (
     <div
-      ref={containerRef}
       className="relative w-full mt-12 overflow-hidden select-none pointer-events-none"
       aria-hidden="true"
     >
@@ -269,7 +270,7 @@ const FooterBrandText: React.FC = () => {
 
       <h2
         ref={textRef}
-        className="relative text-center font-[family-name:var(--font-jersey-25)] uppercase leading-[0.69em] tracking-[0.01em] whitespace-nowrap pb-0"
+        className="relative text-center font-[family-name:var(--font-jersey-25)] uppercase leading-[0.69em] tracking-[0.01em] whitespace-nowrap pb-0 transition-[opacity,transform] duration-300 ease-out will-change-transform"
         style={{
           fontSize: "clamp(3rem, 12vw, 14rem)",
           background:
