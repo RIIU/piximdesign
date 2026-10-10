@@ -143,8 +143,8 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({ onOpenContact })
             <div className="pipeline-active-beam absolute inset-0 bg-gradient-to-r from-[#FF8500] via-[#38BDF8] to-[#34D399] rounded-full shadow-[0_0_15px_rgba(255,133,0,0.7)]" />
           </div>
 
-          {/* 2. 4 Process Step Columns */}
-          <div className="pipeline-nodes-row grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-6 relative z-10">
+          {/* 2. 4 Process Step Columns - 2 columns on mobile */}
+          <div className="pipeline-nodes-row grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-6 relative z-10">
             {PROCESS_STEPS.map((step, idx) => {
               const isSelected = activeStep === idx;
 
@@ -155,45 +155,47 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({ onOpenContact })
                   className="pipeline-node-col group flex flex-col items-center text-center cursor-pointer transition-transform duration-300"
                 >
                   {/* Top Stepper Orb (Sits cleanly on the rail, no overlapping) */}
-                  <div className="relative mb-6 sm:mb-8 flex items-center justify-center">
+                  <div className="relative mb-3 sm:mb-8 flex items-center justify-center">
                     {/* Glowing pulse ring on active/hover */}
                     <div
-                      className={`absolute -inset-3 rounded-full border border-[#FF8500]/50 transition-all duration-300 pointer-events-none ${
-                        isSelected ? "scale-125 opacity-100" : "scale-100 opacity-0 group-hover:opacity-60"
+                      className={`absolute -inset-2 sm:-inset-3 rounded-full border border-[#FF8500]/50 transition-all duration-300 pointer-events-none ${
+                        isSelected ? "scale-115 sm:scale-125 opacity-100" : "scale-100 opacity-0 group-hover:opacity-60"
                       }`}
                     />
 
                     {/* Step Number Tag Floating on Top */}
-                    <span className="absolute -top-3 px-2 py-0.5 rounded-full bg-[#FF8500] text-[#081330] font-mono text-[10px] font-extrabold shadow-md z-20">
+                    <span className="absolute -top-2.5 sm:-top-3 px-1.5 sm:px-2 py-0.5 rounded-full bg-[#FF8500] text-[#081330] font-mono text-[8px] sm:text-[10px] font-extrabold shadow-md z-20">
                       STEP {step.step}
                     </span>
 
                     {/* Circular Stepper Orb */}
                     <div
-                      className={`w-24 h-24 rounded-full bg-[#0C1E4E] border-2 transition-all duration-300 flex items-center justify-center shadow-xl ${
+                      className={`w-16 h-16 sm:w-20 md:w-24 h-16 sm:h-20 md:h-24 rounded-full bg-[#0C1E4E] border-2 transition-all duration-300 flex items-center justify-center shadow-xl ${
                         isSelected
-                          ? "border-[#FF8500] shadow-[0_0_30px_rgba(255,133,0,0.5)] scale-105"
+                          ? "border-[#FF8500] shadow-[0_0_25px_rgba(255,133,0,0.5)] scale-105"
                           : "border-white/20 group-hover:border-[#FF8500]/60"
                       }`}
                     >
-                      {stepGlyphs[idx]}
+                      <div className="scale-75 sm:scale-90 md:scale-100 flex items-center justify-center">
+                        {stepGlyphs[idx]}
+                      </div>
                     </div>
                   </div>
 
                   {/* Text Content - Completely Open, No Box Boundaries */}
-                  <div className="max-w-[240px] flex flex-col items-center">
+                  <div className="max-w-full sm:max-w-[240px] flex flex-col items-center">
                     {/* Timeframe pill */}
-                    <span className="text-[11px] font-mono font-bold text-[#FFA133] uppercase tracking-wider mb-1.5">
+                    <span className="text-[9px] sm:text-[11px] font-mono font-bold text-[#FFA133] uppercase tracking-wider mb-0.5 sm:mb-1.5">
                       {step.timeframe}
                     </span>
 
                     {/* Title */}
-                    <h3 className="font-agency text-white text-xl sm:text-2xl font-bold mb-2 group-hover:text-[#FFA229] transition-colors">
+                    <h3 className="font-agency text-white text-sm sm:text-xl md:text-2xl font-bold mb-1 sm:mb-2 group-hover:text-[#FFA229] transition-colors">
                       {step.title}
                     </h3>
 
                     {/* Clean Descriptive Context */}
-                    <p className="text-slate-400 text-xs sm:text-sm leading-relaxed font-normal">
+                    <p className="text-slate-400 text-[11px] sm:text-xs md:text-sm leading-relaxed font-normal line-clamp-3 sm:line-clamp-none">
                       {step.description}
                     </p>
                   </div>

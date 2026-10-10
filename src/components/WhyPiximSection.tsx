@@ -145,29 +145,29 @@ export const WhyPiximSection: React.FC<WhyPiximSectionProps> = ({ onOpenContact 
           </p>
         </div>
 
-        {/* 3 Pillars Grid - Pure, Clean & Minimal matching uploaded image */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 lg:gap-10">
+        {/* 3 Pillars Grid - 2 columns on mobile for compact vertical footprint */}
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-6 lg:gap-10">
           {/* =========================================
               CARD 1: STRATEGY
              ========================================= */}
-          <div className="wgiep-card flex flex-col group">
+          <div className="wgiep-card col-span-1 flex flex-col group">
             <div
               ref={card1Ref}
-              className="relative aspect-[4/3] w-full rounded-2xl sm:rounded-3xl bg-[#0C1E4E]/70 border border-white/10 group-hover:border-[#FF8500]/40 backdrop-blur-xl shadow-xl transition-all duration-300 flex items-center justify-center overflow-hidden"
+              className="relative aspect-[4/3] w-full rounded-xl sm:rounded-3xl bg-[#0C1E4E]/70 border border-white/10 group-hover:border-[#FF8500]/40 backdrop-blur-xl shadow-xl transition-all duration-300 flex items-center justify-center overflow-hidden"
             >
               {/* Exactly 3 Minimal Dots like the image */}
-              <div className="flex items-center gap-5 sm:gap-6">
-                <span className="ref-dot w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-[#FF8500] opacity-90" />
-                <span className="ref-dot w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-[#FF8500] opacity-55" />
-                <span className="ref-dot w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-[#FF8500] opacity-25" />
+              <div className="flex items-center gap-2 sm:gap-6">
+                <span className="ref-dot w-2.5 h-2.5 sm:w-5 sm:h-5 rounded-full bg-[#FF8500] opacity-90" />
+                <span className="ref-dot w-2.5 h-2.5 sm:w-5 sm:h-5 rounded-full bg-[#FF8500] opacity-55" />
+                <span className="ref-dot w-2.5 h-2.5 sm:w-5 sm:h-5 rounded-full bg-[#FF8500] opacity-25" />
               </div>
             </div>
 
-            <div className="mt-5 sm:mt-6 px-1">
-              <h3 className="font-agency text-2xl sm:text-3xl font-bold text-white tracking-tight">
+            <div className="mt-3 sm:mt-6 px-1">
+              <h3 className="font-agency text-base sm:text-2xl md:text-3xl font-bold text-white tracking-tight">
                 Strategy
               </h3>
-              <p className="mt-2.5 text-xs sm:text-sm text-slate-300 leading-relaxed font-normal">
+              <p className="mt-1 sm:mt-2.5 text-[11px] sm:text-sm text-slate-300 leading-relaxed font-normal line-clamp-3 sm:line-clamp-none">
                 Before we open any tool, we understand your product, audience, and positioning. Design without strategy is just decoration.
               </p>
             </div>
@@ -176,23 +176,23 @@ export const WhyPiximSection: React.FC<WhyPiximSectionProps> = ({ onOpenContact 
           {/* =========================================
               CARD 2: CRAFT
              ========================================= */}
-          <div className="wgiep-card flex flex-col group">
+          <div className="wgiep-card col-span-1 flex flex-col group">
             <div
               ref={card2Ref}
-              className="relative aspect-[4/3] w-full rounded-2xl sm:rounded-3xl bg-[#0C1E4E]/70 border border-white/10 group-hover:border-[#FF8500]/40 backdrop-blur-xl shadow-xl transition-all duration-300 flex items-center justify-center overflow-hidden"
+              className="relative aspect-[4/3] w-full rounded-xl sm:rounded-3xl bg-[#0C1E4E]/70 border border-white/10 group-hover:border-[#FF8500]/40 backdrop-blur-xl shadow-xl transition-all duration-300 flex items-center justify-center overflow-hidden"
             >
               {/* Concentric Circle Outline */}
-              <div className="ref-circle absolute w-28 h-28 sm:w-36 sm:h-36 rounded-full border border-[#FF8500]/45" />
+              <div className="ref-circle absolute w-14 h-14 sm:w-36 sm:h-36 rounded-full border border-[#FF8500]/45" />
 
               {/* Solid Center Dot */}
-              <div className="ref-center-dot relative z-10 w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-[#FF8500]" />
+              <div className="ref-center-dot relative z-10 w-2.5 h-2.5 sm:w-5 sm:h-5 rounded-full bg-[#FF8500]" />
             </div>
 
-            <div className="mt-5 sm:mt-6 px-1">
-              <h3 className="font-agency text-2xl sm:text-3xl font-bold text-white tracking-tight">
+            <div className="mt-3 sm:mt-6 px-1">
+              <h3 className="font-agency text-base sm:text-2xl md:text-3xl font-bold text-white tracking-tight">
                 Craft
               </h3>
-              <p className="mt-2.5 text-xs sm:text-sm text-slate-300 leading-relaxed font-normal">
+              <p className="mt-1 sm:mt-2.5 text-[11px] sm:text-sm text-slate-300 leading-relaxed font-normal line-clamp-3 sm:line-clamp-none">
                 Every frame, every letterform, every transition is intentional. We don&apos;t ship work we wouldn&apos;t put our own name on.
               </p>
             </div>
@@ -201,23 +201,23 @@ export const WhyPiximSection: React.FC<WhyPiximSectionProps> = ({ onOpenContact 
           {/* =========================================
               CARD 3: CONVERSION
              ========================================= */}
-          <div className="wgiep-card flex flex-col group">
+          <div className="wgiep-card col-span-2 md:col-span-1 flex flex-col group">
             <div
               ref={card3Ref}
-              className="relative aspect-[4/3] w-full rounded-2xl sm:rounded-3xl bg-[#0C1E4E]/70 border border-white/10 group-hover:border-[#FF8500]/40 backdrop-blur-xl shadow-xl transition-all duration-300 flex items-center justify-center overflow-hidden"
+              className="relative aspect-[21/9] md:aspect-[4/3] w-full rounded-xl sm:rounded-3xl bg-[#0C1E4E]/70 border border-white/10 group-hover:border-[#FF8500]/40 backdrop-blur-xl shadow-xl transition-all duration-300 flex items-center justify-center overflow-hidden"
             >
               {/* Rounded Bar + Triangle */}
-              <div className="flex items-end gap-3 sm:gap-4 h-20 sm:h-24 justify-center">
-                <div className="ref-bar w-4 sm:w-5 h-14 sm:h-16 rounded-md bg-[#FF8500]" />
-                <div className="ref-triangle w-0 h-0 mb-0.5 border-l-[11px] sm:border-l-[13px] border-l-transparent border-r-[11px] sm:border-r-[13px] border-r-transparent border-b-[20px] sm:border-b-[24px] border-b-[#FF8500]" />
+              <div className="flex items-end gap-2.5 sm:gap-4 h-12 sm:h-24 justify-center">
+                <div className="ref-bar w-3.5 sm:w-5 h-8 sm:h-16 rounded-md bg-[#FF8500]" />
+                <div className="ref-triangle w-0 h-0 mb-0.5 border-l-[8px] sm:border-l-[13px] border-l-transparent border-r-[8px] sm:border-r-[13px] border-r-transparent border-b-[16px] sm:border-b-[24px] border-b-[#FF8500]" />
               </div>
             </div>
 
-            <div className="mt-5 sm:mt-6 px-1">
-              <h3 className="font-agency text-2xl sm:text-3xl font-bold text-white tracking-tight">
+            <div className="mt-3 sm:mt-6 px-1 text-center md:text-left">
+              <h3 className="font-agency text-base sm:text-2xl md:text-3xl font-bold text-white tracking-tight">
                 Conversion
               </h3>
-              <p className="mt-2.5 text-xs sm:text-sm text-slate-300 leading-relaxed font-normal">
+              <p className="mt-1 sm:mt-2.5 text-[11px] sm:text-sm text-slate-300 leading-relaxed font-normal max-w-md mx-auto md:mx-0">
                 By the time a viewer finishes watching or reading, they&apos;re already leaning toward a call. That&apos;s the ultimate metric.
               </p>
             </div>

@@ -120,8 +120,8 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onSelectServic
         </div>
       </div>
 
-      {/* Pixxen-Inspired Bento Grid */}
-      <div ref={gridRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+      {/* Pixxen-Inspired Bento Grid - 2 columns on mobile to keep vertical height compact */}
+      <div ref={gridRef} className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6 lg:gap-8">
         {filteredServices.map((service) => {
           const isCardHovered = hoveredId === service.id;
 
@@ -132,43 +132,43 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onSelectServic
               prefetch={true}
               onMouseEnter={() => setHoveredId(service.id)}
               onMouseLeave={() => setHoveredId(null)}
-              className="pixxen-service-card group flex flex-col justify-between p-7 sm:p-8 cursor-pointer"
+              className="pixxen-service-card group flex flex-col justify-between p-3.5 sm:p-7 md:p-8 cursor-pointer rounded-2xl sm:rounded-[28px]"
             >
               {/* Top Row: Prominent Animated Icon & Badge/Number */}
               <div className="relative z-10">
-                <div className="flex items-start justify-between mb-6">
+                <div className="flex items-start justify-between mb-3 sm:mb-6">
                   {/* Pixxen-Style Prominent Animated Lottie Icon */}
-                  <div className="p-1 rounded-2xl bg-[#081330]/70 border border-[#2651B9]/25 group-hover:border-[#FF8500]/40 group-hover:bg-[#FF8500]/10 transition-all duration-300">
+                  <div className="p-1 sm:p-1.5 rounded-xl sm:rounded-2xl bg-[#081330]/70 border border-[#2651B9]/25 group-hover:border-[#FF8500]/40 group-hover:bg-[#FF8500]/10 transition-all duration-300">
                     <PixxenLottieIcon
                       type={service.id}
-                      size={68}
+                      className="w-9 h-9 sm:w-16 sm:h-16"
                       isHovered={isCardHovered}
                     />
                   </div>
 
                   {/* Pill Badge & Number */}
-                  <div className="flex items-center gap-2">
-                    <span className="text-xs px-3 py-1 rounded-full bg-[#081330]/80 text-slate-300 border border-[#2651B9]/30 font-mono">
+                  <div className="flex items-center gap-1.5 sm:gap-2">
+                    <span className="hidden xs:inline-block text-[10px] sm:text-xs px-2 sm:px-3 py-0.5 sm:py-1 rounded-full bg-[#081330]/80 text-slate-300 border border-[#2651B9]/30 font-mono">
                       {service.badge}
                     </span>
-                    <span className="text-sm font-bold font-mono text-slate-500 group-hover:text-[#FFA133] transition-colors">
+                    <span className="text-xs sm:text-sm font-bold font-mono text-slate-500 group-hover:text-[#FFA133] transition-colors">
                       {service.number}
                     </span>
                   </div>
                 </div>
 
                 {/* Service Title */}
-                <h3 className="font-agency text-lg sm:text-xl font-extrabold text-white group-hover:text-[#FFA133] transition-colors tracking-tight">
+                <h3 className="font-agency text-sm sm:text-lg md:text-xl font-extrabold text-white group-hover:text-[#FFA133] transition-colors tracking-tight line-clamp-2">
                   {service.title}
                 </h3>
 
                 {/* Tagline */}
-                <p className="mt-2.5 text-sm sm:text-base text-slate-400 leading-relaxed group-hover:text-slate-300 transition-colors">
+                <p className="mt-1 sm:mt-2.5 text-[11px] sm:text-sm md:text-base text-slate-400 leading-relaxed group-hover:text-slate-300 transition-colors line-clamp-2 sm:line-clamp-none">
                   {service.tagline}
                 </p>
 
                 {/* Sub-services / Core Features from specification */}
-                <div className="mt-4 pt-3 border-t border-[#2651B9]/15 flex flex-wrap gap-1.5">
+                <div className="mt-2.5 sm:mt-4 pt-2.5 sm:pt-3 border-t border-[#2651B9]/15 hidden sm:flex flex-wrap gap-1.5">
                   {service.features.map((feat) => (
                     <span
                       key={feat}
@@ -181,13 +181,13 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onSelectServic
               </div>
 
               {/* Bottom Row: Pixxen-Style Slide-Arrow Action Button */}
-              <div className="relative z-10 mt-8 pt-5 border-t border-[#2651B9]/25 flex items-center justify-between">
-                <span className="text-xs sm:text-sm font-bold text-slate-300 group-hover:text-white transition-colors">
+              <div className="relative z-10 mt-4 sm:mt-8 pt-3 sm:pt-5 border-t border-[#2651B9]/25 flex items-center justify-between">
+                <span className="text-[11px] sm:text-xs md:text-sm font-bold text-slate-300 group-hover:text-white transition-colors">
                   Read More
                 </span>
 
-                <div className="w-10 h-10 rounded-full bg-[#081330] border border-[#2651B9]/30 group-hover:bg-[#FF8500] group-hover:border-[#FF8500] text-white flex items-center justify-center transition-all duration-300 shadow-sm overflow-hidden shrink-0">
-                  <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+                <div className="w-7 h-7 sm:w-10 sm:h-10 rounded-full bg-[#081330] border border-[#2651B9]/30 group-hover:bg-[#FF8500] group-hover:border-[#FF8500] text-white flex items-center justify-center transition-all duration-300 shadow-sm overflow-hidden shrink-0">
+                  <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 transition-transform duration-300 group-hover:translate-x-1" />
                 </div>
               </div>
             </Link>

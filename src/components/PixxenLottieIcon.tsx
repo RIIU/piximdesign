@@ -48,7 +48,7 @@ const LOTTIE_MAP: Record<string, string> = {
 
 export const PixxenLottieIcon: React.FC<PixxenLottieIconProps> = ({
   type,
-  size = 72,
+  size,
   className = "",
   isHovered = false,
 }) => {
@@ -156,8 +156,8 @@ export const PixxenLottieIcon: React.FC<PixxenLottieIconProps> = ({
       ref={containerRef}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      className={`relative flex items-center justify-center select-none pointer-events-auto transition-transform duration-300 group-hover:scale-105 ${className}`}
-      style={{ width: size, height: size }}
+      className={`relative flex items-center justify-center select-none pointer-events-auto transition-transform duration-300 group-hover:scale-105 [&>svg]:w-full [&>svg]:h-full ${!size && !className.includes("w-") ? "w-16 h-16" : ""} ${className}`}
+      style={size ? { width: size, height: size } : undefined}
       aria-hidden="true"
     />
   );

@@ -82,44 +82,46 @@ export const BrandStoriesSection: React.FC<BrandStoriesSectionProps> = ({ onOpen
             </div>
           </div>
 
-          {/* Right Column: Scrolling Case Studies Image Cards (Scrolls past naturally) */}
+          {/* Right Column: Scrolling Case Studies Image Cards (2-col grid on mobile) */}
           <div
             ref={rightColRef}
-            className="steps-right w-full lg:w-[58%] xl:w-[60%] flex flex-col gap-10 sm:gap-14 relative z-10"
+            className="steps-right w-full lg:w-[58%] xl:w-[60%] grid grid-cols-2 lg:flex lg:flex-col gap-3 sm:gap-6 lg:gap-14 relative z-10"
           >
-            {CASE_STUDIES.map((study) => (
+            {CASE_STUDIES.map((study, idx) => {
+              const isLast = idx === CASE_STUDIES.length - 1;
+              return (
               <div
                 key={study.id}
                 onClick={() => setActiveCaseStudy(study)}
-                className="step-content portfolio-card cursor-pointer group w-full"
+                className={`step-content portfolio-card cursor-pointer group w-full ${isLast ? "col-span-2 lg:col-span-1" : "col-span-1"}`}
               >
-                <div className="portfolio-work-item relative rounded-3xl overflow-hidden border border-blue-400/20 hover:border-[#FF8500]/60 transition-all duration-500 shadow-2xl bg-[#0C1E4E]">
+                <div className="portfolio-work-item relative rounded-2xl sm:rounded-3xl overflow-hidden border border-blue-400/20 hover:border-[#FF8500]/60 transition-all duration-500 shadow-2xl bg-[#0C1E4E]">
                   {/* Top Badge: Number and Category */}
-                  <div className="absolute top-5 left-5 right-5 z-30 flex items-center justify-between pointer-events-none">
-                    <span className="font-mono text-xs font-black tracking-widest text-[#FFA133] px-3.5 py-1.5 rounded-full bg-[#081330]/85 backdrop-blur-md border border-[#FF8500]/30 shadow-lg">
+                  <div className="absolute top-2.5 left-2.5 right-2.5 sm:top-5 sm:left-5 sm:right-5 z-30 flex items-center justify-between pointer-events-none">
+                    <span className="font-mono text-[9px] sm:text-xs font-black tracking-widest text-[#FFA133] px-2 sm:px-3.5 py-0.5 sm:py-1.5 rounded-full bg-[#081330]/85 backdrop-blur-md border border-[#FF8500]/30 shadow-lg">
                       {study.number} / 05
                     </span>
-                    <span className="text-xs font-semibold text-slate-200 px-3.5 py-1.5 rounded-full bg-[#081330]/85 backdrop-blur-md border border-white/15 shadow-lg">
+                    <span className="text-[9px] sm:text-xs font-semibold text-slate-200 px-2 sm:px-3.5 py-0.5 sm:py-1.5 rounded-full bg-[#081330]/85 backdrop-blur-md border border-white/15 shadow-lg">
                       {study.category}
                     </span>
                   </div>
 
                   {/* High-Resolution Mockup Image */}
-                  <div className="relative w-full aspect-[736/491] overflow-hidden bg-slate-900">
+                  <div className="relative w-full aspect-[4/3] sm:aspect-[736/491] overflow-hidden bg-slate-900">
                     <Image
                       src={study.image}
                       alt={study.title}
                       fill
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 736px, 736px"
+                      sizes="(max-width: 768px) 50vw, (max-width: 1200px) 736px, 736px"
                       className="object-cover w-full h-full transition-transform duration-700 ease-out group-hover:scale-105"
                     />
                   </div>
 
                   {/* Backdrop Blur Overlay on Hover - only bottom half */}
-                  <div className="work-item-overlay absolute inset-x-0 bottom-0 h-[56%] pointer-events-none z-10 rounded-b-3xl" />
+                  <div className="work-item-overlay absolute inset-x-0 bottom-0 h-[56%] pointer-events-none z-10 rounded-b-2xl sm:rounded-b-3xl" />
 
-                  {/* Hover Information Box with 3 Metric Pills + View Details */}
-                  <div className="all-portfolio-info absolute inset-x-0 bottom-0 p-5 sm:p-7 xl:p-8 z-20 flex flex-col justify-end">
+                  {/* Hover Information Box with 3 Metric Pills + View Details (desktop/tablet only) */}
+                  <div className="all-portfolio-info absolute inset-x-0 bottom-0 p-5 sm:p-7 xl:p-8 z-20 hidden sm:flex flex-col justify-end">
                     {/* Top Stats Row: 3 metric highlight boxes */}
                     <div className="grid grid-cols-3 gap-2.5 sm:gap-3.5 mb-5">
                       {/* Box 1 */}
@@ -187,17 +189,18 @@ export const BrandStoriesSection: React.FC<BrandStoriesSectionProps> = ({ onOpen
                   </div>
                 </div>
 
-                {/* Mobile / Fallback text underneath image (always readable on touch screens) */}
-                <div className="lg:hidden mt-3 px-2 text-left">
-                  <h3 className="text-white text-lg font-bold">
+                {/* Mobile text underneath image (always readable on touch screens) */}
+                <div className="lg:hidden mt-2 px-1 text-left">
+                  <h3 className="text-white text-xs sm:text-base font-bold line-clamp-1">
                     {study.title}
                   </h3>
-                  <p className="text-[#A7BDB5] text-xs sm:text-sm mt-1">
+                  <p className="text-[#A7BDB5] text-[10px] sm:text-xs mt-0.5 line-clamp-1">
                     {study.tagline}
                   </p>
                 </div>
               </div>
-            ))}
+            );
+          })}
           </div>
 
         </div>
