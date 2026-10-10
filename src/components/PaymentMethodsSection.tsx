@@ -9,7 +9,7 @@ interface PaymentItem {
   badge: React.ReactNode;
 }
 
-export const PaymentMethodsSection: React.FC = () => {
+export const PaymentMethodsSection: React.FC<{ embedded?: boolean }> = ({ embedded = false }) => {
   // Row 1: Exactly 11 items
   const row1: PaymentItem[] = [
     {
@@ -272,6 +272,79 @@ export const PaymentMethodsSection: React.FC = () => {
       ),
     },
   ];
+
+  if (embedded) {
+    return (
+      <div
+        aria-label="Supported Payment Methods"
+        className="w-full py-5 bg-[#030919] border-y border-[#2651B9]/25 transition-colors select-none"
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="rounded-2xl p-4 sm:p-5 bg-[#071333]/90 border border-[#2651B9]/30 shadow-md backdrop-blur-md">
+            <div className="flex flex-col lg:flex-row items-center justify-between gap-4">
+              {/* Left Column: Pay With */}
+              <div className="flex lg:flex-col items-center lg:items-center justify-center gap-1 flex-shrink-0 lg:pr-5 lg:border-r border-[#2651B9]/30">
+                <span className="text-sm font-bold text-[#FFA133] tracking-tight whitespace-nowrap">
+                  Pay With
+                </span>
+                <span className="hidden lg:inline text-[10px] font-mono text-slate-400 whitespace-nowrap">
+                  Methods
+                </span>
+              </div>
+
+              {/* Middle: Strictly 2-Line Perfectly Aligned Grid */}
+              <div className="w-full lg:w-auto overflow-x-auto scrollbar-none py-1 flex justify-start lg:justify-center">
+                <div className="min-w-[700px] sm:min-w-[760px] lg:min-w-0 flex flex-col gap-2">
+                  <div className="grid grid-cols-11 gap-1.5 sm:gap-2">
+                    {row1.map((pm) => (
+                      <div
+                        key={pm.id}
+                        title={pm.name}
+                        className="w-[58px] sm:w-[64px] md:w-[68px] h-[34px] sm:h-[38px] flex items-center justify-center rounded-lg bg-white border border-slate-200/90 shadow-[0_1px_2px_rgba(0,0,0,0.04)] hover:shadow-md hover:border-[#FF8500]/60 hover:-translate-y-0.5 transition-all duration-150 cursor-pointer select-none"
+                      >
+                        {pm.badge}
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="grid grid-cols-11 gap-1.5 sm:gap-2">
+                    {row2.map((pm) => (
+                      <div
+                        key={pm.id}
+                        title={pm.name}
+                        className="w-[58px] sm:w-[64px] md:w-[68px] h-[34px] sm:h-[38px] flex items-center justify-center rounded-lg bg-white border border-slate-200/90 shadow-[0_1px_2px_rgba(0,0,0,0.04)] hover:shadow-md hover:border-[#FF8500]/60 hover:-translate-y-0.5 transition-all duration-150 cursor-pointer select-none"
+                      >
+                        {pm.badge}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Right Column: Verified By SSLCOMMERZ */}
+              <div className="flex lg:flex-col items-center justify-center gap-1.5 flex-shrink-0 lg:pl-5 lg:border-l border-[#2651B9]/30">
+                <div className="text-center">
+                  <div className="text-[9px] uppercase font-mono font-semibold tracking-wider text-slate-400">
+                    Verified By
+                  </div>
+                  <div className="mt-1 flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-[#013571] text-white shadow-xs hover:opacity-95 transition-opacity">
+                    <Lock className="w-2.5 h-2.5 text-[#FF8500]" />
+                    <span className="font-extrabold tracking-wider text-[10px] font-sans">
+                      SSLCOMMERZ
+                    </span>
+                  </div>
+                </div>
+                <div className="hidden sm:flex items-center gap-1 text-[9px] text-emerald-400 font-medium">
+                  <ShieldCheck className="w-3 h-3" />
+                  <span>256-bit Secure</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <section

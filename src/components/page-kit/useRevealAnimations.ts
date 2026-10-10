@@ -15,11 +15,14 @@ export function useRevealAnimations(scope: RefObject<HTMLElement | null>) {
       gsap.registerPlugin(ScrollTrigger);
       const mm = gsap.matchMedia();
       mm.add("(prefers-reduced-motion: no-preference)", () => {
-        gsap.fromTo(
-          ".hero-reveal",
-          { opacity: 0, y: 24 },
-          { opacity: 1, y: 0, duration: 0.7, stagger: 0.08, ease: "power3.out", clearProps: "transform" }
-        );
+        const heroEls = scope.current?.querySelectorAll(".hero-reveal");
+        if (heroEls && heroEls.length > 0) {
+          gsap.fromTo(
+            heroEls,
+            { opacity: 0, y: 24 },
+            { opacity: 1, y: 0, duration: 0.7, stagger: 0.08, ease: "power3.out", clearProps: "transform" }
+          );
+        }
         gsap.utils.toArray<HTMLElement>(".reveal-up").forEach((el) => {
           gsap.fromTo(
             el,

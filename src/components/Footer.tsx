@@ -5,278 +5,304 @@ import Link from "next/link";
 import { PiximLogo } from "./PiximLogo";
 import { CurrencyToggle } from "./currency/CurrencyToggle";
 import { SocialIcon } from "./SocialIcon";
-import { COMPANY, phoneUrl, whatsappUrl } from "@/data/company";
-import { ArrowUp, Heart } from "lucide-react";
+import { COMPANY, phoneUrl, whatsappUrl, type SocialLink } from "@/data/company";
+import { PaymentMethodsSection } from "./PaymentMethodsSection";
+import { useContactModal } from "./AppLayoutWrapper";
+import { ArrowRight, Phone, Mail, MapPin, Clock, Download, ArrowUp } from "lucide-react";
+
+const ALL_SOCIALS: SocialLink[] = [
+  { network: "facebook", label: "Facebook", url: "https://facebook.com/piximdesign" },
+  { network: "instagram", label: "Instagram", url: "https://instagram.com/piximdesign" },
+  { network: "youtube", label: "YouTube", url: "https://youtube.com/@piximdesign" },
+  { network: "behance", label: "Behance", url: "https://behance.net/sabbirbd" },
+  { network: "linkedin", label: "LinkedIn", url: "https://linkedin.com/company/piximdesign" },
+  { network: "x", label: "X (Twitter)", url: "https://twitter.com/piximdesign" },
+];
 
 export const Footer: React.FC = () => {
+  const { openContact } = useContactModal();
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
     <footer
-      className="relative bg-white dark:bg-gradient-to-b dark:from-[#081330] dark:to-[#050D21] border-t border-[#2651B9]/20 dark:border-blue-500/20 pt-16 pb-12 overflow-hidden shadow-[0_-4px_20px_-2px_rgba(15,23,42,0.04)] dark:shadow-[0_-4px_20px_-2px_rgba(8,19,48,0.5)] transition-colors duration-300"
+      className="relative w-full bg-[#050D24] text-white border-t border-[#2651B9]/25 select-none overflow-hidden transition-colors duration-300"
     >
-      {/* Background glow */}
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-48 bg-gradient-to-t from-[#2651B9]/20 via-[#FF8500]/12 to-transparent blur-3xl pointer-events-none" />
+      {/* Background ambient lighting matching Pixim branding */}
+      <div
+        className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-6xl h-80 pointer-events-none opacity-30 blur-3xl"
+        style={{
+          background:
+            "radial-gradient(ellipse at center top, rgba(38, 81, 185, 0.45) 0%, rgba(255, 133, 0, 0.12) 50%, transparent 75%)",
+        }}
+      />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 pb-12 border-b border-slate-200 dark:border-slate-800">
-          {/* Brand Col */}
-          <div className="md:col-span-5 flex flex-col justify-between">
+      {/* ================================================================
+          BAND 1: Main Footer Navigation & Studio Profile (1:1 from ref)
+         ================================================================ */}
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 md:py-20">
+        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-12 gap-8 sm:gap-10 lg:gap-8 xl:gap-12">
+          
+          {/* Column 1: Brand Info + CTA Button + Social Links */}
+          <div className="col-span-2 md:col-span-1 lg:col-span-5 flex flex-col justify-between">
             <div>
               <PiximLogo variant="full" size="md" />
-              <p className="mt-4 text-sm text-slate-700 dark:text-slate-300 max-w-sm leading-relaxed">
-                With 8+ years of experience and 500+ happy clients, Pixim Design creates futuristic brand identities, logos, and modern websites that stand out and connect with your audience.
+              <p className="mt-4 text-xs sm:text-sm text-slate-300 max-w-sm leading-relaxed">
+                Pixim Design helps Bangladeshi and global brands grow with sharper identities, better creative, modern websites, and high-impact digital design.
               </p>
+
+              {/* Primary CTA Button matching the reference image */}
+              <button
+                type="button"
+                onClick={() =>
+                  openContact(
+                    "Footer Free Consultation",
+                    "I want to claim a free growth consultation for our brand."
+                  )
+                }
+                className="mt-6 w-full sm:w-auto inline-flex items-center justify-center gap-2.5 rounded-full bg-gradient-to-r from-[#FF8500] to-[#FFA133] hover:from-[#e67700] hover:to-[#FF8500] text-white px-6 sm:px-7 py-3.5 text-xs sm:text-sm font-bold tracking-wide shadow-lg shadow-orange-500/25 transition-all duration-200 hover:scale-[1.02] active:scale-95 cursor-pointer"
+              >
+                <span>Get Free Consultation</span>
+                <ArrowRight className="w-4 h-4" />
+              </button>
             </div>
 
-            <div className="mt-6 flex items-center gap-3">
-              {[...COMPANY.socials, { network: "whatsapp" as const, label: "WhatsApp", url: whatsappUrl() }].map((social) => (
-                <a
-                  key={social.label}
-                  href={social.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-[#2651B9]/10 text-slate-600 dark:text-slate-300 hover:text-[#2651B9] dark:hover:text-white border border-slate-200 dark:border-slate-700 hover:border-[#2651B9]/30 transition-all duration-200 hover:-translate-y-0.5"
-                  aria-label={social.label}
-                >
-                  <SocialIcon network={social.network} />
-                </a>
-              ))}
+            {/* Social Icons Row matching reference pill style */}
+            <div className="mt-6 sm:mt-8 flex items-center gap-2 sm:gap-2.5 flex-wrap">
+              {[...ALL_SOCIALS, { network: "whatsapp" as const, label: "WhatsApp", url: whatsappUrl() }].map(
+                (social) => (
+                  <a
+                    key={social.label}
+                    href={social.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-9 h-9 rounded-xl bg-[#081538] hover:bg-[#FF8500]/20 text-slate-400 hover:text-[#FFA133] border border-[#2651B9]/30 hover:border-[#FF8500]/50 flex items-center justify-center transition-all duration-200 hover:-translate-y-0.5 shadow-sm"
+                    aria-label={social.label}
+                  >
+                    <SocialIcon network={social.network} className="w-4 h-4" />
+                  </a>
+                )
+              )}
             </div>
           </div>
 
-          {/* Nav Links Col 1 */}
-          <div className="md:col-span-2">
-            <h4 className="text-xs uppercase font-mono font-bold tracking-wider text-[#0F172A] dark:text-white mb-4">
-              Navigation
+          {/* Column 2: Navigation Links Col 1 (Services, How We Work, Why Us...) */}
+          <div className="col-span-1 lg:col-span-2">
+            <h4 className="text-[11px] uppercase font-mono font-bold tracking-widest text-[#FFA133] mb-4">
+              Explore
             </h4>
-            <ul className="space-y-2.5 text-xs sm:text-sm text-slate-600 dark:text-slate-300">
+            <ul className="space-y-2.5 text-xs sm:text-sm text-slate-300">
               <li>
-                <Link href="/" prefetch={true} className="hover:text-[#2651B9] transition-colors">
-                  Home
+                <Link href="/services" prefetch={true} className="hover:text-[#FFA133] transition-colors py-0.5 block">
+                  Services
                 </Link>
               </li>
               <li>
-                <Link href="/services" prefetch={true} className="hover:text-[#2651B9] transition-colors">
-                  Our Services
+                <Link href="/about" prefetch={true} className="hover:text-[#FFA133] transition-colors py-0.5 block">
+                  How We Work
                 </Link>
               </li>
               <li>
-                <Link href="/projects" prefetch={true} className="hover:text-[#2651B9] transition-colors">
-                  Portfolio / Work
+                <Link href="/#why-pixim" prefetch={true} className="hover:text-[#FFA133] transition-colors py-0.5 block">
+                  Why Us
                 </Link>
               </li>
               <li>
-                <Link href="/pricing" prefetch={true} className="hover:text-[#2651B9] transition-colors">
+                <Link href="/#testimonials" prefetch={true} className="hover:text-[#FFA133] transition-colors py-0.5 block">
+                  Reviews
+                </Link>
+              </li>
+              <li>
+                <Link href="/pricing" prefetch={true} className="hover:text-[#FFA133] transition-colors py-0.5 block">
                   Pricing Plans
                 </Link>
               </li>
               <li>
-                <Link href="/about" prefetch={true} className="hover:text-[#2651B9] transition-colors">
-                  About Pixim
+                <Link href="/projects" prefetch={true} className="hover:text-[#FFA133] transition-colors py-0.5 block">
+                  Case Studies
                 </Link>
               </li>
               <li>
-                <Link href="/contact" prefetch={true} className="hover:text-[#2651B9] transition-colors">
-                  Contact Us
+                <Link href="/services/logo-design" prefetch={true} className="hover:text-[#FFA133] transition-colors py-0.5 block">
+                  Brand Identity
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Capabilities Col */}
-          <div className="md:col-span-3">
-            <h4 className="text-xs uppercase font-mono font-bold tracking-wider text-[#0F172A] dark:text-white mb-4">
-              Specialized Services
+          {/* Column 3: Navigation Links Col 2 (Contact, Consult, FAQ, Payment...) */}
+          <div className="col-span-1 lg:col-span-2">
+            <h4 className="text-[11px] uppercase font-mono font-bold tracking-widest text-[#FFA133] mb-4">
+              Company
             </h4>
-            <ul className="space-y-2.5 text-xs sm:text-sm text-slate-600 dark:text-slate-300">
+            <ul className="space-y-2.5 text-xs sm:text-sm text-slate-300">
               <li>
-                <Link href="/services/logo-design" prefetch={true} className="hover:text-[#FF8500] transition-colors">
-                  Logo & Brand Identity
+                <Link href="/contact" prefetch={true} className="hover:text-[#FFA133] transition-colors py-0.5 block">
+                  Contact
                 </Link>
               </li>
               <li>
-                <Link href="/services/social-media" prefetch={true} className="hover:text-[#FF8500] transition-colors">
-                  Social Media & Content Design
+                <button
+                  type="button"
+                  onClick={() => openContact("Consultation", "Direct consultation request")}
+                  className="hover:text-[#FFA133] transition-colors py-0.5 block text-left cursor-pointer"
+                >
+                  Consult
+                </button>
+              </li>
+              <li>
+                <Link href="/contact" prefetch={true} className="hover:text-[#FFA133] transition-colors py-0.5 block">
+                  Help Centre
                 </Link>
               </li>
               <li>
-                <Link href="/services/package-design" prefetch={true} className="hover:text-[#FF8500] transition-colors">
-                  Packaging Design
+                <Link href="/#faq" prefetch={true} className="hover:text-[#FFA133] transition-colors py-0.5 block">
+                  FAQ
                 </Link>
               </li>
               <li>
-                <Link href="/services/motion-video" prefetch={true} className="hover:text-[#FF8500] transition-colors">
-                  Video & Motion Design
+                <Link href="/pricing#payment" prefetch={true} className="inline-flex items-center hover:text-[#FFA133] transition-colors py-0.5">
+                  <span>Payment</span>
+                  <span className="ml-1.5 px-1.5 py-0.5 text-[9px] font-extrabold rounded bg-[#FF8500] text-[#081330] leading-none uppercase">
+                    PAY
+                  </span>
                 </Link>
               </li>
               <li>
-                <Link href="/services/digital-marketing" prefetch={true} className="hover:text-[#FF8500] transition-colors">
-                  Digital Marketing & Ads
+                <Link href="/terms" prefetch={true} className="hover:text-[#FFA133] transition-colors py-0.5 block">
+                  Terms &amp; Conditions
                 </Link>
               </li>
               <li>
-                <Link href="/services/web-design" prefetch={true} className="hover:text-[#FF8500] transition-colors">
-                  Website Design & Development
-                </Link>
-              </li>
-              <li>
-                <Link href="/services/seo-growth" prefetch={true} className="hover:text-[#FF8500] transition-colors">
-                  SEO & Organic Growth
+                <Link href="/privacy-policy" prefetch={true} className="hover:text-[#FFA133] transition-colors py-0.5 block">
+                  Privacy Policy
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Studio Info Col */}
-          <div className="md:col-span-2">
-            <h4 className="text-xs uppercase font-mono font-bold tracking-wider text-[#0F172A] dark:text-white mb-4">
-              Studio Presence
+          {/* Column 4: Contact & Studio Location Info with Icons */}
+          <div className="col-span-2 md:col-span-1 lg:col-span-3 pt-2 md:pt-0 border-t border-white/5 md:border-none">
+            <h4 className="text-[11px] uppercase font-mono font-bold tracking-widest text-[#FFA133] mb-4">
+              Direct Contact
             </h4>
-            <div className="text-xs text-slate-600 dark:text-slate-300 space-y-2">
-              <a href={`mailto:${COMPANY.email}`} className="block break-words hover:text-[#FFA133] transition-colors">
-                {COMPANY.email}
-              </a>
+            <div className="space-y-3.5 text-xs sm:text-sm text-slate-300">
               {COMPANY.phone && (
-                <a href={phoneUrl(COMPANY.phone)} className="block hover:text-[#FFA133] transition-colors">
-                  {COMPANY.phone}
-                </a>
+                <div className="flex items-center gap-3">
+                  <Phone className="w-4 h-4 text-[#FFA133] shrink-0" />
+                  <a
+                    href={phoneUrl(COMPANY.phone)}
+                    className="hover:text-[#FFA133] transition-colors font-medium"
+                  >
+                    {COMPANY.phone}
+                  </a>
+                </div>
               )}
-              <div className="text-slate-500 dark:text-slate-400 font-mono">{COMPANY.address} • Global Remote</div>
-              <div className="pt-2 flex items-center gap-1.5 text-emerald-600 dark:text-emerald-400 font-medium">
-                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                <span>500+ Happy Clients</span>
+
+              <div className="flex items-center gap-3">
+                <Mail className="w-4 h-4 text-[#FFA133] shrink-0" />
+                <a
+                  href={`mailto:${COMPANY.email}`}
+                  className="hover:text-[#FFA133] transition-colors break-words font-medium"
+                >
+                  {COMPANY.email}
+                </a>
               </div>
-            </div>
 
-            <button
-              onClick={scrollToTop}
-              className="mt-6 flex items-center gap-1.5 text-xs text-slate-700 dark:text-slate-200 hover:text-[#0F172A] dark:hover:text-white py-1.5 px-3 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 transition-all cursor-pointer hover:shadow-md hover:border-[#FF8500]/40"
-            >
-              <ArrowUp className="w-3.5 h-3.5" />
-              <span>Back to top</span>
-            </button>
-          </div>
-        </div>
+              <div className="flex items-start gap-3 leading-relaxed">
+                <MapPin className="w-4 h-4 text-[#FFA133] shrink-0 mt-0.5" />
+                <span className="text-slate-300">{COMPANY.address}</span>
+              </div>
 
-        {/* Bottom Bar */}
-        <div className="pt-8 flex flex-col lg:flex-row items-center justify-between gap-5 text-xs text-slate-500 dark:text-slate-400">
-          <div className="text-center lg:text-left space-y-1">
-            <div>
-              &copy; {new Date().getFullYear()} Pixim Design. All rights reserved. Built by{" "}
-              <a
-                href="https://shokhertech.vercel.app/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-[#2651B9] dark:text-[#60A5FA] hover:text-[#FF8500] dark:hover:text-[#FFA133] transition-colors font-medium hover:underline"
-              >
-                Shokher Tech Solutions
-              </a>
-              .
-            </div>
-            <div className="flex items-center justify-center lg:justify-start gap-1">
-              <span>Crafted with passion & precision</span>
-              <Heart className="w-3 h-3 text-[#FF8500] fill-[#FF8500] inline" />
+              {COMPANY.hours && (
+                <div className="flex items-center gap-3">
+                  <Clock className="w-4 h-4 text-[#FFA133] shrink-0" />
+                  <span className="text-slate-300">{COMPANY.hours}</span>
+                </div>
+              )}
             </div>
           </div>
 
-          <nav aria-label="Legal" className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2">
-            <Link href="/privacy-policy" className="hover:text-[#FFA133] transition-colors">
-              Privacy Policy
-            </Link>
-            <Link href="/terms" className="hover:text-[#FFA133] transition-colors">
-              Terms & Conditions
-            </Link>
-            <Link href="/refund-policy" className="hover:text-[#FFA133] transition-colors">
-              Refund Policy
-            </Link>
-          </nav>
-
-          <div className="flex items-center gap-3">
-            <span>Currency</span>
-            <CurrencyToggle size="sm" />
-          </div>
         </div>
       </div>
 
-      {/* Giant Brand Text — cover style with scroll animation */}
-      <FooterBrandText />
+      {/* ================================================================
+          BAND 2: Supported Payment Methods & SSLCOMMERZ Bar (1:1 from ref)
+         ================================================================ */}
+      <PaymentMethodsSection embedded={true} />
+
+      {/* ================================================================
+          BAND 3: Sub-Footer Bar (Company Deck + Copyright + Socials)
+         ================================================================ */}
+      <div className="relative z-10 bg-[#020714] border-t border-white/5 py-5">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-5">
+          
+          {/* Left: Company Deck PDF Download */}
+          <button
+            type="button"
+            onClick={() =>
+              openContact(
+                "Company Deck Request",
+                "I would like to receive the Pixim Design Company Deck PDF."
+              )
+            }
+            className="group flex items-center gap-3 text-left cursor-pointer"
+          >
+            <span className="w-9 h-9 rounded-full bg-[#FF8500] text-[#081330] flex items-center justify-center font-black shadow-md shadow-orange-500/25 group-hover:scale-105 transition-transform shrink-0">
+              <Download className="w-4 h-4 text-[#081330] stroke-[2.5]" />
+            </span>
+            <div>
+              <p className="text-xs font-bold text-white leading-tight group-hover:text-[#FFA133] transition-colors">
+                Company Deck
+              </p>
+              <p className="text-[10px] text-slate-400 font-mono mt-0.5">
+                PDF, 3 MB
+              </p>
+            </div>
+          </button>
+
+          {/* Center: Copyright Notice */}
+          <div className="text-xs text-slate-400 font-mono text-center">
+            &copy; 2021–{new Date().getFullYear()}, Pixim Design | All Rights Reserved.
+          </div>
+
+          {/* Right: Mini Social Glyphs + Currency Toggle + Back to Top */}
+          <div className="flex items-center gap-3 sm:gap-4">
+            <div className="hidden sm:flex items-center gap-1.5">
+              {ALL_SOCIALS.slice(0, 5).map((social) => (
+                <a
+                  key={social.network}
+                  href={social.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-7 h-7 rounded-full bg-white/5 hover:bg-[#FF8500]/20 text-slate-400 hover:text-[#FFA133] border border-white/10 hover:border-[#FF8500]/40 flex items-center justify-center transition-all duration-200"
+                  aria-label={social.label}
+                >
+                  <SocialIcon network={social.network} className="w-3.5 h-3.5" />
+                </a>
+              ))}
+            </div>
+
+            <div className="h-4 w-px bg-white/10 hidden sm:block" />
+
+            <CurrencyToggle size="sm" />
+
+            <button
+              onClick={scrollToTop}
+              className="flex items-center gap-1 text-xs text-slate-300 hover:text-white py-1 px-2.5 rounded-lg bg-[#081538] hover:bg-[#FF8500]/20 border border-[#2651B9]/30 hover:border-[#FF8500]/40 transition-all cursor-pointer"
+              aria-label="Back to top"
+            >
+              <ArrowUp className="w-3.5 h-3.5 text-[#FFA133]" />
+              <span className="hidden md:inline">Top</span>
+            </button>
+          </div>
+
+        </div>
+      </div>
     </footer>
   );
 };
 
-/** Distance (px) before the end of the page over which the brand text rises in */
-const BRAND_REVEAL_DISTANCE = 300;
-
-/** Animated giant brand text at the very bottom */
-const FooterBrandText: React.FC = () => {
-  const textRef = React.useRef<HTMLHeadingElement>(null);
-
-  // The footer persists across client-side navigations and page heights change (route changes,
-  // accordions), so drive the reveal from the live distance to the page bottom instead of
-  // scroll positions measured once at mount, which went stale and left the text invisible.
-  React.useEffect(() => {
-    const text = textRef.current;
-    if (!text || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-    let frame = 0;
-    const update = () => {
-      frame = 0;
-      const doc = document.documentElement;
-      const scrollable = doc.scrollHeight - window.innerHeight;
-      const remaining = scrollable - window.scrollY;
-      const distance = Math.min(BRAND_REVEAL_DISTANCE, scrollable);
-      const progress = distance <= 0 ? 1 : Math.min(1, Math.max(0, 1 - remaining / distance));
-      text.style.opacity = String(progress);
-      text.style.transform = `translateY(${(1 - progress) * 60}px) scale(${0.9 + progress * 0.1})`;
-    };
-    const schedule = () => {
-      if (!frame) frame = requestAnimationFrame(update);
-    };
-
-    update();
-    window.addEventListener("scroll", schedule, { passive: true });
-    window.addEventListener("resize", schedule);
-    const resizeObserver = new ResizeObserver(schedule);
-    resizeObserver.observe(document.body);
-
-    return () => {
-      if (frame) cancelAnimationFrame(frame);
-      window.removeEventListener("scroll", schedule);
-      window.removeEventListener("resize", schedule);
-      resizeObserver.disconnect();
-    };
-  }, []);
-
-  return (
-    <div
-      className="relative w-full mt-12 overflow-hidden select-none pointer-events-none"
-      aria-hidden="true"
-    >
-      {/* Glow behind text */}
-      <div className="absolute inset-0 flex items-center justify-center">
-        <div className="w-3/4 h-full bg-gradient-to-t from-[#2651B9]/15 via-[#FF8500]/10 to-transparent blur-3xl" />
-      </div>
-
-      <h2
-        ref={textRef}
-        className="relative text-center font-[family-name:var(--font-jersey-25)] uppercase leading-[0.69em] tracking-[0.01em] whitespace-nowrap pb-0 transition-[opacity,transform] duration-300 ease-out will-change-transform"
-        style={{
-          fontSize: "clamp(3rem, 12vw, 14rem)",
-          background:
-            "linear-gradient(180deg, rgba(38,81,185,0.35) 0%, rgba(38,81,185,0.08) 100%)",
-          WebkitBackgroundClip: "text",
-          WebkitTextFillColor: "transparent",
-          backgroundClip: "text",
-        }}
-      >
-        PIXIM DESIGN
-      </h2>
-
-      {/* Bottom fade overlay */}
-      <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-white dark:from-[#050D21] to-transparent" />
-    </div>
-  );
-};
+export default Footer;

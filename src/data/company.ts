@@ -13,12 +13,12 @@ export const COMPANY = {
   name: "Pixim Design",
   email: "contact@piximdesign.com",
   /** Display format, e.g. "+880 1XXX-XXXXXX"; hidden when empty */
-  phone: "",
-  /** Digits only with country code, used for wa.me links (placeholder until the real number is added) */
-  whatsapp: "8801700000000",
-  address: "Dhaka, Bangladesh",
+  phone: "+880 1752-971287",
+  /** Digits only with country code, used for wa.me links */
+  whatsapp: "8801752971287",
+  address: "Level 3, House 2, Block G, South Banasree Main Road, Dhaka 1219",
   /** e.g. "Saturday – Thursday, 10:00 AM – 7:00 PM (GMT+6)"; hidden when empty */
-  hours: "",
+  hours: "Sat–Thu, 10:00 AM – 7:00 PM",
   responseTime: "Usually within 2 hours",
   socials: [
     { network: "facebook", label: "Facebook", url: "https://facebook.com/piximdesign" },

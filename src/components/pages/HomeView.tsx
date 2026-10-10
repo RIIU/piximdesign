@@ -15,21 +15,16 @@ const WhyPiximSection = dynamic(() => import("@/components/WhyPiximSection").the
 const ReadyForLogoSection = dynamic(() => import("@/components/ReadyForLogoSection").then(m => ({ default: m.ReadyForLogoSection })));
 const BrandStoriesSection = dynamic(() => import("@/components/BrandStoriesSection").then(m => ({ default: m.BrandStoriesSection })));
 const ProcessSection = dynamic(() => import("@/components/ProcessSection").then(m => ({ default: m.ProcessSection })));
-const ProjectEstimatorSection = dynamic(() => import("@/components/ProjectEstimatorSection").then(m => ({ default: m.ProjectEstimatorSection })));
 const TestimonialsSection = dynamic(() => import("@/components/TestimonialsSection").then(m => ({ default: m.TestimonialsSection })));
 const FreeConsultationSection = dynamic(() => import("@/components/FreeConsultationSection").then(m => ({ default: m.FreeConsultationSection })));
 const FaqSection = dynamic(() => import("@/components/FaqSection").then(m => ({ default: m.FaqSection })));
-const ContactSection = dynamic(() => import("@/components/ContactSection").then(m => ({ default: m.ContactSection })));
+const TakeFirstStepSection = dynamic(() => import("@/components/TakeFirstStepSection").then(m => ({ default: m.TakeFirstStepSection })));
 
 export function HomeView() {
   const { openContact } = useContactModal();
 
   const handleSelectService = (serviceTitle: string) => {
     openContact(serviceTitle, `Interested in getting a scope for ${serviceTitle}`);
-  };
-
-  const handleEstimateSubmit = (serviceTitle: string, summary: string) => {
-    openContact(serviceTitle, summary);
   };
 
   return (
@@ -59,25 +54,22 @@ export function HomeView() {
       <ProcessSection onOpenContact={() => openContact()} />
 
       {/* 9. Key Metrics & Social Proof (5+ Years, 8+ Team Members, 200+ Happy Clients) */}
-      <StatsBar onOpenContact={() => openContact()} className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-10 sm:my-14 md:my-16" />
+      <StatsBar onOpenContact={() => openContact()} />
 
       {/* 10. More Recent Work Showcase Animated Infinite Carousel */}
       <RecentWorkSection onOpenContact={() => openContact()} />
 
-      {/* 11. Interactive Scope Builder & Transparent Pricing Estimator (USD/BDT) */}
-      <ProjectEstimatorSection onEstimateSubmit={handleEstimateSubmit} />
-
-      {/* 12. Client Testimonials & Social Proof */}
+      {/* 11. Client Testimonials & Social Proof */}
       <TestimonialsSection />
 
       {/* 13. 30-Minute Free Consultation & Calendly Schedule */}
       <FreeConsultationSection onOpenContact={() => openContact()} />
 
-      {/* 13. Frequently Asked Questions */}
-      <FaqSection />
+      {/* 14. Frequently Asked Questions (FaqSplit 2-Column Style) */}
+      <FaqSection onOpenContact={(svc, notes) => openContact(svc, notes)} />
 
-      {/* 14. Direct Project Brief & Consultation Form */}
-      <ContactSection />
+      {/* 15. Take the First Step (Banner from Reference Image) */}
+      <TakeFirstStepSection onOpenContact={(svc, notes) => openContact(svc, notes)} />
     </div>
   );
 }

@@ -62,10 +62,7 @@ export const AppLayoutWrapper: React.FC<{ children: React.ReactNode }> = ({ chil
             {children}
           </main>
 
-          {/* Supported Payment Methods Section (Directly before Footer) */}
-          <PaymentMethodsSection />
-
-          {/* Persistent Footer across all pages */}
+          {/* Persistent Footer across all pages (includes Payment Methods & Company Deck) */}
           <Footer />
         </div>
 
