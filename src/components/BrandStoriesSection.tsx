@@ -53,21 +53,21 @@ export const BrandStoriesSection: React.FC<BrandStoriesSectionProps> = ({ onOpen
           <div className="steps-left w-full lg:w-[42%] xl:w-[40%] flex flex-col relative z-10 self-stretch">
             <div
               ref={leftContentRef}
-              className="left-content lg:sticky lg:top-28 xl:top-32 flex flex-col justify-start py-4"
+              className="left-content lg:sticky lg:top-28 xl:top-32 flex flex-col items-center lg:items-start text-center lg:text-left justify-start py-4"
             >
-              <h2 className="font-agency text-2xl sm:text-3xl md:text-4xl lg:text-[44px] font-extrabold text-white tracking-tight leading-[1.15] mb-6 text-left">
-                Experience Brand <br />
+              <h2 className="font-agency text-2xl sm:text-3xl md:text-4xl lg:text-[44px] font-extrabold text-white tracking-tight leading-[1.15] mb-4 sm:mb-6 text-center lg:text-left">
+                Experience Brand <br className="hidden sm:inline" />
                 <span className="bg-gradient-to-r from-white via-slate-100 to-slate-400 bg-clip-text text-transparent">
                   Stories in Design
                 </span>
               </h2>
 
-              <p className="text-base lg:text-lg text-[#A7BDB5] leading-relaxed mb-8 max-w-lg font-normal text-left">
+              <p className="text-sm sm:text-base lg:text-lg text-[#A7BDB5] leading-relaxed mb-6 sm:mb-8 max-w-lg mx-auto lg:mx-0 font-normal text-center lg:text-left">
                 At Pixim, we believe design is more than just look and feel. It takes the end user through a mesmerizing journey that ends in conversion without any friction.
               </p>
 
               {/* Pixim Mega Reveal CTA Button */}
-              <div>
+              <div className="flex justify-center lg:justify-start w-full">
                 <Link
                   href="/projects"
                   prefetch={true}
@@ -97,11 +97,11 @@ export const BrandStoriesSection: React.FC<BrandStoriesSectionProps> = ({ onOpen
               >
                 <div className="portfolio-work-item relative rounded-2xl sm:rounded-3xl overflow-hidden border border-blue-400/20 hover:border-[#FF8500]/60 transition-all duration-500 shadow-2xl bg-[#0C1E4E]">
                   {/* Top Badge: Number and Category */}
-                  <div className="absolute top-2.5 left-2.5 right-2.5 sm:top-5 sm:left-5 sm:right-5 z-30 flex items-center justify-between pointer-events-none">
-                    <span className="font-mono text-[9px] sm:text-xs font-black tracking-widest text-[#FFA133] px-2 sm:px-3.5 py-0.5 sm:py-1.5 rounded-full bg-[#081330]/85 backdrop-blur-md border border-[#FF8500]/30 shadow-lg">
+                  <div className="absolute top-2.5 left-2.5 right-2.5 sm:top-5 sm:left-5 sm:right-5 z-30 flex items-center justify-between pointer-events-none gap-1.5">
+                    <span className="shrink-0 font-mono text-[9px] sm:text-xs font-black tracking-widest text-[#FFA133] px-2 sm:px-3.5 py-0.5 sm:py-1.5 rounded-full bg-[#081330]/85 backdrop-blur-md border border-[#FF8500]/30 shadow-lg">
                       {study.number} / 05
                     </span>
-                    <span className="text-[9px] sm:text-xs font-semibold text-slate-200 px-2 sm:px-3.5 py-0.5 sm:py-1.5 rounded-full bg-[#081330]/85 backdrop-blur-md border border-white/15 shadow-lg">
+                    <span className="truncate max-w-[62%] sm:max-w-none text-[9px] sm:text-xs font-semibold text-slate-200 px-2 sm:px-3.5 py-0.5 sm:py-1.5 rounded-full bg-[#081330]/85 backdrop-blur-md border border-white/15 shadow-lg">
                       {study.category}
                     </span>
                   </div>
