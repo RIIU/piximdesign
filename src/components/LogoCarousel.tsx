@@ -19,6 +19,8 @@ export const ROW_2_LOGOS = [
   { id: "movexa", name: "Movexa", src: "/client logo/movexa.webp" },
 ];
 
+export const CLIENT_LOGOS = [...ROW_1_LOGOS, ...ROW_2_LOGOS];
+
 export const LogoCarousel: React.FC = () => {
   const [isPaused, setIsPaused] = useState(false);
 
