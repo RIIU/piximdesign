@@ -59,54 +59,75 @@ export const VideoShowcaseSection: React.FC<VideoShowcaseSectionProps> = () => {
 
       const mm = gsap.matchMedia();
 
-      // Desktop & Tablet
+      // Desktop & Tablet: Smooth keyframed sequence (50% -> 75% -> 100%)
       mm.add("(min-width: 768px)", () => {
-        gsap.fromTo(
-          videoBoxRef.current,
-          {
-            width: "68%",
-            borderRadius: "36px",
-            scale: 0.95,
+        // Set initial state at 50% width
+        gsap.set(videoBoxRef.current, {
+          width: "50%",
+          borderRadius: "36px",
+          scale: 0.95,
+        });
+
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: triggerRef.current,
+            start: "top 85%",
+            end: "top 15%",
+            scrub: 1.2,
+            invalidateOnRefresh: true,
           },
-          {
-            width: "100%",
-            borderRadius: "24px",
-            scale: 1,
-            ease: "power2.out",
-            scrollTrigger: {
-              trigger: triggerRef.current,
-              start: "top 80%",
-              end: "top 20%",
-              scrub: 1,
-              invalidateOnRefresh: true,
-            },
-          }
-        );
+        });
+
+        // Keyframe 1: 50% -> 75%
+        tl.to(videoBoxRef.current, {
+          width: "75%",
+          borderRadius: "28px",
+          scale: 0.98,
+          ease: "none",
+          duration: 1,
+        })
+        // Keyframe 2: 75% -> 100%
+        .to(videoBoxRef.current, {
+          width: "100%",
+          borderRadius: "20px",
+          scale: 1,
+          ease: "none",
+          duration: 1,
+        });
       });
 
-      // Mobile
+      // Mobile: adapted keyframe steps (60% -> 80% -> 100%)
       mm.add("(max-width: 767px)", () => {
-        gsap.fromTo(
-          videoBoxRef.current,
-          {
-            width: "88%",
-            borderRadius: "24px",
-            scale: 0.98,
+        gsap.set(videoBoxRef.current, {
+          width: "60%",
+          borderRadius: "24px",
+          scale: 0.96,
+        });
+
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: triggerRef.current,
+            start: "top 90%",
+            end: "top 20%",
+            scrub: 1,
+            invalidateOnRefresh: true,
           },
-          {
-            width: "100%",
-            borderRadius: "16px",
-            scale: 1,
-            ease: "power2.out",
-            scrollTrigger: {
-              trigger: triggerRef.current,
-              start: "top 85%",
-              end: "top 30%",
-              scrub: 0.8,
-              invalidateOnRefresh: true,
-            },
-          }
-        );
+        });
+
+        tl.to(videoBoxRef.current, {
+          width: "82%",
+          borderRadius: "20px",
+          scale: 0.98,
+          ease: "none",
+          duration: 1,
+        })
+        .to(videoBoxRef.current, {
+          width: "100%",
+          borderRadius: "16px",
+          scale: 1,
+          ease: "none",
+          duration: 1,
+        });
       });
 
       return () => mm.revert();
@@ -166,19 +187,18 @@ export const VideoShowcaseSection: React.FC<VideoShowcaseSectionProps> = () => {
       />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Video Trigger & Expanding Container */}
         <div
           ref={triggerRef}
-          className="w-full flex justify-center items-center py-4"
+          className="w-full flex justify-center items-center py-6 md:py-8 [perspective:1400px]"
         >
           <div
             ref={videoBoxRef}
-            className="group relative overflow-hidden bg-[#06102B]/95 shadow-[0_20px_70px_-15px_rgba(4,10,28,0.85),0_0_50px_-10px_rgba(38,81,185,0.4)] ring-1 ring-blue-400/30 transition-all duration-300 will-change-[width,border-radius,transform]"
+            className="group relative overflow-hidden bg-[#06102B]/95 ring-1 ring-blue-500/25 border border-white/10 will-change-transform transform-gpu"
             onMouseEnter={() => setShowControls(true)}
             onMouseLeave={() => setShowControls(false)}
           >
             {/* Ambient neon rim highlight */}
-            <div className="absolute -inset-px rounded-[inherit] bg-gradient-to-r from-[#2651B9]/30 via-transparent to-[#FF8500]/30 opacity-70 pointer-events-none z-10" />
+            <div className="absolute -inset-px rounded-[inherit] bg-gradient-to-r from-[#2651B9]/40 via-transparent to-[#FF8500]/40 opacity-80 pointer-events-none z-10" />
 
             {/* Video Element */}
             <div className="relative aspect-video w-full overflow-hidden">
@@ -282,11 +302,11 @@ export const VideoShowcaseSection: React.FC<VideoShowcaseSectionProps> = () => {
           </div>
         </div>
 
-        {/* Animated Client Logo Carousel Section */}
-        <div className="mt-6 sm:mt-8 md:mt-10">
-          <div className="text-center mb-3 sm:mb-4">
-            <span className="text-[11px] sm:text-xs uppercase font-extrabold tracking-widest text-slate-400">
-              Trusted by 500+ Ambitious Brands Worldwide
+        {/* Animated Client Logo Carousel Section (2 Rows - Matching Reference Style) */}
+        <div className="mt-8 sm:mt-12 md:mt-14">
+          <div className="text-center mb-5 sm:mb-6">
+            <span className="text-xs sm:text-sm font-semibold tracking-wide text-slate-300">
+              Trusted By 350+ Global Brands
             </span>
           </div>
 

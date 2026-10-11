@@ -8,6 +8,7 @@ import { HeroSection } from "@/components/HeroSection";
 // Lazy load below-the-fold sections while retaining static HTML prerendering
 const VideoShowcaseSection = dynamic(() => import("@/components/VideoShowcaseSection").then(m => ({ default: m.VideoShowcaseSection })));
 const StatsBar = dynamic(() => import("@/components/StatsBar").then(m => ({ default: m.StatsBar })));
+const RecentWorkSection = dynamic(() => import("@/components/RecentWorkSection").then(m => ({ default: m.RecentWorkSection })));
 const ServicesSection = dynamic(() => import("@/components/ServicesSection").then(m => ({ default: m.ServicesSection })));
 const IndustriesSection = dynamic(() => import("@/components/IndustriesSection").then(m => ({ default: m.IndustriesSection })));
 const WhyPiximSection = dynamic(() => import("@/components/WhyPiximSection").then(m => ({ default: m.WhyPiximSection })));
@@ -39,35 +40,38 @@ export function HomeView() {
       {/* 2. Video Showcase Reel & Brand Logo Carousel (GSAP Scroll-expanding video) */}
       <VideoShowcaseSection onOpenContact={() => openContact()} />
 
-      {/* 3. Key Metrics & Social Proof */}
-      <StatsBar className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-6 sm:my-8 md:my-10" />
-
-      {/* 4. Core Capabilities & Services Bento Grid */}
+      {/* 3. Core Capabilities & Services Bento Grid */}
       <ServicesSection onSelectService={handleSelectService} />
 
-      {/* 5. Industry Playbooks: tailored service stacks per market */}
+      {/* 4. Industry Playbooks: tailored service stacks per market */}
       <IndustriesSection onOpenContact={(service, note) => openContact(service, note)} />
 
-      {/* 6. The Pixim Difference: 3-Way Comparison Matrix vs Traditional Agencies & Freelancers */}
+      {/* 5. The Pixim Difference: 3-Way Comparison Matrix vs Traditional Agencies & Freelancers */}
       <WhyPiximSection onOpenContact={(service, notes) => openContact(service, notes)} />
 
-      {/* 7. Experience Brand Stories in Design (Pixxen-style Sticky Split Showcase) */}
+      {/* 6. Experience Brand Stories in Design (Pixxen-style Sticky Split Showcase) */}
       <BrandStoriesSection onOpenContact={() => openContact()} />
 
-      {/* 8. Ready for a Professional Logo? Video Showcase CTA */}
+      {/* 7. Ready for a Professional Logo? Video Showcase CTA */}
       <ReadyForLogoSection onOpenContact={(service, note) => openContact(service, note)} />
 
-      {/* 9. 4-Step Agile Delivery Process ("Quick Delivery, Faster Results") */}
+      {/* 8. 4-Step Agile Delivery Process ("Quick Delivery, Faster Results") */}
       <ProcessSection onOpenContact={() => openContact()} />
 
-      {/* 10. Interactive Scope Builder & Transparent Pricing Estimator (USD/BDT) */}
+      {/* 9. Key Metrics & Social Proof (5+ Years, 8+ Team Members, 200+ Happy Clients) */}
+      <StatsBar onOpenContact={() => openContact()} className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-10 sm:my-14 md:my-16" />
+
+      {/* 10. More Recent Work Showcase Animated Infinite Carousel */}
+      <RecentWorkSection onOpenContact={() => openContact()} />
+
+      {/* 11. Interactive Scope Builder & Transparent Pricing Estimator (USD/BDT) */}
       <ProjectEstimatorSection onEstimateSubmit={handleEstimateSubmit} />
 
-      {/* 11. Client Testimonials & Social Proof */}
+      {/* 12. Client Testimonials & Social Proof */}
       <TestimonialsSection />
 
-      {/* 12. 30-Minute Free Consultation & Calendly Schedule */}
-      <FreeConsultationSection />
+      {/* 13. 30-Minute Free Consultation & Calendly Schedule */}
+      <FreeConsultationSection onOpenContact={() => openContact()} />
 
       {/* 13. Frequently Asked Questions */}
       <FaqSection />
