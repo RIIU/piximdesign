@@ -98,6 +98,7 @@ export const FreeConsultationSection: React.FC<FreeConsultationSectionProps> = (
                       src="/images/consultation/director-portrait.png"
                       alt="Shaer Reaz - Head of Business"
                       fill
+                      sizes="(max-width: 640px) 72px, 80px"
                       className="object-cover object-top"
                     />
                   </div>
