@@ -96,7 +96,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenContact }) => {
   return (
     <section
       ref={heroRef}
-      className="relative min-h-[90vh] lg:min-h-screen w-full flex flex-col items-center justify-center pt-24 sm:pt-28 md:pt-32 pb-16 sm:pb-20 md:pb-24 overflow-hidden bg-[#081330]"
+      className="relative min-h-[85vh] lg:min-h-[92vh] w-full flex flex-col items-center justify-center pt-20 sm:pt-24 md:pt-28 pb-10 sm:pb-12 md:pb-14 overflow-hidden bg-[#081330]"
     >
       {/* ── Background ambient glows ── */}
       <div

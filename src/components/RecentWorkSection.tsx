@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { useRef, useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
@@ -96,7 +96,8 @@ const RECENT_PROJECTS = [
 
 export const RecentWorkSection: React.FC<RecentWorkProps> = ({ onOpenContact }) => {
   const sectionRef = useRef<HTMLElement>(null);
-  const [isPaused, setIsPaused] = useState(false);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const tweenRef = useRef<gsap.core.Tween | null>(null);
 
   // Triple duplicated list for 100% seamless marquee infinite carousel loop
   const duplicatedProjects = [
@@ -104,6 +105,73 @@ export const RecentWorkSection: React.FC<RecentWorkProps> = ({ onOpenContact }) 
     ...RECENT_PROJECTS,
     ...RECENT_PROJECTS,
   ];
+
+  // GSAP continuous smooth infinite carousel setup
+  useEffect(() => {
+    const track = trackRef.current;
+    if (!track) return;
+
+    const ctx = gsap.context(() => {
+      // 1/3 of the total width for 1 full set of 6 projects
+      const singleSetWidth = track.scrollWidth / 3;
+      gsap.set(track, { x: 0 });
+
+      // Smooth, normal, elegant streaming conveyor (30s full set cycle)
+      tweenRef.current = gsap.to(track, {
+        x: `-=${singleSetWidth}`,
+        duration: 30,
+        ease: "none",
+        repeat: -1,
+        modifiers: {
+          x: gsap.utils.unitize((x) => {
+            const current = parseFloat(x);
+            return current % singleSetWidth;
+          }),
+        },
+      });
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
+  // Pause when off-screen to preserve CPU/GPU performance
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el || typeof IntersectionObserver === "undefined") return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          tweenRef.current?.resume();
+        } else {
+          tweenRef.current?.pause();
+        }
+      },
+      { threshold: 0.05 }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  // Smooth hover slow-down to a complete stop and resume
+  const handleMouseEnter = () => {
+    if (!tweenRef.current) return;
+    gsap.to(tweenRef.current, {
+      timeScale: 0,
+      duration: 0.35,
+      ease: "power2.out",
+    });
+  };
+
+  const handleMouseLeave = () => {
+    if (!tweenRef.current) return;
+    gsap.to(tweenRef.current, {
+      timeScale: 1,
+      duration: 0.45,
+      ease: "power2.inOut",
+    });
+  };
 
   useGSAP(
     () => {
@@ -129,7 +197,7 @@ export const RecentWorkSection: React.FC<RecentWorkProps> = ({ onOpenContact }) 
   return (
     <section
       ref={sectionRef}
-      className="relative w-full py-18 sm:py-22 md:py-28 bg-[#081330] overflow-hidden select-none"
+      className="relative w-full py-10 sm:py-14 md:py-16 bg-[#081330] overflow-hidden select-none"
     >
       {/* Background ambient lighting */}
       <div
@@ -142,7 +210,7 @@ export const RecentWorkSection: React.FC<RecentWorkProps> = ({ onOpenContact }) 
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="recent-work-header text-center max-w-3xl mx-auto mb-12 sm:mb-16">
+        <div className="recent-work-header text-center max-w-3xl mx-auto mb-8 sm:mb-10">
           <h2 className="font-agency text-2xl sm:text-3xl md:text-4xl lg:text-[44px] font-extrabold text-white tracking-tight leading-tight">
             More Recent Work.
           </h2>
@@ -168,36 +236,33 @@ export const RecentWorkSection: React.FC<RecentWorkProps> = ({ onOpenContact }) 
           CONTINUOUS INFINITE CAROUSEL STREAM (Smooth Animated Flow)
          ============================================================== */}
       <div
-        className="relative w-full overflow-hidden py-4 [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)] [-webkit-mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]"
-        onMouseEnter={() => setIsPaused(true)}
-        onMouseLeave={() => setIsPaused(false)}
+        className="relative w-full overflow-hidden py-4 [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)] [-webkit-mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)] cursor-grab active:cursor-grabbing"
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        onTouchStart={handleMouseEnter}
+        onTouchEnd={handleMouseLeave}
       >
         <div
-          className="flex w-max will-change-transform animate-marquee-left items-center py-2"
-          style={{
-            animationPlayState: isPaused ? "paused" : "running",
-            animationDuration: "42s",
-          }}
+          ref={trackRef}
+          className="flex w-max will-change-transform items-center py-2"
         >
           {duplicatedProjects.map((proj, idx) => (
             <div
               key={`${proj.id}-${idx}`}
               onClick={onOpenContact}
-              className="recent-work-card group w-[260px] sm:w-[285px] md:w-[305px] mx-2.5 sm:mx-3 shrink-0 flex flex-col rounded-3xl overflow-hidden bg-[#0C1E4E]/80 border border-white/10 hover:border-[#FF8500]/60 shadow-xl transition-all duration-300 cursor-pointer hover:-translate-y-1.5 hover:shadow-2xl"
+              className="recent-work-card group w-[260px] sm:w-[290px] md:w-[320px] mx-2.5 sm:mx-3 shrink-0 flex flex-col rounded-3xl overflow-hidden bg-[#0C1E4E]/80 border border-white/10 hover:border-[#FF8500]/60 shadow-xl transition-all duration-300 cursor-pointer hover:-translate-y-2 hover:shadow-[0_20px_45px_rgba(255,133,0,0.2)]"
             >
-              {/* Top Visual Canvas Box with Brand Artwork & Center Play Button */}
+              {/* Top Visual Canvas Box with Brand Artwork & Play Button Under Text */}
               <div className={`relative aspect-[4/3] w-full bg-gradient-to-br ${proj.bgGradient} flex flex-col items-center justify-center p-5 overflow-hidden`}>
-                {/* Brand Logo inside Canvas */}
+                {/* Brand Logo & Content inside Canvas */}
                 <div className="relative z-10 flex flex-col items-center text-center transition-transform duration-300 group-hover:scale-105">
                   {proj.logoBadge}
                   <span className="text-[11px] text-slate-600 font-medium mt-1 line-clamp-1">
                     {proj.subtext}
                   </span>
-                </div>
 
-                {/* Center Video Play Badge Pod */}
-                <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                  <div className="w-12 h-12 rounded-2xl bg-black/60 backdrop-blur-md border border-white/20 flex items-center justify-center text-white transition-all duration-300 group-hover:scale-115 group-hover:bg-[#FF8500] group-hover:text-[#081330] shadow-lg">
+                  {/* Play Button Under Text */}
+                  <div className="mt-3.5 w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-black/60 backdrop-blur-md border border-white/20 flex items-center justify-center text-white transition-all duration-300 group-hover:scale-110 group-hover:bg-[#FF8500] group-hover:text-[#081330] shadow-lg">
                     <Play className="w-4 h-4 fill-current translate-x-0.5" />
                   </div>
                 </div>

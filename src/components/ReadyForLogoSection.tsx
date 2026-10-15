@@ -97,7 +97,7 @@ export const ReadyForLogoSection: React.FC<ReadyForLogoSectionProps> = ({
   const isOrange = colorVariant === "orange";
 
   return (
-    <section className="relative w-full py-12 sm:py-16 md:py-20 bg-transparent overflow-hidden">
+    <section className="relative w-full py-8 sm:py-12 md:py-14 bg-transparent overflow-hidden">
       {/* Background ambient lighting */}
       <div
         className="absolute top-1/2 left-1/4 -translate-y-1/2 w-96 sm:w-[500px] h-96 sm:h-[500px] rounded-full pointer-events-none opacity-35 blur-3xl"

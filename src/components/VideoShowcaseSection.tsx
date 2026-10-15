@@ -175,7 +175,7 @@ export const VideoShowcaseSection: React.FC<VideoShowcaseSectionProps> = () => {
   return (
     <section
       ref={sectionRef}
-      className="relative w-full pt-2 sm:pt-4 md:pt-6 pb-6 sm:pb-8 md:pb-10 bg-gradient-to-b from-[#081330] via-[#0A1A46] to-[#081330] overflow-hidden"
+      className="relative w-full pt-1 sm:pt-2 md:pt-4 pb-4 sm:pb-6 md:pb-8 bg-gradient-to-b from-[#081330] via-[#0A1A46] to-[#081330] overflow-hidden"
     >
       {/* Background ambient radial lighting */}
       <div
@@ -303,7 +303,7 @@ export const VideoShowcaseSection: React.FC<VideoShowcaseSectionProps> = () => {
         </div>
 
         {/* Animated Client Logo Carousel Section (2 Rows - Matching Reference Style) */}
-        <div className="mt-8 sm:mt-12 md:mt-14">
+        <div className="mt-6 sm:mt-8 md:mt-10">
           <div className="text-center mb-5 sm:mb-6">
             <span className="text-xs sm:text-sm font-semibold tracking-wide text-slate-300">
               Trusted By 350+ Global Brands

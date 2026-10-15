@@ -74,7 +74,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onSelectServic
     <section
       id="services"
       ref={sectionRef}
-      className="relative py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto"
+      className="relative py-10 sm:py-14 md:py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto"
     >
       {/* Background ambient lighting (GPU-native radial gradient) */}
       <div
@@ -91,7 +91,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onSelectServic
       />
 
       {/* Section Header */}
-      <div className="text-center max-w-3xl mx-auto mb-14">
+      <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
         <h2 className="font-agency text-2xl sm:text-3xl md:text-4xl lg:text-[44px] font-extrabold text-[#0F172A] dark:text-white tracking-tight leading-tight">
           One-Stop Solution For <br />
           <span className="bg-gradient-to-r from-[#FF8500] via-[#FFA229] to-amber-300 bg-clip-text text-transparent">

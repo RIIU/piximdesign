@@ -53,7 +53,7 @@ export const StatsBar: React.FC<StatsBarProps> = ({ className = "", onOpenContac
   return (
     <section
       ref={containerRef}
-      className={`relative z-20 w-full py-12 sm:py-20 md:py-28 overflow-hidden select-none ${className}`}
+      className={`relative z-20 w-full py-8 sm:py-12 md:py-14 overflow-hidden select-none ${className}`}
     >
       {/* Background ambient lighting - blends seamlessly into global canvas */}
       <div
@@ -66,7 +66,7 @@ export const StatsBar: React.FC<StatsBarProps> = ({ className = "", onOpenContac
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="stats-header text-center max-w-3xl mx-auto mb-10 sm:mb-14 md:mb-16">
+        <div className="stats-header text-center max-w-3xl mx-auto mb-6 sm:mb-8 md:mb-10">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FF8500]/10 border border-[#FF8500]/25 text-[#FF8500] text-xs font-bold uppercase tracking-wider mb-3.5 sm:mb-4">
             <Sparkles className="w-3.5 h-3.5" />
             <span>Proven Track Record</span>
@@ -122,38 +122,98 @@ export const StatsBar: React.FC<StatsBarProps> = ({ className = "", onOpenContac
           {/* ------------------------------------------------------------
               CARD 2: 8+ Team Members (Royal Sapphire Studio Core Card - Col 1 on Mobile)
              ------------------------------------------------------------ */}
-          <div className="stats-bento-card col-span-1 md:col-span-3 rounded-[20px] sm:rounded-[32px] p-3.5 sm:p-7 bg-gradient-to-b from-[#102766] to-[#0C1E4E] border border-[#2651B9]/45 hover:border-[#FF8500]/50 shadow-[0_15px_35px_rgba(4,10,28,0.5)] transition-all duration-300 flex flex-col justify-between group overflow-hidden relative min-h-[220px] sm:min-h-[350px] hover:scale-[1.02]">
-            {/* Top Content */}
+          <div className="stats-bento-card col-span-1 md:col-span-3 rounded-[20px] sm:rounded-[32px] p-3.5 sm:p-6 bg-gradient-to-b from-[#102766] to-[#0C1E4E] border border-[#2651B9]/45 hover:border-[#FF8500]/50 shadow-[0_15px_35px_rgba(4,10,28,0.5)] transition-all duration-300 flex flex-col justify-between group overflow-hidden relative min-h-[220px] sm:min-h-[350px] hover:scale-[1.02]">
+            {/* Top Content - Compact & Clean Font Sizing */}
             <div className="text-center flex flex-col items-center">
-              {/* Discount / Tag Pill */}
-              <div className="inline-flex items-center gap-1 px-2 py-0.5 sm:px-3 sm:py-1 rounded-full bg-[#FF8500]/15 border border-[#FF8500]/30 text-[9px] sm:text-[11px] font-bold text-[#FFA133] mb-2 sm:mb-3 shadow-xs">
+              {/* Tag Pill */}
+              <div className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-[#FF8500]/15 border border-[#FF8500]/30 text-[9px] sm:text-[10px] font-bold text-[#FFA133] mb-1.5 shadow-xs">
                 <span>🔥</span>
                 <span>Elite Core</span>
               </div>
 
-              <h3 className="font-agency text-lg sm:text-2xl md:text-3xl font-extrabold text-white leading-tight">
-                8<span className="text-[#FF8500]">+</span> Team <br />
-                Members
+              <h3 className="font-agency text-base sm:text-xl md:text-2xl font-extrabold text-white leading-tight tracking-tight">
+                8<span className="text-[#FF8500]">+</span> Team Members
               </h3>
             </div>
 
-            {/* Bottom Folder & Stack Graphics Graphic */}
-            <div className="relative w-full flex justify-center items-end mt-4 sm:mt-6 pt-2">
-              {/* Stacked Cards behind the folder */}
-              <div className="absolute -top-5 sm:-top-7 w-[90%] sm:w-[85%] flex justify-center -space-x-2 sm:-space-x-3 transition-transform duration-300 group-hover:-translate-y-2">
-                <div className="w-11 h-14 sm:w-16 sm:h-20 rounded-md sm:rounded-lg bg-slate-100 shadow-md rotate-[-8deg] border border-white/20 flex flex-col p-1 opacity-90">
-                  <div className="w-full h-6 sm:h-10 bg-slate-200 rounded mb-1" />
-                  <div className="w-3/4 h-1 bg-slate-300 rounded mb-1" />
-                  <div className="w-1/2 h-1 bg-slate-300 rounded" />
+            {/* Bottom Folder & 3 Team Members Emerging on Hover (No text overlap) */}
+            <div className="relative w-full flex justify-center items-end mt-4 sm:mt-8 pt-4 sm:pt-6">
+              {/* 3 Members tucked inside the folder pocket */}
+              <div className="absolute bottom-2 sm:bottom-3 w-[92%] sm:w-[86%] flex justify-center items-end -space-x-2 sm:-space-x-2.5 z-10 pointer-events-none">
+                {/* Member 1 (Left): Sarah K. (Lead UI/UX) */}
+                <div className="relative w-14 sm:w-19 rounded-xl overflow-hidden bg-[#081330] border border-white/20 group-hover:border-[#FFA229]/70 shadow-2xl transition-all duration-500 ease-out -translate-y-4 sm:-translate-y-6 rotate-[-5deg] group-hover:-translate-y-9 sm:group-hover:-translate-y-13 group-hover:translate-x-2 sm:group-hover:-translate-x-3 group-hover:rotate-[-9deg]">
+                  <div className="relative w-full h-12 sm:h-16 bg-[#0c1a40]">
+                    <img
+                      src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=240&auto=format&fit=crop"
+                      alt="Sarah - Lead UI"
+                      className="w-full h-full object-cover object-top"
+                      loading="lazy"
+                    />
+                    <span className="absolute top-1 right-1 w-2 h-2 rounded-full bg-emerald-400 ring-1 ring-[#081330]" />
+                  </div>
+                  <div className="py-0.5 sm:py-1 px-1 bg-[#081330] text-center border-t border-white/10">
+                    <span className="text-[7.5px] sm:text-[9px] font-mono font-bold text-slate-200 block truncate">
+                      Sarah K.
+                    </span>
+                    <span className="text-[6.5px] sm:text-[7.5px] font-mono font-bold text-[#FFA133] block truncate">
+                      Lead UI
+                    </span>
+                  </div>
                 </div>
-                <div className="w-13 h-16 sm:w-18 sm:h-22 rounded-md sm:rounded-lg bg-[#081330] shadow-xl z-10 border border-[#FF8500]/40 flex items-center justify-center text-[#FF8500]">
-                  <Sparkles className="w-4 h-4 sm:w-6 sm:h-6 text-[#FF8500]" />
+
+                {/* Member 2 (Center): Sabbir Ahmed (Head of Business) - Front & Elevated */}
+                <div className="relative w-16 sm:w-22 rounded-xl overflow-hidden bg-[#081330] border border-[#FF8500]/70 group-hover:border-[#FF8500] shadow-[0_0_15px_rgba(255,133,0,0.25)] transition-all duration-500 ease-out -translate-y-5 sm:-translate-y-8 rotate-0 z-10 group-hover:-translate-y-11 sm:group-hover:-translate-y-16 group-hover:scale-105">
+                  <div className="relative w-full h-13 sm:h-18 bg-[#0c1a40]">
+                    <img
+                      src="/images/consultation/director-portrait.png"
+                      alt="Sabbir Ahmed - Head of Business"
+                      className="w-full h-full object-cover object-top"
+                      loading="lazy"
+                    />
+                    <span className="absolute top-1 right-1 w-2 h-2 rounded-full bg-emerald-400 ring-1 ring-[#081330]" />
+                  </div>
+                  <div className="py-0.5 sm:py-1 px-1 bg-[#081330] text-center border-t border-[#FF8500]/25">
+                    <span className="text-[7.5px] sm:text-[9px] font-mono font-bold text-white block truncate">
+                      Sabbir Ahmed
+                    </span>
+                    <span className="text-[6.5px] sm:text-[7.5px] font-mono font-bold text-[#FF8500] block truncate">
+                      Head of Business
+                    </span>
+                  </div>
                 </div>
-                <div className="w-11 h-14 sm:w-16 sm:h-20 rounded-md sm:rounded-lg bg-gradient-to-br from-[#2651B9] to-[#3B82F6] shadow-md rotate-[8deg] opacity-90 border border-white/20" />
+
+                {/* Member 3 (Right): Maya T. (Brand Lead) */}
+                <div className="relative w-14 sm:w-19 rounded-xl overflow-hidden bg-[#081330] border border-white/20 group-hover:border-[#38BDF8]/70 shadow-2xl transition-all duration-500 ease-out -translate-y-4 sm:-translate-y-6 rotate-[5deg] group-hover:-translate-y-9 sm:group-hover:-translate-y-13 group-hover:translate-x-2 sm:group-hover:translate-x-3 group-hover:rotate-[9deg]">
+                  <div className="relative w-full h-12 sm:h-16 bg-[#0c1a40]">
+                    <img
+                      src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=240&auto=format&fit=crop"
+                      alt="Maya - Brand UX"
+                      className="w-full h-full object-cover object-top"
+                      loading="lazy"
+                    />
+                    <span className="absolute top-1 right-1 w-2 h-2 rounded-full bg-emerald-400 ring-1 ring-[#081330]" />
+                  </div>
+                  <div className="py-0.5 sm:py-1 px-1 bg-[#081330] text-center border-t border-white/10">
+                    <span className="text-[7.5px] sm:text-[9px] font-mono font-bold text-slate-200 block truncate">
+                      Maya T.
+                    </span>
+                    <span className="text-[6.5px] sm:text-[7.5px] font-mono font-bold text-[#38BDF8] block truncate">
+                      Brand UX
+                    </span>
+                  </div>
+                </div>
               </div>
 
-              {/* Front Frosted Folder Pocket */}
-              <div className="relative z-20 w-[95%] h-14 sm:h-24 rounded-xl sm:rounded-2xl bg-[#081330]/50 backdrop-blur-md border border-[#2651B9]/35 shadow-lg flex items-center justify-center" />
+              {/* Front Frosted Folder Pocket (Cards emerge from behind this) */}
+              <div className="relative z-20 w-[94%] sm:w-[90%] h-11 sm:h-15 rounded-xl sm:rounded-2xl bg-[#081330]/85 backdrop-blur-md border border-white/15 shadow-xl flex items-center justify-between px-3 sm:px-4">
+                <span className="text-[10px] sm:text-xs font-bold text-white flex items-center gap-1.5">
+                  <span className="w-2 h-2 rounded-full bg-[#FF8500] animate-pulse" />
+                  Studio Core
+                </span>
+                <span className="text-[9px] sm:text-[10px] font-mono font-bold text-[#FFA133] bg-[#FF8500]/15 px-2 py-0.5 rounded-full border border-[#FF8500]/25">
+                  +5 More
+                </span>
+              </div>
             </div>
           </div>
 

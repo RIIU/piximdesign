@@ -42,7 +42,7 @@ export const Footer: React.FC = () => {
       {/* ================================================================
           BAND 1: Main Footer Navigation & Studio Profile (1:1 from ref)
          ================================================================ */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 md:py-20">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 md:py-14">
         <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-12 gap-8 sm:gap-10 lg:gap-8 xl:gap-12">
           
           {/* Column 1: Brand Info + CTA Button + Social Links */}

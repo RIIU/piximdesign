@@ -28,7 +28,7 @@ export const BrandStoriesSection: React.FC<BrandStoriesSectionProps> = ({ onOpen
     <section
       ref={sectionRef}
       id="portfolioSection"
-      className="steps-section relative py-20 sm:py-24 lg:py-28 overflow-x-clip bg-gradient-to-b from-[#081330] via-[#0B1E52] to-[#081330]"
+      className="steps-section relative py-10 sm:py-14 lg:py-16 overflow-x-clip bg-gradient-to-b from-[#081330] via-[#0B1E52] to-[#081330]"
       style={{
         backgroundImage:
           "radial-gradient(ellipse 65% 50% at 20% 30%, rgba(255, 133, 0, 0.12) 0%, rgba(38, 81, 185, 0.16) 50%, transparent 80%)",
@@ -82,46 +82,46 @@ export const BrandStoriesSection: React.FC<BrandStoriesSectionProps> = ({ onOpen
             </div>
           </div>
 
-          {/* Right Column: Scrolling Case Studies Image Cards (2-col grid on mobile) */}
+          {/* Right Column: Scrolling Case Studies Image Cards (Elevated 1-col on mobile, sticky-scrolling on desktop) */}
           <div
             ref={rightColRef}
-            className="steps-right w-full lg:w-[58%] xl:w-[60%] grid grid-cols-2 lg:flex lg:flex-col gap-3 sm:gap-6 lg:gap-14 relative z-10"
+            className="steps-right w-full lg:w-[58%] xl:w-[60%] flex flex-col gap-6 sm:gap-10 lg:gap-14 relative z-10"
           >
-            {CASE_STUDIES.map((study, idx) => {
-              const isLast = idx === CASE_STUDIES.length - 1;
-              return (
+            {CASE_STUDIES.map((study) => (
               <div
                 key={study.id}
                 onClick={() => setActiveCaseStudy(study)}
-                className={`step-content portfolio-card cursor-pointer group w-full ${isLast ? "col-span-2 lg:col-span-1" : "col-span-1"}`}
+                className="step-content portfolio-card cursor-pointer group w-full"
               >
                 <div className="portfolio-work-item relative rounded-2xl sm:rounded-3xl overflow-hidden border border-blue-400/20 hover:border-[#FF8500]/60 transition-all duration-500 shadow-2xl bg-[#0C1E4E]">
-                  {/* Top Badge: Number and Category */}
-                  <div className="absolute top-2.5 left-2.5 right-2.5 sm:top-5 sm:left-5 sm:right-5 z-30 flex items-center justify-between pointer-events-none gap-1.5">
-                    <span className="shrink-0 font-mono text-[9px] sm:text-xs font-black tracking-widest text-[#FFA133] px-2 sm:px-3.5 py-0.5 sm:py-1.5 rounded-full bg-[#081330]/85 backdrop-blur-md border border-[#FF8500]/30 shadow-lg">
+                  {/* Top Badges: 01 / 05 hidden on mobile per user request */}
+                  <div className="absolute top-3 left-3 right-3 sm:top-5 sm:left-5 sm:right-5 z-30 flex items-center justify-between pointer-events-none gap-2">
+                    {/* Number Badge: Hidden on mobile */}
+                    <span className="hidden sm:inline-flex shrink-0 font-mono text-xs font-black tracking-widest text-[#FFA133] px-3.5 py-1.5 rounded-full bg-[#081330]/85 backdrop-blur-md border border-[#FF8500]/30 shadow-lg">
                       {study.number} / 05
                     </span>
-                    <span className="truncate max-w-[62%] sm:max-w-none text-[9px] sm:text-xs font-semibold text-slate-200 px-2 sm:px-3.5 py-0.5 sm:py-1.5 rounded-full bg-[#081330]/85 backdrop-blur-md border border-white/15 shadow-lg">
+                    {/* Category Badge */}
+                    <span className="ml-auto text-[11px] sm:text-xs font-semibold text-slate-200 px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full bg-[#081330]/85 backdrop-blur-md border border-white/15 shadow-lg">
                       {study.category}
                     </span>
                   </div>
 
                   {/* High-Resolution Mockup Image */}
-                  <div className="relative w-full aspect-[4/3] sm:aspect-[736/491] overflow-hidden bg-slate-900">
+                  <div className="relative w-full aspect-[16/10] sm:aspect-[736/491] overflow-hidden bg-slate-900">
                     <Image
                       src={study.image}
                       alt={study.title}
                       fill
-                      sizes="(max-width: 768px) 50vw, (max-width: 1200px) 736px, 736px"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 736px, 736px"
                       className="object-cover w-full h-full transition-transform duration-700 ease-out group-hover:scale-105"
                     />
                   </div>
 
-                  {/* Backdrop Blur Overlay on Hover - only bottom half */}
+                  {/* Backdrop Blur Overlay on Hover - only bottom half (desktop) */}
                   <div className="work-item-overlay absolute inset-x-0 bottom-0 h-[56%] pointer-events-none z-10 rounded-b-2xl sm:rounded-b-3xl" />
 
-                  {/* Hover Information Box with 3 Metric Pills + View Details (desktop/tablet only) */}
-                  <div className="all-portfolio-info absolute inset-x-0 bottom-0 p-5 sm:p-7 xl:p-8 z-20 hidden sm:flex flex-col justify-end">
+                  {/* Hover Information Box with 3 Metric Pills + View Details (desktop only) */}
+                  <div className="all-portfolio-info absolute inset-x-0 bottom-0 p-5 sm:p-7 xl:p-8 z-20 hidden lg:flex flex-col justify-end">
                     {/* Top Stats Row: 3 metric highlight boxes */}
                     <div className="grid grid-cols-3 gap-2.5 sm:gap-3.5 mb-5">
                       {/* Box 1 */}
@@ -189,18 +189,28 @@ export const BrandStoriesSection: React.FC<BrandStoriesSectionProps> = ({ onOpen
                   </div>
                 </div>
 
-                {/* Mobile text underneath image (always readable on touch screens) */}
-                <div className="lg:hidden mt-2 px-1 text-left">
-                  <h3 className="text-white text-xs sm:text-base font-bold line-clamp-1">
-                    {study.title}
-                  </h3>
-                  <p className="text-[#A7BDB5] text-[10px] sm:text-xs mt-0.5 line-clamp-1">
-                    {study.tagline}
-                  </p>
+                {/* Professional Mobile Card Footer (High-end agency styling) */}
+                <div className="lg:hidden mt-3 px-1.5 flex items-center justify-between gap-3 text-left">
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2">
+                      <h3 className="font-agency text-base font-bold text-white tracking-tight truncate group-hover:text-[#FFA133] transition-colors">
+                        {study.title}
+                      </h3>
+                      <span className="font-mono text-[10px] font-bold text-[#FFA133] px-2 py-0.5 rounded-full bg-[#FF8500]/15 border border-[#FF8500]/30 shrink-0">
+                        {study.stat1.value}
+                      </span>
+                    </div>
+                    <p className="text-slate-400 text-xs truncate mt-0.5">
+                      {study.tagline}
+                    </p>
+                  </div>
+
+                  <div className="w-8 h-8 rounded-full bg-[#0C1E4E] border border-blue-400/30 flex items-center justify-center text-[#FFA133] group-hover:bg-[#FF8500] group-hover:text-white transition-all shadow-md shrink-0">
+                    <ArrowUpRight className="w-4 h-4" />
+                  </div>
                 </div>
               </div>
-            );
-          })}
+            ))}
           </div>
 
         </div>

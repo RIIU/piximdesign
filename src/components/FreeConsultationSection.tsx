@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Image from "next/image";
-import { CheckCircle2, ArrowRight, MessageSquare, PhoneCall } from "lucide-react";
+import { CheckCircle2, ArrowRight, MessageSquare, ChevronDown, Check } from "lucide-react";
 
 interface FreeConsultationSectionProps {
   onOpenContact?: () => void;
@@ -16,28 +16,96 @@ const BUDGET_OPTIONS = [
   "More than $50K",
 ];
 
+const PROJECT_OPTIONS = [
+  "Website Design & Development",
+  "Logo & Brand Identity",
+  "UI/UX & Mobile App",
+  "Packaging Design",
+  "Video & Motion Graphics",
+  "Digital Marketing & Ads",
+  "Other / Custom Consultation",
+];
+
 export const FreeConsultationSection: React.FC<FreeConsultationSectionProps> = () => {
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [whatsapp, setWhatsapp] = useState("");
   const [selectedBudget, setSelectedBudget] = useState("$5K - $10K");
+  const [selectedProject, setSelectedProject] = useState("");
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
   const [details, setDetails] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
 
+  // Close dropdown on outside click
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent | TouchEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+        setIsDropdownOpen(false);
+      }
+    };
+    if (isDropdownOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+      document.addEventListener("touchstart", handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("touchstart", handleClickOutside);
+    };
+  }, [isDropdownOpen]);
+
+  // Close dropdown on Escape key
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setIsDropdownOpen(false);
+      }
+    };
+    if (isDropdownOpen) {
+      window.addEventListener("keydown", handleKeyDown);
+    }
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isDropdownOpen]);
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (!selectedProject) {
+      setIsDropdownOpen(true);
+      return;
+    }
+
     setIsSubmitted(true);
+
+    try {
+      fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: fullName.trim(),
+          email: email.trim(),
+          phone: whatsapp.trim(),
+          services: [selectedProject],
+          budget: selectedBudget,
+          message: details.trim(),
+        }),
+      }).catch(() => {});
+    } catch {}
+
     setTimeout(() => {
       setIsSubmitted(false);
       setFullName("");
       setEmail("");
       setWhatsapp("");
+      setSelectedProject("");
       setDetails("");
     }, 4000);
   };
 
   return (
-    <section className="relative w-full py-12 sm:py-20 md:py-24 bg-[#081330] overflow-hidden select-none">
+    <section className="relative w-full py-8 sm:py-12 md:py-14 bg-[#081330] overflow-hidden select-none">
       {/* Background radial lighting matching Pixim branding */}
       <div
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90vw] md:w-[1200px] h-[550px] rounded-full pointer-events-none opacity-25 blur-3xl"
@@ -51,7 +119,7 @@ export const FreeConsultationSection: React.FC<FreeConsultationSectionProps> = (
         {/* ==============================================================
             MAIN CONSULTATION HERO CARD (1:1 from User Uploaded Reference)
            ============================================================== */}
-        <div className="relative rounded-2xl sm:rounded-[36px] md:rounded-[40px] bg-gradient-to-br from-[#070d1d] via-[#09142b] to-[#0e1832] border border-white/10 p-5 sm:p-10 md:p-14 shadow-2xl overflow-hidden">
+        <div className="relative rounded-2xl sm:rounded-[36px] md:rounded-[40px] bg-gradient-to-br from-[#070d1d] via-[#09142b] to-[#0e1832] border border-white/10 p-5 sm:p-8 md:p-10 shadow-2xl overflow-hidden">
           {/* Subtle warm amber rim glow in top right */}
           <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-[#FF8500]/10 via-[#FFA229]/5 to-transparent rounded-full pointer-events-none blur-3xl" />
 
@@ -61,13 +129,8 @@ export const FreeConsultationSection: React.FC<FreeConsultationSectionProps> = (
                ------------------------------------------------------------ */}
             <div className="lg:col-span-6 flex flex-col justify-between">
               <div>
-                {/* Top Green/Teal Offer Badge */}
-                <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-[#FF8500]/10 border border-[#FF8500]/30 text-[#FFA133] text-xs font-semibold mb-5 sm:mb-6">
-                  <span>Claim a $799 Consultation, on Us!</span>
-                </div>
-
                 {/* Main Headline */}
-                <h2 className="font-agency text-2xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight leading-[1.08] mb-5 sm:mb-6">
+                <h2 className="font-agency text-2xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight leading-[1.08] mb-5 sm:mb-6 pt-1 sm:pt-2">
                   Enhance Your Brand <br />
                   Potential <span className="italic font-serif font-normal text-[#FFA133]">At No Cost!</span>
                 </h2>
@@ -211,6 +274,81 @@ export const FreeConsultationSection: React.FC<FreeConsultationSectionProps> = (
                       );
                     })}
                   </div>
+                </div>
+
+                {/* Select Project (Clean Minimal Luxury Choose Option Dropdown) */}
+                <div className="relative" ref={dropdownRef}>
+                  <label className="block text-xs font-bold uppercase tracking-wider text-white mb-2">
+                    Select Project<span className="text-[#FF8500]">*</span>
+                  </label>
+
+                  {/* Hidden Input for Form Submission */}
+                  <input type="hidden" name="selectedProject" value={selectedProject} />
+
+                  {/* Trigger Box - Clean without icon or secondary subtext */}
+                  <button
+                    type="button"
+                    onClick={() => setIsDropdownOpen((prev) => !prev)}
+                    aria-expanded={isDropdownOpen}
+                    className={`w-full flex items-center justify-between px-4 py-2.5 sm:py-3 rounded-xl sm:rounded-2xl transition-all duration-300 cursor-pointer text-left ${
+                      isDropdownOpen
+                        ? "bg-[#0b1b3d] border border-[#FF8500] shadow-[0_0_20px_rgba(255,133,0,0.2)] ring-1 ring-[#FF8500]/30"
+                        : selectedProject
+                        ? "bg-white/[0.05] hover:bg-white/[0.08] border border-white/20 hover:border-[#FF8500]/50 text-white"
+                        : "bg-white/[0.03] hover:bg-white/[0.06] border border-white/10 hover:border-white/25 text-slate-400"
+                    }`}
+                  >
+                    <span className={`text-sm sm:text-base font-medium truncate ${
+                      selectedProject ? "text-white font-semibold" : "text-slate-400"
+                    }`}>
+                      {selectedProject || "Choose Option.."}
+                    </span>
+
+                    <div
+                      className={`w-6 h-6 rounded-lg flex items-center justify-center transition-transform duration-300 shrink-0 ml-2 ${
+                        isDropdownOpen ? "rotate-180 text-[#FF8500]" : "text-slate-400"
+                      }`}
+                    >
+                      <ChevronDown className="w-4 h-4" />
+                    </div>
+                  </button>
+
+                  {/* Floating Luxury Glassmorphic Dropdown Panel */}
+                  {isDropdownOpen && (
+                    <div
+                      className="absolute top-full mt-2 left-0 right-0 z-50 rounded-2xl bg-[#081433]/98 backdrop-blur-2xl border border-[#2651B9]/40 shadow-[0_25px_60px_-10px_rgba(0,0,0,0.95),0_0_30px_rgba(38,81,185,0.3)] p-1.5 animate-in fade-in zoom-in-95 duration-200 max-h-64 overflow-y-auto"
+                      style={{ scrollbarWidth: "thin" }}
+                    >
+                      <div className="space-y-1">
+                        {PROJECT_OPTIONS.map((opt) => {
+                          const isChosen = selectedProject === opt;
+                          return (
+                            <button
+                              key={opt}
+                              type="button"
+                              onClick={() => {
+                                setSelectedProject(opt);
+                                setIsDropdownOpen(false);
+                              }}
+                              className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl transition-all duration-200 cursor-pointer text-left group ${
+                                isChosen
+                                  ? "bg-[#FF8500]/15 text-[#FFA133] border border-[#FF8500]/40 font-semibold"
+                                  : "hover:bg-white/[0.08] text-slate-200 hover:text-white border border-transparent font-medium"
+                              }`}
+                            >
+                              <span className="text-xs sm:text-sm truncate">
+                                {opt}
+                              </span>
+
+                              {isChosen && (
+                                <Check className="w-4 h-4 text-[#FFA133] shrink-0 ml-2 stroke-[2.5]" />
+                              )}
+                            </button>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  )}
                 </div>
 
                 {/* Project Details */}

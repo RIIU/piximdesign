@@ -28,7 +28,7 @@ export const FaqSplit: React.FC<FaqSplitProps> = ({
   const [open, setOpen] = useState<number | null>(0);
 
   return (
-    <section className="relative py-20 sm:py-28 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+    <section className="relative py-10 sm:py-14 md:py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16">
         {/* Intro + contact card */}
         <div className="lg:col-span-5">

@@ -1,10 +1,10 @@
 "use client";
 
-import React, { useRef, useState, useEffect, useCallback } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
-import { Quote, ChevronLeft, ChevronRight, Star } from "lucide-react";
+import { Quote, ChevronLeft, ChevronRight, Star, Pause, Play, Sparkles, CheckCircle2 } from "lucide-react";
 
 interface TestimonialsSectionProps {
   onOpenContact?: () => void;
@@ -111,17 +111,62 @@ const TESTIMONIALS_DATA = [
 
 export const TestimonialsSection: React.FC<TestimonialsSectionProps> = () => {
   const sectionRef = useRef<HTMLElement>(null);
-  const carouselRef = useRef<HTMLDivElement>(null);
-  const [activeIndex, setActiveIndex] = useState(0);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const tweenRef = useRef<gsap.core.Tween | null>(null);
   const [isPaused, setIsPaused] = useState(false);
 
-  // Mouse drag support for desktop
-  const isDownRef = useRef(false);
-  const startXRef = useRef(0);
-  const scrollLeftRef = useRef(0);
-  const hasDraggedRef = useRef(false);
+  // Triple items for gapless infinite translation
+  const infiniteReviews = [...TESTIMONIALS_DATA, ...TESTIMONIALS_DATA, ...TESTIMONIALS_DATA];
 
-  // Animate on scroll trigger
+  // GSAP continuous fast infinite carousel setup
+  useEffect(() => {
+    const track = trackRef.current;
+    if (!track) return;
+
+    const ctx = gsap.context(() => {
+      // Width of a single set of 8 cards
+      const singleSetWidth = track.scrollWidth / 3;
+      gsap.set(track, { x: 0 });
+
+      // Fast, continuous, ultra-smooth conveyor (26s per full cycle across 8 cards)
+      tweenRef.current = gsap.to(track, {
+        x: `-=${singleSetWidth}`,
+        duration: 26,
+        ease: "none",
+        repeat: -1,
+        modifiers: {
+          x: gsap.utils.unitize((x) => {
+            const current = parseFloat(x);
+            return current % singleSetWidth;
+          }),
+        },
+      });
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
+  // Pause when off-screen to preserve 100% CPU/GPU performance
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el || typeof IntersectionObserver === "undefined") return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          if (!isPaused) tweenRef.current?.resume();
+        } else {
+          tweenRef.current?.pause();
+        }
+      },
+      { threshold: 0.05 }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [isPaused]);
+
+  // Entrance animations on scroll
   useGSAP(
     () => {
       if (typeof window === "undefined") return;
@@ -140,14 +185,14 @@ export const TestimonialsSection: React.FC<TestimonialsSectionProps> = () => {
         },
       });
 
-      gsap.from(".testimonial-carousel-wrap", {
+      gsap.from(".testimonial-fast-carousel-wrap", {
         y: 35,
         opacity: 0,
         duration: 0.85,
         ease: "power3.out",
         clearProps: "all",
         scrollTrigger: {
-          trigger: ".testimonial-carousel-wrap",
+          trigger: ".testimonial-fast-carousel-wrap",
           start: "top 85%",
         },
       });
@@ -155,89 +200,53 @@ export const TestimonialsSection: React.FC<TestimonialsSectionProps> = () => {
     { scope: sectionRef }
   );
 
-  // Helper to scroll by 1 card step
-  const scrollByCard = useCallback((direction: "left" | "right") => {
-    if (!carouselRef.current) return;
-    const container = carouselRef.current;
-    const card = container.querySelector<HTMLElement>(".testimonial-card");
-    const step = card ? card.offsetWidth + 24 : 380;
-
-    if (direction === "right") {
-      if (container.scrollLeft + container.clientWidth >= container.scrollWidth - 20) {
-        container.scrollTo({ left: 0, behavior: "smooth" });
-      } else {
-        container.scrollBy({ left: step, behavior: "smooth" });
-      }
-    } else {
-      if (container.scrollLeft <= 20) {
-        container.scrollTo({ left: container.scrollWidth, behavior: "smooth" });
-      } else {
-        container.scrollBy({ left: -step, behavior: "smooth" });
-      }
-    }
-  }, []);
-
-  // Jump to specific slide index
-  const scrollToIndex = (index: number) => {
-    if (!carouselRef.current) return;
-    const container = carouselRef.current;
-    const card = container.querySelector<HTMLElement>(".testimonial-card");
-    const step = card ? card.offsetWidth + 24 : 380;
-    container.scrollTo({ left: index * step, behavior: "smooth" });
-    setActiveIndex(index);
-  };
-
-  // Sync active dot on scroll
-  const handleScroll = () => {
-    if (!carouselRef.current) return;
-    const container = carouselRef.current;
-    const card = container.querySelector<HTMLElement>(".testimonial-card");
-    const step = card ? card.offsetWidth + 24 : 380;
-    const index = Math.round(container.scrollLeft / step);
-    setActiveIndex(Math.min(Math.max(0, index), TESTIMONIALS_DATA.length - 1));
-  };
-
-  // Autoplay timer
-  useEffect(() => {
+  // Smooth hover slow-down: slows to 15% speed so the user can easily read any card
+  const handleMouseEnter = () => {
     if (isPaused) return;
-    const timer = setInterval(() => {
-      scrollByCard("right");
-    }, 4500);
-
-    return () => clearInterval(timer);
-  }, [isPaused, scrollByCard]);
-
-  // Desktop Mouse Drag Handlers
-  const handleMouseDown = (e: React.MouseEvent) => {
-    if (!carouselRef.current) return;
-    isDownRef.current = true;
-    hasDraggedRef.current = false;
-    startXRef.current = e.pageX - carouselRef.current.offsetLeft;
-    scrollLeftRef.current = carouselRef.current.scrollLeft;
-  };
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (!isDownRef.current || !carouselRef.current) return;
-    e.preventDefault();
-    const x = e.pageX - carouselRef.current.offsetLeft;
-    const walk = (x - startXRef.current) * 1.4;
-    if (Math.abs(walk) > 5) {
-      hasDraggedRef.current = true;
+    if (tweenRef.current) {
+      gsap.to(tweenRef.current, { timeScale: 0.15, duration: 0.4 });
     }
-    carouselRef.current.scrollLeft = scrollLeftRef.current - walk;
   };
 
-  const handleMouseUp = () => {
-    isDownRef.current = false;
+  // Resume full brisk velocity when mouse leaves
+  const handleMouseLeave = () => {
+    if (isPaused) return;
+    if (tweenRef.current) {
+      gsap.to(tweenRef.current, { timeScale: 1, duration: 0.4 });
+    }
+  };
+
+  // Toggle Pause/Play
+  const togglePause = () => {
+    if (isPaused) {
+      tweenRef.current?.resume();
+      if (tweenRef.current) gsap.to(tweenRef.current, { timeScale: 1, duration: 0.3 });
+      setIsPaused(false);
+    } else {
+      tweenRef.current?.pause();
+      setIsPaused(true);
+    }
+  };
+
+  // Manual fast-skip buttons (nudge carousel by 420px forward/backward)
+  const handleNudge = (direction: "left" | "right") => {
+    const track = trackRef.current;
+    if (!track) return;
+    const delta = direction === "right" ? -420 : 420;
+    gsap.to(track, {
+      x: `+=${delta}`,
+      duration: 0.5,
+      ease: "power2.out",
+    });
   };
 
   return (
     <section
       id="testimonials"
       ref={sectionRef}
-      className="relative w-full py-20 sm:py-24 md:py-32 bg-[#050e24] overflow-hidden select-none"
+      className="relative w-full py-10 sm:py-14 md:py-16 bg-[#050e24] overflow-hidden select-none"
     >
-      {/* Background ambient glow */}
+      {/* Background ambient radial glow */}
       <div
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[85vw] md:w-[1100px] h-[500px] rounded-full pointer-events-none opacity-20 blur-3xl"
         style={{
@@ -248,152 +257,142 @@ export const TestimonialsSection: React.FC<TestimonialsSectionProps> = () => {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
-        <div className="testimonial-header flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 sm:mb-16">
+        <div className="testimonial-header flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8 sm:mb-10">
           <div className="max-w-2xl">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FF8500]/10 border border-[#FF8500]/25 text-[#FF8500] text-xs font-bold uppercase tracking-wider mb-3">
+              <Sparkles className="w-3.5 h-3.5" />
+              <span>Verified Client Stories</span>
+            </div>
+
             <h2 className="font-agency text-2xl sm:text-3xl md:text-4xl lg:text-[44px] font-extrabold text-white tracking-tight leading-tight">
               Don&apos;t Just Take Our Word for It
             </h2>
 
-            <p className="font-sherika mt-3.5 sm:mt-4 text-xs sm:text-sm md:text-base text-slate-300 font-normal leading-relaxed">
+            <p className="font-sherika mt-2.5 sm:mt-3 text-xs sm:text-sm md:text-base text-slate-300 font-normal leading-relaxed">
               Real feedback from founders and tech leaders we&apos;ve helped scale across the globe.
             </p>
           </div>
 
-          {/* Desktop Top-Right Prev/Next Buttons */}
-          <div className="hidden md:flex items-center gap-3 shrink-0">
+          {/* Interactive Fast Carousel Controls */}
+          <div className="flex items-center gap-3 shrink-0">
+            {/* Pause / Resume Pill */}
             <button
-              onClick={() => scrollByCard("left")}
-              className="w-11 h-11 rounded-full bg-white/5 hover:bg-[#FF8500] hover:text-black border border-white/10 hover:border-[#FF8500] text-white flex items-center justify-center transition-all duration-200 cursor-pointer shadow-lg hover:scale-105 active:scale-95"
-              aria-label="Previous testimonial"
+              onClick={togglePause}
+              className={`px-3.5 py-2 rounded-full border text-xs font-mono font-medium transition-all duration-300 flex items-center gap-2 cursor-pointer shadow-md ${
+                isPaused
+                  ? "bg-[#FF8500]/20 text-[#FFA133] border-[#FF8500]/50"
+                  : "bg-white/5 hover:bg-white/10 text-slate-300 border-white/10"
+              }`}
+              aria-label={isPaused ? "Resume fast carousel" : "Pause fast carousel"}
             >
-              <ChevronLeft className="w-5 h-5" />
+              {isPaused ? <Play className="w-3.5 h-3.5 fill-current" /> : <Pause className="w-3.5 h-3.5" />}
+              <span>{isPaused ? "Paused" : "Hover to Slow"}</span>
             </button>
-            <button
-              onClick={() => scrollByCard("right")}
-              className="w-11 h-11 rounded-full bg-white/5 hover:bg-[#FF8500] hover:text-black border border-white/10 hover:border-[#FF8500] text-white flex items-center justify-center transition-all duration-200 cursor-pointer shadow-lg hover:scale-105 active:scale-95"
-              aria-label="Next testimonial"
-            >
-              <ChevronRight className="w-5 h-5" />
-            </button>
+
+            {/* Fast Manual Nudge Buttons */}
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => handleNudge("left")}
+                className="w-10 h-10 rounded-full bg-white/5 hover:bg-[#FF8500] hover:text-[#081330] border border-white/10 hover:border-[#FF8500] text-white flex items-center justify-center transition-all duration-200 cursor-pointer shadow-lg hover:scale-105 active:scale-95"
+                aria-label="Previous reviews"
+              >
+                <ChevronLeft className="w-5 h-5" />
+              </button>
+              <button
+                onClick={() => handleNudge("right")}
+                className="w-10 h-10 rounded-full bg-white/5 hover:bg-[#FF8500] hover:text-[#081330] border border-white/10 hover:border-[#FF8500] text-white flex items-center justify-center transition-all duration-200 cursor-pointer shadow-lg hover:scale-105 active:scale-95"
+                aria-label="Next reviews"
+              >
+                <ChevronRight className="w-5 h-5" />
+              </button>
+            </div>
           </div>
         </div>
+      </div>
 
-        {/* ==============================================================
-            INTERACTIVE TESTIMONIALS CAROUSEL
-           ============================================================== */}
-        <div className="testimonial-carousel-wrap relative">
-          {/* Scrollable Track */}
-          <div
-            ref={carouselRef}
-            onMouseEnter={() => setIsPaused(true)}
-            onMouseLeave={() => {
-              setIsPaused(false);
-              handleMouseUp();
-            }}
-            onMouseDown={handleMouseDown}
-            onMouseMove={handleMouseMove}
-            onMouseUp={handleMouseUp}
-            onScroll={handleScroll}
-            className="flex gap-5 sm:gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory [scrollbar-width:none] [&::-webkit-scrollbar]:hidden py-3 px-1 cursor-grab active:cursor-grabbing"
-          >
-            {TESTIMONIALS_DATA.map((item) => (
-              <div
-                key={item.id}
-                className="testimonial-card snap-start shrink-0 w-[84vw] sm:w-[350px] md:w-[380px] lg:w-[400px] group relative rounded-[28px] p-6 sm:p-7 bg-[#0b1b36] border border-white/10 hover:border-[#FF8500]/50 shadow-xl transition-all duration-300 flex flex-col justify-between overflow-hidden hover:-translate-y-1.5"
-              >
-                <div>
-                  {/* Top Row: Stars + Tag */}
-                  <div className="flex items-center justify-between gap-2 mb-4">
-                    <div className="flex items-center gap-1 text-[#FFA133]">
-                      {[...Array(item.rating)].map((_, i) => (
-                        <Star key={i} className="w-3.5 h-3.5 fill-[#FFA133] text-[#FFA133]" />
-                      ))}
-                    </div>
+      {/* ==============================================================
+          FAST CONTINUOUS INFINITE CAROUSEL TRACK
+         ============================================================== */}
+      <div
+        className="testimonial-fast-carousel-wrap relative w-full overflow-hidden select-none py-2"
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+      >
+        {/* Left & Right Smooth Dark Alpha Fade Overlays */}
+        <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-16 sm:w-28 bg-gradient-to-r from-[#050e24] via-[#050e24]/80 to-transparent z-20" />
+        <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-16 sm:w-28 bg-gradient-to-l from-[#050e24] via-[#050e24]/80 to-transparent z-20" />
 
-                    {item.tag && (
-                      <span className="text-[10px] font-mono font-medium px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-slate-400">
-                        {item.tag}
-                      </span>
-                    )}
+        {/* Continuous Gliding Track */}
+        <div
+          ref={trackRef}
+          className="flex gap-5 sm:gap-6 w-max will-change-transform py-3 px-4"
+        >
+          {infiniteReviews.map((item, idx) => (
+            <div
+              key={`${item.id}-${idx}`}
+              className="testimonial-card w-[320px] sm:w-[380px] lg:w-[410px] shrink-0 group relative rounded-[26px] p-6 sm:p-7 bg-[#0b1b36] border border-white/10 hover:border-[#FF8500]/60 shadow-xl transition-all duration-300 flex flex-col justify-between overflow-hidden hover:-translate-y-2 cursor-pointer"
+            >
+              {/* Subtle hover gradient halo */}
+              <div className="absolute -inset-px rounded-[26px] bg-gradient-to-br from-[#FF8500]/15 via-transparent to-[#38BDF8]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+
+              <div className="relative z-10">
+                {/* Top Row: Stars + Tag */}
+                <div className="flex items-center justify-between gap-2 mb-4">
+                  <div className="flex items-center gap-1 text-[#FFA133]">
+                    {[...Array(item.rating)].map((_, i) => (
+                      <Star key={i} className="w-3.5 h-3.5 fill-[#FFA133] text-[#FFA133]" />
+                    ))}
                   </div>
 
-                  {/* Author row with Avatar + Name/Role + Country Flag */}
-                  <div className="flex items-start justify-between gap-3 mb-5">
-                    <div className="flex items-center gap-3">
-                      {/* Rounded avatar pod */}
-                      <div
-                        className={`w-11 h-11 rounded-full ${item.avatarBg} text-white font-bold text-xs flex items-center justify-center shrink-0 border border-white/20 shadow-md`}
-                      >
-                        {item.initials}
-                      </div>
-
-                      <div>
-                        <h3 className="font-agency text-base sm:text-lg font-bold text-white leading-tight">
-                          {item.author}
-                        </h3>
-                        <p className="text-[11px] text-slate-400 font-medium line-clamp-1 mt-0.5">
-                          {item.role}
-                        </p>
-                      </div>
-                    </div>
-
-                    {/* Flag */}
-                    <span className="text-xl shrink-0 opacity-90">{item.flag}</span>
-                  </div>
-
-                  {/* Vertical accent bar + Review Quote */}
-                  <div className="relative pl-3.5 border-l-2 border-[#FF8500]/70 mt-3">
-                    <p className="text-xs sm:text-sm text-slate-200 leading-relaxed font-normal">
-                      &ldquo;{item.review}&rdquo;
-                    </p>
-                  </div>
+                  {item.tag && (
+                    <span className="text-[10px] font-mono font-medium px-2.5 py-0.5 rounded-full bg-white/5 border border-white/10 text-slate-300">
+                      {item.tag}
+                    </span>
+                  )}
                 </div>
 
-                {/* Bottom Huge Watermark Quotation Icon */}
-                <div className="mt-8 pt-2 flex items-center justify-between border-t border-white/5">
-                  <span className="text-[11px] font-medium text-emerald-400 flex items-center gap-1.5">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-                    Verified Client
-                  </span>
-                  <Quote className="w-8 h-8 text-white/[0.08] group-hover:text-[#FF8500]/25 transition-colors rotate-180" />
+                {/* Author row with Avatar + Name/Role + Country Flag */}
+                <div className="flex items-start justify-between gap-3 mb-4">
+                  <div className="flex items-center gap-3 min-w-0">
+                    {/* Rounded avatar pod */}
+                    <div
+                      className={`w-11 h-11 rounded-full ${item.avatarBg} text-white font-bold text-xs flex items-center justify-center shrink-0 border border-white/20 shadow-md`}
+                    >
+                      {item.initials}
+                    </div>
+
+                    <div className="min-w-0">
+                      <h3 className="font-agency text-base sm:text-lg font-bold text-white leading-tight truncate group-hover:text-[#FFA229] transition-colors">
+                        {item.author}
+                      </h3>
+                      <p className="text-[11px] text-slate-400 font-medium line-clamp-1 mt-0.5">
+                        {item.role}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Flag */}
+                  <span className="text-xl shrink-0 opacity-90">{item.flag}</span>
+                </div>
+
+                {/* Vertical accent bar + Review Quote */}
+                <div className="relative pl-3.5 border-l-2 border-[#FF8500]/70 mt-2">
+                  <p className="text-xs sm:text-sm text-slate-200 leading-relaxed font-normal">
+                    &ldquo;{item.review}&rdquo;
+                  </p>
                 </div>
               </div>
-            ))}
-          </div>
 
-          {/* Bottom Navigation & Indicator Dots */}
-          <div className="mt-8 sm:mt-10 flex items-center justify-center gap-4">
-            <button
-              onClick={() => scrollByCard("left")}
-              className="md:hidden w-10 h-10 rounded-full bg-white/5 hover:bg-[#FF8500] hover:text-black border border-white/10 hover:border-[#FF8500] text-white flex items-center justify-center transition-all duration-200 cursor-pointer active:scale-95"
-              aria-label="Previous testimonial"
-            >
-              <ChevronLeft className="w-4 h-4" />
-            </button>
-
-            <div className="flex items-center gap-2">
-              {TESTIMONIALS_DATA.map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => scrollToIndex(i)}
-                  className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
-                    activeIndex === i
-                      ? "w-8 bg-[#FF8500]"
-                      : "w-2 bg-white/20 hover:bg-white/40"
-                  }`}
-                  aria-label={`Go to slide ${i + 1}`}
-                />
-              ))}
+              {/* Bottom Row: Verified Client Badge + Watermark Quote Icon */}
+              <div className="relative z-10 mt-6 pt-3 flex items-center justify-between border-t border-white/5">
+                <span className="text-[11px] font-medium text-emerald-400 flex items-center gap-1.5">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+                  Verified Review
+                </span>
+                <Quote className="w-7 h-7 text-white/[0.08] group-hover:text-[#FF8500]/25 transition-colors rotate-180" />
+              </div>
             </div>
-
-            <button
-              onClick={() => scrollByCard("right")}
-              className="md:hidden w-10 h-10 rounded-full bg-white/5 hover:bg-[#FF8500] hover:text-black border border-white/10 hover:border-[#FF8500] text-white flex items-center justify-center transition-all duration-200 cursor-pointer active:scale-95"
-              aria-label="Next testimonial"
-            >
-              <ChevronRight className="w-4 h-4" />
-            </button>
-          </div>
+          ))}
         </div>
       </div>
     </section>

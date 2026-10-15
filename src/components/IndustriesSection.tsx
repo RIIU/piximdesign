@@ -85,7 +85,7 @@ export const IndustriesSection: React.FC<IndustriesSectionProps> = ({ onOpenCont
     <section
       id="industries"
       ref={sectionRef}
-      className="relative py-20 sm:py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto"
+      className="relative py-10 sm:py-14 md:py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto"
     >
       {/* Background ambient lighting */}
       <div
@@ -96,7 +96,7 @@ export const IndustriesSection: React.FC<IndustriesSectionProps> = ({ onOpenCont
       />
 
       {/* Section Header */}
-      <div className="industry-reveal text-center max-w-3xl mx-auto mb-12 sm:mb-14 relative z-10">
+      <div className="industry-reveal text-center max-w-3xl mx-auto mb-8 sm:mb-10 relative z-10">
         <h2 className="font-agency text-2xl sm:text-3xl md:text-4xl lg:text-[44px] font-extrabold text-white tracking-tight leading-tight">
           Branding Built Around <br />
           <span className="bg-gradient-to-r from-[#FF8500] via-[#FFA229] to-amber-300 bg-clip-text text-transparent">
