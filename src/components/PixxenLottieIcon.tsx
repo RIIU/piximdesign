@@ -1,7 +1,8 @@
 "use client";
 
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import type { AnimationItem } from "lottie-web";
+import { STATIC_SERVICE_SVGS, SERVICE_TYPE_MAP } from "./serviceIconsData";
 
 interface PixxenLottieIconProps {
   type: string;
@@ -54,18 +55,26 @@ export const PixxenLottieIcon: React.FC<PixxenLottieIconProps> = ({
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const animRef = useRef<AnimationItem | null>(null);
-  const isLoadedRef = useRef(false);
+  const [isLottieReady, setIsLottieReady] = useState(false);
 
+  // Instant static SVG key and markup (0ms load time)
+  const svgKey = SERVICE_TYPE_MAP[type] || "branding";
+  const staticSvgHtml = STATIC_SERVICE_SVGS[svgKey] || STATIC_SERVICE_SVGS["branding"];
   const jsonPath = LOTTIE_MAP[type] || "/lottie/branding.json";
 
   useEffect(() => {
     let isMounted = true;
-    isLoadedRef.current = false;
 
     // Clean up previous instance if any
     if (animRef.current) {
       animRef.current.destroy();
       animRef.current = null;
+    }
+    setIsLottieReady(false);
+
+    // On touch/mobile devices with no hover, the instant SVG is perfect and saves 700KB network lag
+    if (typeof window !== "undefined" && window.matchMedia && !window.matchMedia("(hover: hover)").matches) {
+      return;
     }
 
     const container = containerRef.current;
@@ -75,13 +84,12 @@ export const PixxenLottieIcon: React.FC<PixxenLottieIconProps> = ({
       (entries) => {
         const entry = entries[0];
         if (entry.isIntersecting) {
-          // Disconnect observer once triggered
           if (io) {
             io.disconnect();
             io = null;
           }
 
-          // SVG-only light player: these animations use no expressions
+          // SVG-only light player: loads dynamically in the background without blocking the UI
           import("lottie-web/build/player/lottie_light").then((lottieModule) => {
             if (!isMounted || !containerRef.current) return;
             const lottie = lottieModule.default || lottieModule;
@@ -97,8 +105,7 @@ export const PixxenLottieIcon: React.FC<PixxenLottieIconProps> = ({
 
               anim.addEventListener("DOMLoaded", () => {
                 if (!isMounted) return;
-                isLoadedRef.current = true;
-                // Freeze at frame 0 ready for hover interaction
+                setIsLottieReady(true);
                 anim.goToAndStop(0, true);
               });
 
@@ -134,7 +141,6 @@ export const PixxenLottieIcon: React.FC<PixxenLottieIconProps> = ({
     if (isHovered) {
       anim.goToAndPlay(0, true);
     } else {
-      // Pause smoothly when hover leaves
       anim.pause();
     }
   }, [isHovered]);
@@ -153,12 +159,27 @@ export const PixxenLottieIcon: React.FC<PixxenLottieIconProps> = ({
 
   return (
     <div
-      ref={containerRef}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      className={`relative flex items-center justify-center select-none pointer-events-auto transition-transform duration-300 group-hover:scale-105 [&>svg]:w-full [&>svg]:h-full ${!size && !className.includes("w-") ? "w-16 h-16" : ""} ${className}`}
+      className={`relative flex items-center justify-center select-none pointer-events-auto transition-transform duration-300 group-hover:scale-105 ${!size && !className.includes("w-") ? "w-16 h-16" : ""} ${className}`}
       style={size ? { width: size, height: size } : undefined}
       aria-hidden="true"
-    />
+    >
+      {/* Instant static SVG fallback (Loads in 0ms, zero layout shift, zero blank state) */}
+      <div
+        className={`w-full h-full flex items-center justify-center [&>svg]:w-full [&>svg]:h-full transition-opacity duration-200 ${
+          isLottieReady ? "opacity-0 pointer-events-none absolute inset-0" : "opacity-100"
+        }`}
+        dangerouslySetInnerHTML={{ __html: staticSvgHtml }}
+      />
+
+      {/* Interactive Lottie Animation container */}
+      <div
+        ref={containerRef}
+        className={`w-full h-full flex items-center justify-center [&>svg]:w-full [&>svg]:h-full transition-opacity duration-200 ${
+          isLottieReady ? "opacity-100" : "opacity-0 absolute inset-0 pointer-events-none"
+        }`}
+      />
+    </div>
   );
 };
