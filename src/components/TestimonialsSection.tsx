@@ -336,43 +336,30 @@ export const TestimonialsSection: React.FC<TestimonialsSectionProps> = () => {
               <div className="absolute -inset-px rounded-[26px] bg-gradient-to-br from-[#FF8500]/15 via-transparent to-[#38BDF8]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
 
               <div className="relative z-10">
-                {/* Top Row: Stars + Tag */}
-                <div className="flex items-center justify-between gap-2 mb-4">
-                  <div className="flex items-center gap-1 text-[#FFA133]">
-                    {[...Array(item.rating)].map((_, i) => (
-                      <Star key={i} className="w-3.5 h-3.5 fill-[#FFA133] text-[#FFA133]" />
-                    ))}
-                  </div>
-
-                  {item.tag && (
-                    <span className="text-[10px] font-mono font-medium px-2.5 py-0.5 rounded-full bg-white/5 border border-white/10 text-slate-300">
-                      {item.tag}
-                    </span>
-                  )}
+                {/* Top Row: Stars */}
+                <div className="flex items-center gap-1 text-[#FFA133] mb-4">
+                  {[...Array(item.rating)].map((_, i) => (
+                    <Star key={i} className="w-3.5 h-3.5 fill-[#FFA133] text-[#FFA133]" />
+                  ))}
                 </div>
 
-                {/* Author row with Avatar + Name/Role + Country Flag */}
-                <div className="flex items-start justify-between gap-3 mb-4">
-                  <div className="flex items-center gap-3 min-w-0">
-                    {/* Rounded avatar pod */}
-                    <div
-                      className={`w-11 h-11 rounded-full ${item.avatarBg} text-white font-bold text-xs flex items-center justify-center shrink-0 border border-white/20 shadow-md`}
-                    >
-                      {item.initials}
-                    </div>
-
-                    <div className="min-w-0">
-                      <h3 className="font-agency text-base sm:text-lg font-bold text-white leading-tight truncate group-hover:text-[#FFA229] transition-colors">
-                        {item.author}
-                      </h3>
-                      <p className="text-[11px] text-slate-400 font-medium line-clamp-1 mt-0.5">
-                        {item.role}
-                      </p>
-                    </div>
+                {/* Author row with Avatar + Name/Role */}
+                <div className="flex items-center gap-3 mb-4">
+                  {/* Rounded avatar pod */}
+                  <div
+                    className={`w-11 h-11 rounded-full ${item.avatarBg} text-white font-bold text-xs flex items-center justify-center shrink-0 border border-white/20 shadow-md`}
+                  >
+                    {item.initials}
                   </div>
 
-                  {/* Flag */}
-                  <span className="text-xl shrink-0 opacity-90">{item.flag}</span>
+                  <div className="min-w-0">
+                    <h3 className="font-agency text-base sm:text-lg font-bold text-white leading-tight truncate group-hover:text-[#FFA229] transition-colors">
+                      {item.author}
+                    </h3>
+                    <p className="text-[11px] text-slate-400 font-medium line-clamp-1 mt-0.5">
+                      {item.role}
+                    </p>
+                  </div>
                 </div>
 
                 {/* Vertical accent bar + Review Quote */}
