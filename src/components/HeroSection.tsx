@@ -195,40 +195,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenContact }) => {
           </a>
         </div>
 
-        {/* Trust Strip */}
-        <div className="hero-trust mt-5 sm:mt-8 md:mt-12 w-full max-w-4xl px-2 z-20 flex justify-center">
-          {/* Mobile: Sleek Single-Line Pill */}
-          <div className="md:hidden inline-flex items-center justify-center gap-2 sm:gap-2.5 px-3.5 py-2 rounded-full border border-[#3B82F6]/25 bg-[#0C1E4E]/80 backdrop-blur-xl shadow-[0_8px_24px_rgba(4,10,28,0.5)] text-[11px] sm:text-xs text-white max-w-full overflow-x-auto no-scrollbar">
-            {/* Rating */}
-            <div className="inline-flex items-center gap-1 shrink-0">
-              <div className="flex text-amber-400 shrink-0">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-2.5 h-2.5 sm:w-3 sm:h-3 fill-amber-400" />
-                ))}
-              </div>
-              <span className="font-semibold text-white">4.9/5</span>
-              <span className="text-white/50 text-[10px] hidden min-[380px]:inline">(500+)</span>
-            </div>
-
-            <span className="text-white/25 shrink-0">•</span>
-
-            {/* Brands */}
-            <div className="inline-flex items-center gap-1 shrink-0 font-medium text-slate-200">
-              <Sparkles className="w-3 h-3 text-[#FF8500] shrink-0" />
-              <span>500+ Brands</span>
-            </div>
-
-            <span className="text-white/25 shrink-0">•</span>
-
-            {/* IP Ownership */}
-            <div className="inline-flex items-center gap-1 shrink-0 font-medium text-slate-200">
-              <ShieldCheck className="w-3 h-3 text-[#60A5FA] shrink-0" />
-              <span>100% Vector IP</span>
-            </div>
-          </div>
-
-          {/* Desktop: 3-Column Glass Card */}
-          <div className="hidden md:block w-full rounded-2xl border border-[#3B82F6]/15 bg-[#0C1E4E]/50 backdrop-blur-2xl shadow-[0_8px_32px_0_rgba(4,10,28,0.4)] px-5 py-4">
+        {/* Trust Strip (Hidden on mobile, visible on desktop) */}
+        <div className="hero-trust hidden md:block mt-10 md:mt-12 w-full max-w-4xl px-2 z-20">
+          <div className="w-full rounded-2xl border border-[#3B82F6]/15 bg-[#0C1E4E]/50 backdrop-blur-2xl shadow-[0_8px_32px_0_rgba(4,10,28,0.4)] px-5 py-4">
             <div className="grid grid-cols-3 gap-6 divide-x divide-white/10">
               {/* Rating */}
               <div className="flex items-center justify-center gap-2 whitespace-nowrap">
