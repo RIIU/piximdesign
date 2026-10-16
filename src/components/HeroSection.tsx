@@ -183,14 +183,14 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenContact }) => {
         </div>
       </div>
 
-      {/* Peekly-Style Rotating Circular Dot Orbit Animation behind Hero Headline */}
-      <RotatingDotOrbit />
-
       {/* Bottom gradient fade into #081330 */}
       <div className="absolute bottom-0 left-0 right-0 h-44 bg-gradient-to-t from-[#081330] via-[#081330]/85 to-transparent pointer-events-none z-[2]" />
 
       {/* ── Foreground Hero Content ── */}
       <div className="relative z-10 w-full max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center">
+        {/* Peekly-Style Authentic Expanding Dot Matrix Ripple Animation */}
+        <RotatingDotOrbit />
+
         {/* Studio Badge (like pixxen's green dot + studio name) */}
         <div className="hero-badge flex items-center justify-center gap-2 pb-4 md:pb-5">
           <span className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-[#FF8500]" />

@@ -2,173 +2,82 @@
 
 import React from "react";
 
+/**
+ * Authentic Peekly.app Expanding Ripple Ring Wave over Dot Matrix Grid.
+ * Preserves the exact mathematical wave physics and elliptical masking of Peekly,
+ * customized with Pixim Design brand colors (Electric Cyan, Royal Blue, Signature Orange).
+ */
 export const RotatingDotOrbit: React.FC<{ className?: string }> = ({ className = "" }) => {
   return (
     <div
-      className={`pointer-events-none select-none absolute left-1/2 top-[38%] md:top-[40%] -translate-x-1/2 -translate-y-1/2 w-[380px] h-[380px] sm:w-[620px] sm:h-[620px] md:w-[820px] md:h-[820px] lg:w-[1000px] lg:h-[1000px] flex items-center justify-center z-[1] ${className}`}
-      style={{
-        maskImage: "radial-gradient(circle at 50% 50%, black 28%, rgba(0,0,0,0.8) 55%, rgba(0,0,0,0.3) 72%, transparent 85%)",
-        WebkitMaskImage: "radial-gradient(circle at 50% 50%, black 28%, rgba(0,0,0,0.8) 55%, rgba(0,0,0,0.3) 72%, transparent 85%)",
-      }}
       aria-hidden="true"
+      className={`pointer-events-none select-none absolute inset-0 z-0 flex items-center justify-center overflow-hidden ${className}`}
     >
-      <svg
-        viewBox="0 0 1000 1000"
-        className="w-full h-full overflow-visible"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <defs>
-          <filter id="dot-glow-cyan" x="-30%" y="-30%" width="160%" height="160%">
-            <feGaussianBlur stdDeviation="3" result="blur" />
-            <feComposite in="SourceGraphic" in2="blur" operator="over" />
-          </filter>
-          <filter id="dot-glow-orange" x="-30%" y="-30%" width="160%" height="160%">
-            <feGaussianBlur stdDeviation="3.5" result="blur" />
-            <feComposite in="SourceGraphic" in2="blur" operator="over" />
-          </filter>
-          <radialGradient id="orbit-core-glow" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stopColor="#38BDF8" stopOpacity="0.18" />
-            <stop offset="45%" stopColor="#2563EB" stopOpacity="0.08" />
-            <stop offset="100%" stopColor="#081330" stopOpacity="0" />
-          </radialGradient>
-        </defs>
+      <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
+        {/* 1. Subtle central ambient color glow */}
+        <div className="absolute top-[38%] md:top-[40%] left-1/2 -translate-x-1/2 -translate-y-1/2 h-[550px] w-[800px] md:h-[650px] md:w-[950px] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(38,81,185,0.22)_0%,rgba(255,133,0,0.08)_40%,transparent_70%)]" />
 
-        {/* Soft central radiant aura behind dots */}
-        <circle cx="500" cy="500" r="320" fill="url(#orbit-core-glow)" />
+        {/* 2. Peekly's Exact Dot Matrix Field with Elliptical Doughnut Mask */}
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage: "radial-gradient(circle, rgba(56, 189, 248, 0.32) 1.1px, transparent 1.1px)",
+            backgroundSize: "8px 8px",
+            backgroundPosition: "center center",
+            maskImage:
+              "radial-gradient(ellipse 56% 40% at 50% 38%, transparent 26%, black 46%, transparent 80%)",
+            WebkitMaskImage:
+              "radial-gradient(ellipse 56% 40% at 50% 38%, transparent 26%, black 46%, transparent 80%)",
+          }}
+        />
 
-        {/* Ring 1 - Innermost Cyan Dots (Clockwise, 42s) */}
-        <g style={{ transformOrigin: "500px 500px", animation: "orbit-spin 42s linear infinite" }}>
-          <circle
-            cx="500"
-            cy="500"
-            r="95"
-            fill="none"
-            stroke="#38BDF8"
-            strokeWidth="3"
-            strokeLinecap="round"
-            strokeDasharray="0 20"
-            opacity="0.75"
-            filter="url(#dot-glow-cyan)"
-          />
-        </g>
+        {/* 3. The Animated Expanding Ripple Wave masked through the Dot Matrix */}
+        <div
+          className="absolute inset-0"
+          style={{
+            maskImage: "radial-gradient(circle, black 1.1px, transparent 1.1px)",
+            WebkitMaskImage: "radial-gradient(circle, black 1.1px, transparent 1.1px)",
+            maskSize: "8px 8px",
+            WebkitMaskSize: "8px 8px",
+            maskPosition: "center center",
+            WebkitMaskPosition: "center center",
+          }}
+        >
+          <div
+            className="absolute inset-0"
+            style={{
+              maskImage:
+                "radial-gradient(ellipse 56% 40% at 50% 38%, transparent 26%, black 46%, transparent 80%)",
+              WebkitMaskImage:
+                "radial-gradient(ellipse 56% 40% at 50% 38%, transparent 26%, black 46%, transparent 80%)",
+            }}
+          >
+            <div className="absolute left-1/2 top-[38%] md:top-[40%] h-[1200px] w-[1200px] -translate-x-1/2 -translate-y-1/2">
+              {/* Primary Ripple Wave 1 (Pixim Electric Cyan + Radiant Brand Orange Crest) */}
+              <div
+                className="absolute inset-0 rounded-full animate-ripple-ring"
+                style={{
+                  background:
+                    "radial-gradient(circle, transparent 43%, rgba(56, 189, 248, 0.85) 46%, rgba(255, 133, 0, 1) 50%, rgba(56, 189, 248, 0.85) 54%, transparent 57%)",
+                  opacity: 0,
+                }}
+              />
 
-        {/* Ring 2 - Electric Blue Dots (Counter-Clockwise, 54s) */}
-        <g style={{ transformOrigin: "500px 500px", animation: "orbit-spin-reverse 54s linear infinite" }}>
-          <circle
-            cx="500"
-            cy="500"
-            r="155"
-            fill="none"
-            stroke="#60A5FA"
-            strokeWidth="2.5"
-            strokeLinecap="round"
-            strokeDasharray="0 24"
-            opacity="0.6"
-          />
-        </g>
-
-        {/* Ring 3 - Pixim Brand Orange Glowing Dots (Clockwise, 48s) */}
-        <g style={{ transformOrigin: "500px 500px", animation: "orbit-spin 48s linear infinite" }}>
-          <circle
-            cx="500"
-            cy="500"
-            r="225"
-            fill="none"
-            stroke="#FF8500"
-            strokeWidth="3.2"
-            strokeLinecap="round"
-            strokeDasharray="0 30"
-            opacity="0.8"
-            filter="url(#dot-glow-orange)"
-          />
-        </g>
-
-        {/* Subtle Arc Track Accent between rings */}
-        <g style={{ transformOrigin: "500px 500px", animation: "orbit-spin-reverse 75s linear infinite" }}>
-          <circle
-            cx="500"
-            cy="500"
-            r="260"
-            fill="none"
-            stroke="#38BDF8"
-            strokeWidth="1.2"
-            strokeDasharray="30 160"
-            opacity="0.3"
-          />
-        </g>
-
-        {/* Ring 4 - Deep Royal Blue Dots (Counter-Clockwise, 68s) */}
-        <g style={{ transformOrigin: "500px 500px", animation: "orbit-spin-reverse 68s linear infinite" }}>
-          <circle
-            cx="500"
-            cy="500"
-            r="305"
-            fill="none"
-            stroke="#3B82F6"
-            strokeWidth="2.8"
-            strokeLinecap="round"
-            strokeDasharray="0 36"
-            opacity="0.55"
-          />
-        </g>
-
-        {/* Ring 5 - Ice Cyan Dots with Glow (Clockwise, 78s) */}
-        <g style={{ transformOrigin: "500px 500px", animation: "orbit-spin 78s linear infinite" }}>
-          <circle
-            cx="500"
-            cy="500"
-            r="385"
-            fill="none"
-            stroke="#38BDF8"
-            strokeWidth="3"
-            strokeLinecap="round"
-            strokeDasharray="0 42"
-            opacity="0.65"
-            filter="url(#dot-glow-cyan)"
-          />
-        </g>
-
-        {/* Ring 6 - Pixim Warm Amber / Orange (Counter-Clockwise, 62s) */}
-        <g style={{ transformOrigin: "500px 500px", animation: "orbit-spin-reverse 62s linear infinite" }}>
-          <circle
-            cx="500"
-            cy="500"
-            r="465"
-            fill="none"
-            stroke="#FFA229"
-            strokeWidth="3"
-            strokeLinecap="round"
-            strokeDasharray="0 48"
-            opacity="0.6"
-            filter="url(#dot-glow-orange)"
-          />
-        </g>
-
-        {/* Ring 7 - Outer Perimeter Dots (Clockwise, 96s) */}
-        <g style={{ transformOrigin: "500px 500px", animation: "orbit-spin 96s linear infinite" }}>
-          <circle
-            cx="500"
-            cy="500"
-            r="545"
-            fill="none"
-            stroke="#60A5FA"
-            strokeWidth="2.2"
-            strokeLinecap="round"
-            strokeDasharray="0 54"
-            opacity="0.45"
-          />
-        </g>
-
-        {/* Orbital Satellites / Glowing Accent Beacons */}
-        <g style={{ transformOrigin: "500px 500px", animation: "orbit-spin 34s linear infinite" }}>
-          <circle cx="500" cy="275" r="4.5" fill="#FF8500" filter="url(#dot-glow-orange)" />
-          <circle cx="500" cy="725" r="3.5" fill="#38BDF8" filter="url(#dot-glow-cyan)" />
-        </g>
-        <g style={{ transformOrigin: "500px 500px", animation: "orbit-spin-reverse 44s linear infinite" }}>
-          <circle cx="115" cy="500" r="4" fill="#38BDF8" filter="url(#dot-glow-cyan)" />
-          <circle cx="885" cy="500" r="4.5" fill="#FFA229" filter="url(#dot-glow-orange)" />
-        </g>
-      </svg>
+              {/* Secondary Ripple Wave 2 (Delayed by 2s for continuous hypnotic wave flow) */}
+              <div
+                className="absolute inset-0 rounded-full animate-ripple-ring-delayed"
+                style={{
+                  background:
+                    "radial-gradient(circle, transparent 43%, rgba(96, 165, 250, 0.8) 46%, rgba(255, 162, 41, 0.95) 50%, rgba(96, 165, 250, 0.8) 54%, transparent 57%)",
+                  opacity: 0,
+                }}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
+
+export default RotatingDotOrbit;
