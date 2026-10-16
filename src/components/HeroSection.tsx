@@ -9,6 +9,33 @@ interface HeroSectionProps {
   onOpenContact?: () => void;
 }
 
+const CELESTIAL_STARS = [
+  { top: "10%", left: "12%", size: 1.5, delay: "0s", duration: "3.2s" },
+  { top: "16%", left: "84%", size: 2, delay: "1.1s", duration: "4.5s" },
+  { top: "24%", left: "36%", size: 1, delay: "0.5s", duration: "2.8s" },
+  { top: "8%", left: "64%", size: 1.5, delay: "2.3s", duration: "3.9s" },
+  { top: "32%", left: "90%", size: 2.5, delay: "1.7s", duration: "5.1s" },
+  { top: "40%", left: "6%", size: 1, delay: "0.8s", duration: "3.4s" },
+  { top: "48%", left: "20%", size: 1.5, delay: "2.8s", duration: "4.2s" },
+  { top: "14%", left: "46%", size: 2, delay: "1.4s", duration: "3.6s" },
+  { top: "60%", left: "94%", size: 1.5, delay: "0.2s", duration: "4.8s" },
+  { top: "26%", left: "70%", size: 1, delay: "3.1s", duration: "3.1s" },
+  { top: "6%", left: "26%", size: 2, delay: "2.0s", duration: "4.0s" },
+  { top: "44%", left: "80%", size: 1.5, delay: "1.9s", duration: "3.7s" },
+  { top: "66%", left: "12%", size: 1, delay: "0.9s", duration: "4.4s" },
+  { top: "54%", left: "62%", size: 2, delay: "2.5s", duration: "5.2s" },
+  { top: "20%", left: "96%", size: 1.5, delay: "1.2s", duration: "3.3s" },
+  { top: "36%", left: "28%", size: 1, delay: "3.5s", duration: "4.1s" },
+  { top: "70%", left: "40%", size: 1.5, delay: "2.1s", duration: "3.8s" },
+  { top: "78%", left: "86%", size: 2, delay: "0.7s", duration: "4.6s" },
+  { top: "12%", left: "5%", size: 1.5, delay: "1.6s", duration: "3.5s" },
+  { top: "58%", left: "4%", size: 1, delay: "2.9s", duration: "4.9s" },
+  { top: "82%", left: "24%", size: 1.5, delay: "1.8s", duration: "3.9s" },
+  { top: "75%", left: "68%", size: 1, delay: "0.4s", duration: "4.3s" },
+  { top: "30%", left: "52%", size: 2, delay: "2.7s", duration: "4.7s" },
+  { top: "64%", left: "50%", size: 1.5, delay: "1.3s", duration: "3.6s" },
+];
+
 export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenContact }) => {
   const heroRef = useRef<HTMLDivElement>(null);
 
@@ -98,38 +125,76 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenContact }) => {
       ref={heroRef}
       className="relative min-h-[85vh] lg:min-h-[92vh] w-full flex flex-col items-center justify-center pt-20 sm:pt-24 md:pt-28 pb-10 sm:pb-12 md:pb-14 overflow-hidden bg-[#081330]"
     >
-      {/* ── Background ambient glows ── */}
-      <div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-[55%] w-[110vw] md:w-[1200px] h-[500px] md:h-[750px] rounded-full pointer-events-none z-0"
-        style={{
-          background:
-            "radial-gradient(ellipse at center, rgba(38, 81, 185, 0.18) 0%, rgba(59, 130, 246, 0.08) 35%, rgba(255, 133, 0, 0.05) 55%, transparent 72%)",
-        }}
-      />
-
-      {/* Subtle grid texture */}
-      <div
-        className="absolute inset-0 opacity-[0.025] pointer-events-none z-0"
-        style={{
-          backgroundImage: `linear-gradient(to right, #3B82F6 1px, transparent 1px), linear-gradient(to bottom, #3B82F6 1px, transparent 1px)`,
-          backgroundSize: "64px 64px",
-        }}
-      />
-
-      {/* Bottom gradient fade */}
-      <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-[#081330] via-[#081330]/80 to-transparent pointer-events-none z-[2]" />
-
-      {/* ── 3D decorative orb at bottom center (like pixxen's 3D shape) ── */}
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-[30%] w-[320px] h-[320px] md:w-[420px] md:h-[420px] pointer-events-none z-[2]">
+      {/* ── Peekly-Style Atmospheric Aurora Sky Hero Background (Using Pixim Brand Colors) ── */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+        {/* Layer 1: Electric Cyan & Deep Royal Blue Aurora Ribbon */}
         <div
-          className="w-full h-full rounded-full"
+          className="absolute -top-1/4 -left-1/4 w-[150vw] md:w-[1300px] h-[600px] md:h-[850px] rounded-full blur-3xl md:blur-[110px] animate-aurora-1"
           style={{
             background:
-              "radial-gradient(circle at 40% 35%, rgba(255, 133, 0, 0.35) 0%, rgba(38, 81, 185, 0.2) 40%, rgba(56, 189, 248, 0.08) 65%, transparent 85%)",
-            filter: "blur(40px)",
+              "radial-gradient(ellipse at 40% 50%, rgba(38, 81, 185, 0.45) 0%, rgba(59, 130, 246, 0.3) 35%, rgba(56, 189, 248, 0.16) 55%, transparent 75%)",
+          }}
+        />
+
+        {/* Layer 2: Radiant Pixim Orange / Amber Ambient Flare */}
+        <div
+          className="absolute top-1/4 -right-1/4 w-[140vw] md:w-[1200px] h-[550px] md:h-[800px] rounded-full blur-3xl md:blur-[100px] animate-aurora-2"
+          style={{
+            background:
+              "radial-gradient(ellipse at 60% 45%, rgba(255, 133, 0, 0.34) 0%, rgba(255, 162, 41, 0.2) 38%, rgba(251, 191, 36, 0.08) 58%, transparent 75%)",
+          }}
+        />
+
+        {/* Layer 3: Deep Midnight Indigo Core Aurora */}
+        <div
+          className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[120vw] md:w-[1100px] h-[500px] md:h-[700px] rounded-full blur-3xl md:blur-[120px] animate-aurora-3"
+          style={{
+            background:
+              "radial-gradient(circle at center, rgba(30, 58, 138, 0.4) 0%, rgba(38, 81, 185, 0.24) 40%, rgba(8, 19, 48, 0.12) 65%, transparent 80%)",
+          }}
+        />
+
+        {/* Layer 4: Diagonal Atmospheric Sweeping Light Beam */}
+        <div
+          className="absolute -top-1/3 left-1/4 w-[200%] h-[180%] blur-3xl md:blur-[80px] animate-aurora-beam pointer-events-none"
+          style={{
+            background:
+              "linear-gradient(135deg, transparent 30%, rgba(59, 130, 246, 0.16) 48%, rgba(255, 133, 0, 0.12) 54%, transparent 72%)",
+          }}
+        />
+
+        {/* Layer 5: Celestial Twinkling Starfield */}
+        <div className="absolute inset-0 pointer-events-none">
+          {CELESTIAL_STARS.map((star, idx) => (
+            <div
+              key={idx}
+              className="absolute rounded-full bg-white shadow-[0_0_8px_rgba(255,255,255,0.85)]"
+              style={{
+                top: star.top,
+                left: star.left,
+                width: `${star.size}px`,
+                height: `${star.size}px`,
+                animation: `celestial-twinkle ${star.duration} ease-in-out infinite`,
+                animationDelay: star.delay,
+              }}
+            />
+          ))}
+        </div>
+
+        {/* Subtle Architectural Blueprint Grid matching Pixim Design System */}
+        <div
+          className="absolute inset-0 opacity-[0.035]"
+          style={{
+            backgroundImage: `linear-gradient(to right, #3B82F6 1px, transparent 1px), linear-gradient(to bottom, #3B82F6 1px, transparent 1px)`,
+            backgroundSize: "64px 64px",
+            maskImage: "radial-gradient(ellipse 80% 70% at 50% 45%, #000 30%, transparent 100%)",
+            WebkitMaskImage: "radial-gradient(ellipse 80% 70% at 50% 45%, #000 30%, transparent 100%)",
           }}
         />
       </div>
+
+      {/* Bottom gradient fade into #081330 */}
+      <div className="absolute bottom-0 left-0 right-0 h-44 bg-gradient-to-t from-[#081330] via-[#081330]/85 to-transparent pointer-events-none z-[2]" />
 
       {/* ── Foreground Hero Content ── */}
       <div className="relative z-10 w-full max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center">
