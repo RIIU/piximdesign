@@ -510,15 +510,10 @@ html[data-currency="BDT"] .cur-usd {
 }
 
 .animate-ripple-ring {
-  animation: ripple-ring 4s linear infinite;
+  animation: ripple-ring 3.8s linear infinite;
   will-change: transform, opacity;
 }
 
-.animate-ripple-ring-delayed {
-  animation: ripple-ring 4s linear infinite;
-  animation-delay: 2s;
-  will-change: transform, opacity;
-}
 
 
 

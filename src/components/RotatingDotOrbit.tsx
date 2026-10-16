@@ -53,22 +53,12 @@ export const RotatingDotOrbit: React.FC<{ className?: string }> = ({ className =
             }}
           >
             <div className="absolute left-1/2 top-[38%] md:top-[40%] h-[1200px] w-[1200px] -translate-x-1/2 -translate-y-1/2">
-              {/* Primary Ripple Wave 1 (Pixim Electric Cyan + Radiant Brand Orange Crest) */}
+              {/* Expanding Ripple Wave (3.8s loop: Pixim Electric Cyan + Radiant Brand Orange Crest) */}
               <div
                 className="absolute inset-0 rounded-full animate-ripple-ring"
                 style={{
                   background:
-                    "radial-gradient(circle, transparent 43%, rgba(56, 189, 248, 0.85) 46%, rgba(255, 133, 0, 1) 50%, rgba(56, 189, 248, 0.85) 54%, transparent 57%)",
-                  opacity: 0,
-                }}
-              />
-
-              {/* Secondary Ripple Wave 2 (Delayed by 2s for continuous hypnotic wave flow) */}
-              <div
-                className="absolute inset-0 rounded-full animate-ripple-ring-delayed"
-                style={{
-                  background:
-                    "radial-gradient(circle, transparent 43%, rgba(96, 165, 250, 0.8) 46%, rgba(255, 162, 41, 0.95) 50%, rgba(96, 165, 250, 0.8) 54%, transparent 57%)",
+                    "radial-gradient(circle, transparent 42.5%, rgba(56, 189, 248, 0.9) 46%, rgba(255, 133, 0, 1) 50%, rgba(56, 189, 248, 0.9) 54%, transparent 57.5%)",
                   opacity: 0,
                 }}
               />
