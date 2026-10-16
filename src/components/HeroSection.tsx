@@ -4,6 +4,7 @@ import React, { useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { Sparkles, ShieldCheck, Star, ArrowRight } from "lucide-react";
+import { RotatingDotOrbit } from "./RotatingDotOrbit";
 
 interface HeroSectionProps {
   onOpenContact?: () => void;
@@ -181,6 +182,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenContact }) => {
           ))}
         </div>
       </div>
+
+      {/* Peekly-Style Rotating Circular Dot Orbit Animation behind Hero Headline */}
+      <RotatingDotOrbit />
 
       {/* Bottom gradient fade into #081330 */}
       <div className="absolute bottom-0 left-0 right-0 h-44 bg-gradient-to-t from-[#081330] via-[#081330]/85 to-transparent pointer-events-none z-[2]" />

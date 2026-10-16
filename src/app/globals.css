@@ -472,6 +472,36 @@ html[data-currency="BDT"] .cur-usd {
   will-change: transform, opacity;
 }
 
+/* ── Rotating Concentric Dot Orbit Animation (Peekly-Style) ── */
+@keyframes orbit-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes orbit-spin-reverse {
+  from {
+    transform: rotate(360deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+.animate-orbit-spin {
+  animation: orbit-spin 50s linear infinite;
+  will-change: transform;
+}
+
+.animate-orbit-spin-reverse {
+  animation: orbit-spin-reverse 65s linear infinite;
+  will-change: transform;
+}
+
+
 
 
 
