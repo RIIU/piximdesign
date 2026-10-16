@@ -201,7 +201,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenContact }) => {
 
         {/* Service Pill Tags */}
         <div className="hero-pills flex flex-wrap justify-center gap-1.5 sm:gap-2 pb-4 sm:pb-5 md:pb-7">
-          {["Branding", "Web Design", "Digital Marketing", "Motion Graphics"].map(
+          {["Branding", "Web Design", "Digital Marketing"].map(
             (tag) => (
               <span
                 key={tag}
