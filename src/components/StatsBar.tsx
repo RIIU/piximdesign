@@ -4,7 +4,7 @@ import React, { useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
-import { ArrowUpRight, Play, Sparkles } from "lucide-react";
+import { ArrowUpRight, Play } from "lucide-react";
 
 interface StatsBarProps {
   className?: string;
@@ -67,11 +67,6 @@ export const StatsBar: React.FC<StatsBarProps> = ({ className = "", onOpenContac
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="stats-header text-center max-w-3xl mx-auto mb-6 sm:mb-8 md:mb-10">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FF8500]/10 border border-[#FF8500]/25 text-[#FF8500] text-xs font-bold uppercase tracking-wider mb-3.5 sm:mb-4">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>Proven Track Record</span>
-          </div>
-
           <h2 className="font-agency text-2xl sm:text-3xl md:text-4xl lg:text-[44px] font-extrabold text-white tracking-tight leading-tight">
             The Massive <span className="bg-gradient-to-r from-[#FF8500] via-[#FFA229] to-amber-300 bg-clip-text text-transparent">Brand Growth</span> <br />
             Is Right Here.

@@ -4,7 +4,7 @@ import React, { useRef, useState, useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
-import { Quote, ChevronLeft, ChevronRight, Star, Pause, Play, Sparkles, CheckCircle2 } from "lucide-react";
+import { Quote, ChevronLeft, ChevronRight, Star, Pause, Play, CheckCircle2 } from "lucide-react";
 
 interface TestimonialsSectionProps {
   onOpenContact?: () => void;
@@ -259,11 +259,6 @@ export const TestimonialsSection: React.FC<TestimonialsSectionProps> = () => {
         {/* Section Header */}
         <div className="testimonial-header flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8 sm:mb-10">
           <div className="max-w-2xl">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FF8500]/10 border border-[#FF8500]/25 text-[#FF8500] text-xs font-bold uppercase tracking-wider mb-3">
-              <Sparkles className="w-3.5 h-3.5" />
-              <span>Verified Client Stories</span>
-            </div>
-
             <h2 className="font-agency text-2xl sm:text-3xl md:text-4xl lg:text-[44px] font-extrabold text-white tracking-tight leading-tight">
               Don&apos;t Just Take Our Word for It
             </h2>
