@@ -122,9 +122,6 @@ export const RotatingTrustBadge: React.FC<RotatingTrustBadgeProps> = ({
 
   return (
     <div className={`flex flex-col items-center justify-center whitespace-nowrap ${className}`}>
-      {/* Subtle top light bar (as seen in mzmedia) */}
-      <div className="w-24 sm:w-36 h-[1px] bg-gradient-to-r from-transparent via-[#3B82F6]/50 to-transparent mb-2.5 opacity-80" />
-
       {/* Rotating pill container (strictly single line, no wrapping) */}
       <a
         href="#testimonials"
