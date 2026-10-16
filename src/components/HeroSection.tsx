@@ -180,17 +180,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenContact }) => {
             />
           ))}
         </div>
-
-        {/* Subtle Architectural Blueprint Grid matching Pixim Design System */}
-        <div
-          className="absolute inset-0 opacity-[0.035]"
-          style={{
-            backgroundImage: `linear-gradient(to right, #3B82F6 1px, transparent 1px), linear-gradient(to bottom, #3B82F6 1px, transparent 1px)`,
-            backgroundSize: "64px 64px",
-            maskImage: "radial-gradient(ellipse 80% 70% at 50% 45%, #000 30%, transparent 100%)",
-            WebkitMaskImage: "radial-gradient(ellipse 80% 70% at 50% 45%, #000 30%, transparent 100%)",
-          }}
-        />
       </div>
 
       {/* Bottom gradient fade into #081330 */}
