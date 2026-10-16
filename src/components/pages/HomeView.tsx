@@ -14,7 +14,6 @@ const IndustriesSection = dynamic(() => import("@/components/IndustriesSection")
 const WhyPiximSection = dynamic(() => import("@/components/WhyPiximSection").then(m => ({ default: m.WhyPiximSection })));
 const ReadyForLogoSection = dynamic(() => import("@/components/ReadyForLogoSection").then(m => ({ default: m.ReadyForLogoSection })));
 const BrandStoriesSection = dynamic(() => import("@/components/BrandStoriesSection").then(m => ({ default: m.BrandStoriesSection })));
-const ProcessSection = dynamic(() => import("@/components/ProcessSection").then(m => ({ default: m.ProcessSection })));
 const TestimonialsSection = dynamic(() => import("@/components/TestimonialsSection").then(m => ({ default: m.TestimonialsSection })));
 const FreeConsultationSection = dynamic(() => import("@/components/FreeConsultationSection").then(m => ({ default: m.FreeConsultationSection })));
 const FaqSection = dynamic(() => import("@/components/FaqSection").then(m => ({ default: m.FaqSection })));
@@ -50,10 +49,7 @@ export function HomeView() {
       {/* 7. Ready for a Professional Logo? Video Showcase CTA */}
       <ReadyForLogoSection onOpenContact={(service, note) => openContact(service, note)} />
 
-      {/* 8. 4-Step Agile Delivery Process ("Quick Delivery, Faster Results") */}
-      <ProcessSection onOpenContact={() => openContact()} />
-
-      {/* 9. Key Metrics & Social Proof (5+ Years, 8+ Team Members, 200+ Happy Clients) */}
+      {/* 8. Key Metrics & Social Proof (5+ Years, 8+ Team Members, 200+ Happy Clients) */}
       <StatsBar onOpenContact={() => openContact()} />
 
       {/* 10. More Recent Work Showcase Animated Infinite Carousel */}
