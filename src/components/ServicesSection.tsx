@@ -167,14 +167,15 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onSelectServic
                   {service.tagline}
                 </p>
 
-                {/* Sub-services / Core Features from specification */}
-                <div className="mt-2.5 sm:mt-4 pt-2.5 sm:pt-3 border-t border-[#2651B9]/15 hidden sm:flex flex-wrap gap-1.5">
+                {/* Sub-services / Core Features - strictly 3 items per line */}
+                <div className="mt-2.5 sm:mt-4 pt-2.5 sm:pt-3 border-t border-white/[0.08] hidden sm:grid grid-cols-3 gap-1 sm:gap-1.5">
                   {service.features.map((feat) => (
                     <span
                       key={feat}
-                      className="inline-flex items-center text-[11px] font-medium text-slate-300 bg-white/5 px-2.5 py-1 rounded-md border border-white/5 group-hover:border-[#FF8500]/25 transition-colors"
+                      title={feat}
+                      className="inline-flex items-center justify-center text-[10px] xl:text-[11px] font-medium text-slate-300 group-hover:text-white bg-white/[0.05] hover:bg-white/[0.10] px-1 sm:px-1.5 py-1 rounded-md border border-transparent group-hover:border-[#FF8500]/35 hover:!border-[#FF8500]/60 transition-all duration-300 text-center tracking-tight"
                     >
-                      • {feat}
+                      <span className="truncate">• {feat}</span>
                     </span>
                   ))}
                 </div>
@@ -183,7 +184,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onSelectServic
               {/* Bottom Row: Pixxen-Style Slide-Arrow Action Button */}
               <div className="relative z-10 mt-4 sm:mt-8 pt-3 sm:pt-5 border-t border-[#2651B9]/25 flex items-center justify-between">
                 <span className="text-[11px] sm:text-xs md:text-sm font-bold text-slate-300 group-hover:text-white transition-colors">
-                  Read More
+                  Explore Service
                 </span>
 
                 <div className="w-7 h-7 sm:w-10 sm:h-10 rounded-full bg-[#081330] border border-[#2651B9]/30 group-hover:bg-[#FF8500] group-hover:border-[#FF8500] text-white flex items-center justify-center transition-all duration-300 shadow-sm overflow-hidden shrink-0">

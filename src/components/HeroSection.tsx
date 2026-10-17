@@ -3,7 +3,7 @@
 import React, { useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import { Sparkles, ShieldCheck, Star, ArrowRight } from "lucide-react";
+import { Globe, ShieldCheck, Star, ArrowRight } from "lucide-react";
 import { RotatingDotOrbit } from "./RotatingDotOrbit";
 import { RotatingTrustBadge } from "./RotatingTrustBadge";
 
@@ -125,13 +125,13 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenContact }) => {
   return (
     <section
       ref={heroRef}
-      className="relative min-h-[85vh] lg:min-h-[92vh] w-full flex flex-col items-center justify-center pt-20 sm:pt-24 md:pt-28 pb-10 sm:pb-12 md:pb-14 overflow-hidden bg-[#081330]"
+      className="relative w-full flex flex-col items-center justify-start sm:justify-center pt-[74px] sm:pt-24 md:pt-32 pb-4 sm:pb-8 md:pb-14 overflow-hidden bg-[#081330] min-h-0 sm:min-h-[85vh] lg:min-h-[92vh]"
     >
       {/* ── Peekly-Style Atmospheric Aurora Sky Hero Background (Using Pixim Brand Colors) ── */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
         {/* Layer 1: Electric Cyan & Deep Royal Blue Aurora Ribbon */}
         <div
-          className="absolute -top-1/4 -left-1/4 w-[150vw] md:w-[1300px] h-[600px] md:h-[850px] rounded-full blur-3xl md:blur-[110px] animate-aurora-1"
+          className="absolute -top-1/4 -left-1/4 w-[130vw] md:w-[1300px] h-[450px] md:h-[850px] rounded-full blur-2xl md:blur-[110px] animate-aurora-1 opacity-75 md:opacity-100"
           style={{
             background:
               "radial-gradient(ellipse at 40% 50%, rgba(38, 81, 185, 0.45) 0%, rgba(59, 130, 246, 0.3) 35%, rgba(56, 189, 248, 0.16) 55%, transparent 75%)",
@@ -140,7 +140,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenContact }) => {
 
         {/* Layer 2: Radiant Pixim Orange / Amber Ambient Flare */}
         <div
-          className="absolute top-1/4 -right-1/4 w-[140vw] md:w-[1200px] h-[550px] md:h-[800px] rounded-full blur-3xl md:blur-[100px] animate-aurora-2"
+          className="absolute top-1/4 -right-1/4 w-[120vw] md:w-[1200px] h-[400px] md:h-[800px] rounded-full blur-2xl md:blur-[100px] animate-aurora-2 opacity-75 md:opacity-100"
           style={{
             background:
               "radial-gradient(ellipse at 60% 45%, rgba(255, 133, 0, 0.34) 0%, rgba(255, 162, 41, 0.2) 38%, rgba(251, 191, 36, 0.08) 58%, transparent 75%)",
@@ -149,7 +149,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenContact }) => {
 
         {/* Layer 3: Deep Midnight Indigo Core Aurora */}
         <div
-          className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[120vw] md:w-[1100px] h-[500px] md:h-[700px] rounded-full blur-3xl md:blur-[120px] animate-aurora-3"
+          className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[110vw] md:w-[1100px] h-[360px] md:h-[700px] rounded-full blur-2xl md:blur-[120px] animate-aurora-3 opacity-65 md:opacity-100"
           style={{
             background:
               "radial-gradient(circle at center, rgba(30, 58, 138, 0.4) 0%, rgba(38, 81, 185, 0.24) 40%, rgba(8, 19, 48, 0.12) 65%, transparent 80%)",
@@ -185,7 +185,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenContact }) => {
       </div>
 
       {/* Bottom gradient fade into #081330 */}
-      <div className="absolute bottom-0 left-0 right-0 h-44 bg-gradient-to-t from-[#081330] via-[#081330]/85 to-transparent pointer-events-none z-[2]" />
+      <div className="absolute bottom-0 left-0 right-0 h-20 sm:h-32 md:h-44 bg-gradient-to-t from-[#081330] via-[#081330]/85 to-transparent pointer-events-none z-[2]" />
 
       {/* ── Foreground Hero Content ── */}
       <div className="relative z-10 w-full max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center">
@@ -193,17 +193,17 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenContact }) => {
         <RotatingDotOrbit />
 
         {/* MZ Media-Style Rotating Trust Badge (with Pixim Brand Content) */}
-        <div className="hero-badge pb-3 sm:pb-4 md:pb-5">
+        <div className="hero-badge pb-2 sm:pb-3 md:pb-5">
           <RotatingTrustBadge onClick={onOpenContact} />
         </div>
 
         {/* Service Pill Tags */}
-        <div className="hero-pills flex flex-wrap justify-center gap-1.5 sm:gap-2 pb-4 sm:pb-5 md:pb-7">
+        <div className="hero-pills flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 pb-2 sm:pb-3.5 md:pb-6">
           {["Branding", "Web Design", "Digital Marketing"].map(
             (tag) => (
               <span
                 key={tag}
-                className="text-white/90 text-[11px] sm:text-sm md:text-base font-light py-1 sm:py-1.5 px-3 sm:px-4 rounded-full border border-[#3B82F6]/20 bg-gradient-to-b from-white/[0.06] to-transparent leading-snug"
+                className="text-white/85 text-[11px] sm:text-xs md:text-sm font-medium py-0.5 sm:py-1.5 px-2.5 sm:px-4 rounded-full border border-sky-400/20 bg-[#0C1E4E]/40 backdrop-blur-md shadow-xs leading-snug whitespace-nowrap"
               >
                 {tag}
               </span>
@@ -212,15 +212,15 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenContact }) => {
         </div>
 
         {/* Main Heading */}
-        <h1 className="hero-heading font-agency font-black text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-[80px] tracking-tight text-white leading-[1.08] max-w-5xl px-2">
+        <h1 className="hero-heading font-agency font-black text-[34px] xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-[80px] tracking-tight text-white leading-[1.04] max-w-5xl px-3 sm:px-2">
           One Stop Solution for{" "}
-          <span className="relative inline-block bg-gradient-to-r from-[#38bdf8] via-[#FF8500] to-[#FF8500] bg-clip-text text-transparent">
+          <span className="relative inline-block bg-gradient-to-r from-[#38bdf8] via-[#FF8500] to-[#FF8500] bg-clip-text text-transparent drop-shadow-[0_2px_16px_rgba(255,133,0,0.35)]">
             Branding
           </span>
         </h1>
 
         {/* Description */}
-        <p className="hero-desc font-sherika mt-3.5 sm:mt-6 text-xs sm:text-base md:text-lg lg:text-xl text-white/80 max-w-2xl lg:max-w-3xl font-normal leading-[1.55] px-2">
+        <p className="hero-desc font-sherika mt-2.5 sm:mt-4 text-[13px] sm:text-base md:text-lg lg:text-xl text-slate-200/85 max-w-md sm:max-w-2xl lg:max-w-3xl font-normal leading-[1.55] px-4 sm:px-2">
           Pixim Design is a highly specialized branding &amp; creative agency that
           brings your bold, disruptive idea to life. We craft iconic brand
           identities, high-performing websites, and stunning visuals for
@@ -228,11 +228,11 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenContact }) => {
         </p>
 
         {/* Dual CTA Buttons */}
-        <div className="hero-ctas flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mt-6 sm:mt-8 w-full px-4 sm:px-0 z-20">
+        <div className="hero-ctas flex flex-col sm:flex-row items-center justify-center gap-2.5 sm:gap-4 mt-4 sm:mt-7 w-full max-w-[320px] sm:max-w-none px-3 sm:px-0 z-20">
           {/* Primary CTA */}
           <button
             onClick={handleCtaClick}
-            className="group relative overflow-hidden cursor-pointer w-full sm:w-auto inline-flex items-center justify-center gap-3 px-6 sm:px-7 md:px-8 py-3.5 md:py-4 rounded-xl bg-[#FF8500] text-[#081330] font-bold text-sm sm:text-base md:text-lg uppercase tracking-wide transition-all duration-300 hover:bg-[#FFa030] active:scale-[0.97] shadow-[0_8px_30px_-6px_rgba(255,133,0,0.45)]"
+            className="group relative overflow-hidden cursor-pointer w-full sm:w-auto inline-flex items-center justify-center gap-2.5 sm:gap-3 px-6 sm:px-7 md:px-8 py-3.5 md:py-4 rounded-xl bg-[#FF8500] text-[#081330] font-bold text-sm sm:text-base md:text-lg uppercase tracking-wide transition-all duration-300 hover:bg-[#FFa030] active:scale-[0.97] shadow-[0_8px_25px_-4px_rgba(255,133,0,0.45)]"
           >
             {/* Arrow circle icon */}
             <span className="flex items-center justify-center w-6 h-6 rounded-full bg-[#081330]/90 shrink-0">
@@ -244,14 +244,34 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenContact }) => {
           {/* Secondary CTA */}
           <a
             href="/services"
-            className="group w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 sm:px-7 md:px-8 py-3.5 md:py-4 rounded-xl border border-white/25 text-white font-semibold text-sm sm:text-base md:text-lg uppercase tracking-wide transition-all duration-300 hover:bg-white hover:text-[#081330] active:scale-[0.97]"
+            className="group w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 sm:px-7 md:px-8 py-3.5 md:py-4 rounded-xl border border-white/20 bg-white/[0.04] backdrop-blur-sm text-white font-semibold text-sm sm:text-base md:text-lg uppercase tracking-wide transition-all duration-300 hover:bg-white hover:text-[#081330] active:scale-[0.97]"
           >
             <span>Our Services</span>
             <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5 opacity-60 group-hover:opacity-100" />
           </a>
         </div>
 
-        {/* Trust Strip (Hidden on mobile, visible on desktop) */}
+        {/* Trust Strip (Mobile: Sleek compact row) */}
+        <div className="hero-trust flex md:hidden items-center justify-between mt-4 w-full max-w-[340px] px-3 py-2 rounded-xl border border-[#3B82F6]/20 bg-[#0C1E4E]/60 backdrop-blur-xl shadow-[0_4px_20px_rgba(4,10,28,0.4)] text-[11px] text-white/85 z-20">
+          <div className="flex items-center gap-1">
+            <Star className="w-3 h-3 fill-amber-400 text-amber-400 shrink-0" />
+            <span className="font-semibold text-white">4.9/5.0</span>
+            <span className="text-white/60">(500+)</span>
+          </div>
+          <span className="text-white/20">|</span>
+          <div className="flex items-center gap-1">
+            <Globe className="w-3 h-3 text-[#FF8500] shrink-0" />
+            <span className="font-medium text-white/95">500+ Brands</span>
+          </div>
+          <span className="text-white/20">|</span>
+          <div className="flex items-center gap-1">
+            <ShieldCheck className="w-3 h-3 text-[#38BDF8] shrink-0" />
+            <span className="font-medium text-white/95">100% Vector IP</span>
+          </div>
+        </div>
+
+
+        {/* Trust Strip (Desktop: Full 3-column card) */}
         <div className="hero-trust hidden md:block mt-10 md:mt-12 w-full max-w-4xl px-2 z-20">
           <div className="w-full rounded-2xl border border-[#3B82F6]/15 bg-[#0C1E4E]/50 backdrop-blur-2xl shadow-[0_8px_32px_0_rgba(4,10,28,0.4)] px-5 py-4">
             <div className="grid grid-cols-3 gap-6 divide-x divide-white/10">
@@ -272,7 +292,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenContact }) => {
 
               {/* Brands count */}
               <div className="flex items-center justify-center gap-2 whitespace-nowrap">
-                <Sparkles className="w-3.5 h-3.5 text-[#FF8500] shrink-0" />
+                <Globe className="w-3.5 h-3.5 text-[#FF8500] shrink-0" />
                 <span className="text-white font-medium text-sm">
                   500+ Brands Worldwide
                 </span>

@@ -143,10 +143,14 @@ const ServiceCard: React.FC<{ service: Service }> = ({ service }) => {
       </h3>
       <p className="relative mt-2 text-sm text-slate-400 leading-relaxed">{service.tagline}</p>
 
-      <ul className="relative mt-4 flex flex-wrap gap-1.5">
+      <ul className="relative mt-4 grid grid-cols-3 gap-1 sm:gap-1.5">
         {service.features.map((feature) => (
-          <li key={feature} className="rounded-lg border border-white/[0.07] bg-white/[0.04] px-2.5 py-1 text-[11px] font-medium text-slate-300">
-            {feature}
+          <li
+            key={feature}
+            title={feature}
+            className="rounded-md border border-transparent group-hover:border-[#FF8500]/35 hover:!border-[#FF8500]/60 bg-white/[0.05] hover:bg-white/[0.10] px-1 sm:px-1.5 py-1 text-[10px] sm:text-[11px] font-medium text-slate-300 group-hover:text-white text-center tracking-tight truncate transition-all duration-300"
+          >
+            • {feature}
           </li>
         ))}
       </ul>

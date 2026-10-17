@@ -2,18 +2,27 @@
 
 import React, { useState, useRef, useEffect } from "react";
 import Image from "next/image";
-import { CheckCircle2, ArrowRight, MessageSquare, ChevronDown, Check } from "lucide-react";
+import { CheckCircle2, ArrowRight, MessageSquare, ChevronDown, Check, Globe, Star, Clock, ShieldCheck } from "lucide-react";
+import { useCurrency } from "@/lib/currency";
 
 interface FreeConsultationSectionProps {
   onOpenContact?: () => void;
 }
 
-const BUDGET_OPTIONS = [
-  "Less than $5K",
-  "$5K - $10K",
-  "$10K - $20K",
-  "$20K - $50K",
-  "More than $50K",
+const BUDGET_OPTIONS_USD = [
+  "Less than $500",
+  "$500 – $1K",
+  "$1K – $2.5K",
+  "$2.5K – $5K",
+  "More than $5K",
+];
+
+const BUDGET_OPTIONS_BDT = [
+  "Less than ৳60K",
+  "৳60K – ৳120K",
+  "৳120K – ৳300K",
+  "৳300K – ৳600K",
+  "More than ৳600K",
 ];
 
 const PROJECT_OPTIONS = [
@@ -27,10 +36,13 @@ const PROJECT_OPTIONS = [
 ];
 
 export const FreeConsultationSection: React.FC<FreeConsultationSectionProps> = () => {
+  const { currency, setCurrency } = useCurrency();
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [whatsapp, setWhatsapp] = useState("");
-  const [selectedBudget, setSelectedBudget] = useState("$5K - $10K");
+  const [budgetIdx, setBudgetIdx] = useState(1);
+  const currentBudgetOptions = currency === "BDT" ? BUDGET_OPTIONS_BDT : BUDGET_OPTIONS_USD;
+  const selectedBudget = currentBudgetOptions[budgetIdx] || currentBudgetOptions[1];
   const [selectedProject, setSelectedProject] = useState("");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -123,78 +135,128 @@ export const FreeConsultationSection: React.FC<FreeConsultationSectionProps> = (
           {/* Subtle warm amber rim glow in top right */}
           <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-[#FF8500]/10 via-[#FFA229]/5 to-transparent rounded-full pointer-events-none blur-3xl" />
 
-          <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-10 lg:gap-14 items-start">
+          <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-10 lg:gap-12 items-stretch">
             {/* ------------------------------------------------------------
-                LEFT COLUMN: Pitch, Benefits, & Advisor Bio
+                LEFT COLUMN: Pitch, Benefits, Bento Metrics & Advisor Bio
                ------------------------------------------------------------ */}
-            <div className="lg:col-span-6 flex flex-col justify-between">
+            <div className="lg:col-span-6 flex flex-col justify-between h-full space-y-6">
               <div>
+                {/* Free Strategy Pill */}
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.05] border border-white/10 text-xs font-semibold text-[#FFA133] mb-4">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#FF8500] animate-pulse" />
+                  Free 30-Min Discovery & Strategy Call
+                </div>
+
                 {/* Main Headline */}
-                <h2 className="font-agency text-2xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight leading-[1.08] mb-5 sm:mb-6 pt-1 sm:pt-2">
+                <h2 className="font-agency text-2xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight leading-[1.08] mb-3 pt-1">
                   Enhance Your Brand <br />
                   Potential <span className="italic font-serif font-normal text-[#FFA133]">At No Cost!</span>
                 </h2>
 
-                {/* 3 Value Checklist Items */}
-                <div className="flex flex-col gap-2.5 sm:gap-3 mb-8 sm:mb-10">
-                  <div className="flex items-center gap-2.5 text-xs sm:text-sm text-slate-300">
+                <p className="text-xs sm:text-sm text-slate-300/90 leading-relaxed mb-5 max-w-lg">
+                  Book a one-on-one strategy session with our creative leads. We analyze your brand, explore growth opportunities, and provide an actionable execution roadmap.
+                </p>
+
+                {/* 4 Value Checklist Items */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3 mb-6">
+                  <div className="flex items-center gap-2 text-xs sm:text-sm text-slate-200">
                     <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-                    <span>Expect a response from us within 24 hours</span>
+                    <span>Response within 24 hours</span>
                   </div>
-                  <div className="flex items-center gap-2.5 text-xs sm:text-sm text-slate-300">
+                  <div className="flex items-center gap-2 text-xs sm:text-sm text-slate-200">
                     <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-                    <span>We&apos;re happy to sign an NDA upon request.</span>
+                    <span>Strict mutual NDA on request</span>
                   </div>
-                  <div className="flex items-center gap-2.5 text-xs sm:text-sm text-slate-300">
+                  <div className="flex items-center gap-2 text-xs sm:text-sm text-slate-200">
                     <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-                    <span>Get access to a team of dedicated product specialists.</span>
+                    <span>Dedicated product specialists</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-xs sm:text-sm text-slate-200">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+                    <span>Tailored scope & budget plan</span>
+                  </div>
+                </div>
+
+                {/* Agency Proof & Trust Bento Grid (Fills vertical gap & adds strong credibility) */}
+                <div className="grid grid-cols-2 gap-2.5 sm:gap-3 pt-1">
+                  <div className="p-3 sm:p-3.5 rounded-2xl bg-white/[0.03] border border-white/10 hover:border-[#FF8500]/40 transition-colors">
+                    <div className="flex items-center justify-between mb-1">
+                      <span className="font-agency text-xl sm:text-2xl font-black text-white">500+</span>
+                      <Globe className="w-4 h-4 text-[#FFA133]" />
+                    </div>
+                    <p className="text-[11px] sm:text-xs text-slate-400 font-medium">Brands Scaled Globally</p>
+                  </div>
+
+                  <div className="p-3 sm:p-3.5 rounded-2xl bg-white/[0.03] border border-white/10 hover:border-[#FF8500]/40 transition-colors">
+                    <div className="flex items-center justify-between mb-1">
+                      <span className="font-agency text-xl sm:text-2xl font-black text-white">4.9 / 5.0</span>
+                      <Star className="w-4 h-4 text-amber-400 fill-amber-400" />
+                    </div>
+                    <p className="text-[11px] sm:text-xs text-slate-400 font-medium">Verified Client Rating</p>
+                  </div>
+
+                  <div className="p-3 sm:p-3.5 rounded-2xl bg-white/[0.03] border border-white/10 hover:border-[#FF8500]/40 transition-colors">
+                    <div className="flex items-center justify-between mb-1">
+                      <span className="font-agency text-xl sm:text-2xl font-black text-white">&lt; 24h</span>
+                      <Clock className="w-4 h-4 text-emerald-400" />
+                    </div>
+                    <p className="text-[11px] sm:text-xs text-slate-400 font-medium">Fast Feasibility Audit</p>
+                  </div>
+
+                  <div className="p-3 sm:p-3.5 rounded-2xl bg-white/[0.03] border border-white/10 hover:border-[#FF8500]/40 transition-colors">
+                    <div className="flex items-center justify-between mb-1">
+                      <span className="font-agency text-xl sm:text-2xl font-black text-white">100%</span>
+                      <ShieldCheck className="w-4 h-4 text-[#60A5FA]" />
+                    </div>
+                    <p className="text-[11px] sm:text-xs text-slate-400 font-medium">Vector IP & Master Files</p>
                   </div>
                 </div>
               </div>
 
               {/* Specialist / Director Profile Pod */}
-              <div className="pt-5 sm:pt-6 border-t border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-4 sm:gap-5">
-                <div className="flex items-center gap-3.5 sm:gap-4">
+              <div className="pt-4 border-t border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 rounded-2xl bg-white/[0.03] border border-white/10">
+                <div className="flex items-center gap-3.5">
                   {/* Avatar Portrait */}
-                  <div className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-2xl overflow-hidden bg-[#e0d6ff] shrink-0 border border-white/20 shadow-lg">
+                  <div className="relative w-14 h-14 sm:w-16 sm:h-16 rounded-2xl overflow-hidden bg-[#e0d6ff] shrink-0 border border-white/20 shadow-lg">
                     <Image
                       src="/images/consultation/director-portrait.png"
                       alt="Sabbir Ahmed - Head of Business"
                       fill
-                      sizes="(max-width: 640px) 72px, 80px"
+                      sizes="(max-width: 640px) 56px, 64px"
                       className="object-cover object-top"
                     />
                   </div>
 
                   <div>
-                    <h3 className="font-agency text-xl sm:text-2xl font-bold text-white tracking-tight">
+                    <h3 className="font-agency text-lg sm:text-xl font-bold text-white tracking-tight">
                       Sabbir Ahmed
                     </h3>
                     <p className="text-xs text-slate-400 font-medium">
                       Head of Business, Pixim Design
                     </p>
-                    <div className="mt-2 flex items-center gap-1.5 text-xs text-slate-300">
+                    <div className="mt-1.5 flex items-center gap-1.5 text-xs text-emerald-300">
                       <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                      <span>Available this week</span>
+                      <span>Available for consultation</span>
                     </div>
                   </div>
                 </div>
 
-                <div className="flex flex-col sm:items-end gap-1.5">
+                <div className="flex flex-row sm:flex-col items-center sm:items-end justify-between sm:justify-center gap-2 pt-2 sm:pt-0 border-t sm:border-t-0 border-white/10">
                   <a
                     href="https://wa.me/8801752971287"
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-300 hover:text-white transition-colors"
+                    className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-200 hover:text-white transition-colors px-3 py-1.5 rounded-lg bg-emerald-500/10 border border-emerald-500/25 hover:bg-emerald-500/20"
                   >
                     <MessageSquare className="w-3.5 h-3.5 text-emerald-400" />
                     <span>+880 1752-971287</span>
                   </a>
                   <a
                     href="tel:+8801752971287"
-                    className="text-xs font-bold text-[#FFA133] hover:underline"
+                    className="text-xs font-bold text-[#FFA133] hover:underline flex items-center gap-1"
                   >
-                    Book a Call Directly
+                    <span>Direct Call</span>
+                    <ArrowRight className="w-3 h-3" />
                   </a>
                 </div>
               </div>
@@ -203,12 +265,12 @@ export const FreeConsultationSection: React.FC<FreeConsultationSectionProps> = (
             {/* ------------------------------------------------------------
                 RIGHT COLUMN: Sleek Form with Budget Chips
                ------------------------------------------------------------ */}
-            <div className="lg:col-span-6 bg-white/[0.02] sm:p-2 rounded-2xl">
-              <form onSubmit={handleSubmit} className="flex flex-col gap-6">
+            <div className="lg:col-span-6 bg-white/[0.025] p-5 sm:p-7 md:p-8 rounded-2xl sm:rounded-3xl border border-white/10 backdrop-blur-md shadow-xl flex flex-col justify-between">
+              <form onSubmit={handleSubmit} className="flex flex-col gap-5 sm:gap-6">
                 {/* Full Name */}
                 <div>
                   <label className="block text-xs font-bold uppercase tracking-wider text-white mb-2">
-                    Full Name
+                    Full Name<span className="text-[#FF8500]">*</span>
                   </label>
                   <input
                     type="text"
@@ -250,23 +312,52 @@ export const FreeConsultationSection: React.FC<FreeConsultationSectionProps> = (
                   </div>
                 </div>
 
-                {/* Project Budget Chips */}
+                {/* Project Budget Chips with USD / BDT Currency Switcher */}
                 <div>
-                  <label className="block text-xs font-bold uppercase tracking-wider text-white mb-2.5 sm:mb-3">
-                    Project Budget
-                  </label>
-                  <div className="grid grid-cols-2 sm:flex sm:flex-wrap gap-2 sm:gap-2.5">
-                    {BUDGET_OPTIONS.map((opt) => {
-                      const isSelected = selectedBudget === opt;
+                  <div className="flex items-center justify-between mb-2.5 sm:mb-3">
+                    <label className="block text-xs font-bold uppercase tracking-wider text-white">
+                      Project Budget
+                    </label>
+
+                    {/* Currency Switcher Toggle ($ USD / ৳ BDT) */}
+                    <div className="flex items-center gap-1 p-0.5 rounded-full bg-[#081538] border border-[#2651B9]/35 shadow-inner">
+                      <button
+                        type="button"
+                        onClick={() => setCurrency("USD")}
+                        className={`px-2.5 sm:px-3 py-1 rounded-full text-[10px] sm:text-xs font-bold tracking-wider transition-all duration-200 cursor-pointer ${
+                          currency === "USD"
+                            ? "bg-gradient-to-r from-[#FF8500] to-[#FFA133] text-white shadow-sm font-extrabold"
+                            : "text-slate-400 hover:text-white"
+                        }`}
+                      >
+                        $ USD
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setCurrency("BDT")}
+                        className={`px-2.5 sm:px-3 py-1 rounded-full text-[10px] sm:text-xs font-bold tracking-wider transition-all duration-200 cursor-pointer ${
+                          currency === "BDT"
+                            ? "bg-gradient-to-r from-[#FF8500] to-[#FFA133] text-white shadow-sm font-extrabold"
+                            : "text-slate-400 hover:text-white"
+                        }`}
+                      >
+                        ৳ BDT
+                      </button>
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                    {currentBudgetOptions.map((opt, idx) => {
+                      const isSelected = budgetIdx === idx;
                       return (
                         <button
                           key={opt}
                           type="button"
-                          onClick={() => setSelectedBudget(opt)}
-                          className={`px-3 py-2 rounded-xl text-xs font-semibold transition-all cursor-pointer text-center ${
+                          onClick={() => setBudgetIdx(idx)}
+                          className={`px-3 py-2.5 rounded-xl text-xs font-semibold transition-all cursor-pointer text-center ${
                             isSelected
-                              ? "bg-white/15 border border-[#FF8500] text-white shadow-sm"
-                              : "bg-white/5 border border-white/10 text-slate-300 hover:bg-white/10 hover:text-white"
+                              ? "bg-[#FF8500]/15 border border-[#FF8500] text-white shadow-sm ring-1 ring-[#FF8500]/40 font-bold"
+                              : "bg-white/[0.04] border border-white/10 text-slate-300 hover:bg-white/[0.08] hover:text-white"
                           }`}
                         >
                           {opt}

@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import gsap from "gsap";
 import { PiximLogo } from "./PiximLogo";
-import { ArrowUpRight, ArrowRight, ChevronDown, Sparkles } from "lucide-react";
+import { ArrowUpRight, ArrowRight, ChevronDown, Layers } from "lucide-react";
 import { GsapMagneticButton } from "./animations";
 import { SERVICES } from "@/data/agencyData";
 import { SERVICE_ICONS } from "./serviceIcons";
@@ -315,7 +315,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenContact }) => {
         <div className="max-w-6xl mx-auto rounded-3xl border border-[#2651B9]/35 bg-[#0A1A45]/95 backdrop-blur-2xl shadow-[0_30px_80px_-20px_rgba(4,10,28,0.9),0_0_40px_-10px_rgba(38,81,185,0.35)] overflow-hidden">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-[#2651B9]/15">
             {SERVICES.map((service) => {
-              const Icon = SERVICE_ICONS[service.id] ?? Sparkles;
+              const Icon = SERVICE_ICONS[service.id] ?? Layers;
               const isActive = pathname === `/services/${service.id}`;
               return (
                 <Link
@@ -421,7 +421,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenContact }) => {
                     <div className="overflow-hidden">
                       <div className="mt-1.5 ml-4 pl-3 border-l border-[#2651B9]/30 flex flex-col gap-0.5">
                         {SERVICES.map((service) => {
-                          const Icon = SERVICE_ICONS[service.id] ?? Sparkles;
+                          const Icon = SERVICE_ICONS[service.id] ?? Layers;
                           return (
                             <Link
                               key={service.id}
@@ -487,7 +487,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenContact }) => {
               }}
               className="w-full flex items-center justify-center gap-2 py-3.5 rounded-2xl bg-gradient-to-r from-[#FF8500] via-[#FFA133] to-[#FF8500] text-white font-extrabold text-sm shadow-xl shadow-orange-500/20 cursor-pointer transition-transform hover:scale-[1.02] active:scale-95"
             >
-              <Sparkles className="w-4 h-4" />
+              <ArrowRight className="w-4 h-4" />
               <span>Start a Project</span>
             </button>
           </div>

@@ -11,7 +11,7 @@ import {
   Music,
   Play,
   Smartphone,
-  Sparkles,
+  Zap,
   User,
 } from "lucide-react";
 import { ServiceLandingPage } from "../ServiceLandingPage";
@@ -314,7 +314,7 @@ const StoryboardPanel = () => (
       { scene: "Hook", art: <span className="w-10 h-10 rounded-full bg-[#FF8500]/80" /> },
       { scene: "Problem", art: <User className="w-8 h-8 text-slate-300" /> },
       { scene: "Product", art: <Smartphone className="w-8 h-8 text-[#60A5FA]" /> },
-      { scene: "Benefit", art: <Sparkles className="w-8 h-8 text-[#FFA133]" /> },
+      { scene: "Benefit", art: <Zap className="w-8 h-8 text-[#FFA133]" /> },
       { scene: "Proof", art: <CheckCircle2 className="w-8 h-8 text-emerald-400" /> },
       { scene: "Logo", art: <SampleMark className="w-9 h-9" color="#FF8500" /> },
     ].map((panel, i) => (
@@ -503,7 +503,7 @@ const config: ServiceConfig = {
       { icon: Clapperboard, title: "Broadcast-quality exports", desc: "Crisp 4K and 1080p masters ready for YouTube, ads, events and the web." },
       { icon: Smartphone, title: "Every format, one project", desc: "Vertical, square and widescreen versions cut from the same production." },
       { icon: Music, title: "Sound that sells", desc: "Sound design and licensed music that make your story land." },
-      { icon: Sparkles, title: "Smooth 60fps motion", desc: "Fluid animation that feels premium on every screen." },
+      { icon: Zap, title: "Smooth 60fps motion", desc: "Fluid animation that feels premium on every screen." },
     ],
     tools: ["After Effects", "Premiere Pro", "Blender 3D", "Audition"],
     highlight: { value: "4K", label: "Broadcast-quality masters in every format", chips: ["16:9", "9:16", "1:1", "60fps"] },

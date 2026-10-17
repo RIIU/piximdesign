@@ -24,6 +24,7 @@ export const WhyPiximSection: React.FC<WhyPiximSectionProps> = ({ onOpenContact 
 
       // ==========================================
       // PILLAR 1: STRATEGY (Tactical Strategic Radar)
+      // Smooth 60fps hardware-accelerated loop
       // ==========================================
       gsap.to(".strat-scanner", {
         rotation: 360,
@@ -31,132 +32,148 @@ export const WhyPiximSection: React.FC<WhyPiximSectionProps> = ({ onOpenContact 
         repeat: -1,
         ease: "none",
         transformOrigin: "80px 60px",
+        force3D: true,
       });
 
       gsap.to(".strat-ping-1", {
         scale: 2.2,
         opacity: 0,
-        duration: 1.8,
+        duration: 2.0,
         repeat: -1,
         ease: "power1.out",
+        force3D: true,
       });
 
       gsap.to(".strat-ping-2", {
         scale: 2.2,
         opacity: 0,
-        duration: 1.8,
-        delay: 0.6,
+        duration: 2.0,
+        delay: 0.65,
         repeat: -1,
         ease: "power1.out",
+        force3D: true,
       });
 
       gsap.to(".strat-ping-3", {
         scale: 2.2,
         opacity: 0,
-        duration: 1.8,
-        delay: 1.2,
+        duration: 2.0,
+        delay: 1.3,
         repeat: -1,
         ease: "power1.out",
+        force3D: true,
       });
 
       gsap.to([".strat-node-1", ".strat-node-2", ".strat-node-3"], {
         scale: 1.25,
-        duration: 1.1,
+        duration: 1.2,
         repeat: -1,
         yoyo: true,
         stagger: 0.25,
         ease: "sine.inOut",
         transformOrigin: "center",
+        force3D: true,
       });
 
       // ==========================================
       // PILLAR 2: CRAFT (Precision Vector Pen & Curvature)
+      // Smooth fluid geometric interpolation
       // ==========================================
       gsap.to(".craft-handle-1", {
         y: 6,
         x: -2,
-        duration: 2.1,
+        duration: 2.2,
         repeat: -1,
         yoyo: true,
         ease: "sine.inOut",
+        force3D: true,
       });
 
       gsap.to(".craft-guide-1", {
         y: 4,
         x: -1,
-        duration: 2.1,
+        duration: 2.2,
         repeat: -1,
         yoyo: true,
         ease: "sine.inOut",
+        force3D: true,
       });
 
       gsap.to(".craft-handle-2", {
         y: -6,
         x: 2,
-        duration: 2.1,
+        duration: 2.2,
         delay: 0.4,
         repeat: -1,
         yoyo: true,
         ease: "sine.inOut",
+        force3D: true,
       });
 
       gsap.to(".craft-guide-2", {
         y: -4,
         x: 1,
-        duration: 2.1,
+        duration: 2.2,
         delay: 0.4,
         repeat: -1,
         yoyo: true,
         ease: "sine.inOut",
+        force3D: true,
       });
 
       gsap.to(".craft-pen-cursor", {
         x: 10,
         y: -6,
-        duration: 2.3,
+        duration: 2.4,
         repeat: -1,
         yoyo: true,
         ease: "power1.inOut",
+        force3D: true,
       });
 
       // ==========================================
       // PILLAR 3: IMPACT (Exponential Growth & Conversion)
+      // Smooth harmonic metric growth
       // ==========================================
       gsap.to(".impact-bar-1", {
         scaleY: 1.25,
-        duration: 1.2,
+        duration: 1.3,
         repeat: -1,
         yoyo: true,
         ease: "sine.inOut",
         transformOrigin: "bottom",
+        force3D: true,
       });
 
       gsap.to(".impact-bar-2", {
         scaleY: 1.2,
-        duration: 1.4,
+        duration: 1.5,
         delay: 0.25,
         repeat: -1,
         yoyo: true,
         ease: "sine.inOut",
         transformOrigin: "bottom",
+        force3D: true,
       });
 
       gsap.to(".impact-bar-3", {
         scaleY: 1.15,
-        duration: 1.6,
+        duration: 1.7,
         delay: 0.5,
         repeat: -1,
         yoyo: true,
         ease: "sine.inOut",
         transformOrigin: "bottom",
+        force3D: true,
       });
 
       gsap.to(".impact-ping", {
         scale: 2.4,
         opacity: 0,
-        duration: 1.6,
+        duration: 1.7,
         repeat: -1,
         ease: "power1.out",
+        force3D: true,
       });
 
       gsap.to(".impact-star", {
@@ -166,6 +183,7 @@ export const WhyPiximSection: React.FC<WhyPiximSectionProps> = ({ onOpenContact 
         repeat: -1,
         yoyo: true,
         ease: "power1.inOut",
+        force3D: true,
       });
 
       gsap.to([".impact-arrow-1", ".impact-arrow-2"], {
@@ -176,12 +194,37 @@ export const WhyPiximSection: React.FC<WhyPiximSectionProps> = ({ onOpenContact 
         yoyo: true,
         stagger: 0.35,
         ease: "sine.inOut",
+        force3D: true,
       });
+
+      // ==========================================
+      // SEQUENTIAL STORYLINE: Shuru theke Shesh
+      // Smooth wave of focus: 01 Strategy ➔ 02 Craft ➔ 03 Impact
+      // ==========================================
+      const waveTl = gsap.timeline({ repeat: -1, repeatDelay: 0.8 });
+      waveTl
+        // Phase 1: Strategy Focus
+        .to(".card-glow-1", { opacity: 1, duration: 0.6, ease: "power2.out" }, 0)
+        .to(".wgiep-num-1", { color: "#FFA133", scale: 1.15, duration: 0.4 }, 0)
+        .to(".card-glow-1", { opacity: 0, duration: 0.8, ease: "power2.in" }, 1.5)
+        .to(".wgiep-num-1", { color: "#FF8500", scale: 1, duration: 0.4 }, 1.5)
+
+        // Phase 2: Craft Focus
+        .to(".card-glow-2", { opacity: 1, duration: 0.6, ease: "power2.out" }, 2.0)
+        .to(".wgiep-num-2", { color: "#FFA133", scale: 1.15, duration: 0.4 }, 2.0)
+        .to(".card-glow-2", { opacity: 0, duration: 0.8, ease: "power2.in" }, 3.5)
+        .to(".wgiep-num-2", { color: "#FF8500", scale: 1, duration: 0.4 }, 3.5)
+
+        // Phase 3: Impact Focus
+        .to(".card-glow-3", { opacity: 1, duration: 0.6, ease: "power2.out" }, 4.0)
+        .to(".wgiep-num-3", { color: "#FFA133", scale: 1.15, duration: 0.4 }, 4.0)
+        .to(".card-glow-3", { opacity: 0, duration: 0.8, ease: "power2.in" }, 5.5)
+        .to(".wgiep-num-3", { color: "#FF8500", scale: 1, duration: 0.4 }, 5.5);
 
       // ==========================================
       // Entrance Timeline on Scroll / Load
       // ==========================================
-      const tl = gsap.timeline({
+      const entranceTl = gsap.timeline({
         defaults: { ease: "power3.out" },
         scrollTrigger: {
           trigger: sectionRef.current,
@@ -189,23 +232,25 @@ export const WhyPiximSection: React.FC<WhyPiximSectionProps> = ({ onOpenContact 
         },
       });
 
-      tl.from(".wgiep-header > *", {
-        y: 25,
-        opacity: 0,
-        stagger: 0.1,
-        duration: 0.7,
-        clearProps: "all",
-      }).from(
-        ".wgiep-card",
-        {
-          y: 35,
+      entranceTl
+        .from(".wgiep-header > *", {
+          y: 25,
           opacity: 0,
-          stagger: 0.12,
+          stagger: 0.1,
           duration: 0.7,
           clearProps: "all",
-        },
-        "-=0.3"
-      );
+        })
+        .from(
+          ".wgiep-card",
+          {
+            y: 35,
+            opacity: 0,
+            stagger: 0.12,
+            duration: 0.7,
+            clearProps: "all",
+          },
+          "-=0.3"
+        );
     },
     { scope: sectionRef }
   );
@@ -247,6 +292,9 @@ export const WhyPiximSection: React.FC<WhyPiximSectionProps> = ({ onOpenContact 
               ref={card1Ref}
               className="relative aspect-[4/3] w-full rounded-xl sm:rounded-2xl md:rounded-3xl bg-[#0C1E4E]/70 border border-white/10 group-hover:border-[#FF8500]/40 backdrop-blur-xl shadow-md sm:shadow-xl transition-all duration-300 flex items-center justify-center overflow-hidden p-1.5 sm:p-4"
             >
+              {/* Smooth GPU-accelerated active glow layer */}
+              <div className="card-glow-1 pointer-events-none absolute inset-0 rounded-xl sm:rounded-2xl md:rounded-3xl border-2 border-[#FF8500]/60 opacity-0 shadow-[0_0_30px_rgba(255,133,0,0.25)] transition-opacity duration-300" />
+
               {/* Tactical Strategic Radar SVG Animation */}
               <svg
                 viewBox="0 0 160 120"
@@ -279,29 +327,29 @@ export const WhyPiximSection: React.FC<WhyPiximSectionProps> = ({ onOpenContact 
                 <path d="M 132 100 L 138 100 L 138 94" stroke="#FF8500" strokeWidth="1.2" strokeOpacity="0.4" />
 
                 {/* Strategic Interconnect Dashed Vectors */}
-                <path d="M 58 44 L 106 38 L 74 84 Z" stroke="rgba(255,133,0,0.25)" strokeWidth="1" strokeDasharray="2 2" />
+                <path d="M 58 44 L 106 38 L 74 84 Z" stroke="rgba(255,133,0,0.35)" strokeWidth="1" strokeDasharray="2 2" />
 
                 {/* Rotating Scanner Sweep */}
-                <g className="strat-scanner" style={{ transformOrigin: "80px 60px", transformBox: "fill-box" }}>
+                <g className="strat-scanner" style={{ transformOrigin: "80px 60px" }}>
                   <path d="M 80 60 L 126 60 A 46 46 0 0 0 112 28 Z" fill="url(#stratRadarGrad)" />
                   <line x1="80" y1="60" x2="126" y2="60" stroke="url(#stratSweepLine)" strokeWidth="1.5" />
                 </g>
 
                 {/* Target Strategic Nodes & Expanding Echoes */}
                 <g style={{ transformOrigin: "58px 44px" }}>
-                  <circle cx="58" cy="44" r="8" className="strat-ping strat-ping-1" fill="none" stroke="#FF8500" strokeWidth="1" opacity="0.6" style={{ transformBox: "fill-box", transformOrigin: "center" }} />
+                  <circle cx="58" cy="44" r="8" className="strat-ping strat-ping-1" fill="none" stroke="#FF8500" strokeWidth="1" opacity="0.6" style={{ transformOrigin: "center" }} />
                   <circle cx="58" cy="44" r="3.5" className="strat-node-1" fill="#FF8500" />
                   <circle cx="58" cy="44" r="1.5" fill="#FFFFFF" />
                 </g>
 
                 <g style={{ transformOrigin: "106px 38px" }}>
-                  <circle cx="106" cy="38" r="8" className="strat-ping strat-ping-2" fill="none" stroke="#38BDF8" strokeWidth="1" opacity="0.6" style={{ transformBox: "fill-box", transformOrigin: "center" }} />
+                  <circle cx="106" cy="38" r="8" className="strat-ping strat-ping-2" fill="none" stroke="#38BDF8" strokeWidth="1" opacity="0.6" style={{ transformOrigin: "center" }} />
                   <circle cx="106" cy="38" r="3.5" className="strat-node-2" fill="#38BDF8" />
                   <circle cx="106" cy="38" r="1.5" fill="#FFFFFF" />
                 </g>
 
                 <g style={{ transformOrigin: "74px 84px" }}>
-                  <circle cx="74" cy="84" r="8" className="strat-ping strat-ping-3" fill="none" stroke="#FFA229" strokeWidth="1" opacity="0.6" style={{ transformBox: "fill-box", transformOrigin: "center" }} />
+                  <circle cx="74" cy="84" r="8" className="strat-ping strat-ping-3" fill="none" stroke="#FFA229" strokeWidth="1" opacity="0.6" style={{ transformOrigin: "center" }} />
                   <circle cx="74" cy="84" r="3.5" className="strat-node-3" fill="#FFA229" />
                   <circle cx="74" cy="84" r="1.5" fill="#FFFFFF" />
                 </g>
@@ -314,7 +362,7 @@ export const WhyPiximSection: React.FC<WhyPiximSectionProps> = ({ onOpenContact 
 
             <div className="mt-2.5 sm:mt-5 px-0.5 sm:px-1">
               <div className="flex items-center gap-1 sm:gap-2 mb-0.5 sm:mb-1.5">
-                <span className="text-[9px] sm:text-xs font-mono font-bold text-[#FF8500] tracking-wider">
+                <span className="wgiep-num-1 text-[9px] sm:text-xs font-mono font-bold text-[#FF8500] tracking-wider transition-all duration-300">
                   01
                 </span>
                 <span className="hidden sm:inline-block w-1.5 h-1.5 rounded-full bg-[#FF8500]/60" />
@@ -341,6 +389,9 @@ export const WhyPiximSection: React.FC<WhyPiximSectionProps> = ({ onOpenContact 
               ref={card2Ref}
               className="relative aspect-[4/3] w-full rounded-xl sm:rounded-2xl md:rounded-3xl bg-[#0C1E4E]/70 border border-white/10 group-hover:border-[#FF8500]/40 backdrop-blur-xl shadow-md sm:shadow-xl transition-all duration-300 flex items-center justify-center overflow-hidden p-1.5 sm:p-4"
             >
+              {/* Smooth GPU-accelerated active glow layer */}
+              <div className="card-glow-2 pointer-events-none absolute inset-0 rounded-xl sm:rounded-2xl md:rounded-3xl border-2 border-[#FF8500]/60 opacity-0 shadow-[0_0_30px_rgba(255,133,0,0.25)] transition-opacity duration-300" />
+
               {/* Precision Vector Pen & Curvature Geometry SVG */}
               <svg
                 viewBox="0 0 160 120"
@@ -396,11 +447,11 @@ export const WhyPiximSection: React.FC<WhyPiximSectionProps> = ({ onOpenContact 
                 />
 
                 {/* Tangent Handle Controls */}
-                <g className="craft-handle-1" style={{ transformOrigin: "54px 22px", transformBox: "fill-box" }}>
+                <g className="craft-handle-1" style={{ transformOrigin: "54px 22px" }}>
                   <circle cx="54" cy="22" r="4" fill="#0C1E4E" stroke="#38BDF8" strokeWidth="1.5" />
                   <circle cx="54" cy="22" r="1.5" fill="#38BDF8" />
                 </g>
-                <g className="craft-handle-2" style={{ transformOrigin: "106px 102px", transformBox: "fill-box" }}>
+                <g className="craft-handle-2" style={{ transformOrigin: "106px 102px" }}>
                   <circle cx="106" cy="102" r="4" fill="#0C1E4E" stroke="#FF8500" strokeWidth="1.5" />
                   <circle cx="106" cy="102" r="1.5" fill="#FF8500" />
                 </g>
@@ -421,7 +472,7 @@ export const WhyPiximSection: React.FC<WhyPiximSectionProps> = ({ onOpenContact 
 
             <div className="mt-2.5 sm:mt-5 px-0.5 sm:px-1">
               <div className="flex items-center gap-1 sm:gap-2 mb-0.5 sm:mb-1.5">
-                <span className="text-[9px] sm:text-xs font-mono font-bold text-[#FF8500] tracking-wider">
+                <span className="wgiep-num-2 text-[9px] sm:text-xs font-mono font-bold text-[#FF8500] tracking-wider transition-all duration-300">
                   02
                 </span>
                 <span className="hidden sm:inline-block w-1.5 h-1.5 rounded-full bg-[#FF8500]/60" />
@@ -448,6 +499,9 @@ export const WhyPiximSection: React.FC<WhyPiximSectionProps> = ({ onOpenContact 
               ref={card3Ref}
               className="relative aspect-[4/3] w-full rounded-xl sm:rounded-2xl md:rounded-3xl bg-[#0C1E4E]/70 border border-white/10 group-hover:border-[#FF8500]/40 backdrop-blur-xl shadow-md sm:shadow-xl transition-all duration-300 flex items-center justify-center overflow-hidden p-1.5 sm:p-4"
             >
+              {/* Smooth GPU-accelerated active glow layer */}
+              <div className="card-glow-3 pointer-events-none absolute inset-0 rounded-xl sm:rounded-2xl md:rounded-3xl border-2 border-[#FF8500]/60 opacity-0 shadow-[0_0_30px_rgba(255,133,0,0.25)] transition-opacity duration-300" />
+
               {/* Exponential Growth & Conversion Metrics SVG */}
               <svg
                 viewBox="0 0 160 120"
@@ -489,7 +543,7 @@ export const WhyPiximSection: React.FC<WhyPiximSectionProps> = ({ onOpenContact 
                   rx="3"
                   fill="url(#barGrad1)"
                   className="impact-bar-1"
-                  style={{ transformBox: "fill-box", transformOrigin: "bottom" }}
+                  style={{ transformOrigin: "bottom" }}
                 />
                 <rect
                   x="62"
@@ -499,7 +553,7 @@ export const WhyPiximSection: React.FC<WhyPiximSectionProps> = ({ onOpenContact 
                   rx="3"
                   fill="url(#barGrad2)"
                   className="impact-bar-2"
-                  style={{ transformBox: "fill-box", transformOrigin: "bottom" }}
+                  style={{ transformOrigin: "bottom" }}
                 />
                 <rect
                   x="90"
@@ -509,7 +563,7 @@ export const WhyPiximSection: React.FC<WhyPiximSectionProps> = ({ onOpenContact 
                   rx="3"
                   fill="url(#barGrad3)"
                   className="impact-bar-3"
-                  style={{ transformBox: "fill-box", transformOrigin: "bottom" }}
+                  style={{ transformOrigin: "bottom" }}
                 />
 
                 {/* Exponential Area & Curve */}
@@ -538,21 +592,21 @@ export const WhyPiximSection: React.FC<WhyPiximSectionProps> = ({ onOpenContact 
                   fill="none"
                   stroke="#FF8500"
                   strokeWidth="1"
-                  style={{ transformBox: "fill-box", transformOrigin: "center" }}
+                  style={{ transformOrigin: "center" }}
                 />
                 <circle cx="132" cy="30" r="3.5" fill="#FFA229" />
                 <polygon
                   points="132,22 134.5,28 140,30 134.5,32 132,38 129.5,32 124,30 129.5,28"
                   fill="#FFFFFF"
                   className="impact-star"
-                  style={{ transformBox: "fill-box", transformOrigin: "center" }}
+                  style={{ transformOrigin: "center" }}
                 />
               </svg>
             </div>
 
             <div className="mt-2.5 sm:mt-5 px-0.5 sm:px-1">
               <div className="flex items-center gap-1 sm:gap-2 mb-0.5 sm:mb-1.5">
-                <span className="text-[9px] sm:text-xs font-mono font-bold text-[#FF8500] tracking-wider">
+                <span className="wgiep-num-3 text-[9px] sm:text-xs font-mono font-bold text-[#FF8500] tracking-wider transition-all duration-300">
                   03
                 </span>
                 <span className="hidden sm:inline-block w-1.5 h-1.5 rounded-full bg-[#FF8500]/60" />

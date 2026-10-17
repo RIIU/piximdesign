@@ -4,7 +4,7 @@ import React, { useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
-import { ArrowRight, Zap, Shield, Sparkles } from "lucide-react";
+import { ArrowRight, Zap, Shield, Users } from "lucide-react";
 
 interface TakeFirstStepSectionProps {
   onOpenContact?: (service?: string, notes?: string) => void;
@@ -101,7 +101,7 @@ export const TakeFirstStepSection: React.FC<TakeFirstStepSectionProps> = ({
               </span>
               <span className="text-white/20 hidden sm:inline">•</span>
               <span className="inline-flex items-center gap-1.5 font-medium">
-                <Sparkles className="w-3.5 h-3.5 text-[#FF8500]" />
+                <Users className="w-3.5 h-3.5 text-[#FF8500]" />
                 Direct Senior Leads
               </span>
             </div>

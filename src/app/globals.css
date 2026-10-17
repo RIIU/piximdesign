@@ -514,6 +514,26 @@ html[data-currency="BDT"] .cur-usd {
   will-change: transform, opacity;
 }
 
+.animate-ripple-ring-delayed {
+  animation: ripple-ring 3.8s linear infinite;
+  animation-delay: 1.9s;
+  will-change: transform, opacity;
+}
+
+/* Responsive Dot Matrix Mask for Mobile & Desktop */
+.dot-matrix-mask {
+  mask-image: radial-gradient(ellipse 94% 48% at 50% 36%, transparent 16%, black 44%, transparent 88%);
+  -webkit-mask-image: radial-gradient(ellipse 94% 48% at 50% 36%, transparent 16%, black 44%, transparent 88%);
+}
+
+@media (min-width: 768px) {
+  .dot-matrix-mask {
+    mask-image: radial-gradient(ellipse 56% 40% at 50% 38%, transparent 26%, black 46%, transparent 80%);
+    -webkit-mask-image: radial-gradient(ellipse 56% 40% at 50% 38%, transparent 26%, black 46%, transparent 80%);
+  }
+}
+
+
 
 
 
