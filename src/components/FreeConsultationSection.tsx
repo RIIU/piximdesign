@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState } from "react";
 import Image from "next/image";
-import { CheckCircle2, ArrowRight, MessageSquare, ChevronDown, Check, Globe, Star, Clock, ShieldCheck } from "lucide-react";
+import { CheckCircle2, ArrowRight, MessageSquare, ChevronDown, Check } from "lucide-react";
 import { useCurrency } from "@/lib/currency";
 
 interface FreeConsultationSectionProps {
@@ -10,83 +10,66 @@ interface FreeConsultationSectionProps {
 }
 
 const BUDGET_OPTIONS_USD = [
-  "Less than $500",
-  "$500 – $1K",
-  "$1K – $2.5K",
-  "$2.5K – $5K",
-  "More than $5K",
+  "Under $300",
+  "$300 - $800",
+  "$800 - $2K",
+  "$2K - $5K",
+  "$5K+",
 ];
 
 const BUDGET_OPTIONS_BDT = [
-  "Less than ৳60K",
-  "৳60K – ৳120K",
-  "৳120K – ৳300K",
-  "৳300K – ৳600K",
-  "More than ৳600K",
+  "Under ৳30K",
+  "৳30K - ৳80K",
+  "৳80K - ৳200K",
+  "৳200K - ৳500K",
+  "৳500K+",
 ];
 
-const PROJECT_OPTIONS = [
-  "Website Design & Development",
+const NEED_OPTIONS = [
   "Logo & Brand Identity",
-  "UI/UX & Mobile App",
-  "Packaging Design",
-  "Video & Motion Graphics",
-  "Digital Marketing & Ads",
-  "Other / Custom Consultation",
+  "Website Design",
+  "Motion Graphics",
+  "SEO",
+  "Something else",
+];
+
+const COUNTRY_CODES = [
+  { code: "+880", label: "+880" },
+  { code: "+1", label: "+1" },
+  { code: "+44", label: "+44" },
+  { code: "+971", label: "+971" },
+  { code: "+91", label: "+91" },
+  { code: "+61", label: "+61" },
+  { code: "+65", label: "+65" },
+  { code: "+49", label: "+49" },
+  { code: "+33", label: "+33" },
+  { code: "+966", label: "+966" },
 ];
 
 export const FreeConsultationSection: React.FC<FreeConsultationSectionProps> = () => {
   const { currency, setCurrency } = useCurrency();
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
+  const [countryCode, setCountryCode] = useState("+880");
   const [whatsapp, setWhatsapp] = useState("");
-  const [budgetIdx, setBudgetIdx] = useState(1);
+  const [selectedNeeds, setSelectedNeeds] = useState<string[]>(["Logo & Brand Identity"]);
+  const [budgetIdx, setBudgetIdx] = useState(2); // "$800 - $2K" as in user screenshot
   const currentBudgetOptions = currency === "BDT" ? BUDGET_OPTIONS_BDT : BUDGET_OPTIONS_USD;
-  const selectedBudget = currentBudgetOptions[budgetIdx] || currentBudgetOptions[1];
-  const [selectedProject, setSelectedProject] = useState("");
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement>(null);
+  const selectedBudget = currentBudgetOptions[budgetIdx] || currentBudgetOptions[2];
   const [details, setDetails] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  // Close dropdown on outside click
-  useEffect(() => {
-    const handleClickOutside = (e: MouseEvent | TouchEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
-        setIsDropdownOpen(false);
-      }
-    };
-    if (isDropdownOpen) {
-      document.addEventListener("mousedown", handleClickOutside);
-      document.addEventListener("touchstart", handleClickOutside);
-    }
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-      document.removeEventListener("touchstart", handleClickOutside);
-    };
-  }, [isDropdownOpen]);
-
-  // Close dropdown on Escape key
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
-        setIsDropdownOpen(false);
-      }
-    };
-    if (isDropdownOpen) {
-      window.addEventListener("keydown", handleKeyDown);
-    }
-    return () => {
-      window.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [isDropdownOpen]);
+  const toggleNeed = (need: string) => {
+    setSelectedNeeds((prev) =>
+      prev.includes(need) ? prev.filter((item) => item !== need) : [...prev, need]
+    );
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!selectedProject) {
-      setIsDropdownOpen(true);
-      return;
+    if (selectedNeeds.length === 0) {
+      setSelectedNeeds(["Something else"]);
     }
 
     setIsSubmitted(true);
@@ -98,8 +81,8 @@ export const FreeConsultationSection: React.FC<FreeConsultationSectionProps> = (
         body: JSON.stringify({
           name: fullName.trim(),
           email: email.trim(),
-          phone: whatsapp.trim(),
-          services: [selectedProject],
+          phone: `${countryCode} ${whatsapp.trim()}`,
+          services: selectedNeeds.length > 0 ? selectedNeeds : ["General Inquiry"],
           budget: selectedBudget,
           message: details.trim(),
         }),
@@ -111,7 +94,7 @@ export const FreeConsultationSection: React.FC<FreeConsultationSectionProps> = (
       setFullName("");
       setEmail("");
       setWhatsapp("");
-      setSelectedProject("");
+      setSelectedNeeds(["Logo & Brand Identity"]);
       setDetails("");
     }, 4000);
   };
@@ -127,7 +110,7 @@ export const FreeConsultationSection: React.FC<FreeConsultationSectionProps> = (
         }}
       />
 
-      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* ==============================================================
             MAIN CONSULTATION HERO CARD (1:1 from User Uploaded Reference)
            ============================================================== */}
@@ -135,11 +118,11 @@ export const FreeConsultationSection: React.FC<FreeConsultationSectionProps> = (
           {/* Subtle warm amber rim glow in top right */}
           <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-[#FF8500]/10 via-[#FFA229]/5 to-transparent rounded-full pointer-events-none blur-3xl" />
 
-          <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-10 lg:gap-12 items-stretch">
+          <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-10 lg:gap-8 items-stretch">
             {/* ------------------------------------------------------------
-                LEFT COLUMN: Pitch, Benefits, Bento Metrics & Advisor Bio
+                LEFT COLUMN: Pitch, Benefits, Bento Metrics & Advisor Bio (Aligned & Balanced)
                ------------------------------------------------------------ */}
-            <div className="lg:col-span-6 flex flex-col justify-between h-full space-y-6">
+            <div className="lg:col-span-5 flex flex-col justify-between h-full space-y-6">
               <div>
                 {/* Free Strategy Pill */}
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.05] border border-white/10 text-xs font-semibold text-[#FFA133] mb-4">
@@ -147,206 +130,237 @@ export const FreeConsultationSection: React.FC<FreeConsultationSectionProps> = (
                   Free 30-Min Discovery & Strategy Call
                 </div>
 
-                {/* Main Headline */}
-                <h2 className="font-agency text-2xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight leading-[1.08] mb-3 pt-1">
-                  Enhance Your Brand <br />
-                  Potential <span className="italic font-serif font-normal text-[#FFA133]">At No Cost!</span>
+                {/* Main Headline - Balanced & Clean Wrapping */}
+                <h2 className="font-agency text-3xl sm:text-4xl lg:text-[32px] xl:text-[40px] 2xl:text-[46px] font-extrabold text-white tracking-tight leading-[1.12] mb-3 pt-1">
+                  <span className="block whitespace-normal sm:whitespace-nowrap">Enhance Your Brand</span>
+                  <span className="block whitespace-normal sm:whitespace-nowrap mt-0.5">
+                    Potential <span className="italic font-serif font-normal text-[#FFA133]">At No Cost!</span>
+                  </span>
                 </h2>
 
                 <p className="text-xs sm:text-sm text-slate-300/90 leading-relaxed mb-5 max-w-lg">
                   Book a one-on-one strategy session with our creative leads. We analyze your brand, explore growth opportunities, and provide an actionable execution roadmap.
                 </p>
 
-                {/* 4 Value Checklist Items */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3 mb-6">
-                  <div className="flex items-center gap-2 text-xs sm:text-sm text-slate-200">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-                    <span>Response within 24 hours</span>
+                {/* 4 Value Checklist Items - Clean Top Alignment & Responsive Columns */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-2.5 sm:gap-3 mb-6">
+                  <div className="flex items-start gap-2.5 text-xs sm:text-[13px] text-slate-200">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                    <span className="leading-snug font-medium">Response within 24 hours</span>
                   </div>
-                  <div className="flex items-center gap-2 text-xs sm:text-sm text-slate-200">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-                    <span>Strict mutual NDA on request</span>
+                  <div className="flex items-start gap-2.5 text-xs sm:text-[13px] text-slate-200">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                    <span className="leading-snug font-medium">Strict mutual NDA on request</span>
                   </div>
-                  <div className="flex items-center gap-2 text-xs sm:text-sm text-slate-200">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-                    <span>Dedicated product specialists</span>
+                  <div className="flex items-start gap-2.5 text-xs sm:text-[13px] text-slate-200">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                    <span className="leading-snug font-medium">Dedicated product specialists</span>
                   </div>
-                  <div className="flex items-center gap-2 text-xs sm:text-sm text-slate-200">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-                    <span>Tailored scope & budget plan</span>
-                  </div>
-                </div>
-
-                {/* Agency Proof & Trust Bento Grid (Fills vertical gap & adds strong credibility) */}
-                <div className="grid grid-cols-2 gap-2.5 sm:gap-3 pt-1">
-                  <div className="p-3 sm:p-3.5 rounded-2xl bg-white/[0.03] border border-white/10 hover:border-[#FF8500]/40 transition-colors">
-                    <div className="flex items-center justify-between mb-1">
-                      <span className="font-agency text-xl sm:text-2xl font-black text-white">500+</span>
-                      <Globe className="w-4 h-4 text-[#FFA133]" />
-                    </div>
-                    <p className="text-[11px] sm:text-xs text-slate-400 font-medium">Brands Scaled Globally</p>
-                  </div>
-
-                  <div className="p-3 sm:p-3.5 rounded-2xl bg-white/[0.03] border border-white/10 hover:border-[#FF8500]/40 transition-colors">
-                    <div className="flex items-center justify-between mb-1">
-                      <span className="font-agency text-xl sm:text-2xl font-black text-white">4.9 / 5.0</span>
-                      <Star className="w-4 h-4 text-amber-400 fill-amber-400" />
-                    </div>
-                    <p className="text-[11px] sm:text-xs text-slate-400 font-medium">Verified Client Rating</p>
-                  </div>
-
-                  <div className="p-3 sm:p-3.5 rounded-2xl bg-white/[0.03] border border-white/10 hover:border-[#FF8500]/40 transition-colors">
-                    <div className="flex items-center justify-between mb-1">
-                      <span className="font-agency text-xl sm:text-2xl font-black text-white">&lt; 24h</span>
-                      <Clock className="w-4 h-4 text-emerald-400" />
-                    </div>
-                    <p className="text-[11px] sm:text-xs text-slate-400 font-medium">Fast Feasibility Audit</p>
-                  </div>
-
-                  <div className="p-3 sm:p-3.5 rounded-2xl bg-white/[0.03] border border-white/10 hover:border-[#FF8500]/40 transition-colors">
-                    <div className="flex items-center justify-between mb-1">
-                      <span className="font-agency text-xl sm:text-2xl font-black text-white">100%</span>
-                      <ShieldCheck className="w-4 h-4 text-[#60A5FA]" />
-                    </div>
-                    <p className="text-[11px] sm:text-xs text-slate-400 font-medium">Vector IP & Master Files</p>
+                  <div className="flex items-start gap-2.5 text-xs sm:text-[13px] text-slate-200">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                    <span className="leading-snug font-medium">Tailored scope & budget plan</span>
                   </div>
                 </div>
               </div>
 
-              {/* Specialist / Director Profile Pod */}
-              <div className="pt-4 border-t border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 rounded-2xl bg-white/[0.03] border border-white/10">
-                <div className="flex items-center gap-3.5">
+              {/* Specialist / Director Profile Pod - Fixed Layout without Text Collisions */}
+              <div className="p-3.5 sm:p-4 rounded-2xl bg-white/[0.03] border border-white/10 flex flex-col gap-3">
+                <div className="flex items-center gap-3 sm:gap-3.5">
                   {/* Avatar Portrait */}
-                  <div className="relative w-14 h-14 sm:w-16 sm:h-16 rounded-2xl overflow-hidden bg-[#e0d6ff] shrink-0 border border-white/20 shadow-lg">
+                  <div className="relative w-12 h-12 sm:w-14 sm:h-14 rounded-2xl overflow-hidden bg-[#e0d6ff] shrink-0 border border-white/20 shadow-md">
                     <Image
                       src="/images/consultation/director-portrait.png"
                       alt="Sabbir Ahmed - Head of Business"
                       fill
-                      sizes="(max-width: 640px) 56px, 64px"
+                      sizes="56px"
                       className="object-cover object-top"
                     />
                   </div>
 
-                  <div>
-                    <h3 className="font-agency text-lg sm:text-xl font-bold text-white tracking-tight">
+                  <div className="min-w-0 flex-1">
+                    <h3 className="font-agency text-lg sm:text-xl font-bold text-white tracking-tight whitespace-nowrap">
                       Sabbir Ahmed
                     </h3>
-                    <p className="text-xs text-slate-400 font-medium">
+                    <p className="text-xs text-slate-400 font-medium whitespace-nowrap">
                       Head of Business, Pixim Design
                     </p>
-                    <div className="mt-1.5 flex items-center gap-1.5 text-xs text-emerald-300">
+                    <div className="mt-1 flex items-center gap-1.5 text-xs text-emerald-300">
                       <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                      <span>Available for consultation</span>
+                      <span className="font-medium whitespace-nowrap">Available for consultation</span>
                     </div>
                   </div>
                 </div>
 
-                <div className="flex flex-row sm:flex-col items-center sm:items-end justify-between sm:justify-center gap-2 pt-2 sm:pt-0 border-t sm:border-t-0 border-white/10">
+                <div className="flex items-center gap-2 pt-2.5 border-t border-white/10">
                   <a
                     href="https://wa.me/8801752971287"
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-200 hover:text-white transition-colors px-3 py-1.5 rounded-lg bg-emerald-500/10 border border-emerald-500/25 hover:bg-emerald-500/20"
+                    className="flex-1 inline-flex items-center justify-center gap-2 text-xs font-semibold text-slate-200 hover:text-white transition-all px-3 py-2 rounded-xl bg-emerald-500/10 border border-emerald-500/25 hover:bg-emerald-500/20 whitespace-nowrap shadow-xs"
                   >
-                    <MessageSquare className="w-3.5 h-3.5 text-emerald-400" />
+                    <MessageSquare className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
                     <span>+880 1752-971287</span>
                   </a>
                   <a
                     href="tel:+8801752971287"
-                    className="text-xs font-bold text-[#FFA133] hover:underline flex items-center gap-1"
+                    className="inline-flex items-center justify-center gap-1 text-xs font-bold text-[#FFA133] hover:text-white transition-all px-3.5 py-2 rounded-xl bg-white/[0.04] border border-white/10 hover:bg-[#FF8500]/20 hover:border-[#FF8500]/40 shrink-0 whitespace-nowrap shadow-xs"
                   >
                     <span>Direct Call</span>
-                    <ArrowRight className="w-3 h-3" />
+                    <ArrowRight className="w-3 h-3 text-[#FFA133]" />
                   </a>
                 </div>
               </div>
             </div>
 
             {/* ------------------------------------------------------------
-                RIGHT COLUMN: Sleek Form with Budget Chips
+                RIGHT COLUMN: Pixim Brand Dark Studio Project Inquiry Form (Expanded lg:col-span-7)
                ------------------------------------------------------------ */}
-            <div className="lg:col-span-6 bg-white/[0.025] p-5 sm:p-7 md:p-8 rounded-2xl sm:rounded-3xl border border-white/10 backdrop-blur-md shadow-xl flex flex-col justify-between">
-              <form onSubmit={handleSubmit} className="flex flex-col gap-5 sm:gap-6">
-                {/* Full Name */}
+            <div className="lg:col-span-7 bg-[#0C1E4E]/85 backdrop-blur-xl rounded-2xl sm:rounded-[32px] p-5 sm:p-7 md:p-8 shadow-2xl text-white border border-[#2651B9]/35 hover:border-[#FF8500]/40 flex flex-col justify-between transition-colors">
+              {/* Form Header */}
+              <div className="mb-4 sm:mb-5">
+                <span className="text-[11px] sm:text-xs font-black uppercase tracking-widest text-[#FFA133] font-mono block">
+                  START A PROJECT
+                </span>
+                <h3 className="font-agency text-2xl sm:text-3xl md:text-[32px] font-black text-white tracking-tight leading-tight mt-1">
+                  Tell us what you want to build.
+                </h3>
+                <p className="text-xs sm:text-sm text-slate-300 mt-2 leading-relaxed font-normal">
+                  Fill this in once and we will come back with ideas and a clear quote. It takes about two minutes.
+                </p>
+              </div>
+
+              <form onSubmit={handleSubmit} className="flex flex-col gap-4 sm:gap-4.5">
+                {/* Full name */}
                 <div>
-                  <label className="block text-xs font-bold uppercase tracking-wider text-white mb-2">
-                    Full Name<span className="text-[#FF8500]">*</span>
+                  <label className="block text-xs sm:text-sm font-bold text-white mb-1.5">
+                    Full name
                   </label>
                   <input
                     type="text"
                     required
                     value={fullName}
                     onChange={(e) => setFullName(e.target.value)}
-                    placeholder="John Doe"
-                    className="w-full bg-transparent border-b border-white/20 pb-2 text-sm sm:text-base text-white placeholder-slate-500 focus:outline-none focus:border-[#FF8500] transition-colors"
+                    placeholder="Your name"
+                    className="w-full bg-[#081330]/80 border border-[#2651B9]/30 rounded-xl px-3.5 sm:px-4 py-2.5 sm:py-3 text-sm text-white placeholder:text-slate-500 focus:outline-none focus:border-[#FF8500] focus:ring-1 focus:ring-[#FF8500]/30 transition-all"
                   />
                 </div>
 
-                {/* Email & WhatsApp Row */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                {/* Email & WhatsApp number (Row) */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 sm:gap-4">
                   <div>
-                    <label className="block text-xs font-bold uppercase tracking-wider text-white mb-2">
-                      Your Email<span className="text-[#FF8500]">*</span>
+                    <label className="block text-xs sm:text-sm font-bold text-white mb-1.5">
+                      Email <span className="text-[#FF8500]">*</span>
                     </label>
                     <input
                       type="email"
                       required
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      placeholder="yourmail@gmail.com"
-                      className="w-full bg-transparent border-b border-white/20 pb-2 text-sm sm:text-base text-white placeholder-slate-500 focus:outline-none focus:border-[#FF8500] transition-colors"
+                      placeholder="you@company.com"
+                      className="w-full bg-[#081330]/80 border border-[#2651B9]/30 rounded-xl px-3.5 sm:px-4 py-2.5 sm:py-3 text-sm text-white placeholder:text-slate-500 focus:outline-none focus:border-[#FF8500] focus:ring-1 focus:ring-[#FF8500]/30 transition-all"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold uppercase tracking-wider text-white mb-2">
-                      Whatsapp Number
+                    <label className="block text-xs sm:text-sm font-bold text-white mb-1.5">
+                      WhatsApp number
                     </label>
-                    <input
-                      type="tel"
-                      value={whatsapp}
-                      onChange={(e) => setWhatsapp(e.target.value)}
-                      placeholder="+1 123 456 7890"
-                      className="w-full bg-transparent border-b border-white/20 pb-2 text-sm sm:text-base text-white placeholder-slate-500 focus:outline-none focus:border-[#FF8500] transition-colors"
-                    />
+                    <div className="flex gap-2">
+                      <div className="relative shrink-0">
+                        <select
+                          value={countryCode}
+                          onChange={(e) => setCountryCode(e.target.value)}
+                          className="appearance-none bg-[#081330] border border-[#2651B9]/30 rounded-xl pl-3 pr-7 py-2.5 sm:py-3 text-sm font-semibold text-slate-200 focus:outline-none focus:border-[#FF8500] cursor-pointer"
+                        >
+                          {COUNTRY_CODES.map((item) => (
+                            <option key={item.code} value={item.code} className="bg-[#081330] text-white">
+                              {item.label}
+                            </option>
+                          ))}
+                        </select>
+                        <ChevronDown className="w-3.5 h-3.5 text-slate-400 absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                      </div>
+                      <input
+                        type="tel"
+                        value={whatsapp}
+                        onChange={(e) => setWhatsapp(e.target.value)}
+                        placeholder="1XXX XXXXXX"
+                        className="w-full bg-[#081330]/80 border border-[#2651B9]/30 rounded-xl px-3.5 sm:px-4 py-2.5 sm:py-3 text-sm text-white placeholder:text-slate-500 focus:outline-none focus:border-[#FF8500] focus:ring-1 focus:ring-[#FF8500]/30 transition-all"
+                      />
+                    </div>
                   </div>
                 </div>
 
-                {/* Project Budget Chips with USD / BDT Currency Switcher */}
+                {/* What do you need? * (Pick one or more) */}
                 <div>
-                  <div className="flex items-center justify-between mb-2.5 sm:mb-3">
-                    <label className="block text-xs font-bold uppercase tracking-wider text-white">
-                      Project Budget
+                  <div className="flex items-center justify-between mb-2">
+                    <label className="text-xs sm:text-sm font-bold text-white">
+                      What do you need? <span className="text-[#FF8500]">*</span>
+                    </label>
+                    <span className="text-[11px] text-slate-400 font-medium">
+                      Pick one or more
+                    </span>
+                  </div>
+
+                  <div className="flex flex-wrap gap-2">
+                    {NEED_OPTIONS.map((opt) => {
+                      const isSelected = selectedNeeds.includes(opt);
+                      return (
+                        <button
+                          key={opt}
+                          type="button"
+                          onClick={() => toggleNeed(opt)}
+                          className={`inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 cursor-pointer ${
+                            isSelected
+                              ? "bg-[#FF8500]/15 border border-[#FF8500] text-white font-bold shadow-sm shadow-[#FF8500]/20"
+                              : "bg-white/[0.04] border border-white/10 text-slate-300 hover:bg-white/[0.08] hover:text-white hover:border-white/20 font-medium"
+                          }`}
+                        >
+                          {isSelected && (
+                            <Check className="w-3.5 h-3.5 text-[#FFA133] stroke-[3]" />
+                          )}
+                          <span>{opt}</span>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {/* Project budget with Currency toggle (USD $ | BDT ৳) */}
+                <div>
+                  <div className="flex items-center justify-between mb-2">
+                    <label className="text-xs sm:text-sm font-bold text-white">
+                      Project budget
                     </label>
 
-                    {/* Currency Switcher Toggle ($ USD / ৳ BDT) */}
-                    <div className="flex items-center gap-1 p-0.5 rounded-full bg-[#081538] border border-[#2651B9]/35 shadow-inner">
+                    {/* Currency toggle ($ USD / ৳ BDT) */}
+                    <div className="inline-flex items-center p-0.5 rounded-full bg-[#081538] border border-[#2651B9]/35 shadow-inner">
                       <button
                         type="button"
                         onClick={() => setCurrency("USD")}
-                        className={`px-2.5 sm:px-3 py-1 rounded-full text-[10px] sm:text-xs font-bold tracking-wider transition-all duration-200 cursor-pointer ${
+                        className={`px-3 py-1 rounded-full text-[11px] font-bold transition-all duration-200 cursor-pointer ${
                           currency === "USD"
-                            ? "bg-gradient-to-r from-[#FF8500] to-[#FFA133] text-white shadow-sm font-extrabold"
+                            ? "bg-gradient-to-r from-[#FF8500] to-[#FFA133] text-white font-extrabold shadow-sm"
                             : "text-slate-400 hover:text-white"
                         }`}
                       >
-                        $ USD
+                        USD $
                       </button>
                       <button
                         type="button"
                         onClick={() => setCurrency("BDT")}
-                        className={`px-2.5 sm:px-3 py-1 rounded-full text-[10px] sm:text-xs font-bold tracking-wider transition-all duration-200 cursor-pointer ${
+                        className={`px-3 py-1 rounded-full text-[11px] font-bold transition-all duration-200 cursor-pointer ${
                           currency === "BDT"
-                            ? "bg-gradient-to-r from-[#FF8500] to-[#FFA133] text-white shadow-sm font-extrabold"
+                            ? "bg-gradient-to-r from-[#FF8500] to-[#FFA133] text-white font-extrabold shadow-sm"
                             : "text-slate-400 hover:text-white"
                         }`}
                       >
-                        ৳ BDT
+                        BDT ৳
                       </button>
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                  <div className="flex flex-wrap gap-2">
                     {currentBudgetOptions.map((opt, idx) => {
                       const isSelected = budgetIdx === idx;
                       return (
@@ -354,10 +368,10 @@ export const FreeConsultationSection: React.FC<FreeConsultationSectionProps> = (
                           key={opt}
                           type="button"
                           onClick={() => setBudgetIdx(idx)}
-                          className={`px-3 py-2.5 rounded-xl text-xs font-semibold transition-all cursor-pointer text-center ${
+                          className={`px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 cursor-pointer ${
                             isSelected
-                              ? "bg-[#FF8500]/15 border border-[#FF8500] text-white shadow-sm ring-1 ring-[#FF8500]/40 font-bold"
-                              : "bg-white/[0.04] border border-white/10 text-slate-300 hover:bg-white/[0.08] hover:text-white"
+                              ? "bg-[#FF8500]/15 border border-[#FF8500] text-white font-bold shadow-sm shadow-[#FF8500]/20 ring-1 ring-[#FF8500]/30"
+                              : "bg-white/[0.04] border border-white/10 text-slate-300 hover:bg-white/[0.08] hover:text-white hover:border-white/20 font-medium"
                           }`}
                         >
                           {opt}
@@ -365,107 +379,42 @@ export const FreeConsultationSection: React.FC<FreeConsultationSectionProps> = (
                       );
                     })}
                   </div>
+
+                  <p className="text-[11px] text-slate-400 mt-2 font-medium">
+                    {currency === "USD"
+                      ? "Your quote will be sent in US dollars."
+                      : "Your quote will be sent in Bangladeshi Taka."}
+                  </p>
                 </div>
 
-                {/* Select Project (Clean Minimal Luxury Choose Option Dropdown) */}
-                <div className="relative" ref={dropdownRef}>
-                  <label className="block text-xs font-bold uppercase tracking-wider text-white mb-2">
-                    Select Project<span className="text-[#FF8500]">*</span>
-                  </label>
-
-                  {/* Hidden Input for Form Submission */}
-                  <input type="hidden" name="selectedProject" value={selectedProject} />
-
-                  {/* Trigger Box - Clean without icon or secondary subtext */}
-                  <button
-                    type="button"
-                    onClick={() => setIsDropdownOpen((prev) => !prev)}
-                    aria-expanded={isDropdownOpen}
-                    className={`w-full flex items-center justify-between px-4 py-2.5 sm:py-3 rounded-xl sm:rounded-2xl transition-all duration-300 cursor-pointer text-left ${
-                      isDropdownOpen
-                        ? "bg-[#0b1b3d] border border-[#FF8500] shadow-[0_0_20px_rgba(255,133,0,0.2)] ring-1 ring-[#FF8500]/30"
-                        : selectedProject
-                        ? "bg-white/[0.05] hover:bg-white/[0.08] border border-white/20 hover:border-[#FF8500]/50 text-white"
-                        : "bg-white/[0.03] hover:bg-white/[0.06] border border-white/10 hover:border-white/25 text-slate-400"
-                    }`}
-                  >
-                    <span className={`text-sm sm:text-base font-medium truncate ${
-                      selectedProject ? "text-white font-semibold" : "text-slate-400"
-                    }`}>
-                      {selectedProject || "Choose Option.."}
-                    </span>
-
-                    <div
-                      className={`w-6 h-6 rounded-lg flex items-center justify-center transition-transform duration-300 shrink-0 ml-2 ${
-                        isDropdownOpen ? "rotate-180 text-[#FF8500]" : "text-slate-400"
-                      }`}
-                    >
-                      <ChevronDown className="w-4 h-4" />
-                    </div>
-                  </button>
-
-                  {/* Floating Luxury Glassmorphic Dropdown Panel */}
-                  {isDropdownOpen && (
-                    <div
-                      className="absolute top-full mt-2 left-0 right-0 z-50 rounded-2xl bg-[#081433]/98 backdrop-blur-2xl border border-[#2651B9]/40 shadow-[0_25px_60px_-10px_rgba(0,0,0,0.95),0_0_30px_rgba(38,81,185,0.3)] p-1.5 animate-in fade-in zoom-in-95 duration-200 max-h-64 overflow-y-auto"
-                      style={{ scrollbarWidth: "thin" }}
-                    >
-                      <div className="space-y-1">
-                        {PROJECT_OPTIONS.map((opt) => {
-                          const isChosen = selectedProject === opt;
-                          return (
-                            <button
-                              key={opt}
-                              type="button"
-                              onClick={() => {
-                                setSelectedProject(opt);
-                                setIsDropdownOpen(false);
-                              }}
-                              className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl transition-all duration-200 cursor-pointer text-left group ${
-                                isChosen
-                                  ? "bg-[#FF8500]/15 text-[#FFA133] border border-[#FF8500]/40 font-semibold"
-                                  : "hover:bg-white/[0.08] text-slate-200 hover:text-white border border-transparent font-medium"
-                              }`}
-                            >
-                              <span className="text-xs sm:text-sm truncate">
-                                {opt}
-                              </span>
-
-                              {isChosen && (
-                                <Check className="w-4 h-4 text-[#FFA133] shrink-0 ml-2 stroke-[2.5]" />
-                              )}
-                            </button>
-                          );
-                        })}
-                      </div>
-                    </div>
-                  )}
-                </div>
-
-                {/* Project Details */}
+                {/* Project details * */}
                 <div>
-                  <label className="block text-xs font-bold uppercase tracking-wider text-white mb-2">
-                    Project Details<span className="text-[#FF8500]">*</span>
+                  <label className="block text-xs sm:text-sm font-bold text-white mb-1.5">
+                    Project details <span className="text-[#FF8500]">*</span>
                   </label>
                   <textarea
-                    rows={2}
+                    rows={3}
                     required
                     value={details}
                     onChange={(e) => setDetails(e.target.value)}
-                    placeholder="I want to redesign my website.."
-                    className="w-full bg-transparent border-b border-white/20 pb-2 text-sm sm:text-base text-white placeholder-slate-500 focus:outline-none focus:border-[#FF8500] transition-colors resize-none"
+                    placeholder="Tell us about your business, what you want designed, and any deadline."
+                    className="w-full bg-[#081330]/80 border border-[#2651B9]/30 rounded-xl p-3.5 sm:p-4 text-sm text-white placeholder:text-slate-500 focus:outline-none focus:border-[#FF8500] focus:ring-1 focus:ring-[#FF8500]/30 transition-all resize-y min-h-[96px]"
                   />
                 </div>
 
-                {/* Submit Button */}
-                <div className="pt-2">
+                {/* Bottom submission row */}
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-2">
                   <button
                     type="submit"
-                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-3.5 rounded-xl bg-gradient-to-r from-[#FF8500] via-[#FFA229] to-[#FF8500] hover:from-[#FFA229] hover:to-[#FF8500] text-white font-bold text-sm tracking-wide shadow-xl shadow-[#FF8500]/25 active:scale-95 transition-all cursor-pointer"
+                    className="inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3.5 rounded-xl bg-gradient-to-r from-[#FF8500] via-[#FFA229] to-[#FF8500] hover:from-[#FFA229] hover:to-[#FF8500] text-white font-bold text-sm sm:text-base tracking-wide shadow-lg shadow-[#FF8500]/30 active:scale-95 transition-all cursor-pointer shrink-0"
                   >
-                    <span>{isSubmitted ? "Inquiry Sent! ✓" : "Send Inquiry"}</span>
+                    <span>{isSubmitted ? "Inquiry Sent! ✓" : "Send inquiry"}</span>
                     {!isSubmitted && <ArrowRight className="w-4 h-4" />}
                   </button>
+
+                  <p className="text-[11px] text-slate-400 leading-snug sm:max-w-[240px]">
+                    Your details stay private and are only used to reply to this inquiry.
+                  </p>
                 </div>
               </form>
             </div>

@@ -55,12 +55,13 @@ export const PixxenLottieIcon: React.FC<PixxenLottieIconProps> = ({
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const animRef = useRef<AnimationItem | null>(null);
-  const [isLottieReady, setIsLottieReady] = useState(false);
-
   // Instant static SVG key and markup (0ms load time)
   const svgKey = SERVICE_TYPE_MAP[type] || "branding";
   const staticSvgHtml = STATIC_SERVICE_SVGS[svgKey] || STATIC_SERVICE_SVGS["branding"];
   const jsonPath = LOTTIE_MAP[type] || "/lottie/branding.json";
+
+  const [readyPath, setReadyPath] = useState<string | null>(null);
+  const isLottieReady = readyPath === jsonPath;
 
   useEffect(() => {
     let isMounted = true;
@@ -69,12 +70,6 @@ export const PixxenLottieIcon: React.FC<PixxenLottieIconProps> = ({
     if (animRef.current) {
       animRef.current.destroy();
       animRef.current = null;
-    }
-    setIsLottieReady(false);
-
-    // On touch/mobile devices with no hover, the instant SVG is perfect and saves 700KB network lag
-    if (typeof window !== "undefined" && window.matchMedia && !window.matchMedia("(hover: hover)").matches) {
-      return;
     }
 
     const container = containerRef.current;
@@ -99,14 +94,15 @@ export const PixxenLottieIcon: React.FC<PixxenLottieIconProps> = ({
                 container: containerRef.current,
                 renderer: "svg",
                 loop: true,
-                autoplay: false,
+                autoplay: true,
                 path: jsonPath,
               });
 
               anim.addEventListener("DOMLoaded", () => {
                 if (!isMounted) return;
-                setIsLottieReady(true);
-                anim.goToAndStop(0, true);
+                setReadyPath(jsonPath);
+                anim.setSpeed(1.3);
+                anim.play();
               });
 
               animRef.current = anim;
@@ -133,27 +129,27 @@ export const PixxenLottieIcon: React.FC<PixxenLottieIconProps> = ({
     };
   }, [jsonPath]);
 
-  // Trigger animation on card hover or direct hover
+  // Adjust animation speed on hover for interactive feel while keeping animation active
   useEffect(() => {
     const anim = animRef.current;
     if (!anim) return;
 
     if (isHovered) {
-      anim.goToAndPlay(0, true);
+      anim.setSpeed(1.7);
     } else {
-      anim.pause();
+      anim.setSpeed(1.3);
     }
   }, [isHovered]);
 
   const handleMouseEnter = () => {
     if (animRef.current) {
-      animRef.current.goToAndPlay(0, true);
+      animRef.current.setSpeed(1.7);
     }
   };
 
   const handleMouseLeave = () => {
-    if (animRef.current && !isHovered) {
-      animRef.current.pause();
+    if (animRef.current) {
+      animRef.current.setSpeed(1.3);
     }
   };
 

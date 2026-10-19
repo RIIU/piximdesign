@@ -8,14 +8,8 @@ export const GlobalBackgroundAnimation: React.FC = () => {
       aria-hidden="true"
       className="fixed inset-0 pointer-events-none overflow-hidden z-0"
     >
-      {/* 1. Subtle Engineering Grid Overlay in Brand Royal Blue */}
-      <div
-        className="absolute inset-0 opacity-[0.05] dark:opacity-[0.09]"
-        style={{
-          backgroundImage: `linear-gradient(to right, rgba(59, 130, 246, 0.4) 1px, transparent 1px), linear-gradient(to bottom, rgba(59, 130, 246, 0.4) 1px, transparent 1px)`,
-          backgroundSize: "56px 56px",
-        }}
-      />
+
+
 
       {/* 2. Top-Left Luminous Brand Royal Blue Atmosphere */}
       <div

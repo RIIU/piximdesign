@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -15,6 +15,8 @@ import {
   ArrowRight,
   ArrowUpRight,
   Check,
+  ChevronLeft,
+  ChevronRight,
   type LucideIcon,
 } from "lucide-react";
 import { INDUSTRIES, SERVICES } from "@/data/agencyData";
@@ -37,12 +39,82 @@ export const IndustriesSection: React.FC<IndustriesSectionProps> = ({ onOpenCont
   const [activeId, setActiveId] = useState<string>(INDUSTRIES[0].id);
   const sectionRef = useRef<HTMLElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
+  const tabsContainerRef = useRef<HTMLDivElement>(null);
+  const touchStartX = useRef<number | null>(null);
+  const touchStartY = useRef<number | null>(null);
+  const mouseStartX = useRef<number | null>(null);
 
   const active = INDUSTRIES.find((i) => i.id === activeId) ?? INDUSTRIES[0];
   const ActiveIcon = INDUSTRY_ICONS[active.id];
   const stack = active.services
     .map((id) => SERVICES.find((s) => s.id === id))
     .filter((s): s is (typeof SERVICES)[number] => Boolean(s));
+
+  const [direction, setDirection] = useState<"next" | "prev">("next");
+  const currentIndex = INDUSTRIES.findIndex((i) => i.id === activeId);
+
+  const handleNext = () => {
+    setDirection("next");
+    const nextIndex = (currentIndex + 1) % INDUSTRIES.length;
+    setActiveId(INDUSTRIES[nextIndex].id);
+  };
+
+  const handlePrev = () => {
+    setDirection("prev");
+    const prevIndex = (currentIndex - 1 + INDUSTRIES.length) % INDUSTRIES.length;
+    setActiveId(INDUSTRIES[prevIndex].id);
+  };
+
+  const handleSelect = (id: string, index: number) => {
+    setDirection(index >= currentIndex ? "next" : "prev");
+    setActiveId(id);
+  };
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+    touchStartY.current = e.touches[0].clientY;
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX.current === null || touchStartY.current === null) return;
+    const diffX = touchStartX.current - e.changedTouches[0].clientX;
+    const diffY = touchStartY.current - e.changedTouches[0].clientY;
+
+    // Fast, responsive 20px threshold for instant swipe response
+    if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 20) {
+      if (diffX > 0) {
+        handleNext();
+      } else {
+        handlePrev();
+      }
+    }
+    touchStartX.current = null;
+    touchStartY.current = null;
+  };
+
+  const handleMouseDown = (e: React.MouseEvent) => {
+    mouseStartX.current = e.clientX;
+  };
+
+  const handleMouseUp = (e: React.MouseEvent) => {
+    if (mouseStartX.current === null) return;
+    const diffX = mouseStartX.current - e.clientX;
+    if (Math.abs(diffX) > 25) {
+      if (diffX > 0) handleNext();
+      else handlePrev();
+    }
+    mouseStartX.current = null;
+  };
+
+  // Auto-scroll active tab into view on mobile
+  useEffect(() => {
+    if (typeof window !== "undefined" && window.innerWidth < 1024) {
+      const activeBtn = document.getElementById(`industry-tab-${activeId}`);
+      if (activeBtn) {
+        activeBtn.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+      }
+    }
+  }, [activeId]);
 
   // Section entrance
   useGSAP(
@@ -68,14 +140,14 @@ export const IndustriesSection: React.FC<IndustriesSectionProps> = ({ onOpenCont
     { scope: sectionRef }
   );
 
-  // Panel content swap on tab change
+  // Fast, crisp panel content swap on change
   useGSAP(
     () => {
       if (!panelRef.current) return;
       gsap.fromTo(
         panelRef.current.querySelectorAll(".industry-panel-item"),
-        { opacity: 0, y: 14 },
-        { opacity: 1, y: 0, duration: 0.45, stagger: 0.05, ease: "power2.out" }
+        { opacity: 0, x: direction === "next" ? 18 : -18 },
+        { opacity: 1, x: 0, duration: 0.2, stagger: 0.015, ease: "power2.out" }
       );
     },
     { dependencies: [activeId], scope: panelRef }
@@ -111,11 +183,12 @@ export const IndustriesSection: React.FC<IndustriesSectionProps> = ({ onOpenCont
       <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
         {/* Industry Tabs: horizontal scroll on mobile, vertical list on desktop */}
         <div
+          ref={tabsContainerRef}
           role="tablist"
           aria-label="Industries"
           className="industry-reveal lg:col-span-5 flex lg:flex-col gap-2.5 overflow-x-auto lg:overflow-visible -mx-4 px-4 sm:mx-0 sm:px-0 pb-2 lg:pb-0 snap-x scroll-px-4 sm:scroll-px-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
         >
-          {INDUSTRIES.map((industry) => {
+          {INDUSTRIES.map((industry, index) => {
             const Icon = INDUSTRY_ICONS[industry.id];
             const isActive = industry.id === activeId;
             return (
@@ -126,7 +199,7 @@ export const IndustriesSection: React.FC<IndustriesSectionProps> = ({ onOpenCont
                 id={`industry-tab-${industry.id}`}
                 aria-selected={isActive}
                 aria-controls="industry-panel"
-                onClick={() => setActiveId(industry.id)}
+                onClick={() => handleSelect(industry.id, index)}
                 className={`group snap-start shrink-0 lg:shrink flex items-center gap-3 sm:gap-4 rounded-2xl border px-4 py-3 lg:px-5 lg:py-4 text-left transition-all duration-300 cursor-pointer ${
                   isActive
                     ? "bg-gradient-to-r from-[#FF8500]/15 to-[#0C1E4E]/80 border-[#FF8500]/55 shadow-[0_10px_30px_-12px_rgba(255,133,0,0.35)]"
@@ -165,7 +238,11 @@ export const IndustriesSection: React.FC<IndustriesSectionProps> = ({ onOpenCont
           id="industry-panel"
           role="tabpanel"
           aria-labelledby={`industry-tab-${active.id}`}
-          className="industry-reveal lg:col-span-7 relative overflow-hidden rounded-[28px] border border-[#2651B9]/30 bg-[#0C1E4E]/80 backdrop-blur-xl p-6 sm:p-8 lg:p-10"
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
+          onMouseDown={handleMouseDown}
+          onMouseUp={handleMouseUp}
+          className="industry-reveal lg:col-span-7 relative overflow-hidden rounded-[28px] border border-[#2651B9]/30 bg-[#0C1E4E]/80 backdrop-blur-xl p-6 sm:p-8 lg:p-10 select-none cursor-grab active:cursor-grabbing lg:cursor-default touch-pan-y"
         >
           {/* Corner glow */}
           <div className="absolute -top-24 -right-24 w-72 h-72 rounded-full bg-[radial-gradient(circle,rgba(255,133,0,0.22),transparent_70%)] pointer-events-none" />
@@ -178,10 +255,15 @@ export const IndustriesSection: React.FC<IndustriesSectionProps> = ({ onOpenCont
           />
 
           <div className="relative z-10">
-            <span className="industry-panel-item inline-flex items-center gap-2 text-xs px-3 py-1 rounded-full bg-[#081330]/80 text-[#FFA133] border border-[#FF8500]/30 font-mono">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#FF8500]" />
-              {active.name} Playbook
-            </span>
+            <div className="flex items-center justify-between gap-3">
+              <span className="industry-panel-item inline-flex items-center gap-2 text-xs px-3 py-1 rounded-full bg-[#081330]/80 text-[#FFA133] border border-[#FF8500]/30 font-mono">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#FF8500]" />
+                {active.name} Playbook
+              </span>
+              <span className="lg:hidden text-xs font-mono text-slate-400 bg-white/[0.05] px-2.5 py-1 rounded-full border border-white/10">
+                {currentIndex + 1} / {INDUSTRIES.length}
+              </span>
+            </div>
 
             <h3 className="industry-panel-item mt-5 font-agency text-2xl sm:text-3xl lg:text-[34px] font-extrabold text-white tracking-tight leading-tight">
               {active.headline}
@@ -238,11 +320,59 @@ export const IndustriesSection: React.FC<IndustriesSectionProps> = ({ onOpenCont
                 }
                 variant="primary"
                 strength={0.25}
-                className="px-6 sm:px-7 py-3.5 text-xs sm:text-sm font-bold uppercase tracking-wider !bg-gradient-to-r !from-[#FF8500] !to-[#FFA133] hover:!from-[#e67700] hover:!to-[#FF8500] !text-white shadow-lg shadow-orange-500/25"
+                className="px-6 sm:px-7 py-3.5 text-xs sm:text-sm font-bold uppercase tracking-wider !bg-gradient-to-r !from-[#FF8500] !to-[#FFA133] hover:!from-[#e67700] hover:!to-[#FF8500] !text-white shadow-lg shadow-orange-500/25 w-full sm:w-auto"
               >
                 <span>Get My {active.shortName} Plan</span>
                 <ArrowRight className="w-4 h-4" />
               </GsapMagneticButton>
+            </div>
+
+            {/* Mobile Swipe Navigation Controls & Dots Indicator */}
+            <div className="flex lg:hidden items-center justify-between gap-3 mt-8 pt-6 border-t border-[#2651B9]/25">
+              <button
+                type="button"
+                onClick={handlePrev}
+                aria-label="Previous Industry"
+                className="flex items-center justify-center w-10 h-10 rounded-full bg-[#081330] border border-[#2651B9]/40 text-slate-300 hover:text-white hover:border-[#FF8500] active:scale-95 transition-all shadow-sm cursor-pointer"
+              >
+                <ChevronLeft className="w-5 h-5" />
+              </button>
+
+              {/* Dots Indicator */}
+              <div className="flex items-center gap-1.5">
+                {INDUSTRIES.map((ind, idx) => {
+                  const isActive = ind.id === activeId;
+                  return (
+                    <button
+                      key={ind.id}
+                      type="button"
+                      onClick={() => handleSelect(ind.id, idx)}
+                      aria-label={`Go to ${ind.name}`}
+                      className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
+                        isActive
+                          ? "w-7 bg-gradient-to-r from-[#FF8500] to-[#FFA133] shadow-sm shadow-[#FF8500]/40"
+                          : "w-2 bg-white/20 hover:bg-white/40"
+                      }`}
+                    />
+                  );
+                })}
+              </div>
+
+              <button
+                type="button"
+                onClick={handleNext}
+                aria-label="Next Industry"
+                className="flex items-center justify-center w-10 h-10 rounded-full bg-[#081330] border border-[#2651B9]/40 text-slate-300 hover:text-white hover:border-[#FF8500] active:scale-95 transition-all shadow-sm cursor-pointer"
+              >
+                <ChevronRight className="w-5 h-5" />
+              </button>
+            </div>
+
+            {/* Mobile swipe helper hint */}
+            <div className="lg:hidden text-center mt-3">
+              <span className="text-[11px] font-mono text-slate-500">
+                ← Swipe left / right to change →
+              </span>
             </div>
           </div>
         </div>

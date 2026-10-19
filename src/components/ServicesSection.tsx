@@ -137,22 +137,17 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onSelectServic
               {/* Top Row: Prominent Animated Icon & Badge/Number */}
               <div className="relative z-10">
                 <div className="flex items-start justify-between mb-3 sm:mb-6">
-                  {/* Pixxen-Style Prominent Animated Lottie Icon */}
-                  <div className="p-1 sm:p-1.5 rounded-xl sm:rounded-2xl bg-[#081330]/70 border border-[#2651B9]/25 group-hover:border-[#FF8500]/40 group-hover:bg-[#FF8500]/10 transition-all duration-300">
-                    <PixxenLottieIcon
-                      type={service.id}
-                      className="w-9 h-9 sm:w-16 sm:h-16"
-                      isHovered={isCardHovered}
-                    />
-                  </div>
+                  {/* Pixxen-Style Prominent Animated Lottie Icon (No background, larger size) */}
+                  <PixxenLottieIcon
+                    type={service.id}
+                    className="w-14 h-14 sm:w-20 sm:h-20"
+                    isHovered={isCardHovered}
+                  />
 
-                  {/* Pill Badge & Number */}
+                  {/* Pill Badge */}
                   <div className="flex items-center gap-1.5 sm:gap-2">
                     <span className="hidden xs:inline-block text-[10px] sm:text-xs px-2 sm:px-3 py-0.5 sm:py-1 rounded-full bg-[#081330]/80 text-slate-300 border border-[#2651B9]/30 font-mono">
                       {service.badge}
-                    </span>
-                    <span className="text-xs sm:text-sm font-bold font-mono text-slate-500 group-hover:text-[#FFA133] transition-colors">
-                      {service.number}
                     </span>
                   </div>
                 </div>
@@ -167,15 +162,15 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onSelectServic
                   {service.tagline}
                 </p>
 
-                {/* Sub-services / Core Features - strictly 3 items per line */}
-                <div className="mt-2.5 sm:mt-4 pt-2.5 sm:pt-3 border-t border-white/[0.08] hidden sm:grid grid-cols-3 gap-1 sm:gap-1.5">
+                {/* Sub-services / Core Features */}
+                <div className="mt-2.5 sm:mt-4 pt-2.5 sm:pt-3 border-t border-white/[0.08] hidden sm:flex flex-wrap gap-1 sm:gap-1.5">
                   {service.features.map((feat) => (
                     <span
                       key={feat}
                       title={feat}
-                      className="inline-flex items-center justify-center text-[10px] xl:text-[11px] font-medium text-slate-300 group-hover:text-white bg-white/[0.05] hover:bg-white/[0.10] px-1 sm:px-1.5 py-1 rounded-md border border-transparent group-hover:border-[#FF8500]/35 hover:!border-[#FF8500]/60 transition-all duration-300 text-center tracking-tight"
+                      className="inline-flex items-center justify-center text-[10px] xl:text-[11px] font-medium text-slate-300 group-hover:text-white bg-white/[0.05] hover:bg-white/[0.10] px-2 sm:px-2.5 py-1 rounded-md border border-transparent group-hover:border-[#FF8500]/35 hover:!border-[#FF8500]/60 transition-all duration-300 text-center tracking-tight whitespace-nowrap"
                     >
-                      <span className="truncate">• {feat}</span>
+                      {feat}
                     </span>
                   ))}
                 </div>
@@ -183,7 +178,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onSelectServic
 
               {/* Bottom Row: Pixxen-Style Slide-Arrow Action Button */}
               <div className="relative z-10 mt-4 sm:mt-8 pt-3 sm:pt-5 border-t border-[#2651B9]/25 flex items-center justify-between">
-                <span className="text-[11px] sm:text-xs md:text-sm font-bold text-slate-300 group-hover:text-white transition-colors">
+                <span className="text-[11px] sm:text-xs md:text-sm font-bold text-[#FFA133] group-hover:text-white transition-colors">
                   Explore Service
                 </span>
 

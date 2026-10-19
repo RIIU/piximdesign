@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useRef } from "react";
+import Link from "next/link";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { Globe, ShieldCheck, Star, ArrowRight } from "lucide-react";
@@ -242,13 +243,13 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenContact }) => {
           </button>
 
           {/* Secondary CTA */}
-          <a
+          <Link
             href="/services"
             className="group w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 sm:px-7 md:px-8 py-3.5 md:py-4 rounded-xl border border-white/20 bg-white/[0.04] backdrop-blur-sm text-white font-semibold text-sm sm:text-base md:text-lg uppercase tracking-wide transition-all duration-300 hover:bg-white hover:text-[#081330] active:scale-[0.97]"
           >
             <span>Our Services</span>
             <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5 opacity-60 group-hover:opacity-100" />
-          </a>
+          </Link>
         </div>
 
         {/* Trust Strip (Mobile: Sleek compact row) */}

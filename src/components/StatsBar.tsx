@@ -4,7 +4,7 @@ import React, { useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
-import { ArrowUpRight, Play } from "lucide-react";
+import { ArrowUpRight, Play, Globe } from "lucide-react";
 
 interface StatsBarProps {
   className?: string;
@@ -213,29 +213,48 @@ export const StatsBar: React.FC<StatsBarProps> = ({ className = "", onOpenContac
           </div>
 
           {/* ------------------------------------------------------------
-              CARD 3: 200+ Happy Clients (Vibrant Pixim Electric Orange Folder Card - Col 2 on Mobile)
+              CARD 3: 200+ Happy Clients (Luminous Light Warm Amber Folder Card with Animated World on Hover)
              ------------------------------------------------------------ */}
           <div
             onClick={onOpenContact}
             className="stats-bento-card col-span-1 md:col-span-4 relative shadow-[0_15px_35px_rgba(4,10,28,0.5)] transition-all duration-300 flex flex-col justify-between group cursor-pointer hover:scale-[1.02] min-h-[220px] sm:min-h-[350px]"
           >
-            {/* Top decorative stacked photo sticking out */}
-            <div className="absolute -top-2.5 sm:-top-3.5 right-3 sm:right-10 z-0 flex items-center gap-1 transition-transform duration-300 group-hover:-translate-y-1">
-              <div className="w-8 h-8 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-[#081330] p-0.5 shadow-md rotate-3 border border-white/20">
-                <div className="w-full h-full rounded-md sm:rounded-lg bg-gradient-to-tr from-[#2651B9] to-[#3B82F6] flex items-center justify-center text-white font-bold text-[10px] sm:text-xs">
-                  ★
+            {/* Top decorative Worldwide Globe Tab with 360deg spin & radar pulse on hover */}
+            <div className="absolute -top-3.5 sm:-top-5 right-3 sm:right-10 z-0 flex items-center gap-1 transition-all duration-500 ease-out group-hover:-translate-y-2 group-hover:rotate-0">
+              <div className="relative rounded-xl sm:rounded-2xl bg-[#081330] p-1 sm:p-1.5 shadow-xl rotate-3 group-hover:rotate-0 transition-all duration-500 border border-[#3B82F6]/40 group-hover:border-[#38BDF8] group-hover:shadow-[0_0_22px_rgba(56,189,248,0.45)]">
+                <div className="w-8 h-8 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-gradient-to-tr from-[#1E40AF] via-[#2563EB] to-[#38BDF8] flex items-center justify-center text-white relative overflow-hidden">
+                  {/* Expanding radar sonar glow on hover */}
+                  <span className="absolute inset-0 bg-white/30 rounded-full scale-0 group-hover:scale-150 transition-transform duration-700 opacity-0 group-hover:opacity-100" />
+
+                  {/* Animated Rotating World Globe */}
+                  <Globe className="w-4 h-4 sm:w-6 sm:h-6 text-white transition-transform duration-1000 ease-out group-hover:rotate-[360deg] relative z-10" />
+
+                  {/* Glowing worldwide client online beacon */}
+                  <span className="absolute top-1 right-1 w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-emerald-400 shadow-[0_0_6px_#34D399]" />
+                  <span className="absolute top-1 right-1 w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-emerald-400 animate-ping opacity-75" />
                 </div>
               </div>
             </div>
 
-            {/* Main Folder Shape Body */}
+            {/* Main Folder Shape Body - Single uniform solid brand color throughout */}
             <div
-              className="w-full h-full p-3.5 sm:p-8 rounded-[20px] sm:rounded-[32px] bg-gradient-to-br from-[#FF8500] via-[#FF921A] to-[#FFA133] text-[#081330] flex flex-col justify-between relative z-10 shadow-2xl"
+              className="w-full h-full p-3.5 sm:p-8 rounded-[20px] sm:rounded-[32px] bg-[#FFA133] text-[#081330] flex flex-col justify-between relative z-10 shadow-2xl overflow-hidden transition-all duration-300 group-hover:bg-[#FFa842]"
               style={{
                 clipPath: "polygon(0 0, 36% 0, 44% 14px, 100% 14px, 100% 100%, 0 100%)",
               }}
             >
-              <div>
+              {/* Interactive World Wireframe Watermark */}
+              <div className="pointer-events-none absolute -top-4 -right-4 w-32 h-32 sm:w-48 sm:h-48 opacity-[0.07] group-hover:opacity-[0.14] transition-all duration-700 group-hover:scale-110 group-hover:rotate-12">
+                <svg viewBox="0 0 100 100" className="w-full h-full stroke-[#081330] fill-none" strokeWidth="2">
+                  <circle cx="50" cy="50" r="44" strokeDasharray="3 3" />
+                  <ellipse cx="50" cy="50" rx="44" ry="18" />
+                  <ellipse cx="50" cy="50" rx="20" ry="44" />
+                  <line x1="6" y1="50" x2="94" y2="50" />
+                  <line x1="50" y1="6" x2="50" y2="94" />
+                </svg>
+              </div>
+
+              <div className="relative z-10">
                 {/* 200+ Metric */}
                 <div className="font-agency text-3xl sm:text-5xl md:text-6xl font-black tracking-tight text-[#081330] mb-0.5 sm:mb-1 pt-2 sm:pt-2">
                   200<span className="text-[#081330]/70">+</span>
@@ -247,7 +266,7 @@ export const StatsBar: React.FC<StatsBarProps> = ({ className = "", onOpenContac
               </div>
 
               {/* Bottom Row: Check em out! + Dark Circle Arrow Button */}
-              <div className="mt-4 sm:mt-12 flex items-center justify-between">
+              <div className="mt-4 sm:mt-12 flex items-center justify-between relative z-10">
                 <span className="text-xs sm:text-sm font-extrabold text-[#081330] tracking-tight group-hover:underline">
                   Check em out!
                 </span>

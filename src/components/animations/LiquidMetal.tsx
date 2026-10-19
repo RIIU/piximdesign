@@ -479,25 +479,27 @@ export const LiquidMetal: React.FC<LiquidMetalProps> = ({
     fit,
   });
 
-  propsRef.current = {
-    shape,
-    colorBack,
-    colorTint,
-    speed,
-    softness,
-    repetition,
-    shiftRed,
-    shiftBlue,
-    distortion,
-    contour,
-    scale,
-    rotation,
-    offsetX,
-    offsetY,
-    originX,
-    originY,
-    fit,
-  };
+  useEffect(() => {
+    propsRef.current = {
+      shape,
+      colorBack,
+      colorTint,
+      speed,
+      softness,
+      repetition,
+      shiftRed,
+      shiftBlue,
+      distortion,
+      contour,
+      scale,
+      rotation,
+      offsetX,
+      offsetY,
+      originX,
+      originY,
+      fit,
+    };
+  });
 
   useEffect(() => {
     const container = containerRef.current;
@@ -629,7 +631,7 @@ export const LiquidMetal: React.FC<LiquidMetalProps> = ({
     resizeObserver.observe(container);
     resize();
 
-    let startTime = performance.now();
+    const startTime = performance.now();
     let currentFrame = 0;
     let lastTime = startTime;
     let isVisible = true;
