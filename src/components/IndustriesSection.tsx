@@ -122,16 +122,17 @@ export const IndustriesSection: React.FC<IndustriesSectionProps> = ({ onOpenCont
       gsap.registerPlugin(ScrollTrigger);
       gsap.fromTo(
         ".industry-reveal",
-        { opacity: 0, y: 32 },
+        { opacity: 0, y: 16 },
         {
           opacity: 1,
           y: 0,
-          duration: 0.75,
-          stagger: 0.12,
-          ease: "power3.out",
+          duration: 0.35,
+          stagger: 0.04,
+          ease: "power2.out",
+          clearProps: "all",
           scrollTrigger: {
             trigger: sectionRef.current,
-            start: "top 80%",
+            start: "top 95%",
             toggleActions: "play none none none",
           },
         }

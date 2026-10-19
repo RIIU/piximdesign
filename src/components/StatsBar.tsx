@@ -21,29 +21,29 @@ export const StatsBar: React.FC<StatsBarProps> = ({ className = "", onOpenContac
 
       // Section header entrance
       gsap.from(".stats-header > *", {
-        y: 25,
+        y: 16,
         opacity: 0,
-        stagger: 0.1,
-        duration: 0.8,
-        ease: "power3.out",
+        stagger: 0.04,
+        duration: 0.35,
+        ease: "power2.out",
         clearProps: "all",
         scrollTrigger: {
           trigger: containerRef.current,
-          start: "top 80%",
+          start: "top 95%",
         },
       });
 
       // Bento cards staggered entrance
       gsap.from(".stats-bento-card", {
-        y: 35,
+        y: 18,
         opacity: 0,
-        stagger: 0.14,
-        duration: 0.8,
-        ease: "power3.out",
+        stagger: 0.05,
+        duration: 0.35,
+        ease: "power2.out",
         clearProps: "all",
         scrollTrigger: {
           trigger: ".stats-bento-grid",
-          start: "top 82%",
+          start: "top 95%",
         },
       });
     },

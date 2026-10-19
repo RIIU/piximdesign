@@ -59,62 +59,62 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenContact }) => {
   // Simple staggered entrance with clearProps to avoid animation getting stuck hidden
   useGSAP(
     () => {
-      const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+      const tl = gsap.timeline({ defaults: { ease: "power2.out" } });
 
       tl.from(".hero-badge", {
-        y: 20,
+        y: 12,
         opacity: 0,
-        duration: 0.6,
+        duration: 0.35,
         clearProps: "all",
       })
         .from(
           ".hero-pills span",
           {
-            y: 15,
+            y: 8,
             opacity: 0,
-            duration: 0.5,
-            stagger: 0.06,
+            duration: 0.25,
+            stagger: 0.03,
             clearProps: "all",
           },
-          "-=0.3"
+          "-=0.2"
         )
         .from(
           ".hero-heading",
           {
-            y: 25,
+            y: 16,
             opacity: 0,
-            duration: 0.7,
+            duration: 0.4,
             clearProps: "all",
           },
-          "-=0.3"
+          "-=0.15"
         )
         .from(
           ".hero-desc",
           {
-            y: 15,
+            y: 10,
             opacity: 0,
-            duration: 0.6,
+            duration: 0.35,
             clearProps: "all",
           },
-          "-=0.4"
+          "-=0.25"
         )
         .from(
           ".hero-ctas > *",
           {
-            y: 15,
+            y: 12,
             opacity: 0,
-            duration: 0.6,
-            stagger: 0.1,
+            duration: 0.35,
+            stagger: 0.05,
             clearProps: "all",
           },
-          "-=0.3"
+          "-=0.2"
         )
         .from(
           ".hero-trust",
           {
-            y: 20,
+            y: 12,
             opacity: 0,
-            duration: 0.6,
+            duration: 0.35,
             clearProps: "all",
           },
           "-=0.2"

@@ -21,14 +21,14 @@ export const TakeFirstStepSection: React.FC<TakeFirstStepSectionProps> = ({
       gsap.registerPlugin(ScrollTrigger);
 
       gsap.from(".take-first-step-ticket", {
-        y: 35,
+        y: 16,
         opacity: 0,
-        duration: 0.85,
-        ease: "power3.out",
+        duration: 0.35,
+        ease: "power2.out",
         clearProps: "all",
         scrollTrigger: {
           trigger: sectionRef.current,
-          start: "top 85%",
+          start: "top 95%",
         },
       });
     },

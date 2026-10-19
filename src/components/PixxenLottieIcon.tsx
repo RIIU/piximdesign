@@ -47,6 +47,58 @@ const LOTTIE_MAP: Record<string, string> = {
   "technical-seo": "/lottie/dashboard-design.json",
 };
 
+// Global cache for lottie-web player and parsed animation JSONs
+let lottieLightInstance: any = null;
+let lottieLightPromise: Promise<any> | null = null;
+const animationDataCache = new Map<string, any>();
+
+function getLottieLight() {
+  if (lottieLightInstance) return Promise.resolve(lottieLightInstance);
+  if (!lottieLightPromise) {
+    lottieLightPromise = import("lottie-web/build/player/lottie_light").then((m) => {
+      lottieLightInstance = m.default || m;
+      return lottieLightInstance;
+    });
+  }
+  return lottieLightPromise;
+}
+
+async function getAnimationData(path: string) {
+  if (animationDataCache.has(path)) {
+    return animationDataCache.get(path);
+  }
+  try {
+    const res = await fetch(path);
+    if (!res.ok) return null;
+    const data = await res.json();
+    animationDataCache.set(path, data);
+    return data;
+  } catch {
+    return null;
+  }
+}
+
+// Preload player and top JSONs immediately when in browser
+if (typeof window !== "undefined") {
+  const preload = () => {
+    getLottieLight();
+    const paths = [
+      "/lottie/branding.json",
+      "/lottie/website-design.json",
+      "/lottie/saas-design.json",
+      "/lottie/mobile-app.json",
+      "/lottie/web-app.json",
+      "/lottie/dashboard-design.json",
+    ];
+    paths.forEach((p) => getAnimationData(p));
+  };
+  if ("requestIdleCallback" in window) {
+    (window as any).requestIdleCallback(preload);
+  } else {
+    setTimeout(preload, 100);
+  }
+}
+
 export const PixxenLottieIcon: React.FC<PixxenLottieIconProps> = ({
   type,
   size,
@@ -60,7 +112,9 @@ export const PixxenLottieIcon: React.FC<PixxenLottieIconProps> = ({
   const staticSvgHtml = STATIC_SERVICE_SVGS[svgKey] || STATIC_SERVICE_SVGS["branding"];
   const jsonPath = LOTTIE_MAP[type] || "/lottie/branding.json";
 
-  const [readyPath, setReadyPath] = useState<string | null>(null);
+  const [readyPath, setReadyPath] = useState<string | null>(() =>
+    animationDataCache.has(jsonPath) ? jsonPath : null
+  );
   const isLottieReady = readyPath === jsonPath;
 
   useEffect(() => {
@@ -75,6 +129,55 @@ export const PixxenLottieIcon: React.FC<PixxenLottieIconProps> = ({
     const container = containerRef.current;
     if (!container) return;
 
+    const startAnimation = async () => {
+      try {
+        const [lottie, animData] = await Promise.all([
+          getLottieLight(),
+          getAnimationData(jsonPath),
+        ]);
+
+        if (!isMounted || !containerRef.current) return;
+
+        // Clean any leftovers in container
+        containerRef.current.innerHTML = "";
+
+        const anim = animData
+          ? lottie.loadAnimation({
+              container: containerRef.current,
+              renderer: "svg",
+              loop: true,
+              autoplay: true,
+              animationData: animData,
+            })
+          : lottie.loadAnimation({
+              container: containerRef.current,
+              renderer: "svg",
+              loop: true,
+              autoplay: true,
+              path: jsonPath,
+            });
+
+        anim.setSpeed(1.3);
+        setReadyPath(jsonPath);
+        animRef.current = anim;
+      } catch (err) {
+        console.error("Failed to load lottie animation:", jsonPath, err);
+      }
+    };
+
+    // If data is already cached, start immediately with 0 delay
+    if (animationDataCache.has(jsonPath)) {
+      startAnimation();
+      return () => {
+        isMounted = false;
+        if (animRef.current) {
+          animRef.current.destroy();
+          animRef.current = null;
+        }
+      };
+    }
+
+    // Otherwise use IntersectionObserver with generous rootMargin
     let io: IntersectionObserver | null = new IntersectionObserver(
       (entries) => {
         const entry = entries[0];
@@ -83,33 +186,7 @@ export const PixxenLottieIcon: React.FC<PixxenLottieIconProps> = ({
             io.disconnect();
             io = null;
           }
-
-          // SVG-only light player: loads dynamically in the background without blocking the UI
-          import("lottie-web/build/player/lottie_light").then((lottieModule) => {
-            if (!isMounted || !containerRef.current) return;
-            const lottie = lottieModule.default || lottieModule;
-
-            try {
-              const anim = lottie.loadAnimation({
-                container: containerRef.current,
-                renderer: "svg",
-                loop: true,
-                autoplay: true,
-                path: jsonPath,
-              });
-
-              anim.addEventListener("DOMLoaded", () => {
-                if (!isMounted) return;
-                setReadyPath(jsonPath);
-                anim.setSpeed(1.3);
-                anim.play();
-              });
-
-              animRef.current = anim;
-            } catch (err) {
-              console.error("Failed to load lottie animation:", jsonPath, err);
-            }
-          });
+          startAnimation();
         }
       },
       { rootMargin: "600px 0px" }
@@ -119,9 +196,7 @@ export const PixxenLottieIcon: React.FC<PixxenLottieIconProps> = ({
 
     return () => {
       isMounted = false;
-      if (io) {
-        io.disconnect();
-      }
+      if (io) io.disconnect();
       if (animRef.current) {
         animRef.current.destroy();
         animRef.current = null;

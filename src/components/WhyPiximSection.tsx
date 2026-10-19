@@ -225,31 +225,31 @@ export const WhyPiximSection: React.FC<WhyPiximSectionProps> = ({ onOpenContact 
       // Entrance Timeline on Scroll / Load
       // ==========================================
       const entranceTl = gsap.timeline({
-        defaults: { ease: "power3.out" },
+        defaults: { ease: "power2.out" },
         scrollTrigger: {
           trigger: sectionRef.current,
-          start: "top 80%",
+          start: "top 95%",
         },
       });
 
       entranceTl
         .from(".wgiep-header > *", {
-          y: 25,
+          y: 16,
           opacity: 0,
-          stagger: 0.1,
-          duration: 0.7,
+          stagger: 0.04,
+          duration: 0.35,
           clearProps: "all",
         })
         .from(
           ".wgiep-card",
           {
-            y: 35,
+            y: 18,
             opacity: 0,
-            stagger: 0.12,
-            duration: 0.7,
+            stagger: 0.05,
+            duration: 0.35,
             clearProps: "all",
           },
-          "-=0.3"
+          "-=0.2"
         );
     },
     { scope: sectionRef }

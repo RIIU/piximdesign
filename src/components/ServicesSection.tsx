@@ -49,19 +49,20 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onSelectServic
         cards,
         {
           opacity: 0,
-          y: 40,
-          scale: 0.96,
+          y: 16,
+          scale: 0.98,
         },
         {
           opacity: 1,
           y: 0,
           scale: 1,
-          duration: 0.75,
-          stagger: 0.1,
-          ease: "power3.out",
+          duration: 0.35,
+          stagger: 0.04,
+          ease: "power2.out",
+          clearProps: "all",
           scrollTrigger: {
             trigger: gridRef.current,
-            start: "top 85%",
+            start: "top 95%",
             toggleActions: "play none none none",
           },
         }

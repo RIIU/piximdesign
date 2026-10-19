@@ -1,23 +1,20 @@
 "use client";
 
 import React from "react";
-import dynamic from "next/dynamic";
 import { useContactModal } from "@/components/AppLayoutWrapper";
 import { HeroSection } from "@/components/HeroSection";
-
-// Lazy load below-the-fold sections while retaining static HTML prerendering
-const VideoShowcaseSection = dynamic(() => import("@/components/VideoShowcaseSection").then(m => ({ default: m.VideoShowcaseSection })));
-const StatsBar = dynamic(() => import("@/components/StatsBar").then(m => ({ default: m.StatsBar })));
-const RecentWorkSection = dynamic(() => import("@/components/RecentWorkSection").then(m => ({ default: m.RecentWorkSection })));
-const ServicesSection = dynamic(() => import("@/components/ServicesSection").then(m => ({ default: m.ServicesSection })));
-const IndustriesSection = dynamic(() => import("@/components/IndustriesSection").then(m => ({ default: m.IndustriesSection })));
-const WhyPiximSection = dynamic(() => import("@/components/WhyPiximSection").then(m => ({ default: m.WhyPiximSection })));
-const ReadyForLogoSection = dynamic(() => import("@/components/ReadyForLogoSection").then(m => ({ default: m.ReadyForLogoSection })));
-const BrandStoriesSection = dynamic(() => import("@/components/BrandStoriesSection").then(m => ({ default: m.BrandStoriesSection })));
-const TestimonialsSection = dynamic(() => import("@/components/TestimonialsSection").then(m => ({ default: m.TestimonialsSection })));
-const FreeConsultationSection = dynamic(() => import("@/components/FreeConsultationSection").then(m => ({ default: m.FreeConsultationSection })));
-const FaqSection = dynamic(() => import("@/components/FaqSection").then(m => ({ default: m.FaqSection })));
-const TakeFirstStepSection = dynamic(() => import("@/components/TakeFirstStepSection").then(m => ({ default: m.TakeFirstStepSection })));
+import { VideoShowcaseSection } from "@/components/VideoShowcaseSection";
+import { StatsBar } from "@/components/StatsBar";
+import { RecentWorkSection } from "@/components/RecentWorkSection";
+import { ServicesSection } from "@/components/ServicesSection";
+import { IndustriesSection } from "@/components/IndustriesSection";
+import { WhyPiximSection } from "@/components/WhyPiximSection";
+import { ReadyForLogoSection } from "@/components/ReadyForLogoSection";
+import { BrandStoriesSection } from "@/components/BrandStoriesSection";
+import { TestimonialsSection } from "@/components/TestimonialsSection";
+import { FreeConsultationSection } from "@/components/FreeConsultationSection";
+import { FaqSection } from "@/components/FaqSection";
+import { TakeFirstStepSection } from "@/components/TakeFirstStepSection";
 
 export function HomeView() {
   const { openContact } = useContactModal();

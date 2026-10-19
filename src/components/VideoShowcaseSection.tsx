@@ -71,9 +71,9 @@ export const VideoShowcaseSection: React.FC<VideoShowcaseSectionProps> = () => {
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: triggerRef.current,
-            start: "top 85%",
+            start: "top 95%",
             end: "top 15%",
-            scrub: 1.2,
+            scrub: 0.4,
             invalidateOnRefresh: true,
           },
         });
@@ -107,9 +107,9 @@ export const VideoShowcaseSection: React.FC<VideoShowcaseSectionProps> = () => {
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: triggerRef.current,
-            start: "top 90%",
+            start: "top 95%",
             end: "top 20%",
-            scrub: 1,
+            scrub: 0.4,
             invalidateOnRefresh: true,
           },
         });
