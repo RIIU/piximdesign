@@ -45,7 +45,7 @@ export const Footer: React.FC = () => {
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 md:py-14">
         <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-12 gap-8 sm:gap-10 lg:gap-8 xl:gap-12">
           
-          {/* Column 1: Brand Info + CTA Button + Social Links */}
+          {/* Column 1: Brand Info + Social Links (Top) + CTA Button (Bottom) */}
           <div className="col-span-2 md:col-span-1 lg:col-span-5 flex flex-col justify-between">
             <div>
               <PiximLogo variant="full" size="md" />
@@ -53,38 +53,40 @@ export const Footer: React.FC = () => {
                 Pixim Design helps Bangladeshi and global brands grow with sharper identities, better creative, modern websites, and high-impact digital design.
               </p>
 
-              {/* Primary CTA Button matching the reference image */}
-              <button
-                type="button"
-                onClick={() =>
-                  openContact(
-                    "Footer Free Consultation",
-                    "I want to claim a free growth consultation for our brand."
+              {/* Social Icons Row (Placed above the button) */}
+              <div className="mt-5 sm:mt-6 flex items-center gap-2 sm:gap-2.5 flex-wrap">
+                {[...ALL_SOCIALS, { network: "whatsapp" as const, label: "WhatsApp", url: whatsappUrl() }].map(
+                  (social) => (
+                    <a
+                      key={social.label}
+                      href={social.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-9 h-9 rounded-xl bg-[#081538] hover:bg-[#FF8500]/20 text-slate-400 hover:text-[#FFA133] border border-[#2651B9]/30 hover:border-[#FF8500]/50 flex items-center justify-center transition-all duration-200 hover:-translate-y-0.5 shadow-sm"
+                      aria-label={social.label}
+                    >
+                      <SocialIcon network={social.network} className="w-4 h-4" />
+                    </a>
                   )
-                }
-                className="mt-6 w-full sm:w-auto inline-flex items-center justify-center gap-2.5 rounded-full bg-gradient-to-r from-[#FF8500] to-[#FFA133] hover:from-[#e67700] hover:to-[#FF8500] text-white px-6 sm:px-7 py-3.5 text-xs sm:text-sm font-bold tracking-wide shadow-lg shadow-orange-500/25 transition-all duration-200 hover:scale-[1.02] active:scale-95 cursor-pointer"
-              >
-                <span>Get Free Consultation</span>
-                <ArrowRight className="w-4 h-4" />
-              </button>
-            </div>
+                )}
+              </div>
 
-            {/* Social Icons Row matching reference pill style */}
-            <div className="mt-6 sm:mt-8 flex items-center gap-2 sm:gap-2.5 flex-wrap">
-              {[...ALL_SOCIALS, { network: "whatsapp" as const, label: "WhatsApp", url: whatsappUrl() }].map(
-                (social) => (
-                  <a
-                    key={social.label}
-                    href={social.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-9 h-9 rounded-xl bg-[#081538] hover:bg-[#FF8500]/20 text-slate-400 hover:text-[#FFA133] border border-[#2651B9]/30 hover:border-[#FF8500]/50 flex items-center justify-center transition-all duration-200 hover:-translate-y-0.5 shadow-sm"
-                    aria-label={social.label}
-                  >
-                    <SocialIcon network={social.network} className="w-4 h-4" />
-                  </a>
-                )
-              )}
+              {/* Primary CTA Button (Placed below the social icons) */}
+              <div className="mt-5 sm:mt-6">
+                <button
+                  type="button"
+                  onClick={() =>
+                    openContact(
+                      "Footer Free Consultation",
+                      "I want to claim a free growth consultation for our brand."
+                    )
+                  }
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 rounded-full bg-gradient-to-r from-[#FF8500] to-[#FFA133] hover:from-[#e67700] hover:to-[#FF8500] text-white px-6 sm:px-7 py-3.5 text-xs sm:text-sm font-bold tracking-wide shadow-lg shadow-orange-500/25 transition-all duration-200 hover:scale-[1.02] active:scale-95 cursor-pointer"
+                >
+                  <span>Get Free Consultation</span>
+                  <ArrowRight className="w-4 h-4" />
+                </button>
+              </div>
             </div>
           </div>
 
