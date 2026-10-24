@@ -114,8 +114,8 @@ export const TakeFirstStepSection: React.FC<TakeFirstStepSectionProps> = ({
             From concept to MVP, from poor marketing strategy to powerful brand exposure – with Pixim, you&apos;re in good hands.
           </p>
 
-          {/* Buttons (Side by Side in Mobile) */}
-          <div className="flex flex-row items-center justify-center gap-2.5 w-full">
+          {/* Buttons: Content-hugged, balanced & centered (No stretching) */}
+          <div className="flex flex-row items-center justify-center gap-2.5 sm:gap-3 max-w-full">
             {/* Primary Action: Book a Strategy Call with Circular Arrow Badge */}
             <button
               type="button"
@@ -125,10 +125,10 @@ export const TakeFirstStepSection: React.FC<TakeFirstStepSectionProps> = ({
                   "I want to book a strategy call for our project."
                 )
               }
-              className="group flex-1 inline-flex items-center justify-center gap-1.5 rounded-xl bg-gradient-to-r from-[#FF8500] via-[#FFA229] to-[#FF8500] hover:from-[#FFA229] hover:to-[#FF8500] text-white font-black text-[10.5px] min-[380px]:text-xs uppercase tracking-wider px-2.5 py-2.5 shadow-[0_6px_20px_rgba(255,133,0,0.35)] active:scale-[0.98] transition-all cursor-pointer whitespace-nowrap"
+              className="group inline-flex items-center justify-center gap-1.5 min-[380px]:gap-2 rounded-xl sm:rounded-2xl bg-gradient-to-r from-[#FF8500] via-[#FFA229] to-[#FF8500] hover:from-[#FFA229] hover:to-[#FF8500] text-white font-black text-[10.5px] min-[380px]:text-xs uppercase tracking-wider px-3 sm:px-5 py-2.5 sm:py-3 shadow-[0_6px_20px_rgba(255,133,0,0.35)] active:scale-[0.98] transition-all cursor-pointer whitespace-nowrap shrink-0"
             >
-              <span className="w-4 h-4 rounded-full bg-black/25 flex items-center justify-center shrink-0">
-                <ArrowRight className="w-2.5 h-2.5 text-white transition-transform duration-200 group-hover:translate-x-0.5" />
+              <span className="w-4 h-4 min-[380px]:w-5 min-[380px]:h-5 rounded-full bg-black/25 flex items-center justify-center shrink-0">
+                <ArrowRight className="w-2.5 h-2.5 min-[380px]:w-3 min-[380px]:h-3 text-white transition-transform duration-200 group-hover:translate-x-0.5" />
               </span>
               <span>BOOK A STRATEGY CALL</span>
             </button>
@@ -142,7 +142,7 @@ export const TakeFirstStepSection: React.FC<TakeFirstStepSectionProps> = ({
                   "I want to get in touch with Pixim Design."
                 )
               }
-              className="flex-initial inline-flex items-center justify-center rounded-xl border border-white/70 hover:border-white bg-transparent hover:bg-white/10 text-white font-black text-[10.5px] min-[380px]:text-xs uppercase tracking-wider px-3.5 py-2.5 shadow-sm active:scale-[0.98] transition-all cursor-pointer whitespace-nowrap"
+              className="inline-flex items-center justify-center rounded-xl sm:rounded-2xl border border-white/70 hover:border-white bg-transparent hover:bg-white/10 text-white font-black text-[10.5px] min-[380px]:text-xs uppercase tracking-wider px-3.5 sm:px-5 py-2.5 sm:py-3 shadow-sm active:scale-[0.98] transition-all cursor-pointer whitespace-nowrap shrink-0"
             >
               <span>CONTACT US</span>
             </button>
