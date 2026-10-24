@@ -213,16 +213,16 @@ export const StatsBar: React.FC<StatsBarProps> = ({ className = "", onOpenContac
           </div>
 
           {/* ------------------------------------------------------------
-              CARD 3: 200+ Happy Clients (Pixim Brand Navy & Electric Orange Card with Centered Animated Globe)
+              CARD 3: 200+ Happy Clients (Iconic Folder Card with Pixim Brand Orange & Centered World Globe)
              ------------------------------------------------------------ */}
           <div
             onClick={onOpenContact}
             className="stats-bento-card col-span-1 md:col-span-4 relative shadow-[0_15px_35px_rgba(4,10,28,0.5)] transition-all duration-300 flex flex-col justify-between group cursor-pointer hover:scale-[1.02] min-h-[220px] sm:min-h-[350px]"
           >
             {/* Top decorative Worldwide Globe Tab - Centered in Middle */}
-            <div className="absolute -top-3.5 sm:-top-5 left-1/2 -translate-x-1/2 z-20 flex items-center justify-center transition-all duration-500 ease-out group-hover:-translate-y-1.5">
+            <div className="absolute -top-3.5 sm:-top-5 left-1/2 -translate-x-1/2 z-0 flex items-center justify-center transition-all duration-500 ease-out group-hover:-translate-y-2">
               <div className="relative rounded-xl sm:rounded-2xl bg-[#081330] p-1 sm:p-1.5 shadow-xl transition-all duration-500 border border-[#2651B9]/50 group-hover:border-[#FF8500] group-hover:shadow-[0_0_22px_rgba(255,133,0,0.45)]">
-                <div className="w-8 h-8 sm:w-11 sm:h-11 rounded-lg sm:rounded-xl bg-gradient-to-tr from-[#102766] via-[#1E40AF] to-[#FF8500] flex items-center justify-center text-white relative overflow-hidden">
+                <div className="w-8 h-8 sm:w-11 sm:h-11 rounded-lg sm:rounded-xl bg-gradient-to-tr from-[#0F245E] via-[#1E40AF] to-[#FF8500] flex items-center justify-center text-white relative overflow-hidden">
                   {/* Expanding radar sonar glow on hover */}
                   <span className="absolute inset-0 bg-white/25 rounded-full scale-0 group-hover:scale-150 transition-transform duration-700 opacity-0 group-hover:opacity-100" />
 
@@ -236,15 +236,16 @@ export const StatsBar: React.FC<StatsBarProps> = ({ className = "", onOpenContac
               </div>
             </div>
 
-            {/* Main Card Body - Pixim Brand Royal Navy Palette */}
-            <div className="w-full h-full p-4 sm:p-7 rounded-[20px] sm:rounded-[32px] bg-gradient-to-b from-[#102766] to-[#0C1E4E] border border-[#2651B9]/45 hover:border-[#FF8500]/60 text-white flex flex-col justify-between relative z-10 shadow-2xl overflow-hidden transition-all duration-300">
-              {/* Subtle ambient specular glow orbs */}
-              <div className="pointer-events-none absolute -bottom-10 -right-10 w-40 h-40 rounded-full bg-[#FF8500]/15 blur-2xl" />
-              <div className="pointer-events-none absolute -top-8 left-1/2 -translate-x-1/2 w-48 h-24 rounded-full bg-[#2651B9]/30 blur-2xl" />
-
+            {/* Main Folder Shape Body - Iconic Polygon Folder Shape Restored */}
+            <div
+              className="w-full h-full p-3.5 sm:p-8 rounded-[20px] sm:rounded-[32px] bg-gradient-to-br from-[#FF8500] via-[#FFA133] to-[#FF7A00] text-[#081330] flex flex-col justify-between relative z-10 shadow-2xl overflow-hidden transition-all duration-300 group-hover:brightness-105"
+              style={{
+                clipPath: "polygon(0 0, 36% 0, 44% 14px, 100% 14px, 100% 100%, 0 100%)",
+              }}
+            >
               {/* Interactive World Wireframe Watermark - Centered */}
-              <div className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-40 h-40 sm:w-56 sm:h-56 opacity-[0.06] group-hover:opacity-[0.14] transition-all duration-700 group-hover:scale-110">
-                <svg viewBox="0 0 100 100" className="w-full h-full stroke-white fill-none" strokeWidth="1.5">
+              <div className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-44 h-44 sm:w-60 sm:h-60 opacity-[0.09] group-hover:opacity-[0.16] transition-all duration-700 group-hover:scale-110">
+                <svg viewBox="0 0 100 100" className="w-full h-full stroke-[#081330] fill-none" strokeWidth="1.75">
                   <circle cx="50" cy="50" r="44" strokeDasharray="3 3" />
                   <ellipse cx="50" cy="50" rx="44" ry="18" />
                   <ellipse cx="50" cy="50" rx="20" ry="44" />
@@ -254,31 +255,31 @@ export const StatsBar: React.FC<StatsBarProps> = ({ className = "", onOpenContac
               </div>
 
               {/* Top Section: 200+ Metric + Title + Short Subheading */}
-              <div className="relative z-10 pt-2 sm:pt-3">
+              <div className="relative z-10 pt-1 sm:pt-2">
                 {/* 200+ Metric */}
-                <div className="font-agency text-3xl sm:text-5xl md:text-6xl font-black tracking-tight text-white mb-0.5 sm:mb-1">
-                  200<span className="text-[#FF8500] ml-0.5">+</span>
+                <div className="font-agency text-3xl sm:text-5xl md:text-6xl font-black tracking-tight text-[#081330] mb-0.5 sm:mb-1">
+                  200<span className="text-[#081330]/75 ml-0.5">+</span>
                 </div>
 
                 {/* Main Title */}
-                <div className="text-xs sm:text-base font-extrabold text-white leading-tight">
+                <div className="text-xs sm:text-base font-extrabold text-[#081330] leading-tight">
                   Happy Clients Worldwide
                 </div>
 
                 {/* Short Subheading requested by user */}
-                <p className="mt-2 text-[11px] sm:text-xs text-slate-300 font-normal leading-relaxed line-clamp-2 max-w-[260px]">
+                <p className="mt-2 sm:mt-2.5 text-[11px] sm:text-xs text-[#081330]/80 font-medium leading-relaxed max-w-[260px]">
                   Delivering high-impact brand identities &amp; websites across 18+ countries.
                 </p>
               </div>
 
-              {/* Bottom Row: Check em out! + Brand Arrow Button */}
-              <div className="mt-4 sm:mt-8 flex items-center justify-between relative z-10 pt-2">
-                <span className="text-xs sm:text-sm font-extrabold text-[#FFA133] group-hover:text-white tracking-tight group-hover:underline transition-colors">
+              {/* Bottom Row: Check em out! + Dark Circle Arrow Button */}
+              <div className="mt-4 sm:mt-8 flex items-center justify-between relative z-10 pt-1">
+                <span className="text-xs sm:text-sm font-extrabold text-[#081330] tracking-tight group-hover:underline transition-colors">
                   Check em out!
                 </span>
 
-                {/* Brand Circle Arrow CTA Button */}
-                <div className="w-8 h-8 sm:w-11 sm:h-11 rounded-full bg-[#081330] border border-[#2651B9]/50 group-hover:border-[#FF8500] text-[#FFA133] group-hover:bg-[#FF8500] group-hover:text-white flex items-center justify-center transition-all duration-300 group-hover:rotate-45 shadow-xl shrink-0">
+                {/* Dark Midnight Circle Arrow CTA Button */}
+                <div className="w-8 h-8 sm:w-11 sm:h-11 rounded-full bg-[#081330] text-[#FFA133] group-hover:text-white flex items-center justify-center transition-all duration-300 group-hover:rotate-45 group-hover:bg-black shadow-xl shrink-0">
                   <ArrowUpRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 stroke-[2.5]" />
                 </div>
               </div>
