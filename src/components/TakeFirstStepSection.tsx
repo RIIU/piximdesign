@@ -80,35 +80,37 @@ export const TakeFirstStepSection: React.FC<TakeFirstStepSectionProps> = ({
             </h2>
           </div>
 
-          {/* Right Column: Dual Pill Buttons (Pixim Orange Primary + Clean White Secondary) */}
-          <div className="flex items-center gap-3 w-full sm:w-auto shrink-0">
-            {/* Primary Action: Book a Call */}
+          {/* Right Column: Dual Action Buttons matching Mobile/Desktop Pattern (Filled with Circle Arrow + Outline Contact) */}
+          <div className="flex items-center gap-2.5 sm:gap-3.5 w-full sm:w-auto shrink-0">
+            {/* Primary Action: Book a Strategy Call with Circular Arrow Badge */}
             <button
               type="button"
               onClick={() =>
                 onOpenContact?.(
                   "Strategy Call",
-                  "I want to book a call for our project."
+                  "I want to book a strategy call for our project."
                 )
               }
-              className="group flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 rounded-full bg-[#FF8500] hover:bg-[#FFA229] text-white font-bold text-xs sm:text-sm px-5 sm:px-6 py-2.5 sm:py-3 shadow-[0_0_22px_rgba(255,133,0,0.45)] hover:shadow-[0_0_32px_rgba(255,133,0,0.65)] hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer whitespace-nowrap"
+              className="group flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 sm:gap-2.5 rounded-xl sm:rounded-2xl bg-gradient-to-r from-[#FF8500] via-[#FFA229] to-[#FF8500] hover:from-[#FFA229] hover:to-[#FF8500] text-white font-black text-[10.5px] min-[380px]:text-xs sm:text-sm uppercase tracking-wider px-3 sm:px-6 py-2.5 sm:py-3.5 shadow-[0_8px_25px_rgba(255,133,0,0.35)] hover:shadow-[0_12px_32px_rgba(255,133,0,0.5)] hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer whitespace-nowrap"
             >
-              <span>Book a Call</span>
-              <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
+              <span className="w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-black/25 flex items-center justify-center shrink-0">
+                <ArrowRight className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-white transition-transform duration-200 group-hover:translate-x-0.5" />
+              </span>
+              <span>BOOK A STRATEGY CALL</span>
             </button>
 
-            {/* Secondary Action: Free Audit */}
+            {/* Secondary Action: Contact Us (Outlined Rectangle) */}
             <button
               type="button"
               onClick={() =>
                 onOpenContact?.(
-                  "Free Audit",
-                  "I would like a free brand and website audit."
+                  "General Inquiry",
+                  "I want to get in touch with Pixim Design."
                 )
               }
-              className="flex-1 sm:flex-initial inline-flex items-center justify-center rounded-full bg-white hover:bg-slate-100 text-[#081330] font-bold text-xs sm:text-sm px-5 sm:px-6 py-2.5 sm:py-3 shadow-md hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer whitespace-nowrap"
+              className="flex-initial inline-flex items-center justify-center rounded-xl sm:rounded-2xl border border-white/70 hover:border-white bg-transparent hover:bg-white/10 text-white font-black text-[10.5px] min-[380px]:text-xs sm:text-sm uppercase tracking-wider px-3.5 sm:px-6 py-2.5 sm:py-3.5 shadow-sm hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer whitespace-nowrap"
             >
-              <span>Free Audit</span>
+              <span>CONTACT US</span>
             </button>
           </div>
         </div>
