@@ -6,7 +6,6 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { Globe, ShieldCheck, Star, ArrowRight } from "lucide-react";
 import { RotatingDotOrbit } from "./RotatingDotOrbit";
-import { RotatingTrustBadge } from "./RotatingTrustBadge";
 
 interface HeroSectionProps {
   onOpenContact?: () => void;
@@ -61,13 +60,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenContact }) => {
     () => {
       const tl = gsap.timeline({ defaults: { ease: "power2.out" } });
 
-      tl.from(".hero-badge", {
-        y: 12,
-        opacity: 0,
-        duration: 0.35,
-        clearProps: "all",
-      })
-        .from(
+      tl.from(
           ".hero-pills span",
           {
             y: 8,
@@ -193,10 +186,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenContact }) => {
         {/* Peekly-Style Authentic Expanding Dot Matrix Ripple Animation */}
         <RotatingDotOrbit />
 
-        {/* MZ Media-Style Rotating Trust Badge (with Pixim Brand Content) */}
-        <div className="hero-badge pb-2 sm:pb-3 md:pb-5">
-          <RotatingTrustBadge onClick={onOpenContact} />
-        </div>
 
         {/* Service Pill Tags */}
         <div className="hero-pills flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 pb-2 sm:pb-3.5 md:pb-6">

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -17,6 +17,8 @@ import {
   Check,
   ChevronLeft,
   ChevronRight,
+  Pause,
+  Play,
   type LucideIcon,
 } from "lucide-react";
 import { INDUSTRIES, SERVICES } from "@/data/agencyData";
@@ -44,6 +46,11 @@ export const IndustriesSection: React.FC<IndustriesSectionProps> = ({ onOpenCont
   const touchStartY = useRef<number | null>(null);
   const mouseStartX = useRef<number | null>(null);
 
+  const [isMobile, setIsMobile] = useState<boolean>(false);
+  const [isPaused, setIsPaused] = useState<boolean>(false);
+  const [isAutoPlayEnabled, setIsAutoPlayEnabled] = useState<boolean>(true);
+  const pauseTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
   const active = INDUSTRIES.find((i) => i.id === activeId) ?? INDUSTRIES[0];
   const ActiveIcon = INDUSTRY_ICONS[active.id];
   const stack = active.services
@@ -53,24 +60,95 @@ export const IndustriesSection: React.FC<IndustriesSectionProps> = ({ onOpenCont
   const [direction, setDirection] = useState<"next" | "prev">("next");
   const currentIndex = INDUSTRIES.findIndex((i) => i.id === activeId);
 
-  const handleNext = () => {
-    setDirection("next");
-    const nextIndex = (currentIndex + 1) % INDUSTRIES.length;
-    setActiveId(INDUSTRIES[nextIndex].id);
-  };
+  // Check viewport on mount and window resize
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 1024);
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
-  const handlePrev = () => {
+  // Pause autoplay temporarily during user interaction
+  const pauseTemporarily = useCallback((duration = 7500) => {
+    setIsPaused(true);
+    if (pauseTimeoutRef.current) clearTimeout(pauseTimeoutRef.current);
+    pauseTimeoutRef.current = setTimeout(() => {
+      setIsPaused(false);
+    }, duration);
+  }, []);
+
+  const handleNext = useCallback(() => {
+    pauseTemporarily();
+    setDirection("next");
+    setActiveId((prevId) => {
+      const idx = INDUSTRIES.findIndex((i) => i.id === prevId);
+      const nextIdx = (idx + 1) % INDUSTRIES.length;
+      return INDUSTRIES[nextIdx].id;
+    });
+  }, [pauseTemporarily]);
+
+  const handlePrev = useCallback(() => {
+    pauseTemporarily();
     setDirection("prev");
-    const prevIndex = (currentIndex - 1 + INDUSTRIES.length) % INDUSTRIES.length;
-    setActiveId(INDUSTRIES[prevIndex].id);
-  };
+    setActiveId((prevId) => {
+      const idx = INDUSTRIES.findIndex((i) => i.id === prevId);
+      const prevIdx = (idx - 1 + INDUSTRIES.length) % INDUSTRIES.length;
+      return INDUSTRIES[prevIdx].id;
+    });
+  }, [pauseTemporarily]);
 
   const handleSelect = (id: string, index: number) => {
+    pauseTemporarily();
     setDirection(index >= currentIndex ? "next" : "prev");
     setActiveId(id);
   };
 
+  // Center active tab horizontally inside its container (avoids whole-page jitter)
+  const centerActiveTab = useCallback((id: string, smooth = true) => {
+    const container = tabsContainerRef.current;
+    if (!container) return;
+    const btn = document.getElementById(`industry-tab-${id}`);
+    if (!btn) return;
+
+    const containerWidth = container.clientWidth;
+    const btnLeft = btn.offsetLeft;
+    const btnWidth = btn.clientWidth;
+    const targetScroll = btnLeft - containerWidth / 2 + btnWidth / 2;
+
+    container.scrollTo({
+      left: Math.max(0, targetScroll),
+      behavior: smooth ? "smooth" : "auto",
+    });
+  }, []);
+
+  // Auto-scroll active tab into view on mobile whenever activeId changes
+  useEffect(() => {
+    if (isMobile) {
+      centerActiveTab(activeId, true);
+    }
+  }, [activeId, isMobile, centerActiveTab]);
+
+  // Autoplay carousel timer on mobile
+  useEffect(() => {
+    if (!isAutoPlayEnabled || isPaused || !isMobile) return;
+
+    const interval = setInterval(() => {
+      setDirection("next");
+      setActiveId((prevId) => {
+        const idx = INDUSTRIES.findIndex((i) => i.id === prevId);
+        const nextIdx = (idx + 1) % INDUSTRIES.length;
+        return INDUSTRIES[nextIdx].id;
+      });
+    }, 4200);
+
+    return () => clearInterval(interval);
+  }, [isAutoPlayEnabled, isPaused, isMobile]);
+
+  // Touch swipe handling
   const handleTouchStart = (e: React.TouchEvent) => {
+    pauseTemporarily();
     touchStartX.current = e.touches[0].clientX;
     touchStartY.current = e.touches[0].clientY;
   };
@@ -80,8 +158,7 @@ export const IndustriesSection: React.FC<IndustriesSectionProps> = ({ onOpenCont
     const diffX = touchStartX.current - e.changedTouches[0].clientX;
     const diffY = touchStartY.current - e.changedTouches[0].clientY;
 
-    // Fast, responsive 20px threshold for instant swipe response
-    if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 20) {
+    if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 30) {
       if (diffX > 0) {
         handleNext();
       } else {
@@ -99,22 +176,12 @@ export const IndustriesSection: React.FC<IndustriesSectionProps> = ({ onOpenCont
   const handleMouseUp = (e: React.MouseEvent) => {
     if (mouseStartX.current === null) return;
     const diffX = mouseStartX.current - e.clientX;
-    if (Math.abs(diffX) > 25) {
+    if (Math.abs(diffX) > 30) {
       if (diffX > 0) handleNext();
       else handlePrev();
     }
     mouseStartX.current = null;
   };
-
-  // Auto-scroll active tab into view on mobile
-  useEffect(() => {
-    if (typeof window !== "undefined" && window.innerWidth < 1024) {
-      const activeBtn = document.getElementById(`industry-tab-${activeId}`);
-      if (activeBtn) {
-        activeBtn.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
-      }
-    }
-  }, [activeId]);
 
   // Section entrance
   useGSAP(
@@ -182,55 +249,133 @@ export const IndustriesSection: React.FC<IndustriesSectionProps> = ({ onOpenCont
       </div>
 
       <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
-        {/* Industry Tabs: horizontal scroll on mobile, vertical list on desktop */}
-        <div
-          ref={tabsContainerRef}
-          role="tablist"
-          aria-label="Industries"
-          className="industry-reveal lg:col-span-5 flex lg:flex-col gap-2.5 overflow-x-auto lg:overflow-visible -mx-4 px-4 sm:mx-0 sm:px-0 pb-2 lg:pb-0 snap-x scroll-px-4 sm:scroll-px-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-        >
-          {INDUSTRIES.map((industry, index) => {
-            const Icon = INDUSTRY_ICONS[industry.id];
-            const isActive = industry.id === activeId;
-            return (
-              <button
-                key={industry.id}
-                type="button"
-                role="tab"
-                id={`industry-tab-${industry.id}`}
-                aria-selected={isActive}
-                aria-controls="industry-panel"
-                onClick={() => handleSelect(industry.id, index)}
-                className={`group snap-start shrink-0 lg:shrink flex items-center gap-3 sm:gap-4 rounded-2xl border px-4 py-3 lg:px-5 lg:py-4 text-left transition-all duration-300 cursor-pointer ${
-                  isActive
-                    ? "bg-gradient-to-r from-[#FF8500]/15 to-[#0C1E4E]/80 border-[#FF8500]/55 shadow-[0_10px_30px_-12px_rgba(255,133,0,0.35)]"
-                    : "bg-[#0C1E4E]/60 border-[#2651B9]/25 hover:border-[#FF8500]/40 hover:bg-[#0C1E4E]/90"
-                }`}
-              >
+        {/* Industry Tabs Column */}
+        <div className="lg:col-span-5 relative">
+          {/* Mobile Carousel Top Control Bar */}
+          <div className="flex lg:hidden items-center justify-between mb-3 px-1">
+            <div className="flex items-center gap-2">
+              <span className="inline-flex items-center gap-1.5 text-[11px] font-mono font-medium text-[#FFA133] bg-[#FF8500]/10 border border-[#FF8500]/25 px-2.5 py-0.5 rounded-full">
                 <span
-                  className={`flex items-center justify-center w-9 h-9 lg:w-11 lg:h-11 rounded-xl border transition-colors duration-300 shrink-0 ${
-                    isActive
-                      ? "bg-[#FF8500] border-[#FF8500] text-white"
-                      : "bg-[#081330]/80 border-[#2651B9]/30 text-slate-300 group-hover:text-[#FFA133]"
-                  }`}
-                >
-                  <Icon className="w-4 h-4 lg:w-5 lg:h-5" />
-                </span>
-                <span
-                  className={`whitespace-nowrap lg:whitespace-normal text-sm lg:text-base font-bold transition-colors ${
-                    isActive ? "text-white" : "text-slate-300 group-hover:text-white"
-                  }`}
-                >
-                  {industry.name}
-                </span>
-                <ArrowRight
-                  className={`hidden lg:block ml-auto w-4 h-4 transition-all duration-300 ${
-                    isActive ? "text-[#FFA133] translate-x-0 opacity-100" : "text-slate-500 -translate-x-1 opacity-0 group-hover:opacity-100 group-hover:translate-x-0"
+                  className={`w-1.5 h-1.5 rounded-full bg-[#FF8500] ${
+                    !isPaused && isAutoPlayEnabled ? "animate-ping" : ""
                   }`}
                 />
+                {!isAutoPlayEnabled
+                  ? "Manual"
+                  : isPaused
+                  ? "Paused"
+                  : "Auto-moving"}
+              </span>
+              <span className="text-[11px] font-mono text-slate-400">
+                {currentIndex + 1} of {INDUSTRIES.length}
+              </span>
+            </div>
+
+            {/* Quick Carousel Prev/Next & Play/Pause */}
+            <div className="flex items-center gap-1.5">
+              <button
+                type="button"
+                onClick={handlePrev}
+                aria-label="Previous Industry"
+                className="w-8 h-8 rounded-full bg-[#0C1E4E] border border-[#2651B9]/40 text-slate-300 hover:text-white active:scale-90 transition-all flex items-center justify-center cursor-pointer shadow-sm"
+              >
+                <ChevronLeft className="w-4 h-4" />
               </button>
-            );
-          })}
+
+              <button
+                type="button"
+                onClick={() => {
+                  if (isPaused) {
+                    setIsPaused(false);
+                    setIsAutoPlayEnabled(true);
+                  } else {
+                    setIsPaused(true);
+                  }
+                }}
+                aria-label={isPaused ? "Resume Carousel" : "Pause Carousel"}
+                className="w-8 h-8 rounded-full bg-[#0C1E4E] border border-[#2651B9]/40 text-slate-300 hover:text-white active:scale-90 transition-all flex items-center justify-center cursor-pointer shadow-sm"
+              >
+                {isPaused ? <Play className="w-3.5 h-3.5 fill-current" /> : <Pause className="w-3.5 h-3.5 fill-current" />}
+              </button>
+
+              <button
+                type="button"
+                onClick={handleNext}
+                aria-label="Next Industry"
+                className="w-8 h-8 rounded-full bg-[#0C1E4E] border border-[#2651B9]/40 text-slate-300 hover:text-white active:scale-90 transition-all flex items-center justify-center cursor-pointer shadow-sm"
+              >
+                <ChevronRight className="w-4 h-4" />
+              </button>
+            </div>
+          </div>
+
+          {/* Industry Tabs: horizontal scrollable carousel on mobile, vertical list on desktop */}
+          <div className="relative">
+            {/* Fade cues on mobile edges */}
+            <div className="lg:hidden pointer-events-none absolute left-0 top-0 bottom-0 w-6 bg-gradient-to-r from-[#081330] to-transparent z-10" />
+            <div className="lg:hidden pointer-events-none absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-[#081330] to-transparent z-10" />
+
+            <div
+              ref={tabsContainerRef}
+              role="tablist"
+              aria-label="Industries"
+              onTouchStart={handleTouchStart}
+              onTouchEnd={handleTouchEnd}
+              onMouseEnter={() => setIsPaused(true)}
+              onMouseLeave={() => setIsPaused(false)}
+              className="industry-reveal flex lg:flex-col gap-2.5 overflow-x-auto lg:overflow-visible -mx-4 px-4 sm:mx-0 sm:px-0 pb-2 lg:pb-0 snap-x snap-mandatory scroll-px-4 sm:scroll-px-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden relative"
+            >
+              {INDUSTRIES.map((industry, index) => {
+                const Icon = INDUSTRY_ICONS[industry.id];
+                const isActive = industry.id === activeId;
+                return (
+                  <button
+                    key={industry.id}
+                    type="button"
+                    role="tab"
+                    id={`industry-tab-${industry.id}`}
+                    aria-selected={isActive}
+                    aria-controls="industry-panel"
+                    onClick={() => handleSelect(industry.id, index)}
+                    className={`group relative snap-center shrink-0 lg:shrink flex items-center gap-3 sm:gap-4 rounded-2xl border px-4 py-3 lg:px-5 lg:py-4 text-left transition-all duration-300 cursor-pointer overflow-hidden ${
+                      isActive
+                        ? "bg-gradient-to-r from-[#FF8500]/20 to-[#0C1E4E]/90 border-[#FF8500] shadow-[0_10px_30px_-12px_rgba(255,133,0,0.45)] ring-1 ring-[#FF8500]/40 scale-[1.02] lg:scale-100"
+                        : "bg-[#0C1E4E]/60 border-[#2651B9]/25 hover:border-[#FF8500]/40 hover:bg-[#0C1E4E]/90 opacity-80 lg:opacity-100"
+                    }`}
+                  >
+                    {/* Active tab bottom glow line on mobile */}
+                    {isActive && (
+                      <span className="lg:hidden absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-[#FF8500] via-[#FFA133] to-amber-300 shadow-[0_0_8px_rgba(255,133,0,0.8)]" />
+                    )}
+
+                    <span
+                      className={`flex items-center justify-center w-9 h-9 lg:w-11 lg:h-11 rounded-xl border transition-colors duration-300 shrink-0 ${
+                        isActive
+                          ? "bg-[#FF8500] border-[#FF8500] text-white"
+                          : "bg-[#081330]/80 border-[#2651B9]/30 text-slate-300 group-hover:text-[#FFA133]"
+                      }`}
+                    >
+                      <Icon className="w-4 h-4 lg:w-5 lg:h-5" />
+                    </span>
+                    <span
+                      className={`whitespace-nowrap lg:whitespace-normal text-sm lg:text-base font-bold transition-colors ${
+                        isActive ? "text-white" : "text-slate-300 group-hover:text-white"
+                      }`}
+                    >
+                      {industry.name}
+                    </span>
+                    <ArrowRight
+                      className={`hidden lg:block ml-auto w-4 h-4 transition-all duration-300 ${
+                        isActive
+                          ? "text-[#FFA133] translate-x-0 opacity-100"
+                          : "text-slate-500 -translate-x-1 opacity-0 group-hover:opacity-100 group-hover:translate-x-0"
+                      }`}
+                    />
+                  </button>
+                );
+              })}
+            </div>
+          </div>
         </div>
 
         {/* Active Industry Playbook Panel */}
@@ -243,6 +388,8 @@ export const IndustriesSection: React.FC<IndustriesSectionProps> = ({ onOpenCont
           onTouchEnd={handleTouchEnd}
           onMouseDown={handleMouseDown}
           onMouseUp={handleMouseUp}
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
           className="industry-reveal lg:col-span-7 relative overflow-hidden rounded-[28px] border border-[#2651B9]/30 bg-[#0C1E4E]/80 backdrop-blur-xl p-6 sm:p-8 lg:p-10 select-none cursor-grab active:cursor-grabbing lg:cursor-default touch-pan-y"
         >
           {/* Corner glow */}
@@ -328,7 +475,7 @@ export const IndustriesSection: React.FC<IndustriesSectionProps> = ({ onOpenCont
               </GsapMagneticButton>
             </div>
 
-            {/* Mobile Swipe Navigation Controls & Dots Indicator */}
+            {/* Mobile Carousel Controls & Dots Indicator */}
             <div className="flex lg:hidden items-center justify-between gap-3 mt-8 pt-6 border-t border-[#2651B9]/25">
               <button
                 type="button"

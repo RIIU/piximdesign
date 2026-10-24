@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useState, useRef } from "react";
 import Image from "next/image";
@@ -82,18 +82,27 @@ export const BrandStoriesSection: React.FC<BrandStoriesSectionProps> = ({ onOpen
             </div>
           </div>
 
-          {/* Right Column: Scrolling Case Studies Image Cards (Elevated 1-col on mobile, sticky-scrolling on desktop) */}
+          {/* Right Column: Scrolling Case Studies Image Cards (Mobile sticky-stacking cards, sticky-scrolling on desktop) */}
           <div
             ref={rightColRef}
-            className="steps-right w-full lg:w-[58%] xl:w-[60%] flex flex-col gap-6 sm:gap-10 lg:gap-14 relative z-10"
+            className="steps-right w-full lg:w-[58%] xl:w-[60%] flex flex-col gap-8 sm:gap-10 lg:gap-14 relative z-10 pb-16 sm:pb-24 lg:pb-0"
           >
-            {CASE_STUDIES.map((study) => (
+            {CASE_STUDIES.map((study, index) => {
+              // Mobile sticky stack offset: each card stays sticky and subsequent cards overlap cleanly
+              const topOffsetMobile = 74 + index * 8;
+              const zIndexMobile = 10 + index;
+
+              return (
               <div
                 key={study.id}
                 onClick={() => setActiveCaseStudy(study)}
-                className="step-content portfolio-card cursor-pointer group w-full"
+                style={{
+                  top: topOffsetMobile,
+                  zIndex: zIndexMobile,
+                }}
+                className="step-content portfolio-card cursor-pointer group w-full sticky lg:static rounded-2xl sm:rounded-3xl bg-[#081330] border border-blue-400/25 p-2 sm:p-2.5 shadow-[0_-8px_24px_-4px_rgba(4,10,28,0.7),0_20px_35px_-5px_rgba(0,0,0,0.85)] lg:bg-transparent lg:border-0 lg:p-0 lg:shadow-none transition-all duration-300"
               >
-                <div className="portfolio-work-item relative rounded-2xl sm:rounded-3xl overflow-hidden border border-blue-400/20 hover:border-[#FF8500]/60 transition-all duration-500 shadow-2xl bg-[#0C1E4E]">
+                <div className="portfolio-work-item relative rounded-xl sm:rounded-2xl lg:rounded-3xl overflow-hidden border border-blue-400/20 hover:border-[#FF8500]/60 transition-all duration-500 shadow-xl bg-[#0C1E4E]">
                   {/* Top Badges: 01 / 05 hidden on mobile per user request */}
                   <div className="absolute top-3 left-3 right-3 sm:top-5 sm:left-5 sm:right-5 z-30 flex items-center justify-between pointer-events-none gap-2">
                     {/* Number Badge: Hidden on mobile */}
@@ -210,7 +219,8 @@ export const BrandStoriesSection: React.FC<BrandStoriesSectionProps> = ({ onOpen
                   </div>
                 </div>
               </div>
-            ))}
+              );
+            })}
           </div>
 
         </div>

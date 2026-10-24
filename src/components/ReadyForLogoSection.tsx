@@ -1,7 +1,6 @@
-"use client";
+﻿"use client";
 
 import React, { useRef, useState } from "react";
-import Image from "next/image";
 import { ArrowRight, Send, Volume2, VolumeX, Play } from "lucide-react";
 import { GsapMagneticButton } from "@/components/animations";
 
@@ -241,19 +240,7 @@ export const ReadyForLogoSection: React.FC<ReadyForLogoSectionProps> = ({
                   className="w-full h-full object-cover cursor-pointer"
                 />
 
-                {/* Top-Left: Pixim Logo Icon */}
-                <div className="absolute top-3 left-3 sm:top-4 sm:left-4 z-20 flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/65 backdrop-blur-md border border-white/20 shadow-md pointer-events-none">
-                  <Image
-                    src="/images/logo.webp"
-                    alt="Pixim Design"
-                    width={22}
-                    height={22}
-                    className="w-5 h-5 object-contain"
-                  />
-                  <span className="text-[11px] sm:text-xs font-semibold text-white tracking-wide">
-                    Pixim
-                  </span>
-                </div>
+
 
                 {/* Top-Right: Sound Listen/Mute Pill Toggle */}
                 <button

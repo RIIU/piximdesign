@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useRef } from "react";
 import Link from "next/link";
@@ -214,6 +214,7 @@ export const GsapMagneticButton: React.FC<GsapMagneticButtonProps> = ({
   }
 
   const isFullWidth = className.includes("w-full");
+  const isFlex1 = className.includes("flex-1");
 
   const renderedContent = (
     <div
@@ -223,7 +224,7 @@ export const GsapMagneticButton: React.FC<GsapMagneticButtonProps> = ({
       onMouseLeave={handleMouseLeave}
       onMouseDown={handleMouseDown}
       onMouseUp={handleMouseUp}
-      className={`relative inline-flex items-center justify-center overflow-hidden rounded-full font-semibold transition-shadow duration-300 cursor-pointer select-none will-change-transform ${variantStyles} ${className}`}
+      className={`relative inline-flex items-center justify-center overflow-hidden rounded-full font-semibold transition-shadow duration-300 cursor-pointer select-none will-change-transform ${isFlex1 || isFullWidth ? "w-full" : ""} ${variantStyles} ${className}`}
     >
       {/* Liquid Overwrite Hover Fill Layer */}
       {showOverwriteFill && (
@@ -250,7 +251,7 @@ export const GsapMagneticButton: React.FC<GsapMagneticButtonProps> = ({
     </div>
   );
 
-  const wrapperClasses = `${isFullWidth ? "w-full" : "inline-block"} focus:outline-none`;
+  const wrapperClasses = `${isFullWidth ? "w-full" : isFlex1 ? "flex-1 inline-flex" : "inline-flex"} items-center justify-center focus:outline-none align-middle`;
 
   if (href) {
     return (
