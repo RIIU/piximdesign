@@ -38,64 +38,77 @@ export const TakeFirstStepSection: React.FC<TakeFirstStepSectionProps> = ({
   return (
     <section
       ref={sectionRef}
-      className="relative w-full py-8 sm:py-12 md:py-16 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto select-none"
+      className="relative w-full py-6 sm:py-10 md:py-12 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto select-none"
     >
       {/* ==============================================================
-          CLEAN MINIMAL CREATIVE LAUNCH PASS
+          SLEEK MINIMAL HORIZONTAL CTA STRIP (Matching Image 2 Pattern)
          ============================================================== */}
-      <div className="take-first-step-ticket relative rounded-2xl sm:rounded-[32px] overflow-hidden bg-gradient-to-br from-[#081538] via-[#0C1E4E] to-[#07112E] border border-[#2651B9]/35 hover:border-[#FF8500]/50 shadow-[0_25px_60px_rgba(4,10,28,0.7),0_0_40px_rgba(38,81,185,0.2)] transition-all duration-300">
+      <div className="take-first-step-ticket relative rounded-2xl sm:rounded-[26px] overflow-hidden bg-gradient-to-r from-[#081538] via-[#0C1E4E] to-[#07112E] border border-[#2651B9]/35 hover:border-[#FF8500]/50 shadow-[0_20px_50px_rgba(4,10,28,0.65),0_0_35px_rgba(38,81,185,0.18)] transition-all duration-300">
         {/* Subtle background blueprint grid */}
         <div
           className="absolute inset-0 opacity-[0.03] pointer-events-none"
           style={{
             backgroundImage:
               "linear-gradient(to right, #3B82F6 1px, transparent 1px), linear-gradient(to bottom, #3B82F6 1px, transparent 1px)",
-            backgroundSize: "48px 48px",
+            backgroundSize: "40px 40px",
           }}
         />
 
-        {/* Ambient Specular Glow Orbs */}
+        {/* Ambient Specular Glow Orbs in Pixim Brand Colors */}
         <div
-          className="absolute -top-24 -left-24 w-80 h-80 rounded-full pointer-events-none opacity-35 blur-3xl"
+          className="absolute -top-16 -left-16 w-60 h-60 rounded-full pointer-events-none opacity-30 blur-3xl"
           style={{
             background: "radial-gradient(circle, rgba(38, 81, 185, 0.45) 0%, transparent 70%)",
           }}
         />
         <div
-          className="absolute -bottom-24 -right-24 w-80 h-80 rounded-full pointer-events-none opacity-25 blur-3xl"
+          className="absolute -bottom-16 right-20 w-60 h-60 rounded-full pointer-events-none opacity-20 blur-3xl"
           style={{
-            background: "radial-gradient(circle, rgba(255, 133, 0, 0.35) 0%, transparent 70%)",
+            background: "radial-gradient(circle, rgba(255, 133, 0, 0.4) 0%, transparent 70%)",
           }}
         />
 
-        {/* Main Clean Minimal Banner Body - Center Aligned */}
-        <div className="relative z-10 p-6 sm:p-10 md:p-12 lg:p-16 flex flex-col items-center justify-center text-center">
-          {/* Headline */}
-          <h2 className="font-agency text-3xl sm:text-4xl md:text-5xl lg:text-[54px] font-extrabold text-white tracking-tight leading-[1.08] mb-3 sm:mb-4 text-center">
-            Take the{" "}
-            <span className="bg-gradient-to-r from-[#FF8500] via-[#FFA229] to-amber-300 bg-clip-text text-transparent">
-              First Step
+        {/* Main Content: Horizontal Flex Strip (Left Text, Right Action Pills) */}
+        <div className="relative z-10 px-5 py-5 sm:px-8 sm:py-6 md:px-10 md:py-7 flex flex-col md:flex-row items-start md:items-center justify-between gap-5 md:gap-8">
+          {/* Left Column: Kicker + Headline */}
+          <div className="min-w-0">
+            <span className="text-[11px] sm:text-xs font-black uppercase tracking-widest text-[#FFA133] font-mono block mb-1">
+              READY TO SCALE?
             </span>
-          </h2>
+            <h2 className="font-agency text-2xl sm:text-3xl md:text-[34px] font-extrabold text-white tracking-tight leading-tight">
+              Let&apos;s build something remarkable.
+            </h2>
+          </div>
 
-          <p className="font-sherika text-xs sm:text-sm md:text-base text-slate-300 font-normal leading-relaxed max-w-xl mx-auto mb-6 sm:mb-8 text-center">
-            From concept to scale – senior design sprints engineered for explosive market results.
-          </p>
-
-          {/* CTA Button placed below the text - Centered */}
-          <div className="flex items-center justify-center">
+          {/* Right Column: Dual Pill Buttons (Pixim Orange Primary + Clean White Secondary) */}
+          <div className="flex items-center gap-3 w-full sm:w-auto shrink-0">
+            {/* Primary Action: Book a Call */}
             <button
               type="button"
               onClick={() =>
                 onOpenContact?.(
                   "Strategy Call",
-                  "I want to book a strategy call for our project."
+                  "I want to book a call for our project."
                 )
               }
-              className="group inline-flex items-center justify-center gap-2.5 rounded-xl sm:rounded-2xl bg-gradient-to-r from-[#FF8500] via-[#FFA229] to-[#FF8500] hover:from-[#FFA229] hover:to-[#FF8500] text-white font-bold text-xs sm:text-sm uppercase tracking-wider py-3.5 px-7 sm:px-9 shadow-[0_8px_25px_rgba(255,133,0,0.35)] hover:shadow-[0_12px_35px_rgba(255,133,0,0.5)] hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer"
+              className="group flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 rounded-full bg-[#FF8500] hover:bg-[#FFA229] text-white font-bold text-xs sm:text-sm px-5 sm:px-6 py-2.5 sm:py-3 shadow-[0_0_22px_rgba(255,133,0,0.45)] hover:shadow-[0_0_32px_rgba(255,133,0,0.65)] hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer whitespace-nowrap"
             >
-              <span>Book Strategy Call</span>
+              <span>Book a Call</span>
               <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
+            </button>
+
+            {/* Secondary Action: Free Audit */}
+            <button
+              type="button"
+              onClick={() =>
+                onOpenContact?.(
+                  "Free Audit",
+                  "I would like a free brand and website audit."
+                )
+              }
+              className="flex-1 sm:flex-initial inline-flex items-center justify-center rounded-full bg-white hover:bg-slate-100 text-[#081330] font-bold text-xs sm:text-sm px-5 sm:px-6 py-2.5 sm:py-3 shadow-md hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer whitespace-nowrap"
+            >
+              <span>Free Audit</span>
             </button>
           </div>
         </div>
