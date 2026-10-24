@@ -143,21 +143,21 @@ export const FreeConsultationSection: React.FC<FreeConsultationSectionProps> = (
                 </p>
 
                 {/* 4 Value Checklist Items - Clean Top Alignment & Responsive Columns */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-2.5 sm:gap-3 mb-6">
-                  <div className="flex items-start gap-2.5 text-xs sm:text-[13px] text-slate-200">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                <div className="grid grid-cols-2 gap-x-2.5 sm:gap-x-4 gap-y-2.5 sm:gap-y-3 mb-6">
+                  <div className="flex items-start gap-1.5 sm:gap-2.5 text-[11.5px] min-[380px]:text-xs sm:text-[13px] text-slate-200">
+                    <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-400 shrink-0 mt-0.5" />
                     <span className="leading-snug font-medium">Response within 24 hours</span>
                   </div>
-                  <div className="flex items-start gap-2.5 text-xs sm:text-[13px] text-slate-200">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                  <div className="flex items-start gap-1.5 sm:gap-2.5 text-[11.5px] min-[380px]:text-xs sm:text-[13px] text-slate-200">
+                    <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-400 shrink-0 mt-0.5" />
                     <span className="leading-snug font-medium">Strict mutual NDA on request</span>
                   </div>
-                  <div className="flex items-start gap-2.5 text-xs sm:text-[13px] text-slate-200">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                  <div className="flex items-start gap-1.5 sm:gap-2.5 text-[11.5px] min-[380px]:text-xs sm:text-[13px] text-slate-200">
+                    <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-400 shrink-0 mt-0.5" />
                     <span className="leading-snug font-medium">Dedicated product specialists</span>
                   </div>
-                  <div className="flex items-start gap-2.5 text-xs sm:text-[13px] text-slate-200">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                  <div className="flex items-start gap-1.5 sm:gap-2.5 text-[11.5px] min-[380px]:text-xs sm:text-[13px] text-slate-200">
+                    <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-400 shrink-0 mt-0.5" />
                     <span className="leading-snug font-medium">Tailored scope & budget plan</span>
                   </div>
                 </div>
