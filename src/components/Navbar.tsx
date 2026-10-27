@@ -296,13 +296,13 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenContact }) => {
             </GsapMagneticButton>
           </div>
 
-          {/* Mobile View: "Let's Talk ->" Vibrant Electric Royal Blue Button + Orange Hamburger Menu */}
+          {/* Mobile View: "Let's Talk ->" Orange Button (matching desktop) + Orange Hamburger Menu */}
           <div className="flex md:hidden items-center gap-2.5">
             <button
               type="button"
               onClick={handleMobileContactClick}
               style={{ boxShadow: "none", textShadow: "none", filter: "none" }}
-              className="relative group overflow-hidden inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-bold text-white bg-gradient-to-r from-[#1E429F] via-[#2651B9] to-[#2E5FD9] border border-blue-400/40 active:scale-95 transition-all duration-200 cursor-pointer shadow-none [text-shadow:none] [filter:none]"
+              className="relative group overflow-hidden inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-bold text-white bg-gradient-to-r from-[#E66000] via-[#FF7A00] to-[#FF8500] border border-orange-300/50 active:scale-95 transition-all duration-200 cursor-pointer shadow-none [text-shadow:none] [filter:none]"
             >
               <span
                 style={{ textShadow: "none", filter: "none" }}
