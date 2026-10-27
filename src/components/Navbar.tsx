@@ -51,6 +51,16 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenContact }) => {
     });
   };
 
+  const handleMobileContactClick = () => {
+    if (mobileMenuOpen) {
+      closeMenuOrchestratedEaseReverse(() => {
+        onOpenContact();
+      });
+    } else {
+      onOpenContact();
+    }
+  };
+
   useEffect(() => {
     let prevScrolled = false;
     const handleScroll = () => {
@@ -261,41 +271,75 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenContact }) => {
           })}
         </nav>
 
-        {/* Right CTA Block */}
-        <div className="hidden md:flex items-center gap-3">
-          <GsapMagneticButton
-            onClick={onOpenContact}
-            variant="primary"
-            className="px-4 py-2 text-xs lg:text-sm !text-white font-bold shadow-md shadow-orange-500/20"
-          >
-            <span>Let&apos;s Talk</span>
-            <ArrowUpRight className="w-4 h-4" />
-          </GsapMagneticButton>
-        </div>
+        {/* Right CTA / Action Controls */}
+        <div className="flex items-center gap-2.5 sm:gap-3">
+          {/* Desktop Only CTA - Completely shadowless clean flat text & button */}
+          <div className="hidden md:flex items-center gap-3">
+            <GsapMagneticButton
+              onClick={onOpenContact}
+              variant="primary"
+              showOverwriteFill={false}
+              showCursorGlow={false}
+              className="px-5 py-2.5 !text-white font-extrabold !shadow-none !bg-gradient-to-r !from-[#E66000] !via-[#FF7A00] !to-[#FF8500] border !border-orange-300/50"
+            >
+              <span
+                style={{ textShadow: "none", filter: "none" }}
+                className="text-white font-bold text-sm lg:text-[15px] tracking-wide [text-shadow:none] [filter:none]"
+              >
+                Let&apos;s Talk
+              </span>
+              <ArrowUpRight
+                style={{ filter: "none" }}
+                className="w-4 h-4 text-white [filter:none]"
+                strokeWidth={2.5}
+              />
+            </GsapMagneticButton>
+          </div>
 
-        {/* Mobile Animated Hamburger Button */}
-        <div className="flex items-center gap-2 md:hidden">
-          <button
-            onClick={handleMenuToggle}
-            className="relative w-10 h-10 rounded-xl bg-white dark:bg-[#0C1E4E] border border-[#2651B9]/20 dark:border-[#2651B9]/35 flex flex-col items-center justify-center gap-1.5 focus:outline-none transition-all duration-200 active:scale-90 cursor-pointer hover:border-[#FF8500]/50 shadow-sm"
-            aria-label="Toggle Menu"
-          >
-            <span
-              className={`w-5 h-0.5 rounded-full transition-all duration-300 ease-in-out ${
-                mobileMenuOpen ? "rotate-45 translate-y-2 bg-[#FF8500]" : "bg-slate-800 dark:bg-slate-200"
-              }`}
-            />
-            <span
-              className={`w-5 h-0.5 rounded-full transition-all duration-200 ${
-                mobileMenuOpen ? "opacity-0 -translate-x-2 bg-[#FF8500]" : "bg-slate-800 dark:bg-slate-200"
-              }`}
-            />
-            <span
-              className={`w-5 h-0.5 rounded-full transition-all duration-300 ease-in-out ${
-                mobileMenuOpen ? "-rotate-45 -translate-y-2 bg-[#FF8500]" : "bg-slate-800 dark:bg-slate-200"
-              }`}
-            />
-          </button>
+          {/* Mobile View: "Let's Talk ->" Vibrant Electric Royal Blue Button + Orange Hamburger Menu */}
+          <div className="flex md:hidden items-center gap-2.5">
+            <button
+              type="button"
+              onClick={handleMobileContactClick}
+              style={{ boxShadow: "none", textShadow: "none", filter: "none" }}
+              className="relative group overflow-hidden inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-bold text-white bg-gradient-to-r from-[#1E429F] via-[#2651B9] to-[#2E5FD9] border border-blue-400/40 active:scale-95 transition-all duration-200 cursor-pointer shadow-none [text-shadow:none] [filter:none]"
+            >
+              <span
+                style={{ textShadow: "none", filter: "none" }}
+                className="relative z-10 tracking-tight font-bold text-white [text-shadow:none] [filter:none]"
+              >
+                Let&apos;s Talk
+              </span>
+              <ArrowRight
+                style={{ filter: "none" }}
+                className="relative z-10 w-3.5 h-3.5 text-white transition-transform duration-200 group-hover:translate-x-0.5 [filter:none]"
+                strokeWidth={2.5}
+              />
+            </button>
+
+            <button
+              onClick={handleMenuToggle}
+              className="relative w-8 h-8 flex flex-col items-center justify-center gap-1.5 focus:outline-none transition-all duration-200 active:scale-90 cursor-pointer"
+              aria-label="Toggle Menu"
+              aria-expanded={mobileMenuOpen}
+            >
+              <span
+                className={`w-5 h-[2.5px] rounded-full transition-all duration-300 ease-in-out bg-[#FF8500] ${
+                  mobileMenuOpen ? "rotate-45 translate-y-[8.5px]" : ""
+                }`}
+              />
+              <span
+                className={`w-5 h-[2.5px] rounded-full transition-all duration-200 bg-[#FF8500] ${
+                  mobileMenuOpen ? "opacity-0 -translate-x-2" : ""
+                }`}
+              />
+              <span
+                className={`w-5 h-[2.5px] rounded-full transition-all duration-300 ease-in-out bg-[#FF8500] ${
+                  mobileMenuOpen ? "-rotate-45 -translate-y-[8.5px]" : ""
+                }`}
+              />
+            </button>
+          </div>
         </div>
       </div>
 

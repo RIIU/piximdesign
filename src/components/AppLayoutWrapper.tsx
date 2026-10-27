@@ -4,6 +4,7 @@ import React, { useState, createContext, useContext } from "react";
 import { ThemeProvider } from "@/context/ThemeContext";
 import { Navbar } from "./Navbar";
 import { Footer } from "./Footer";
+import { TakeFirstStepSection } from "./TakeFirstStepSection";
 import { PaymentMethodsSection } from "./PaymentMethodsSection";
 import { ContactModal } from "./ContactModal";
 import { GlobalBackgroundAnimation } from "./animations";
@@ -61,6 +62,9 @@ export const AppLayoutWrapper: React.FC<{ children: React.ReactNode }> = ({ chil
           <main id="main-content" tabIndex={-1} className="flex-1 w-full focus:outline-none">
             {children}
           </main>
+
+          {/* Pre-footer Closing Banner across all pages */}
+          <TakeFirstStepSection onOpenContact={(svc, notes) => openContact(svc, notes)} />
 
           {/* Persistent Footer across all pages (includes Payment Methods & Company Deck) */}
           <Footer />

@@ -14,7 +14,6 @@ import { BrandStoriesSection } from "@/components/BrandStoriesSection";
 import { TestimonialsSection } from "@/components/TestimonialsSection";
 import { FreeConsultationSection } from "@/components/FreeConsultationSection";
 import { FaqSection } from "@/components/FaqSection";
-import { TakeFirstStepSection } from "@/components/TakeFirstStepSection";
 
 export function HomeView() {
   const { openContact } = useContactModal();
@@ -60,9 +59,6 @@ export function HomeView() {
 
       {/* 14. Frequently Asked Questions (FaqSplit 2-Column Style) */}
       <FaqSection onOpenContact={(svc, notes) => openContact(svc, notes)} />
-
-      {/* 15. Take the First Step (Banner from Reference Image) */}
-      <TakeFirstStepSection onOpenContact={(svc, notes) => openContact(svc, notes)} />
     </div>
   );
 }

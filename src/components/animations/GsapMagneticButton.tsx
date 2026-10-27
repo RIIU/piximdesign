@@ -13,6 +13,7 @@ interface GsapMagneticButtonProps {
   strength?: number; // Distance multiplier for magnetism (default 0.38)
   textStrengthMultiplier?: number; // Parallax multiplier for inner text (default 1.55)
   showOverwriteFill?: boolean; // Liquid overwrite hover sweep
+  showCursorGlow?: boolean; // Cursor glow sheen blur
   type?: "button" | "submit" | "reset";
   disabled?: boolean;
 }
@@ -26,6 +27,7 @@ export const GsapMagneticButton: React.FC<GsapMagneticButtonProps> = ({
   strength = 0.38,
   textStrengthMultiplier = 1.55,
   showOverwriteFill = true,
+  showCursorGlow = false,
   type = "button",
   disabled = false,
 }) => {
@@ -236,15 +238,18 @@ export const GsapMagneticButton: React.FC<GsapMagneticButtonProps> = ({
       )}
 
       {/* Cursor Glow Sheen */}
-      <div
-        ref={glowRef}
-        className="pointer-events-none absolute -left-12 -top-12 w-24 h-24 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/40 blur-md opacity-0 will-change-transform"
-      />
+      {showCursorGlow && (
+        <div
+          ref={glowRef}
+          className="pointer-events-none absolute -left-12 -top-12 w-24 h-24 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/40 blur-md opacity-0 will-change-transform"
+        />
+      )}
 
       {/* Inner Button Content with 3D Depth Parallax */}
       <span
         ref={textRef}
-        className="relative z-10 flex items-center justify-center gap-2 will-change-transform pointer-events-none w-full"
+        style={{ textShadow: "none", filter: "none" }}
+        className="relative z-10 flex items-center justify-center gap-2 will-change-transform pointer-events-none w-full [text-shadow:none] [filter:none]"
       >
         {children}
       </span>

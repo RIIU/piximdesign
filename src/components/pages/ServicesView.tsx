@@ -350,18 +350,7 @@ export const ServicesView: React.FC = () => {
         <GsapReviewsInfiniteSlider title="Verified Client Reviews Across Services" subtitle="PROVEN TRACK RECORD" speed={38} />
       </section>
 
-      {/* 7. FAQ */}
-      <FaqSplit
-        title={
-          <>
-            Service Questions, <GradientText>Answered</GradientText>
-          </>
-        }
-        faqs={FAQS}
-        onAsk={() => consult("I have a few questions about your services.")}
-      />
-
-      {/* 8. Final CTA */}
+      {/* 7. CTA: Not Sure Where to Start? */}
       <ReadyForLogoSection
         onOpenContact={(service, note) => openContact(service, note)}
         titleLead="Not Sure Where"
@@ -372,6 +361,17 @@ export const ServicesView: React.FC = () => {
         secondaryService="Service Consultation"
         secondaryNote="I would like to book a free consultation about your services."
         {...CTA_VIDEOS.grow}
+      />
+
+      {/* 8. FAQ */}
+      <FaqSplit
+        title={
+          <>
+            Service Questions, <GradientText>Answered</GradientText>
+          </>
+        }
+        faqs={FAQS}
+        onAsk={() => consult("I have a few questions about your services.")}
       />
     </div>
   );
