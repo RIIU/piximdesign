@@ -252,25 +252,7 @@ export const IndustriesSection: React.FC<IndustriesSectionProps> = ({ onOpenCont
         {/* Industry Tabs Column */}
         <div className="lg:col-span-5 relative">
           {/* Mobile Carousel Top Control Bar */}
-          <div className="flex lg:hidden items-center justify-between mb-3 px-1">
-            <div className="flex items-center gap-2">
-              <span className="inline-flex items-center gap-1.5 text-[11px] font-mono font-medium text-[#FFA133] bg-[#FF8500]/10 border border-[#FF8500]/25 px-2.5 py-0.5 rounded-full">
-                <span
-                  className={`w-1.5 h-1.5 rounded-full bg-[#FF8500] ${
-                    !isPaused && isAutoPlayEnabled ? "animate-ping" : ""
-                  }`}
-                />
-                {!isAutoPlayEnabled
-                  ? "Manual"
-                  : isPaused
-                  ? "Paused"
-                  : "Auto-moving"}
-              </span>
-              <span className="text-[11px] font-mono text-slate-400">
-                {currentIndex + 1} of {INDUSTRIES.length}
-              </span>
-            </div>
-
+          <div className="flex lg:hidden items-center justify-end mb-3 px-1">
             {/* Quick Carousel Prev/Next & Play/Pause */}
             <div className="flex items-center gap-1.5">
               <button
