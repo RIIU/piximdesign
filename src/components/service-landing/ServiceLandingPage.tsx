@@ -79,18 +79,7 @@ export const ServiceLandingPage: React.FC<{ config: ServiceConfig }> = ({ config
         <GsapReviewsInfiniteSlider title={config.reviewsTitle} subtitle="PROVEN TRACK RECORD" speed={38} />
       </section>
 
-      {/* 11. Two-column FAQ */}
-      <FaqSplit
-        title={
-          <>
-            {shortName} Questions, <GradientText>Answered</GradientText>
-          </>
-        }
-        faqs={config.faqs}
-        onAsk={() => start(`I have a few questions before starting ${projectLabel}.`)}
-      />
-
-      {/* 12. Final CTA */}
+      {/* 11. Final CTA */}
       <ReadyForLogoSection
         onOpenContact={(service, note) => openContact(service, note)}
         titleLead={config.cta.titleLead}
@@ -102,6 +91,17 @@ export const ServiceLandingPage: React.FC<{ config: ServiceConfig }> = ({ config
         secondaryNote={`I would like to book a consultation about ${serviceName}.`}
         videoSrc={config.cta.videoSrc}
         posterSrc={config.cta.posterSrc}
+      />
+
+      {/* 12. Two-column FAQ (Placed directly above the closing TakeFirstStepSection banner) */}
+      <FaqSplit
+        title={
+          <>
+            {shortName} Questions, <GradientText>Answered</GradientText>
+          </>
+        }
+        faqs={config.faqs}
+        onAsk={() => start(`I have a few questions before starting ${projectLabel}.`)}
       />
     </div>
   );

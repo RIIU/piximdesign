@@ -335,19 +335,7 @@ export const PricingView: React.FC = () => {
         <GsapReviewsInfiniteSlider title="What Founders Say About Our Value" subtitle="TRANSPARENT CLIENT REVIEWS" speed={38} />
       </section>
 
-      {/* 8. FAQ */}
-      <FaqSplit
-        id="payment"
-        title={
-          <>
-            Pricing Questions, <GradientText>Answered</GradientText>
-          </>
-        }
-        faqs={FAQS}
-        onAsk={() => quote("I have a few questions about pricing.")}
-      />
-
-      {/* 9. Final CTA */}
+      {/* 8. Final CTA */}
       <ReadyForLogoSection
         onOpenContact={(service, note) => openContact(service, note)}
         titleLead="Let's Price"
@@ -358,6 +346,18 @@ export const PricingView: React.FC = () => {
         secondaryService="Pricing Consultation"
         secondaryNote="I would like to book a free call to discuss pricing."
         {...CTA_VIDEOS.grow}
+      />
+
+      {/* 9. FAQ (Placed directly above the closing TakeFirstStepSection banner) */}
+      <FaqSplit
+        id="payment"
+        title={
+          <>
+            Pricing Questions, <GradientText>Answered</GradientText>
+          </>
+        }
+        faqs={FAQS}
+        onAsk={() => quote("I have a few questions about pricing.")}
       />
     </div>
   );
