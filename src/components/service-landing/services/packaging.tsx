@@ -5,6 +5,7 @@ import { Box, Check, Layers, Printer, ShieldCheck } from "lucide-react";
 import { ServiceLandingPage } from "../ServiceLandingPage";
 import { GradientText, SAMPLE_MARK_PATH, SampleMark, Wordmark } from "@/components/page-kit/shared";
 import { ChipDot, ChipIconBox, FloatingChip, Lines, MonoLabel, TILE_DARK } from "@/components/page-kit/primitives";
+import { ServiceHeroVideo } from "../sections/ServiceHeroVideo";
 import type { ServiceConfig } from "../types";
 import { SERVICE_PRICING } from "@/data/servicePricing";
 
@@ -142,60 +143,35 @@ const Barcode: React.FC<{ className?: string }> = ({ className = "h-8" }) => (
 /* ---------- Hero composition ---------- */
 
 const HeroVisual = () => (
-  <div className="relative">
-    <div className="relative grid grid-cols-6 gap-3 sm:gap-4">
-      <div className="relative col-span-4 aspect-[4/3] rounded-3xl border border-[#2651B9]/35 bg-gradient-to-br from-[#0F2260] to-[#081330] overflow-hidden flex items-center justify-center">
-        <span className="absolute bottom-[12%] left-1/2 -translate-x-1/2 w-1/2 h-4 rounded-full bg-black/40 blur-md" />
-        <IsoBox className="relative w-[62%] h-[82%] drop-shadow-[0_20px_30px_rgba(255,133,0,0.25)]" />
-        <MonoLabel className="absolute top-4 left-4 text-slate-500">Retail box</MonoLabel>
-      </div>
-
-      <div className="col-span-2 rounded-3xl border border-[#2651B9]/35 bg-[#0C1E4E]/90 p-3 flex flex-col items-center justify-center gap-2">
-        <Pouch className="w-full h-auto max-h-[120px]" />
-        <MonoLabel>Pouch</MonoLabel>
-      </div>
-
-      <div className={`col-span-3 ${TILE_DARK} p-3.5 flex items-center gap-3`}>
-        <div className="flex-1 rounded-xl bg-gradient-to-br from-[#FF8500] to-[#FFA133] p-2.5">
-          <div className="flex items-center gap-1">
-            <SampleMark className="w-3.5 h-3.5" color="#FFFFFF" />
-            <Wordmark className="text-[10px] text-white" />
-          </div>
-          <span className="mt-1 block font-agency text-sm font-extrabold text-white leading-none">Organic Honey</span>
-          <span className="block text-[8px] text-white/80">Net wt. 250g</span>
-        </div>
-        <div className="hidden sm:block">
-          <Barcode className="h-10" />
-        </div>
-      </div>
-
-      <div className={`col-span-3 ${TILE_DARK} p-3 flex items-end justify-center gap-3`}>
-        <Jar className="h-20 w-auto" />
-        <Bottle className="h-24 w-auto" />
-      </div>
-    </div>
-
-    <FloatingChip
-      className="right-3 -top-4"
-      icon={
-        <ChipDot>
-          <Check className="w-2.5 h-2.5" strokeWidth={3.5} />
-        </ChipDot>
-      }
-      title="Print-ready"
-    />
-    <FloatingChip
-      className="right-2 sm:-right-4 -bottom-5"
-      delayed
-      icon={
-        <ChipIconBox>
-          <Printer className="w-3.5 h-3.5" />
-        </ChipIconBox>
-      }
-      title="die-cut-box.pdf"
-      sub="CMYK · 3mm bleed"
-    />
-  </div>
+  <ServiceHeroVideo
+    videoSrc="/video/Creative-Logo-Branding-Solutions-for-Your-Business-_-Pixim-Design.mp4"
+    posterSrc="/video/posters/Creative-Logo-Branding-Solutions-for-Your-Business-_-Pixim-Design.webp"
+    badge="Packaging Showcase"
+    topChip={
+      <FloatingChip
+        className="right-3 -top-4 sm:-top-5"
+        icon={
+          <ChipDot>
+            <Check className="w-2.5 h-2.5" strokeWidth={3.5} />
+          </ChipDot>
+        }
+        title="Print-ready"
+      />
+    }
+    bottomChip={
+      <FloatingChip
+        className="right-2 sm:-right-4 -bottom-5"
+        delayed
+        icon={
+          <ChipIconBox>
+            <Printer className="w-3.5 h-3.5" />
+          </ChipIconBox>
+        }
+        title="die-cut-box.pdf"
+        sub="300 DPI · Spot UV"
+      />
+    }
+  />
 );
 
 /* ---------- Bento visuals ---------- */

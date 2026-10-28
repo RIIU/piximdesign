@@ -19,6 +19,34 @@ interface ServicePageProps {
   }>;
 }
 
+// Friendly aliases so common route names work seamlessly
+const SLUG_ALIASES: Record<string, string> = {
+  branding: "logo-design",
+  brand: "logo-design",
+  logo: "logo-design",
+  "logo-branding": "logo-design",
+  packaging: "package-design",
+  package: "package-design",
+  "package-label": "package-design",
+  web: "web-design",
+  website: "web-design",
+  motion: "motion-video",
+  video: "motion-video",
+  "motion-graphics": "motion-video",
+  social: "social-media",
+  "social-media-design": "social-media",
+  marketing: "digital-marketing",
+  ads: "digital-marketing",
+  "performance-marketing": "digital-marketing",
+  seo: "seo-growth",
+  "seo-optimization": "seo-growth",
+};
+
+function resolveServiceSlug(rawSlug: string): string {
+  const normalized = (rawSlug || "").toLowerCase().trim();
+  return SLUG_ALIASES[normalized] || normalized;
+}
+
 // One landing page per service, all built on the shared service-landing template
 const SERVICE_PAGES: Record<string, React.ComponentType> = {
   "logo-design": BrandingServicePage,
@@ -31,21 +59,22 @@ const SERVICE_PAGES: Record<string, React.ComponentType> = {
 };
 
 export async function generateStaticParams() {
-  return SERVICES.map((service) => ({
-    slug: service.id,
-  }));
+  const canonical = SERVICES.map((service) => ({ slug: service.id }));
+  const aliases = Object.keys(SLUG_ALIASES).map((slug) => ({ slug }));
+  return [...canonical, ...aliases];
 }
 
 export async function generateMetadata({ params }: ServicePageProps): Promise<Metadata> {
   const { slug } = await params;
-  const service = SERVICES.find((s) => s.id === slug);
+  const canonicalSlug = resolveServiceSlug(slug);
+  const service = SERVICES.find((s) => s.id === canonicalSlug);
   if (!service) return { title: "Service Not Found" };
 
-  const from = startingFrom(slug);
+  const from = startingFrom(canonicalSlug);
   return pageMetadata({
     title: service.title,
     description: from ? `${service.tagline} Packages from ${from.bdt} / ${from.usd}.` : service.tagline,
-    path: `/services/${slug}`,
+    path: `/services/${canonicalSlug}`,
   });
 }
 
@@ -53,15 +82,16 @@ const priceNumber = (price: string) => price.replace(/[^0-9.]/g, "");
 
 export default async function ServiceDetailPage({ params }: ServicePageProps) {
   const { slug } = await params;
-  const ServicePage = SERVICE_PAGES[slug];
-  const service = SERVICES.find((s) => s.id === slug);
+  const canonicalSlug = resolveServiceSlug(slug);
+  const ServicePage = SERVICE_PAGES[canonicalSlug];
+  const service = SERVICES.find((s) => s.id === canonicalSlug);
 
   if (!ServicePage || !service) {
     notFound();
   }
 
-  const path = `/services/${slug}`;
-  const from = startingFrom(slug);
+  const path = `/services/${canonicalSlug}`;
+  const from = startingFrom(canonicalSlug);
   const serviceJsonLd = {
     "@context": "https://schema.org",
     "@type": "Service",

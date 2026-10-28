@@ -257,8 +257,9 @@ export const WhyPiximSection: React.FC<WhyPiximSectionProps> = ({ onOpenContact 
 
   return (
     <section
+      id="why-pixim"
       ref={sectionRef}
-      className="relative w-full py-10 sm:py-14 md:py-16 bg-[#081330] overflow-hidden"
+      className="relative w-full py-10 sm:py-14 md:py-16 bg-[#081330] overflow-hidden scroll-mt-24"
     >
       {/* Soft ambient background spotlight */}
       <div

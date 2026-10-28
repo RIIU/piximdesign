@@ -18,6 +18,7 @@ import {
 import { ServiceLandingPage } from "../ServiceLandingPage";
 import { GradientText, SampleMark, Wordmark } from "@/components/page-kit/shared";
 import { Bars, ChipDot, ChipIconBox, FloatingChip, Lines, MonoLabel, Sparkline, TILE_DARK } from "@/components/page-kit/primitives";
+import { ServiceHeroVideo } from "../sections/ServiceHeroVideo";
 import type { ServiceConfig } from "../types";
 import { SERVICE_PRICING } from "@/data/servicePricing";
 
@@ -100,67 +101,35 @@ const SearchAd: React.FC<{ className?: string }> = ({ className = "" }) => (
 /* ---------- Hero composition ---------- */
 
 const HeroVisual = () => (
-  <div className="relative">
-    <div className="relative grid grid-cols-6 gap-3 sm:gap-4">
-      <div className={`col-span-4 ${TILE_DARK} p-3.5 sm:p-4`}>
-        <div className="flex items-center justify-between">
-          <span className="text-xs font-semibold text-white">Campaign overview</span>
-          <span className="flex items-center gap-1 rounded-full bg-emerald-500/15 px-2 py-0.5 text-[9px] font-semibold text-emerald-400">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" /> Live
-          </span>
-        </div>
-        <div className="mt-3 grid grid-cols-3 gap-2">
-          <Kpi label="ROAS" points={[3, 4, 3.5, 5, 6, 5.5, 7]} />
-          <Kpi label="CTR" points={[2, 2.5, 2.2, 3, 3.4, 3.1, 3.9]} />
-          <Kpi label="Leads" points={[5, 6, 8, 7, 9, 11, 12]} />
-        </div>
-        <div className="mt-3 rounded-xl bg-[#081330] border border-white/10 p-2.5">
-          <div className="flex items-center justify-between">
-            <span className="text-[9px] font-mono text-slate-500">Conversions</span>
-            <span className="text-[9px] font-mono text-[#FFA133]">Last 30 days</span>
-          </div>
-          <Sparkline points={[10, 12, 11, 15, 14, 18, 17, 22, 21, 26, 28, 31]} className="mt-1 w-full h-14" />
-        </div>
-      </div>
-
-      <MiniAd className="col-span-2 self-start" />
-
-      <div className={`col-span-3 ${TILE_DARK} p-3.5 space-y-1.5`}>
-        {[
-          { l: "Awareness", w: "w-full", c: "bg-[#2651B9]" },
-          { l: "Consideration", w: "w-[82%]", c: "bg-[#3B82F6]" },
-          { l: "Conversion", w: "w-[62%]", c: "bg-gradient-to-r from-[#FF8500] to-[#FFA133]" },
-        ].map((stage) => (
-          <div key={stage.l} className={`mx-auto ${stage.w} ${stage.c} rounded-lg py-1.5 text-center text-[10px] font-bold text-white`}>
-            {stage.l}
-          </div>
-        ))}
-      </div>
-
-      <SearchAd className="col-span-3" />
-    </div>
-
-    <FloatingChip
-      className="right-[36%] -top-4"
-      icon={
-        <ChipDot>
-          <Check className="w-2.5 h-2.5" strokeWidth={3.5} />
-        </ChipDot>
-      }
-      title="Pixel tracking on"
-    />
-    <FloatingChip
-      className="right-2 sm:-right-4 -bottom-5"
-      delayed
-      icon={
-        <ChipIconBox>
-          <ChartColumn className="w-3.5 h-3.5" />
-        </ChipIconBox>
-      }
-      title="Weekly report sent"
-      sub="Every Monday · PDF"
-    />
-  </div>
+  <ServiceHeroVideo
+    videoSrc="/video/Grow-Your-Business-with-Creative-Design-_-Pixim-Design-Agency.mp4"
+    posterSrc="/video/posters/Grow-Your-Business-with-Creative-Design-_-Pixim-Design-Agency.webp"
+    badge="Performance Ads Reel"
+    topChip={
+      <FloatingChip
+        className="right-3 -top-4 sm:-top-5"
+        icon={
+          <ChipDot>
+            <Check className="w-2.5 h-2.5" strokeWidth={3.5} />
+          </ChipDot>
+        }
+        title="Pixel tracking active"
+      />
+    }
+    bottomChip={
+      <FloatingChip
+        className="right-2 sm:-right-4 -bottom-5"
+        delayed
+        icon={
+          <ChipIconBox>
+            <ChartColumn className="w-3.5 h-3.5" />
+          </ChipIconBox>
+        }
+        title="ROAS 4.8x average"
+        sub="Meta + Google Ads · Scaling"
+      />
+    }
+  />
 );
 
 /* ---------- Bento visuals ---------- */

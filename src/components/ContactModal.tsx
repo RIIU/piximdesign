@@ -13,39 +13,55 @@ interface ContactModalProps {
 }
 
 const BUDGET_OPTIONS_USD = [
-  "Less than $500",
-  "$500 – $1K",
-  "$1K – $2.5K",
-  "$2.5K – $5K",
-  "More than $5K",
+  "Under $200",
+  "$200 – $500",
+  "$500 – $1,200",
+  "$1,200 – $3,000",
+  "$3,000+",
 ];
 
 const BUDGET_OPTIONS_BDT = [
-  "Less than ৳60K",
-  "৳60K – ৳120K",
-  "৳120K – ৳300K",
-  "৳300K – ৳600K",
-  "More than ৳600K",
+  "Under ৳25,000",
+  "৳25,000 – ৳60,000",
+  "৳60,000 – ৳150,000",
+  "৳150,000 – ৳350,000",
+  "৳350,000+",
 ];
 
 const PROJECT_OPTIONS = [
-  "Website Design & Development",
   "Logo & Brand Identity",
-  "UI/UX & Mobile App",
+  "Website Design & Development",
+  "Social Media & Content Design",
   "Packaging Design",
-  "Video & Motion Graphics",
+  "Video & Motion Design",
   "Digital Marketing & Ads",
+  "SEO & Organic Growth",
+  "UI/UX & Mobile App",
   "Other / Custom Consultation",
 ];
 
-const matchInitialService = (service: string) => {
-  if (!service) return "";
-  const found = PROJECT_OPTIONS.find(
-    (opt) =>
-      opt.toLowerCase().includes(service.toLowerCase()) ||
-      service.toLowerCase().includes(opt.toLowerCase())
+const matchInitialService = (service?: string): string => {
+  if (!service) return "Logo & Brand Identity";
+  const s = service.toLowerCase().trim();
+
+  const exact = PROJECT_OPTIONS.find((opt) => opt.toLowerCase() === s);
+  if (exact) return exact;
+
+  const direct = PROJECT_OPTIONS.find(
+    (opt) => opt.toLowerCase().includes(s) || s.includes(opt.toLowerCase())
   );
-  return found || service;
+  if (direct) return direct;
+
+  if (s.includes("logo") || s.includes("brand")) return "Logo & Brand Identity";
+  if (s.includes("web") || s.includes("site") || s.includes("landing")) return "Website Design & Development";
+  if (s.includes("social") || s.includes("content") || s.includes("post") || s.includes("instagram") || s.includes("facebook")) return "Social Media & Content Design";
+  if (s.includes("packag") || s.includes("label") || s.includes("box") || s.includes("pouch")) return "Packaging Design";
+  if (s.includes("motion") || s.includes("video") || s.includes("animat") || s.includes("reel")) return "Video & Motion Design";
+  if (s.includes("market") || s.includes("ad") || s.includes("campaign")) return "Digital Marketing & Ads";
+  if (s.includes("seo") || s.includes("organic") || s.includes("search") || s.includes("rank")) return "SEO & Organic Growth";
+  if (s.includes("ui") || s.includes("ux") || s.includes("app") || s.includes("mobile") || s.includes("dashboard") || s.includes("saas")) return "UI/UX & Mobile App";
+
+  return service.trim() || "Other / Custom Consultation";
 };
 
 const ContactDialog: React.FC<Omit<ContactModalProps, "isOpen">> = ({
@@ -65,6 +81,9 @@ const ContactDialog: React.FC<Omit<ContactModalProps, "isOpen">> = ({
   const selectedBudget = currentBudgetOptions[budgetIdx] || currentBudgetOptions[1];
 
   const [selectedProject, setSelectedProject] = useState(() => matchInitialService(initialService));
+  const availableProjects = selectedProject && !PROJECT_OPTIONS.includes(selectedProject)
+    ? [selectedProject, ...PROJECT_OPTIONS]
+    : PROJECT_OPTIONS;
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -387,7 +406,7 @@ const ContactDialog: React.FC<Omit<ContactModalProps, "isOpen">> = ({
                 style={{ scrollbarWidth: "thin" }}
               >
                 <div className="space-y-1">
-                  {PROJECT_OPTIONS.map((opt) => {
+                  {availableProjects.map((opt) => {
                     const isChosen = selectedProject === opt;
                     return (
                       <button

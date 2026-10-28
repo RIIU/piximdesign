@@ -5,6 +5,7 @@ import { ArrowRight, Check, MousePointer2, MousePointerClick, Rocket, ShieldChec
 import { ServiceLandingPage } from "../ServiceLandingPage";
 import { GradientText, SampleMark, Wordmark } from "@/components/page-kit/shared";
 import { BrowserFrame, ChipIconBox, FloatingChip, Lines, MonoLabel, PhoneFrame, Ring, TILE_DARK } from "@/components/page-kit/primitives";
+import { ServiceHeroVideo } from "../sections/ServiceHeroVideo";
 import type { ServiceConfig } from "../types";
 import { SERVICE_PRICING } from "@/data/servicePricing";
 
@@ -57,52 +58,31 @@ const SitePreview: React.FC<{ compact?: boolean }> = ({ compact = false }) => (
 /* ---------- Hero composition ---------- */
 
 const HeroVisual = () => (
-  <div className="relative">
-    <div className="relative grid grid-cols-6 gap-3 sm:gap-4">
-      <BrowserFrame className="col-span-4 self-center">
-        <SitePreview />
-      </BrowserFrame>
-      <PhoneFrame className="col-span-2">
-        <div className="pt-3">
-          <SitePreview compact />
-        </div>
-      </PhoneFrame>
-
-      <div className={`col-span-3 ${TILE_DARK} p-3.5 flex items-center gap-3`}>
-        <Ring value={100} size={58} stroke={5} color="#22C55E">
-          <span className="font-agency text-lg font-extrabold text-white">100</span>
-        </Ring>
-        <div>
-          <span className="block text-xs font-semibold text-white">Performance</span>
-          <span className="block text-[10px] text-slate-400">Lighthouse target</span>
-        </div>
-      </div>
-
-      <div className={`col-span-3 ${TILE_DARK} p-3.5`}>
-        <MonoLabel>Built with</MonoLabel>
-        <div className="mt-2 flex flex-wrap gap-1.5">
-          {["Next.js", "React", "WordPress", "Tailwind"].map((t) => (
-            <span key={t} className="rounded-md border border-[#2651B9]/40 bg-[#081330] px-2 py-0.5 text-[10px] text-slate-300">
-              {t}
-            </span>
-          ))}
-        </div>
-      </div>
-    </div>
-
-    <FloatingChip className="right-3 -top-4" icon={<Zap className="w-3.5 h-3.5 text-[#FFA133] fill-[#FFA133]" />} title="Sub-second load" />
-    <FloatingChip
-      className="right-2 sm:-right-4 -bottom-5"
-      delayed
-      icon={
-        <ChipIconBox>
-          <Rocket className="w-3.5 h-3.5" />
-        </ChipIconBox>
-      }
-      title="Deployed to production"
-      sub="Mobile-first · SEO-ready"
-    />
-  </div>
+  <ServiceHeroVideo
+    videoSrc="/video/Grow-Your-Business-with-Creative-Design-_-Pixim-Design-Agency.mp4"
+    posterSrc="/video/posters/Grow-Your-Business-with-Creative-Design-_-Pixim-Design-Agency.webp"
+    badge="Web Experience Reel"
+    topChip={
+      <FloatingChip
+        className="right-3 -top-4 sm:-top-5"
+        icon={<Zap className="w-3.5 h-3.5 text-[#FFA133] fill-[#FFA133]" />}
+        title="Sub-second load"
+      />
+    }
+    bottomChip={
+      <FloatingChip
+        className="right-2 sm:-right-4 -bottom-5"
+        delayed
+        icon={
+          <ChipIconBox>
+            <Rocket className="w-3.5 h-3.5" />
+          </ChipIconBox>
+        }
+        title="Deployed to production"
+        sub="Mobile-first · SEO-ready"
+      />
+    }
+  />
 );
 
 /* ---------- Bento visuals ---------- */

@@ -15,6 +15,7 @@ import { GradientText } from "@/components/page-kit/shared";
 import { useRevealAnimations } from "@/components/page-kit/useRevealAnimations";
 import { ServiceHero } from "./sections/ServiceHero";
 import { ServiceBento } from "./sections/ServiceBento";
+import { ServicePreviousProjects } from "./sections/ServicePreviousProjects";
 import type { ServiceConfig } from "./types";
 
 export const ServiceLandingPage: React.FC<{ config: ServiceConfig }> = ({ config }) => {
@@ -64,12 +65,21 @@ export const ServiceLandingPage: React.FC<{ config: ServiceConfig }> = ({ config
         onCustom={() => start(`I'd like a tailored quote for ${projectLabel}.`)}
       />
 
-      {/* 9. Client reviews */}
+      {/* 9. Previous Projects (Directly after pricing) */}
+      <ServicePreviousProjects
+        shortName={shortName}
+        serviceName={serviceName}
+        projectLabel={projectLabel}
+        projects={config.projects}
+        onInquire={(title) => start(`I'm interested in a project similar to ${title}.`)}
+      />
+
+      {/* 10. Client reviews */}
       <section className="relative py-10 sm:py-14">
         <GsapReviewsInfiniteSlider title={config.reviewsTitle} subtitle="PROVEN TRACK RECORD" speed={38} />
       </section>
 
-      {/* 10. Two-column FAQ */}
+      {/* 11. Two-column FAQ */}
       <FaqSplit
         title={
           <>
@@ -80,7 +90,7 @@ export const ServiceLandingPage: React.FC<{ config: ServiceConfig }> = ({ config
         onAsk={() => start(`I have a few questions before starting ${projectLabel}.`)}
       />
 
-      {/* 11. Final CTA */}
+      {/* 12. Final CTA */}
       <ReadyForLogoSection
         onOpenContact={(service, note) => openContact(service, note)}
         titleLead={config.cta.titleLead}

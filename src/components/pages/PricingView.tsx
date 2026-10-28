@@ -337,6 +337,7 @@ export const PricingView: React.FC = () => {
 
       {/* 8. FAQ */}
       <FaqSplit
+        id="payment"
         title={
           <>
             Pricing Questions, <GradientText>Answered</GradientText>

@@ -10,6 +10,7 @@ import { GsapReviewsInfiniteSlider } from "@/components/animations";
 import { SERVICE_ICONS } from "@/components/serviceIcons";
 import { Price } from "@/components/currency/Price";
 import { PageHero } from "@/components/page-kit/PageHero";
+import { ServiceHeroVideo } from "@/components/service-landing/sections/ServiceHeroVideo";
 import { ClientLogoWall } from "@/components/page-kit/ClientLogoWall";
 import { FilterPills } from "@/components/page-kit/FilterPills";
 import { ProcessTimeline } from "@/components/page-kit/ProcessTimeline";
@@ -48,72 +49,37 @@ const CTA_SPAN_MD: Record<number, string> = { 0: "md:col-span-2", 1: "md:col-spa
 
 /* ---------- Hero composition ---------- */
 
-const HeroServiceTile: React.FC<{ service: Service }> = ({ service }) => {
-  const Icon = SERVICE_ICONS[service.id];
-  return (
-    <div className={`${TILE_DARK} aspect-square p-3 sm:p-4 flex flex-col justify-between`}>
-      <span className="flex w-9 h-9 sm:w-10 sm:h-10 items-center justify-center rounded-xl bg-[#FF8500]/12 border border-[#FF8500]/30 text-[#FFA133]">
-        <Icon className="w-4 h-4 sm:w-5 sm:h-5" />
-      </span>
-      <span className="flex items-end justify-between gap-1">
-        <span className="font-agency text-sm sm:text-base font-extrabold text-white leading-none">{SHORT_LABELS[service.id]}</span>
-        <span className="font-mono text-[9px] text-slate-500">{service.number}</span>
-      </span>
-    </div>
-  );
-};
-
 const HeroVisual = () => (
-  <div className="relative">
-    <div className="grid grid-cols-3 gap-3 sm:gap-4">
-      {SERVICES.slice(0, 4).map((service) => (
-        <HeroServiceTile key={service.id} service={service} />
-      ))}
-      <div className={`${TILE_ORANGE} relative aspect-square overflow-hidden p-3 sm:p-4 flex flex-col justify-between`}>
-        <SampleMark className="absolute -right-6 -top-6 w-24 h-24 opacity-20" color="#FFFFFF" />
-        <span className="text-[9px] font-mono uppercase tracking-widest text-white/80">One studio</span>
-        <span>
-          <span className="block font-agency text-5xl sm:text-6xl font-extrabold text-white leading-none">7</span>
-          <span className="block text-[11px] font-semibold text-white/90">services</span>
-        </span>
-      </div>
-      {SERVICES.slice(4).map((service) => (
-        <HeroServiceTile key={service.id} service={service} />
-      ))}
-      <div className={`${TILE_DEEP} aspect-square p-3 sm:p-4 flex flex-col justify-between`}>
-        <span className="flex text-[#FFA133]">
-          {[0, 1, 2, 3, 4].map((s) => (
-            <Star key={s} className="w-3 h-3 fill-current" />
-          ))}
-        </span>
-        <span>
-          <span className="block font-agency text-3xl sm:text-4xl font-extrabold text-white leading-none">4.9</span>
-          <span className="block text-[10px] text-slate-400">client rating</span>
-        </span>
-      </div>
-    </div>
-
-    <FloatingChip
-      className="right-3 -top-6"
-      icon={
-        <ChipIconBox>
-          <CalendarCheck className="w-3.5 h-3.5" />
-        </ChipIconBox>
-      }
-      title="Free 30-min consultation"
-      sub="No obligation"
-    />
-    <FloatingChip
-      className="left-3 -bottom-7"
-      delayed
-      icon={
-        <ChipDot>
-          <Check className="w-2.5 h-2.5" strokeWidth={3.5} />
-        </ChipDot>
-      }
-      title="Prices in ৳ BDT & $ USD"
-    />
-  </div>
+  <ServiceHeroVideo
+    videoSrc="/video/Grow-Your-Business-with-Creative-Design-_-Pixim-Design-Agency.mp4"
+    posterSrc="/video/posters/Grow-Your-Business-with-Creative-Design-_-Pixim-Design-Agency.webp"
+    badge="7 Studio Services"
+    topChip={
+      <FloatingChip
+        className="right-3 -top-4 sm:-top-5"
+        icon={
+          <ChipIconBox>
+            <CalendarCheck className="w-3.5 h-3.5" />
+          </ChipIconBox>
+        }
+        title="Free 30-min consultation"
+        sub="No obligation"
+      />
+    }
+    bottomChip={
+      <FloatingChip
+        className="right-2 sm:-right-4 -bottom-5"
+        delayed
+        icon={
+          <ChipDot>
+            <Check className="w-2.5 h-2.5" strokeWidth={3.5} />
+          </ChipDot>
+        }
+        title="Prices in ৳ BDT & $ USD"
+        sub="100% On-time guarantee"
+      />
+    }
+  />
 );
 
 /* ---------- Service card ---------- */

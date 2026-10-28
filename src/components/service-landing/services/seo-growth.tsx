@@ -5,6 +5,7 @@ import { ChartColumn, Check, FileSearch, Gauge, MapPin, Search, Star, Target, Tr
 import { ServiceLandingPage } from "../ServiceLandingPage";
 import { GradientText, SampleMark } from "@/components/page-kit/shared";
 import { ChipDot, ChipIconBox, FloatingChip, Lines, MonoLabel, Ring, Sparkline, TILE_DARK } from "@/components/page-kit/primitives";
+import { ServiceHeroVideo } from "../sections/ServiceHeroVideo";
 import type { ServiceConfig } from "../types";
 import { SERVICE_PRICING } from "@/data/servicePricing";
 
@@ -75,52 +76,35 @@ const INTENT_STYLE: Record<string, string> = {
 /* ---------- Hero composition ---------- */
 
 const HeroVisual = () => (
-  <div className="relative">
-    <div className="relative grid grid-cols-6 gap-3 sm:gap-4">
-      <Serp className="col-span-6" />
-
-      <div className={`col-span-4 ${TILE_DARK} p-3.5`}>
-        <div className="flex items-center justify-between">
-          <span className="text-xs font-semibold text-white">Organic traffic</span>
-          <TrendingUp className="w-4 h-4 text-emerald-400" />
-        </div>
-        <Sparkline points={[8, 9, 9, 11, 12, 14, 15, 18, 20, 24, 27, 31]} className="mt-2 w-full h-14" />
-        <div className="mt-1 flex justify-between text-[8px] font-mono text-slate-500">
-          {["Jan", "Mar", "May", "Jul", "Sep", "Nov"].map((m) => (
-            <span key={m}>{m}</span>
-          ))}
-        </div>
-      </div>
-
-      <div className={`col-span-2 ${TILE_DARK} p-3 flex flex-col items-center justify-center gap-2`}>
-        <Ring value={94} size={60} stroke={5} color="#22C55E">
-          <Check className="w-5 h-5 text-emerald-400" strokeWidth={3} />
-        </Ring>
-        <span className="text-[10px] font-semibold text-slate-300 text-center leading-tight">Site health</span>
-      </div>
-    </div>
-
-    <FloatingChip
-      className="right-3 -top-4"
-      icon={
-        <ChipDot>
-          <Check className="w-2.5 h-2.5" strokeWidth={3.5} />
-        </ChipDot>
-      }
-      title="Rich result live"
-    />
-    <FloatingChip
-      className="left-2 sm:-left-6 top-[38%]"
-      delayed
-      icon={
-        <ChipIconBox>
-          <FileSearch className="w-3.5 h-3.5" />
-        </ChipIconBox>
-      }
-      title="Indexed in Google"
-      sub="Sitemap submitted"
-    />
-  </div>
+  <ServiceHeroVideo
+    videoSrc="/video/Grow-Your-Business-with-Creative-Design-_-Pixim-Design-Agency.mp4"
+    posterSrc="/video/posters/Grow-Your-Business-with-Creative-Design-_-Pixim-Design-Agency.webp"
+    badge="Organic Growth Reel"
+    topChip={
+      <FloatingChip
+        className="right-3 -top-4 sm:-top-5"
+        icon={
+          <ChipDot>
+            <Check className="w-2.5 h-2.5" strokeWidth={3.5} />
+          </ChipDot>
+        }
+        title="#1 on Google"
+      />
+    }
+    bottomChip={
+      <FloatingChip
+        className="right-2 sm:-right-4 -bottom-5"
+        delayed
+        icon={
+          <ChipIconBox>
+            <FileSearch className="w-3.5 h-3.5" />
+          </ChipIconBox>
+        }
+        title="Indexed in Google"
+        sub="Sitemap submitted · 100% Core Vitals"
+      />
+    }
+  />
 );
 
 /* ---------- Bento visuals ---------- */

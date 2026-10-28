@@ -114,7 +114,7 @@ export const PageHero: React.FC<PageHeroProps> = ({
       </div>
 
       {/* Composition */}
-      <div className="hero-reveal lg:col-span-5" aria-hidden>
+      <div className="hero-reveal lg:col-span-5">
         {visual}
       </div>
     </div>

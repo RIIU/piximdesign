@@ -17,6 +17,7 @@ import {
 import { ServiceLandingPage } from "../ServiceLandingPage";
 import { GradientText, SampleMark, Wordmark } from "@/components/page-kit/shared";
 import { ChipIconBox, FloatingChip, Lines, MonoLabel, TILE_DARK } from "@/components/page-kit/primitives";
+import { ServiceHeroVideo } from "../sections/ServiceHeroVideo";
 import type { ServiceConfig } from "../types";
 import { SERVICE_PRICING } from "@/data/servicePricing";
 
@@ -113,57 +114,31 @@ const Timeline: React.FC<{ tall?: boolean }> = ({ tall = false }) => (
 /* ---------- Hero composition ---------- */
 
 const HeroVisual = () => (
-  <div className="relative">
-    <div className="relative grid grid-cols-6 gap-3 sm:gap-4">
-      <Player className="col-span-4">
-        <div className="flex flex-col items-center gap-2">
-          <span className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-br from-[#FF8500] to-[#FFA133] flex items-center justify-center shadow-[0_0_40px_rgba(255,133,0,0.55)]">
-            <SampleMark className="w-8 h-8 sm:w-9 sm:h-9" color="#FFFFFF" />
-          </span>
-          <Wordmark className="text-base sm:text-lg text-white" />
-        </div>
-      </Player>
-
-      <div className="col-span-2 relative overflow-hidden rounded-2xl bg-gradient-to-b from-[#FF8500] to-[#FFA133] p-2.5 flex flex-col justify-between">
-        <div className="flex gap-0.5">
-          <span className="h-0.5 flex-1 rounded bg-white" />
-          <span className="h-0.5 flex-1 rounded bg-white/40" />
-        </div>
-        <span className="mx-auto flex w-9 h-9 items-center justify-center rounded-full bg-white/25">
-          <Play className="w-4 h-4 text-white fill-white" />
-        </span>
-        <div className="flex items-end justify-between">
-          <Lines widths={["w-12", "w-8"]} className="space-y-1" barClass="h-1 bg-white/70" />
-          <Heart className="w-3.5 h-3.5 text-white fill-white" />
-        </div>
-      </div>
-
-      <div className={`col-span-6 ${TILE_DARK} p-3.5 sm:p-4`}>
-        <div className="mb-2.5 flex items-center justify-between">
-          <MonoLabel>Edit timeline</MonoLabel>
-          <MonoLabel className="text-[#FFA133]">brand-intro.prproj</MonoLabel>
-        </div>
-        <Timeline />
-      </div>
-    </div>
-
-    <FloatingChip
-      className="right-3 -top-4"
-      icon={<span className="w-2 h-2 rounded-full bg-[#FF5F57] animate-pulse" />}
-      title="4K · 60fps"
-    />
-    <FloatingChip
-      className="right-2 sm:-right-4 -bottom-5"
-      delayed
-      icon={
-        <ChipIconBox>
-          <Music className="w-3.5 h-3.5" />
-        </ChipIconBox>
-      }
-      title="Sound design added"
-      sub="Licensed music · mixed"
-    />
-  </div>
+  <ServiceHeroVideo
+    videoSrc="/video/Creative-Logo-Branding-Solutions-for-Your-Business-_-Pixim-Design.mp4"
+    posterSrc="/video/posters/Creative-Logo-Branding-Solutions-for-Your-Business-_-Pixim-Design.webp"
+    badge="4K Motion Reel"
+    topChip={
+      <FloatingChip
+        className="right-3 -top-4 sm:-top-5"
+        icon={<span className="w-2 h-2 rounded-full bg-[#FF5F57] animate-pulse" />}
+        title="4K · 60fps"
+      />
+    }
+    bottomChip={
+      <FloatingChip
+        className="right-2 sm:-right-4 -bottom-5"
+        delayed
+        icon={
+          <ChipIconBox>
+            <Music className="w-3.5 h-3.5" />
+          </ChipIconBox>
+        }
+        title="Sound design added"
+        sub="Licensed music · mixed"
+      />
+    }
+  />
 );
 
 /* ---------- Bento visuals ---------- */

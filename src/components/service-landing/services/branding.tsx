@@ -5,6 +5,7 @@ import { ArrowRight, Check, Clock, FileCheck, FileText, Gem, MessagesSquare } fr
 import { ServiceLandingPage } from "../ServiceLandingPage";
 import { GradientText, SAMPLE_MARK_PATH, SampleMark, Wordmark } from "@/components/page-kit/shared";
 import { ChipDot, ChipIconBox, FloatingChip, MonoLabel, TILE_DARK } from "@/components/page-kit/primitives";
+import { ServiceHeroVideo } from "../sections/ServiceHeroVideo";
 import type { ServiceConfig } from "../types";
 import { SERVICE_PRICING } from "@/data/servicePricing";
 
@@ -12,79 +13,36 @@ const PRICING = SERVICE_PRICING["logo-design"];
 
 /* ---------- Hero composition ---------- */
 
-const HERO_PALETTE = [
-  { hex: "#FF8500", text: "text-white" },
-  { hex: "#FFA133", text: "text-white" },
-  { hex: "#2651B9", text: "text-white" },
-  { hex: "#081330", text: "text-slate-300" },
-  { hex: "#F8FAFC", text: "text-slate-700" },
-];
-
 const HeroVisual = () => (
-  <div className="relative">
-    <div className="relative grid grid-cols-6 gap-3 sm:gap-4">
-      <div className="relative col-span-4 aspect-[4/3] overflow-hidden rounded-3xl bg-gradient-to-br from-[#FF8500] to-[#FFA133] p-5 sm:p-6 flex flex-col justify-between shadow-[0_25px_60px_-15px_rgba(255,133,0,0.5)]">
-        <div className="absolute -right-10 -top-10 w-44 h-44 rounded-full border border-dashed border-white/30" />
-        <div className="absolute -right-2 -top-2 w-28 h-28 rounded-full border border-white/20" />
-        <div className="relative flex items-center justify-between">
-          <MonoLabel className="text-white/75">Primary mark</MonoLabel>
-          <span className="text-[10px] font-mono text-white/60">01</span>
-        </div>
-        <div className="relative flex items-center gap-3">
-          <span className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-white flex items-center justify-center shadow-md">
-            <SampleMark className="w-7 h-7 sm:w-8 sm:h-8" color="#FF8500" />
-          </span>
-          <Wordmark className="text-2xl sm:text-3xl text-white" />
-        </div>
-      </div>
-
-      <div className={`col-span-2 ${TILE_DARK} p-4 flex flex-col justify-between`}>
-        <MonoLabel>Type</MonoLabel>
-        <span className="font-agency text-5xl font-extrabold text-white leading-none">Aa</span>
-        <span className="text-[10px] text-slate-400 leading-tight">Agency · Jakarta</span>
-      </div>
-
-      <div className={`col-span-3 ${TILE_DARK} p-4`}>
-        <MonoLabel>Palette</MonoLabel>
-        <div className="mt-3 flex gap-1.5 sm:gap-2">
-          {HERO_PALETTE.map((c) => (
-            <span key={c.hex} className="flex-1 h-11 rounded-xl border border-white/10 flex items-end justify-center pb-1" style={{ background: c.hex }}>
-              <span className={`hidden sm:block text-[7px] font-mono ${c.text}`}>{c.hex.slice(1)}</span>
-            </span>
-          ))}
-        </div>
-      </div>
-
-      <div className="col-span-3 rounded-3xl border border-[#2651B9]/35 bg-gradient-to-br from-[#0F2260] to-[#081330] p-4 flex flex-col justify-between rotate-[-3deg] shadow-xl">
-        <SampleMark className="w-7 h-7" color="#FF8500" />
-        <div>
-          <div className="h-1.5 w-20 rounded bg-white/80" />
-          <div className="mt-1.5 h-1.5 w-14 rounded bg-white/30" />
-        </div>
-      </div>
-    </div>
-
-    <FloatingChip
-      className="right-3 -top-4"
-      icon={
-        <ChipDot>
-          <Check className="w-2.5 h-2.5" strokeWidth={3.5} />
-        </ChipDot>
-      }
-      title="Vector ready"
-    />
-    <FloatingChip
-      className="right-2 sm:-right-4 -bottom-5"
-      delayed
-      icon={
-        <ChipIconBox>
-          <FileText className="w-3.5 h-3.5" />
-        </ChipIconBox>
-      }
-      title="brand-guidelines.pdf"
-      sub="24 pages · ready"
-    />
-  </div>
+  <ServiceHeroVideo
+    videoSrc="/video/Creative-Logo-Branding-Solutions-for-Your-Business-_-Pixim-Design.mp4"
+    posterSrc="/video/posters/Creative-Logo-Branding-Solutions-for-Your-Business-_-Pixim-Design.webp"
+    badge="Brand Identity Reel"
+    topChip={
+      <FloatingChip
+        className="right-3 -top-4 sm:-top-5"
+        icon={
+          <ChipDot>
+            <Check className="w-2.5 h-2.5" strokeWidth={3.5} />
+          </ChipDot>
+        }
+        title="Vector ready"
+      />
+    }
+    bottomChip={
+      <FloatingChip
+        className="right-2 sm:-right-4 -bottom-5"
+        delayed
+        icon={
+          <ChipIconBox>
+            <FileText className="w-3.5 h-3.5" />
+          </ChipIconBox>
+        }
+        title="brand-guidelines.pdf"
+        sub="24 pages · ready"
+      />
+    }
+  />
 );
 
 /* ---------- Bento visuals ---------- */

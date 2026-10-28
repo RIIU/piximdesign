@@ -18,6 +18,7 @@ import {
 import { ServiceLandingPage } from "../ServiceLandingPage";
 import { GradientText, SampleMark, Wordmark } from "@/components/page-kit/shared";
 import { ChipDot, ChipIconBox, FloatingChip, Lines, MonoLabel, PhoneFrame, Ring, TILE_DARK } from "@/components/page-kit/primitives";
+import { ServiceHeroVideo } from "../sections/ServiceHeroVideo";
 import type { ServiceConfig } from "../types";
 import { SERVICE_PRICING } from "@/data/servicePricing";
 
@@ -92,79 +93,35 @@ const FeedTile: React.FC<{ i: number }> = ({ i }) => {
 /* ---------- Hero composition ---------- */
 
 const HeroVisual = () => (
-  <div className="relative">
-    <div className="relative grid grid-cols-6 gap-3 sm:gap-4">
-      <PhoneFrame className="col-span-3 row-span-2">
-        <div className="p-2.5 pt-5">
-          <div className="flex items-center gap-2">
-            <span className="w-8 h-8 shrink-0 rounded-full bg-gradient-to-br from-[#FF8500] to-[#FFA133] flex items-center justify-center ring-2 ring-[#FF8500]/40 ring-offset-2 ring-offset-[#081330]">
-              <SampleMark className="w-4 h-4" color="#FFFFFF" />
-            </span>
-            <div className="flex-1">
-              <Wordmark className="block text-[11px] text-white leading-none" />
-              <Lines widths={["w-4/5"]} className="mt-1" barClass="h-1 bg-white/20" />
-            </div>
-          </div>
-          <div className="mt-2.5 flex gap-1.5">
-            {["bg-[#FF8500]", "bg-[#2651B9]", "bg-[#FFA133]", "bg-white/20"].map((c) => (
-              <span key={c} className={`w-5 h-5 rounded-full ring-1 ring-white/20 ${c}`} />
-            ))}
-          </div>
-          <div className="mt-2.5 grid grid-cols-3 gap-1">
-            {Array.from({ length: 9 }).map((_, i) => (
-              <FeedTile key={i} i={i} />
-            ))}
-          </div>
-        </div>
-      </PhoneFrame>
-
-      <div className="col-span-3 aspect-square rounded-3xl bg-gradient-to-br from-[#FF8500] to-[#FFA133] p-4 flex flex-col justify-between shadow-[0_25px_60px_-15px_rgba(255,133,0,0.5)]">
-        <div className="flex items-center gap-1.5">
-          <SampleMark className="w-4 h-4" color="#FFFFFF" />
-          <Wordmark className="text-xs text-white" />
-        </div>
-        <span className="font-agency text-3xl sm:text-4xl font-extrabold text-white leading-[0.9]">
-          New
-          <br />
-          Drop
-        </span>
-        <span className="self-start rounded-full bg-white px-2.5 py-1 text-[10px] font-bold text-[#FF8500]">Shop now</span>
-      </div>
-
-      <div className={`col-span-3 ${TILE_DARK} p-3.5 flex flex-col justify-between`}>
-        <div className="flex items-center justify-between text-slate-400">
-          <div className="flex gap-2.5">
-            <Heart className="w-4 h-4 text-[#FF5F57] fill-[#FF5F57]" />
-            <MessageCircle className="w-4 h-4" />
-          </div>
-          <Bookmark className="w-4 h-4" />
-        </div>
-        <Lines widths={["w-full", "w-2/3"]} className="mt-3 space-y-1.5" barClass="h-1.5 bg-white/15" />
-        <MonoLabel className="mt-3 text-slate-500">Caption & hashtags</MonoLabel>
-      </div>
-    </div>
-
-    <FloatingChip
-      className="right-3 -top-4"
-      icon={
-        <ChipDot>
-          <Check className="w-2.5 h-2.5" strokeWidth={3.5} />
-        </ChipDot>
-      }
-      title="On-brand"
-    />
-    <FloatingChip
-      className="right-2 sm:-right-4 -bottom-5"
-      delayed
-      icon={
-        <ChipIconBox>
-          <CalendarCheck className="w-3.5 h-3.5" />
-        </ChipIconBox>
-      }
-      title="Post scheduled"
-      sub="Friday · 7:00 PM"
-    />
-  </div>
+  <ServiceHeroVideo
+    videoSrc="/video/Grow-Your-Business-with-Creative-Design-_-Pixim-Design-Agency.mp4"
+    posterSrc="/video/posters/Grow-Your-Business-with-Creative-Design-_-Pixim-Design-Agency.webp"
+    badge="Social Content Reel"
+    topChip={
+      <FloatingChip
+        className="right-3 -top-4 sm:-top-5"
+        icon={
+          <ChipDot>
+            <Check className="w-2.5 h-2.5" strokeWidth={3.5} />
+          </ChipDot>
+        }
+        title="On-brand aesthetic"
+      />
+    }
+    bottomChip={
+      <FloatingChip
+        className="right-2 sm:-right-4 -bottom-5"
+        delayed
+        icon={
+          <ChipIconBox>
+            <CalendarCheck className="w-3.5 h-3.5" />
+          </ChipIconBox>
+        }
+        title="Post scheduled"
+        sub="Friday · 7:00 PM"
+      />
+    }
+  />
 );
 
 /* ---------- Bento visuals ---------- */

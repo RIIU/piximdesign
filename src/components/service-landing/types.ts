@@ -7,6 +7,7 @@ import type {
   StatementContent,
   WhyContent,
 } from "@/components/page-kit/types";
+import type { ServiceProject } from "@/data/serviceProjects";
 
 export interface BentoTile {
   title: string;
@@ -51,6 +52,8 @@ export interface ServiceConfig {
   };
   why: WhyContent;
   packages: PackagesContent;
+  /** Optional custom projects; falls back to curated service projects */
+  projects?: ServiceProject[];
   reviewsTitle: string;
   faqs: FaqItem[];
   cta: {
