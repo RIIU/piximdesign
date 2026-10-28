@@ -9,7 +9,6 @@ import { ArrowUpRight, ArrowRight, ChevronDown, Layers } from "lucide-react";
 import { GsapMagneticButton } from "./animations";
 import { SERVICES } from "@/data/agencyData";
 import { SERVICE_ICONS } from "./serviceIcons";
-import { CurrencyToggle } from "./currency/CurrencyToggle";
 
 interface NavbarProps {
   onOpenContact: () => void;
@@ -276,7 +275,6 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenContact }) => {
         <div className="flex items-center gap-2.5 sm:gap-3">
           {/* Desktop Only CTA - Completely shadowless clean flat text & button */}
           <div className="hidden md:flex items-center gap-3">
-            <CurrencyToggle size="sm" />
             <GsapMagneticButton
               onClick={onOpenContact}
               variant="primary"
