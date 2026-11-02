@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -6,6 +8,9 @@ import { SERVICE_ICONS } from "@/components/serviceIcons";
 import { Eyebrow, GradientText, SectionTitle } from "@/components/page-kit/shared";
 import { AGENCY_STATS, SERVICES } from "@/data/agencyData";
 import { COMPANY } from "@/data/company";
+import { TeamSection } from "@/components/about/TeamSection";
+import { ProcessSection } from "@/components/about/ProcessSection";
+import { BookingCalendarSection } from "@/components/about/BookingCalendarSection";
 
 const STORY_POINTS = [
   "100% vector master source files delivered (AI, EPS, SVG, Figma, PNG)",
@@ -37,7 +42,7 @@ const VALUES = [
   },
 ];
 
-/** Simple about page: story, numbers, services, values and a contact prompt. */
+/** Comprehensive about page: story, numbers, core team, process framework, services, values and calendar booking. */
 export const AboutView: React.FC = () => (
   <div className="w-full overflow-x-clip">
     {/* Header */}
@@ -121,6 +126,12 @@ export const AboutView: React.FC = () => (
       </dl>
     </section>
 
+    {/* Team Section (Image 1) */}
+    <TeamSection />
+
+    {/* Process Timeline Section (Image 2) */}
+    <ProcessSection />
+
     {/* What we do */}
     <section className="relative px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto pb-16 sm:pb-24">
       <Eyebrow>What we do</Eyebrow>
@@ -177,29 +188,7 @@ export const AboutView: React.FC = () => (
       </ul>
     </section>
 
-    {/* Contact prompt */}
-    <section className="relative px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto pb-20 sm:pb-28">
-      <div className="rounded-[28px] border border-[#FF8500]/30 bg-gradient-to-br from-[#FF8500]/15 via-[#0C1E4E] to-[#0C1E4E] p-8 sm:p-12 text-center">
-        <h2 className="font-agency text-3xl sm:text-4xl font-extrabold text-white">Let&apos;s Build Your Brand Together</h2>
-        <p className="mx-auto mt-3 max-w-xl text-base text-slate-300">
-          Tell us about your business and goals. The first 30-minute consultation is free.
-        </p>
-        <div className="mt-7 flex flex-wrap items-center justify-center gap-3">
-          <Link
-            href="/contact"
-            className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#FF8500] to-[#FFA133] px-7 py-3.5 text-sm font-bold uppercase tracking-wider text-white shadow-lg shadow-orange-500/25 transition-shadow hover:shadow-orange-500/40"
-          >
-            Contact us
-            <ArrowRight className="w-4 h-4" />
-          </Link>
-          <Link
-            href="/projects"
-            className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/[0.06] px-7 py-3.5 text-sm font-bold uppercase tracking-wider text-white transition-colors hover:border-white/40 hover:bg-white/[0.1]"
-          >
-            See our work
-          </Link>
-        </div>
-      </div>
-    </section>
+    {/* Interactive Discovery Booking & Calendar Section (Image 3) */}
+    <BookingCalendarSection />
   </div>
 );
