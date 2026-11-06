@@ -5,6 +5,7 @@ import gsap from "gsap";
 import Image from "next/image";
 import { Star, Quote, CheckCircle2, Pause, Play } from "lucide-react";
 import { TESTIMONIALS } from "@/data/agencyData";
+import { media } from "@/content/media";
 
 export interface ReviewItem {
   quote: string;
@@ -195,7 +196,7 @@ export const GsapReviewsInfiniteSlider: React.FC<GsapReviewsInfiniteSliderProps>
       <div className="relative z-10 flex items-center gap-3.5 mt-6 pt-5 border-t border-slate-100 dark:border-slate-800">
         <div className="relative w-11 h-11 rounded-full overflow-hidden border-2 border-orange-500/60 shrink-0 group-hover:border-orange-500 group-hover:scale-105 transition-all">
           <Image
-            src={t.avatar}
+            src={media(t.avatar)}
             alt={t.author}
             width={44}
             height={44}
