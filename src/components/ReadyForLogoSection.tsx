@@ -3,6 +3,7 @@
 import React, { useRef, useState } from "react";
 import { ArrowRight, Send, Volume2, VolumeX, Play } from "lucide-react";
 import { GsapMagneticButton } from "@/components/animations/GsapMagneticButton";
+import { media } from "@/content/media";
 
 interface ReadyForLogoSectionProps {
   onOpenContact?: (service?: string, note?: string) => void;
@@ -228,8 +229,8 @@ export const ReadyForLogoSection: React.FC<ReadyForLogoSectionProps> = ({
                 {/* Video Element */}
                 <video
                   ref={videoRef}
-                  src={shouldLoadVideo ? videoSrc : undefined}
-                  poster={posterSrc}
+                  src={media(shouldLoadVideo ? videoSrc : undefined)}
+                  poster={media(posterSrc)}
                   preload="none"
                   autoPlay
                   muted={isMuted}

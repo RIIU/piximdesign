@@ -5,6 +5,7 @@ import Image from "next/image";
 import { PORTFOLIO_PROJECTS } from "@/data/agencyData";
 import { ArrowUpRight, X, TrendingUp, Calendar, User } from "lucide-react";
 import { GsapMagneticButton } from "@/components/animations/GsapMagneticButton";
+import { media } from "@/content/media";
 
 interface PortfolioSectionProps {
   onOpenContact: () => void;
@@ -66,7 +67,7 @@ export const PortfolioSection: React.FC<PortfolioSectionProps> = ({ onOpenContac
             {/* Visual Preview Container */}
             <div className="relative h-64 sm:h-80 w-full overflow-hidden bg-slate-100 dark:bg-slate-800">
               <Image
-                src={project.image}
+                src={media(project.image)}
                 alt={project.title}
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"

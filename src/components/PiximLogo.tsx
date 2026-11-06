@@ -2,6 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
+import { media } from "@/content/media";
 
 interface PiximLogoProps {
   variant?: "full" | "icon" | "badge";
@@ -37,7 +38,7 @@ export const PiximLogo: React.FC<PiximLogoProps> = ({
 
         <div className="relative flex items-center justify-center overflow-hidden rounded-xl bg-white p-2 border border-[#2651B9]/15 shadow-sm">
           <Image
-            src="/images/logo.webp"
+            src={media("/images/logo.webp")}
             alt="Pixim Design Icon"
             width={currentSize.iconSize}
             height={currentSize.iconSize}
@@ -53,7 +54,7 @@ export const PiximLogo: React.FC<PiximLogoProps> = ({
     return (
       <div className={`relative flex items-center justify-center ${className}`}>
         <Image
-          src="/images/logo.webp"
+          src={media("/images/logo.webp")}
           alt="Pixim Design Emblem"
           width={currentSize.iconSize}
           height={currentSize.iconSize}
@@ -67,7 +68,7 @@ export const PiximLogo: React.FC<PiximLogoProps> = ({
   return (
     <div className={`flex items-center gap-3 ${className}`}>
       <Image
-        src="/images/logo.webp"
+        src={media("/images/logo.webp")}
         alt="Pixim Design"
         width={currentSize.width}
         height={currentSize.height}

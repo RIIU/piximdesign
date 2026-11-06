@@ -12,6 +12,7 @@ import {
 import { CASE_STUDIES, type CaseStudy } from "@/data/caseStudies";
 import { useHome } from "@/content/ContentProvider";
 import { RichTitle } from "@/content/RichTitle";
+import { media } from "@/content/media";
 
 interface BrandStoriesSectionProps {
   onOpenContact?: () => void;
@@ -40,7 +41,7 @@ export const BrandStoriesSection: React.FC<BrandStoriesSectionProps> = ({ onOpen
       {/* Decorative background workshape line */}
       <div className="common-line-shape-animation absolute bottom-0 left-0 z-10 pointer-events-none opacity-25">
         <Image
-          src="/images/case-studies/workshape.svg"
+          src={media("/images/case-studies/workshape.svg")}
           alt="decorative shape"
           width={400}
           height={400}
@@ -122,7 +123,7 @@ export const BrandStoriesSection: React.FC<BrandStoriesSectionProps> = ({ onOpen
                   {/* High-Resolution Mockup Image */}
                   <div className="relative w-full aspect-[16/10] sm:aspect-[736/491] overflow-hidden bg-slate-900">
                     <Image
-                      src={study.image}
+                      src={media(study.image)}
                       alt={study.title}
                       fill
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 736px, 736px"
@@ -141,7 +142,7 @@ export const BrandStoriesSection: React.FC<BrandStoriesSectionProps> = ({ onOpen
                       <div className="work-box-info bg-[#081330]/95 border border-blue-400/25 p-3 sm:p-4 rounded-2xl flex flex-col justify-between shadow-xl">
                         <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-white/5 flex items-center justify-center mb-2">
                           <Image
-                            src={study.stat1.icon}
+                            src={media(study.stat1.icon)}
                             alt=""
                             width={28}
                             height={28}
@@ -162,7 +163,7 @@ export const BrandStoriesSection: React.FC<BrandStoriesSectionProps> = ({ onOpen
                       <div className="work-box-info bg-[#081330]/95 border border-blue-400/25 p-3 sm:p-4 rounded-2xl flex flex-col justify-between shadow-xl">
                         <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-white/5 flex items-center justify-center mb-2">
                           <Image
-                            src={study.stat2.icon}
+                            src={media(study.stat2.icon)}
                             alt=""
                             width={28}
                             height={28}
@@ -252,7 +253,7 @@ export const BrandStoriesSection: React.FC<BrandStoriesSectionProps> = ({ onOpen
             {/* Modal Image */}
             <div className="relative w-full aspect-[736/400] rounded-2xl overflow-hidden mb-6 bg-slate-900">
               <Image
-                src={activeCaseStudy.image}
+                src={media(activeCaseStudy.image)}
                 alt={activeCaseStudy.title}
                 fill
                 className="object-cover"

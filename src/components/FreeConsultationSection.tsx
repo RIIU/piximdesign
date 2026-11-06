@@ -6,6 +6,7 @@ import { CheckCircle2, ArrowRight, MessageSquare, ChevronDown, Check } from "luc
 import { useCurrency } from "@/lib/currency";
 import { useHome } from "@/content/ContentProvider";
 import { RichTitle } from "@/content/RichTitle";
+import { media } from "@/content/media";
 
 interface FreeConsultationSectionProps {
   onOpenContact?: () => void;
@@ -163,7 +164,7 @@ export const FreeConsultationSection: React.FC<FreeConsultationSectionProps> = (
                   {/* Avatar Portrait */}
                   <div className="relative w-12 h-12 sm:w-14 sm:h-14 rounded-2xl overflow-hidden bg-[#e0d6ff] shrink-0 border border-white/20 shadow-md">
                     <Image
-                      src="/images/consultation/director-portrait.png"
+                      src={media("/images/consultation/director-portrait.png")}
                       alt="Sabbir Ahmed - Head of Business"
                       fill
                       sizes="56px"
