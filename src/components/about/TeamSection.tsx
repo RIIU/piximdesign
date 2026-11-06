@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Eyebrow, GradientText } from "@/components/page-kit/shared";
 import { MapPin, Sparkles, Play, Pause, Volume2, VolumeX } from "lucide-react";
 import { SocialIcon } from "@/components/SocialIcon";
+import { media } from "@/content/media";
 
 interface TeamMember {
   id: string;
@@ -169,8 +170,8 @@ export const TeamSection: React.FC<TeamSectionProps> = ({
               {/* HTML5 Video Element */}
               <video
                 ref={videoRef}
-                src={videoSrc}
-                poster={posterSrc}
+                src={media(videoSrc)}
+                poster={media(posterSrc)}
                 playsInline
                 autoPlay
                 muted={isMuted}
@@ -249,7 +250,7 @@ export const TeamSection: React.FC<TeamSectionProps> = ({
                 <div className="relative aspect-[4/3] w-full rounded-[18px] overflow-hidden bg-gradient-to-b from-blue-950/60 via-[#0B1A44] to-[#071128] border border-white/5 flex items-center justify-center">
                   {!hasError && member.image ? (
                     <Image
-                      src={member.image}
+                      src={media(member.image)}
                       alt={member.name}
                       fill
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 300px"
