@@ -1,12 +1,13 @@
 "use client";
 
 import React from "react";
-import { ArrowRight, Check } from "lucide-react";
+import { ArrowRight, Check } from "@/content/lucide";
 import { SectionHeading } from "./shared";
 import { Price } from "@/components/currency/Price";
 import { CurrencyToggle } from "@/components/currency/CurrencyToggle";
 import { useCurrency } from "@/lib/currency";
 import type { PackagesContent } from "./types";
+import { tx } from "@/content/text";
 
 interface PackageTiersProps {
   packages: PackagesContent;
@@ -66,7 +67,7 @@ export const PackageTiers: React.FC<PackageTiersProps> = ({
             >
               {popular && (
                 <span className="absolute -top-3.5 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-gradient-to-r from-[#FF8500] to-[#FFA133] px-3.5 py-1 text-[11px] font-bold uppercase tracking-wider text-white shadow-md">
-                  Most Popular
+                  {tx("page-kit/PackageTiers.most-popular", "Most Popular")}
                 </span>
               )}
 
@@ -108,7 +109,7 @@ export const PackageTiers: React.FC<PackageTiersProps> = ({
                     : "bg-[#081330] border border-[#2651B9]/35 text-slate-200 hover:border-[#FF8500]/50 hover:text-white"
                 }`}
               >
-                Choose {name}
+                {tx("page-kit/PackageTiers.choose", "Choose")} {name}
               </button>
             </div>
           );
@@ -116,13 +117,13 @@ export const PackageTiers: React.FC<PackageTiersProps> = ({
       </div>
 
       <p className="reveal-up mt-10 text-center text-sm text-slate-400">
-        Need something different?{" "}
+        {tx("page-kit/PackageTiers.need-something-different", "Need something different?")}{" "}
         <button
           type="button"
           onClick={onCustom}
           className="group inline-flex items-center gap-1 font-bold text-[#FFA133] hover:text-white transition-colors cursor-pointer"
         >
-          Get a tailored quote
+          {tx("page-kit/PackageTiers.get-a-tailored-quote", "Get a tailored quote")}
           <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />
         </button>
       </p>

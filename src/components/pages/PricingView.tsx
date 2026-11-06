@@ -2,7 +2,7 @@
 
 import React, { useRef } from "react";
 import Link from "next/link";
-import { ArrowRight, BadgeCheck, Check, FileCheck, LifeBuoy, ShieldCheck, Wallet } from "lucide-react";
+import { ArrowRight, BadgeCheck, Check, FileCheck, LifeBuoy, ShieldCheck, Wallet } from "@/content/lucide";
 import { useContactModal } from "@/components/AppLayoutWrapper";
 import { ReadyForLogoSection } from "@/components/ReadyForLogoSection";
 import { ProjectEstimator } from "@/components/ProjectEstimator";
@@ -22,6 +22,7 @@ import { usePricing, useServices } from "@/content/ContentProvider";
 import { T, usePageContent, type PageContent } from "@/content/page";
 import { type TierKey } from "@/data/servicePricing";
 import { CTA_VIDEOS, OWNERSHIP_FAQ, PAYMENT_FAQ } from "@/data/studioContent";
+import { tx } from "@/content/text";
 
 const TIERS: { key: TierKey; name: string }[] = [
   { key: "basic", name: "Basic" },
@@ -161,9 +162,9 @@ const HeroVisual = ({ standard }: { standard: { usd: string; bdt: string; desc: 
     <div className={`${TILE_DARK} absolute inset-x-6 top-0 bottom-8 rotate-[5deg] opacity-60`} />
     <div className="relative rounded-[28px] border-2 border-[#FF8500] bg-gradient-to-b from-[#FF8500]/[0.16] via-[#0C1E4E] to-[#0C1E4E] p-6 sm:p-7 shadow-[0_30px_70px_-25px_rgba(255,133,0,0.5)]">
       <div className="flex items-center justify-between gap-3">
-        <span className="font-agency text-xl font-extrabold text-[#FFA133]">Standard</span>
+        <span className="font-agency text-xl font-extrabold text-[#FFA133]">{tx("pages/PricingView.standard", "Standard")}</span>
         <span className="rounded-full bg-gradient-to-r from-[#FF8500] to-[#FFA133] px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-white">
-          Most Popular
+          {tx("pages/PricingView.most-popular", "Most Popular")}
         </span>
       </div>
       <span className="mt-5 block font-agency text-[32px] sm:text-[38px] font-extrabold text-white leading-tight">
@@ -182,7 +183,7 @@ const HeroVisual = ({ standard }: { standard: { usd: string; bdt: string; desc: 
         ))}
       </ul>
       <div className="mt-6 rounded-xl bg-gradient-to-r from-[#FF8500] to-[#FFA133] py-3 text-center text-sm font-bold text-white">
-        Choose Standard
+        {tx("pages/PricingView.choose-standard", "Choose Standard")}
       </div>
     </div>
 
@@ -193,8 +194,8 @@ const HeroVisual = ({ standard }: { standard: { usd: string; bdt: string; desc: 
           <ShieldCheck className="w-3.5 h-3.5" />
         </ChipIconBox>
       }
-      title="No hidden fees"
-      sub="Fixed quote before we start"
+      title={tx("pages/PricingView.no-hidden-fees", "No hidden fees")}
+      sub={tx("pages/PricingView.fixed-quote-before-we-start", "Fixed quote before we start")}
     />
     <FloatingChip
       className="right-0 sm:-right-4 -top-9"
@@ -204,8 +205,8 @@ const HeroVisual = ({ standard }: { standard: { usd: string; bdt: string; desc: 
           <Wallet className="w-3.5 h-3.5" />
         </ChipIconBox>
       }
-      title="bKash · Nagad · Cards"
-      sub="Billed in BDT or USD"
+      title={tx("pages/PricingView.bkash-nagad-cards", "bKash · Nagad · Cards")}
+      sub={tx("pages/PricingView.billed-in-bdt-or-usd", "Billed in BDT or USD")}
     />
   </div>
 );
@@ -228,7 +229,7 @@ export const PricingView: React.FC = () => {
     <div ref={rootRef} className="w-full overflow-x-clip">
       {/* 1. Hero */}
       <PageHero
-        crumbs={[{ label: "Home", href: "/" }, { label: "Pricing" }]}
+        crumbs={[{ label: tx("pages/PricingView.home", "Home"), href: "/" }, { label: tx("pages/PricingView.pricing", "Pricing") }]}
         eyebrow={c.hero.eyebrow}
         title={<T text={c.hero.title} />}
         description={c.hero.description}
@@ -237,7 +238,7 @@ export const PricingView: React.FC = () => {
         visual={<HeroVisual standard={c.packages!.tiers.standard} />}
       >
         <div className="hero-reveal mt-7 flex flex-wrap items-center gap-3">
-          <span className="text-xs font-semibold uppercase tracking-wider text-slate-400">Show prices in</span>
+          <span className="text-xs font-semibold uppercase tracking-wider text-slate-400">{tx("pages/PricingView.show-prices-in", "Show prices in")}</span>
           <CurrencyToggle />
         </div>
       </PageHero>
@@ -265,13 +266,13 @@ export const PricingView: React.FC = () => {
 
         <div className="reveal-up mt-12 overflow-hidden rounded-[28px] border border-[#2651B9]/30 bg-[#0C1E4E]/60">
           <div className="hidden lg:grid grid-cols-12 gap-6 border-b border-white/[0.08] px-7 py-4 text-[10px] font-mono uppercase tracking-widest text-slate-500">
-            <span className="col-span-4">Service</span>
+            <span className="col-span-4">{tx("pages/PricingView.service", "Service")}</span>
             <span className="col-span-6 grid grid-cols-3 gap-4">
               {TIERS.map((tier) => (
                 <span key={tier.key}>{tier.name}</span>
               ))}
             </span>
-            <span className="col-span-2 text-right">Details</span>
+            <span className="col-span-2 text-right">{tx("pages/PricingView.details", "Details")}</span>
           </div>
 
           <ul className="divide-y divide-white/[0.06]">
@@ -312,8 +313,8 @@ export const PricingView: React.FC = () => {
                       href={`/services/${service.id}#service-packages`}
                       className="group inline-flex items-center gap-1.5 text-sm font-bold text-[#FFA133] transition-colors hover:text-white"
                     >
-                      See packages
-                      <span className="sr-only">for {service.title}</span>
+                      {tx("pages/PricingView.see-packages", "See packages")}
+                      <span className="sr-only">{tx("pages/PricingView.for", "for")} {service.title}</span>
                       <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
                     </Link>
                   </div>
@@ -348,7 +349,7 @@ export const PricingView: React.FC = () => {
 
       {/* 7. Client reviews */}
       <section className="relative py-10 sm:py-14">
-        <GsapReviewsInfiniteSlider title={c.reviewsTitle!} subtitle="TRANSPARENT CLIENT REVIEWS" speed={38} />
+        <GsapReviewsInfiniteSlider title={c.reviewsTitle!} subtitle={tx("pages/PricingView.transparent-client-reviews", "TRANSPARENT CLIENT REVIEWS")} speed={38} />
       </section>
 
       {/* 8. Final CTA */}

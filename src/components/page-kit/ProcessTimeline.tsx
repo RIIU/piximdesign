@@ -6,6 +6,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { SectionHeading } from "./shared";
 import type { ProcessStep } from "./types";
+import { tx } from "@/content/text";
 
 interface ProcessTimelineProps {
   eyebrow?: string;
@@ -70,12 +71,12 @@ export const ProcessTimeline: React.FC<ProcessTimelineProps> = ({ eyebrow = "How
               {/* Card */}
               <div className={`reveal-up pl-16 lg:pl-0 lg:row-start-1 ${cardOnLeft ? "lg:col-start-1 lg:text-right" : "lg:col-start-2"}`}>
                 <div className="rounded-3xl border border-[#2651B9]/30 bg-[#0C1E4E]/70 p-6 sm:p-7 transition-colors hover:border-[#FF8500]/45">
-                  <span className="font-mono text-xs text-slate-500">Step 0{i + 1}</span>
+                  <span className="font-mono text-xs text-slate-500">{tx("page-kit/ProcessTimeline.step-0", "Step 0")}{i + 1}</span>
                   <h3 className="mt-1 font-agency text-2xl font-extrabold text-white">{step.title}</h3>
                   <p className="mt-2 text-sm sm:text-base text-slate-400 leading-relaxed">{step.desc}</p>
                   <span className="mt-4 inline-flex items-center gap-2 rounded-full border border-[#FF8500]/30 bg-[#FF8500]/10 px-3 py-1 text-xs font-semibold text-[#FFA133]">
                     <span className="w-1.5 h-1.5 rounded-full bg-[#FF8500]" />
-                    You receive: {step.output}
+                    {tx("page-kit/ProcessTimeline.you-receive", "You receive:")} {step.output}
                   </span>
                 </div>
               </div>

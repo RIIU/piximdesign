@@ -1,8 +1,9 @@
 import React from "react";
-import { Star } from "lucide-react";
+import { Star } from "@/content/lucide";
 import { AGENCY_STATS } from "@/data/agencyData";
 import { SampleMark } from "./shared";
 import type { StatHighlight } from "./types";
+import { Tx } from "@/content/text";
 
 const [BRANDS, YEARS, , RATING] = AGENCY_STATS;
 
@@ -11,7 +12,7 @@ export const StatsBento: React.FC<{ highlight: StatHighlight; className?: string
   <div className={`grid grid-cols-2 gap-4 auto-rows-[minmax(150px,auto)] ${className}`}>
     <div className="reveal-up relative row-span-2 overflow-hidden rounded-3xl bg-gradient-to-br from-[#FF8500] to-[#FFA133] p-6 flex flex-col justify-between shadow-[0_25px_60px_-20px_rgba(255,133,0,0.55)]">
       <SampleMark className="absolute -right-12 -top-12 w-44 h-44 opacity-15" color="#FFFFFF" />
-      <span className="text-[10px] font-mono uppercase tracking-widest text-white/80">Track record</span>
+      <span className="text-[10px] font-mono uppercase tracking-widest text-white/80"><Tx k="page-kit/StatsBento.track-record" d="Track record" /></span>
       <div className="relative">
         <span className="block font-agency text-5xl sm:text-7xl font-extrabold text-white leading-none">{BRANDS.value}</span>
         <span className="mt-2 block text-base font-bold text-white">{BRANDS.label}</span>

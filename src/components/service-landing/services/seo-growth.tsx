@@ -1,13 +1,14 @@
 "use client";
 
 import React from "react";
-import { ChartColumn, Check, FileSearch, Gauge, MapPin, Search, Star, Target, TrendingUp, X } from "lucide-react";
+import { ChartColumn, Check, FileSearch, Gauge, MapPin, Search, Star, Target, TrendingUp, X } from "@/content/lucide";
 import { ServiceLandingPage, type ServicePageProps } from "../ServiceLandingPage";
 import { GradientText, SampleMark } from "@/components/page-kit/shared";
 import { ChipDot, ChipIconBox, FloatingChip, Lines, MonoLabel, Ring, Sparkline, TILE_DARK } from "@/components/page-kit/primitives";
 import { ServiceHeroVideo } from "../sections/ServiceHeroVideo";
 import type { ServiceConfig } from "../types";
 import { SERVICE_PRICING } from "@/data/servicePricing";
+import { tx } from "@/content/text";
 
 const PRICING = SERVICE_PRICING["seo-growth"];
 
@@ -40,19 +41,19 @@ const Serp: React.FC<{ query?: string; compact?: boolean; className?: string }> 
           <span className="w-4 h-4 rounded-full bg-[#081330] flex items-center justify-center">
             <SampleMark className="w-2.5 h-2.5" color="#FF8500" />
           </span>
-          <span className="text-[9px] text-slate-600">yourbrand.com › honey</span>
+          <span className="text-[9px] text-slate-600">{tx("service-landing/services/seo-growth.yourbrand-com-honey", "yourbrand.com › honey")}</span>
         </div>
-        <span className="mt-0.5 block text-[12px] font-semibold text-[#1A0DAB] leading-snug">Pure Organic Honey | Delivered Fresh</span>
+        <span className="mt-0.5 block text-[12px] font-semibold text-[#1A0DAB] leading-snug">{tx("service-landing/services/seo-growth.pure-organic-honey-delivered-fresh", "Pure Organic Honey | Delivered Fresh")}</span>
         <span className="mt-0.5 flex items-center gap-1">
           <Stars />
-          <span className="text-[8px] text-slate-500">Rating · Reviews · In stock</span>
+          <span className="text-[8px] text-slate-500">{tx("service-landing/services/seo-growth.rating-reviews-in-stock", "Rating · Reviews · In stock")}</span>
         </span>
         <Lines widths={["w-full", "w-4/5"]} className="mt-1 space-y-1" barClass="h-1 bg-slate-300" />
       </div>
       {!compact &&
         [1, 2].map((i) => (
           <div key={i} className="px-2 opacity-45">
-            <span className="text-[9px] text-slate-500">competitor-{i}.com</span>
+            <span className="text-[9px] text-slate-500">{tx("service-landing/services/seo-growth.competitor", "competitor-")}{i}{tx("service-landing/services/seo-growth.com", ".com")}</span>
             <Lines widths={["w-3/4", "w-full"]} className="mt-1 space-y-1" barClass="h-1 bg-slate-200" />
           </div>
         ))}
@@ -61,10 +62,10 @@ const Serp: React.FC<{ query?: string; compact?: boolean; className?: string }> 
 );
 
 const KEYWORDS = [
-  { k: "organic honey online", intent: "Buy", d: 35 },
-  { k: "raw honey benefits", intent: "Learn", d: 55 },
-  { k: "honey gift box", intent: "Buy", d: 25 },
-  { k: "best honey brand", intent: "Compare", d: 70 },
+  { get k() { return tx("service-landing/services/seo-growth.organic-honey-online", "organic honey online"); }, intent: "Buy", d: 35 },
+  { get k() { return tx("service-landing/services/seo-growth.raw-honey-benefits", "raw honey benefits"); }, intent: "Learn", d: 55 },
+  { get k() { return tx("service-landing/services/seo-growth.honey-gift-box", "honey gift box"); }, intent: "Buy", d: 25 },
+  { get k() { return tx("service-landing/services/seo-growth.best-honey-brand", "best honey brand"); }, intent: "Compare", d: 70 },
 ];
 
 const INTENT_STYLE: Record<string, string> = {
@@ -79,7 +80,7 @@ const HeroVisual = () => (
   <ServiceHeroVideo
     videoSrc="/video/Grow-Your-Business-with-Creative-Design-_-Pixim-Design-Agency.mp4"
     posterSrc="/video/posters/Grow-Your-Business-with-Creative-Design-_-Pixim-Design-Agency.webp"
-    badge="Organic Growth Reel"
+    badge={tx("service-landing/services/seo-growth.organic-growth-reel", "Organic Growth Reel")}
     topChip={
       <FloatingChip
         className="right-3 -top-4 sm:-top-5"
@@ -88,7 +89,7 @@ const HeroVisual = () => (
             <Check className="w-2.5 h-2.5" strokeWidth={3.5} />
           </ChipDot>
         }
-        title="#1 on Google"
+        title={tx("service-landing/services/seo-growth.1-on-google", "#1 on Google")}
       />
     }
     bottomChip={
@@ -100,8 +101,8 @@ const HeroVisual = () => (
             <FileSearch className="w-3.5 h-3.5" />
           </ChipIconBox>
         }
-        title="Indexed in Google"
-        sub="Sitemap submitted · 100% Core Vitals"
+        title={tx("service-landing/services/seo-growth.indexed-in-google", "Indexed in Google")}
+        sub={tx("service-landing/services/seo-growth.sitemap-submitted-100-core-vitals", "Sitemap submitted · 100% Core Vitals")}
       />
     }
   />
@@ -115,28 +116,28 @@ const TechnicalAuditVisual = () => (
       <Ring value={94} size={120} stroke={9} color="#22C55E">
         <span className="text-center leading-tight">
           <Check className="mx-auto w-7 h-7 text-emerald-400" strokeWidth={3} />
-          <span className="block text-[10px] text-slate-400">Healthy</span>
+          <span className="block text-[10px] text-slate-400">{tx("service-landing/services/seo-growth.healthy", "Healthy")}</span>
         </span>
       </Ring>
-      <MonoLabel>Site audit</MonoLabel>
+      <MonoLabel>{tx("service-landing/services/seo-growth.site-audit", "Site audit")}</MonoLabel>
     </div>
     <ul className="flex-1 space-y-2">
       {[
-        { k: "HTTPS & security", ok: true },
-        { k: "XML sitemap & indexing", ok: true },
-        { k: "Core Web Vitals", ok: true },
-        { k: "Broken links & redirects", ok: true },
-        { k: "Mobile usability", ok: true },
-        { k: "Duplicate meta tags", ok: false },
+        { k: tx("service-landing/services/seo-growth.https-security", "HTTPS & security"), ok: true },
+        { k: tx("service-landing/services/seo-growth.xml-sitemap-indexing", "XML sitemap & indexing"), ok: true },
+        { k: tx("service-landing/services/seo-growth.core-web-vitals", "Core Web Vitals"), ok: true },
+        { k: tx("service-landing/services/seo-growth.broken-links-redirects", "Broken links & redirects"), ok: true },
+        { k: tx("service-landing/services/seo-growth.mobile-usability", "Mobile usability"), ok: true },
+        { k: tx("service-landing/services/seo-growth.duplicate-meta-tags", "Duplicate meta tags"), ok: false },
       ].map((row) => (
         <li key={row.k} className="flex items-center justify-between gap-2 rounded-lg bg-[#081330] border border-white/10 px-3 py-2">
           <span className="text-[11px] text-slate-300">{row.k}</span>
           {row.ok ? (
             <span className="flex items-center gap-1 text-[9px] font-bold text-emerald-400">
-              <Check className="w-3 h-3" strokeWidth={3} /> Fixed
+              <Check className="w-3 h-3" strokeWidth={3} /> {tx("service-landing/services/seo-growth.fixed", "Fixed")}
             </span>
           ) : (
-            <span className="text-[9px] font-bold text-[#FFA133]">In progress</span>
+            <span className="text-[9px] font-bold text-[#FFA133]">{tx("service-landing/services/seo-growth.in-progress", "In progress")}</span>
           )}
         </li>
       ))}
@@ -147,9 +148,9 @@ const TechnicalAuditVisual = () => (
 const KeywordVisual = () => (
   <div className="flex h-full flex-col justify-center">
     <div className="grid grid-cols-[1fr_auto_70px] items-center gap-x-3 gap-y-2">
-      <MonoLabel>Keyword</MonoLabel>
-      <MonoLabel>Intent</MonoLabel>
-      <MonoLabel>Difficulty</MonoLabel>
+      <MonoLabel>{tx("service-landing/services/seo-growth.keyword", "Keyword")}</MonoLabel>
+      <MonoLabel>{tx("service-landing/services/seo-growth.intent", "Intent")}</MonoLabel>
+      <MonoLabel>{tx("service-landing/services/seo-growth.difficulty", "Difficulty")}</MonoLabel>
       {KEYWORDS.map((row) => (
         <React.Fragment key={row.k}>
           <span className="text-[11px] text-slate-200 truncate">{row.k}</span>
@@ -169,13 +170,13 @@ const KeywordVisual = () => (
 const OnPageVisual = () => (
   <div className="flex h-full flex-col justify-center gap-2">
     <div className="rounded-lg bg-white p-2.5">
-      <span className="block text-[8px] text-[#15803D]">yourbrand.com › honey</span>
-      <span className="block text-[10px] font-semibold text-[#1A0DAB] leading-tight">Pure Organic Honey | Delivered Fresh</span>
+      <span className="block text-[8px] text-[#15803D]">{tx("service-landing/services/seo-growth.yourbrand-com-honey", "yourbrand.com › honey")}</span>
+      <span className="block text-[10px] font-semibold text-[#1A0DAB] leading-tight">{tx("service-landing/services/seo-growth.pure-organic-honey-delivered-fresh", "Pure Organic Honey | Delivered Fresh")}</span>
       <Lines widths={["w-full", "w-3/4"]} className="mt-1 space-y-0.5" barClass="h-0.5 bg-slate-300" />
     </div>
     <div className="flex justify-between text-[9px] font-mono">
-      <span className="text-emerald-400">Title 54/60</span>
-      <span className="text-emerald-400">Meta 148/160</span>
+      <span className="text-emerald-400">{tx("service-landing/services/seo-growth.title-54-60", "Title 54/60")}</span>
+      <span className="text-emerald-400">{tx("service-landing/services/seo-growth.meta-148-160", "Meta 148/160")}</span>
     </div>
   </div>
 );
@@ -188,10 +189,10 @@ const LocalVisual = () => (
     </svg>
     <MapPin className="absolute left-1/2 top-[22%] -translate-x-1/2 w-7 h-7 text-[#FF8500] fill-[#FF8500]/30 drop-shadow" />
     <div className="absolute inset-x-2 bottom-2 rounded-lg bg-white px-2 py-1.5">
-      <span className="block text-[10px] font-bold text-[#081330]">yourbrand</span>
+      <span className="block text-[10px] font-bold text-[#081330]">{tx("service-landing/services/seo-growth.yourbrand", "yourbrand")}</span>
       <span className="flex items-center gap-1">
         <Stars className="w-2 h-2" />
-        <span className="text-[8px] font-semibold text-emerald-600">Open now</span>
+        <span className="text-[8px] font-semibold text-emerald-600">{tx("service-landing/services/seo-growth.open-now", "Open now")}</span>
       </span>
     </div>
   </div>
@@ -202,21 +203,21 @@ const SchemaVisual = () => (
     <div className="flex-1 rounded-lg bg-[#05070D] border border-white/10 p-2.5 font-mono text-[9px] leading-relaxed text-slate-300">
       <div>{"{"}</div>
       <div className="pl-3">
-        <span className="text-[#93C5FD]">&quot;@type&quot;</span>: <span className="text-emerald-400">&quot;Product&quot;</span>,
+        <span className="text-[#93C5FD]">{tx("service-landing/services/seo-growth.type", "\"@type\"")}</span>: <span className="text-emerald-400">{tx("service-landing/services/seo-growth.product", "\"Product\"")}</span>,
       </div>
       <div className="pl-3">
-        <span className="text-[#93C5FD]">&quot;name&quot;</span>: <span className="text-emerald-400">&quot;Organic Honey&quot;</span>,
+        <span className="text-[#93C5FD]">{tx("service-landing/services/seo-growth.name", "\"name\"")}</span>: <span className="text-emerald-400">{tx("service-landing/services/seo-growth.organic-honey", "\"Organic Honey\"")}</span>,
       </div>
       <div className="pl-3">
-        <span className="text-[#93C5FD]">&quot;aggregateRating&quot;</span>: <span className="text-[#FFA133]">{"{…}"}</span>
+        <span className="text-[#93C5FD]">{tx("service-landing/services/seo-growth.aggregaterating", "\"aggregateRating\"")}</span>: <span className="text-[#FFA133]">{"{…}"}</span>
       </div>
       <div>{"}"}</div>
     </div>
     <div className="flex-1 rounded-lg bg-white p-2.5">
-      <span className="block text-[10px] font-semibold text-[#1A0DAB] leading-tight">Pure Organic Honey</span>
+      <span className="block text-[10px] font-semibold text-[#1A0DAB] leading-tight">{tx("service-landing/services/seo-growth.pure-organic-honey", "Pure Organic Honey")}</span>
       <span className="mt-0.5 flex items-center gap-1">
         <Stars className="w-2 h-2" />
-        <span className="text-[8px] text-slate-500">Reviews · In stock</span>
+        <span className="text-[8px] text-slate-500">{tx("service-landing/services/seo-growth.reviews-in-stock", "Reviews · In stock")}</span>
       </span>
       <Lines widths={["w-full"]} className="mt-1" barClass="h-0.5 bg-slate-300" />
     </div>
@@ -226,13 +227,13 @@ const SchemaVisual = () => (
 const GrowthVisual = () => (
   <div className="flex h-full flex-col">
     <div className="flex items-center justify-between">
-      <MonoLabel>Search performance</MonoLabel>
+      <MonoLabel>{tx("service-landing/services/seo-growth.search-performance", "Search performance")}</MonoLabel>
       <div className="flex gap-3">
         <span className="flex items-center gap-1 text-[9px] text-slate-400">
-          <span className="w-2 h-2 rounded-sm bg-[#FF8500]" /> Clicks
+          <span className="w-2 h-2 rounded-sm bg-[#FF8500]" /> {tx("service-landing/services/seo-growth.clicks", "Clicks")}
         </span>
         <span className="flex items-center gap-1 text-[9px] text-slate-400">
-          <span className="w-2 h-2 rounded-sm bg-[#60A5FA]" /> Impressions
+          <span className="w-2 h-2 rounded-sm bg-[#60A5FA]" /> {tx("service-landing/services/seo-growth.impressions", "Impressions")}
         </span>
       </div>
     </div>
@@ -255,16 +256,16 @@ const AuditPanel = () => (
     <Ring value={94} size={130} stroke={10} color="#22C55E">
       <span className="text-center leading-tight">
         <Check className="mx-auto w-8 h-8 text-emerald-400" strokeWidth={3} />
-        <span className="block text-[10px] text-slate-400">Site health</span>
+        <span className="block text-[10px] text-slate-400">{tx("service-landing/services/seo-growth.site-health", "Site health")}</span>
       </span>
     </Ring>
     <div className="w-full flex-1 space-y-3">
       {[
-        { k: "Crawlability", w: 96 },
-        { k: "Page speed", w: 90 },
-        { k: "On-page SEO", w: 88 },
-        { k: "Content quality", w: 80 },
-        { k: "Internal links", w: 84 },
+        { k: tx("service-landing/services/seo-growth.crawlability", "Crawlability"), w: 96 },
+        { k: tx("service-landing/services/seo-growth.page-speed", "Page speed"), w: 90 },
+        { k: tx("service-landing/services/seo-growth.on-page-seo", "On-page SEO"), w: 88 },
+        { k: tx("service-landing/services/seo-growth.content-quality", "Content quality"), w: 80 },
+        { k: tx("service-landing/services/seo-growth.internal-links", "Internal links"), w: 84 },
       ].map((c) => (
         <div key={c.k}>
           <div className="flex items-center justify-between text-xs text-slate-300">
@@ -283,7 +284,7 @@ const KeywordMapPanel = () => (
   <div className="rounded-2xl bg-[#081330] border border-[#2651B9]/35 p-4 sm:p-6">
     <div className="flex flex-col items-center">
       <span className="rounded-xl bg-gradient-to-r from-[#FF8500] to-[#FFA133] px-4 py-2 text-xs sm:text-sm font-bold text-white">
-        Pillar: Organic Honey
+        {tx("service-landing/services/seo-growth.pillar-organic-honey", "Pillar: Organic Honey")}
       </span>
       <span className="h-5 w-px bg-[#2651B9]/70" />
       <div className="relative grid w-full grid-cols-3 gap-2">
@@ -314,31 +315,31 @@ const BeforeAfterPanel = () => (
   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
     <div className="rounded-2xl bg-[#081330] border border-[#2651B9]/35 p-4">
       <div className="mb-2 flex items-center justify-between">
-        <MonoLabel>Before</MonoLabel>
+        <MonoLabel>{tx("service-landing/services/seo-growth.before", "Before")}</MonoLabel>
         <span className="flex w-5 h-5 items-center justify-center rounded-full bg-[#FF5F57]/20 text-[#FF5F57]">
           <X className="w-3 h-3" strokeWidth={3} />
         </span>
       </div>
       <div className="rounded-lg bg-white p-3 opacity-70">
-        <span className="block text-[9px] text-[#15803D]">yourbrand.com</span>
-        <span className="block text-sm font-semibold text-[#1A0DAB]">Home</span>
-        <span className="block text-[10px] text-slate-500">Welcome to our website. We sell many products…</span>
+        <span className="block text-[9px] text-[#15803D]">{tx("service-landing/services/seo-growth.yourbrand-com", "yourbrand.com")}</span>
+        <span className="block text-sm font-semibold text-[#1A0DAB]">{tx("service-landing/services/seo-growth.home", "Home")}</span>
+        <span className="block text-[10px] text-slate-500">{tx("service-landing/services/seo-growth.welcome-to-our-website-we-sell", "Welcome to our website. We sell many products…")}</span>
       </div>
     </div>
     <div className="rounded-2xl bg-[#081330] border border-[#FF8500]/50 p-4">
       <div className="mb-2 flex items-center justify-between">
-        <MonoLabel className="text-[#FFA133]">After</MonoLabel>
+        <MonoLabel className="text-[#FFA133]">{tx("service-landing/services/seo-growth.after", "After")}</MonoLabel>
         <span className="flex w-5 h-5 items-center justify-center rounded-full bg-emerald-500/20 text-emerald-400">
           <Check className="w-3 h-3" strokeWidth={3} />
         </span>
       </div>
       <div className="rounded-lg bg-white p-3">
-        <span className="block text-[9px] text-[#15803D]">yourbrand.com › organic-honey</span>
-        <span className="block text-sm font-semibold text-[#1A0DAB] leading-snug">Pure Organic Honey | Delivered Fresh</span>
+        <span className="block text-[9px] text-[#15803D]">{tx("service-landing/services/seo-growth.yourbrand-com-organic-honey", "yourbrand.com › organic-honey")}</span>
+        <span className="block text-sm font-semibold text-[#1A0DAB] leading-snug">{tx("service-landing/services/seo-growth.pure-organic-honey-delivered-fresh", "Pure Organic Honey | Delivered Fresh")}</span>
         <span className="mt-0.5 flex items-center gap-1">
           <Stars className="w-2.5 h-2.5" />
         </span>
-        <span className="block text-[10px] text-slate-600">Raw, unfiltered honey from local farms. Free delivery on orders over $30.</span>
+        <span className="block text-[10px] text-slate-600">{tx("service-landing/services/seo-growth.raw-unfiltered-honey-from-local-farms", "Raw, unfiltered honey from local farms. Free delivery on orders over $30.")}</span>
       </div>
     </div>
   </div>
@@ -347,7 +348,7 @@ const BeforeAfterPanel = () => (
 const MonthlyReportPanel = () => (
   <div className="rounded-2xl bg-[#081330] border border-[#2651B9]/35 p-4 sm:p-5">
     <div className="flex items-center justify-between">
-      <span className="font-agency text-lg font-extrabold text-white">Monthly SEO report</span>
+      <span className="font-agency text-lg font-extrabold text-white">{tx("service-landing/services/seo-growth.monthly-seo-report", "Monthly SEO report")}</span>
       <TrendingUp className="w-5 h-5 text-emerald-400" />
     </div>
     <Sparkline points={[10, 12, 12, 15, 17, 16, 20, 24, 27, 30, 35, 40]} className="mt-3 w-full h-20" />
@@ -356,7 +357,7 @@ const MonthlyReportPanel = () => (
         <div key={page} className="flex items-center justify-between py-2">
           <span className="text-xs font-mono text-slate-300 truncate">{page}</span>
           <span className="flex items-center gap-1 text-[10px] font-bold text-emerald-400">
-            <TrendingUp className="w-3 h-3" /> Rising
+            <TrendingUp className="w-3 h-3" /> {tx("service-landing/services/seo-growth.rising", "Rising")}
           </span>
         </div>
       ))}

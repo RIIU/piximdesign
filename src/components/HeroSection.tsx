@@ -4,7 +4,7 @@ import React, { useRef } from "react";
 import Link from "next/link";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import { Globe, ShieldCheck, Star, ArrowRight } from "lucide-react";
+import { Globe, ShieldCheck, Star, ArrowRight } from "@/content/lucide";
 import { RotatingDotOrbit } from "./RotatingDotOrbit";
 import { useHome } from "@/content/ContentProvider";
 import { RichTitle } from "@/content/RichTitle";

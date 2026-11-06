@@ -1,8 +1,9 @@
 "use client";
 
 import React, { useRef, useState, useEffect } from "react";
-import { Play, Volume2, VolumeX } from "lucide-react";
+import { Play, Volume2, VolumeX } from "@/content/lucide";
 import { media } from "@/content/media";
+import { tx } from "@/content/text";
 
 export interface ServiceHeroVideoProps {
   videoSrc: string;
@@ -153,12 +154,12 @@ export const ServiceHeroVideo: React.FC<ServiceHeroVideoProps> = ({
           {isMuted ? (
             <>
               <VolumeX className="w-3.5 h-3.5 text-white/70" />
-              <span className="text-[10px] uppercase font-mono tracking-wider">Muted</span>
+              <span className="text-[10px] uppercase font-mono tracking-wider">{tx("service-landing/sections/ServiceHeroVideo.muted", "Muted")}</span>
             </>
           ) : (
             <>
               <Volume2 className="w-3.5 h-3.5 text-white" />
-              <span className="text-[10px] uppercase font-mono tracking-wider">Audio On</span>
+              <span className="text-[10px] uppercase font-mono tracking-wider">{tx("service-landing/sections/ServiceHeroVideo.audio-on", "Audio On")}</span>
             </>
           )}
         </button>

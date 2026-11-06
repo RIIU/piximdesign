@@ -3,7 +3,7 @@
 import React, { useEffect, useRef, useState, useCallback } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { RotateCcw, Sliders, Flame } from "lucide-react";
+import { RotateCcw, Sliders, Flame } from "@/content/lucide";
 import { GsapMagneticButton } from "./GsapMagneticButton";
 
 interface GsapExplosiveTextScrollProps {

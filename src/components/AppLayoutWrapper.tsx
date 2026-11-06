@@ -9,6 +9,7 @@ import { Footer } from "./Footer";
 import { TakeFirstStepSection } from "./TakeFirstStepSection";
 import { PaymentMethodsSection } from "./PaymentMethodsSection";
 import { GlobalBackgroundAnimation } from "@/components/animations/GlobalBackgroundAnimation";
+import { tx } from "@/content/text";
 
 // Performance: the contact modal (form + validation) is split into its own chunk.
 // It is fetched in the background once the page is idle, and only mounted when opened.
@@ -73,7 +74,7 @@ export const AppLayoutWrapper: React.FC<{ children: React.ReactNode }> = ({ chil
             href="#main-content"
             className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-[#FF8500] focus:px-5 focus:py-2.5 focus:text-sm focus:font-bold focus:text-white focus:shadow-lg"
           >
-            Skip to main content
+            {tx("AppLayoutWrapper.skip-to-main-content", "Skip to main content")}
           </a>
 
           {/* Persistent Sticky Navbar across all pages */}

@@ -4,9 +4,10 @@ import React, { useRef, useState, useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
-import { Quote, ChevronLeft, ChevronRight, Star, Pause, Play, CheckCircle2 } from "lucide-react";
+import { Quote, ChevronLeft, ChevronRight, Star, Pause, Play, CheckCircle2 } from "@/content/lucide";
 import { useHome } from "@/content/ContentProvider";
 import { RichTitle } from "@/content/RichTitle";
+import { tx } from "@/content/text";
 
 interface TestimonialsSectionProps {
   onOpenContact?: () => void;
@@ -302,7 +303,7 @@ export const TestimonialsSection: React.FC<TestimonialsSectionProps> = () => {
               <div className="relative z-10 mt-6 pt-3 flex items-center justify-between border-t border-white/5">
                 <span className="text-[11px] font-medium text-emerald-400 flex items-center gap-1.5">
                   <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
-                  Verified Review
+                  {tx("TestimonialsSection.verified-review", "Verified Review")}
                 </span>
                 <Quote className="w-7 h-7 text-white/[0.08] group-hover:text-[#FF8500]/25 transition-colors rotate-180" />
               </div>

@@ -1,12 +1,13 @@
 import React from "react";
 import Link from "next/link";
-import { Clock, Mail, MapPin, Phone, Timer, type LucideIcon } from "lucide-react";
+import { Clock, Mail, MapPin, Phone, Timer, type LucideIcon } from "@/content/lucide";
 import { ContactForm } from "@/components/ContactSection";
 import { SocialIcon } from "@/components/SocialIcon";
 import { mapUrlFor, phoneUrl, whatsappUrl } from "@/data/company";
 import { getPageOverride, getSiteSettings } from "@/sanity/content";
 import { mergePage } from "@/content/pageMerge";
 import { CONTACT_PAGE_DEFAULTS } from "@/content/contactDefaults";
+import { Tx } from "@/content/text";
 
 interface ContactRow {
   label: string;
@@ -43,12 +44,12 @@ export const ContactView = async () => {
           <ol className="flex items-center gap-2 text-xs text-slate-500">
             <li>
               <Link href="/" className="hover:text-[#FFA133] transition-colors">
-                Home
+                <Tx k="pages/ContactView.home" d="Home" />
               </Link>
             </li>
             <li aria-hidden>/</li>
             <li className="text-slate-300" aria-current="page">
-              Contact
+              <Tx k="pages/ContactView.contact" d="Contact" />
             </li>
           </ol>
         </nav>

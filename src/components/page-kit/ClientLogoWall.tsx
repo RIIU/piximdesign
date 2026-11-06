@@ -3,15 +3,16 @@
 import React from "react";
 import { useSettings } from "@/content/ContentProvider";
 import { media } from "@/content/media";
+import { tx } from "@/content/text";
 
 export const ClientLogoWall: React.FC = () => {
   const { clientLogos } = useSettings();
   return (
   <section className="relative px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto pb-6">
     <div className="reveal-up flex flex-col sm:flex-row sm:items-end justify-between gap-2 mb-5">
-      <p className="text-xs uppercase tracking-[0.2em] text-slate-500 font-semibold">Trusted by growing brands</p>
+      <p className="text-xs uppercase tracking-[0.2em] text-slate-500 font-semibold">{tx("page-kit/ClientLogoWall.trusted-by-growing-brands", "Trusted by growing brands")}</p>
       <p className="text-sm text-slate-400">
-        <strong className="text-white">500+</strong> businesses have trusted Pixim with their brand
+        <strong className="text-white">500+</strong> {tx("page-kit/ClientLogoWall.businesses-have-trusted-pixim-with-their", "businesses have trusted Pixim with their brand")}
       </p>
     </div>
 

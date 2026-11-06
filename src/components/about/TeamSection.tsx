@@ -3,9 +3,10 @@
 import React, { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import { Eyebrow, GradientText } from "@/components/page-kit/shared";
-import { MapPin, Sparkles, Play, Pause, Volume2, VolumeX } from "lucide-react";
+import { MapPin, Sparkles, Play, Pause, Volume2, VolumeX } from "@/content/lucide";
 import { SocialIcon } from "@/components/SocialIcon";
 import { media } from "@/content/media";
+import { tx } from "@/content/text";
 
 interface TeamMember {
   id: string;
@@ -20,39 +21,39 @@ interface TeamMember {
 const TEAM_MEMBERS: TeamMember[] = [
   {
     id: "sahin-mia",
-    name: "Sahin Mia",
-    role: "Founder & CEO",
+    get name() { return tx("about/TeamSection.sahin-mia", "Sahin Mia"); },
+    get role() { return tx("about/TeamSection.founder-ceo", "Founder & CEO"); },
     image: "/images/team/sahin-mia.jpg",
-    bio: "Brand strategist and creative technologist driving visual identity & vision.",
+    get bio() { return tx("about/TeamSection.brand-strategist-and-creative-technologist-drivi", "Brand strategist and creative technologist driving visual identity & vision."); },
     linkedin: "https://linkedin.com",
-    badge: "Leadership",
+    get badge() { return tx("about/TeamSection.leadership", "Leadership"); },
   },
   {
     id: "ismail-nahid",
-    name: "Ismail Nahid",
-    role: "Sales Manager",
+    get name() { return tx("about/TeamSection.ismail-nahid", "Ismail Nahid"); },
+    get role() { return tx("about/TeamSection.sales-manager", "Sales Manager"); },
     image: "/images/team/ismail-nahid.jpg",
-    bio: "Client partnership lead ensuring clear scopes, swift kickoffs & client success.",
+    get bio() { return tx("about/TeamSection.client-partnership-lead-ensuring-clear-scopes", "Client partnership lead ensuring clear scopes, swift kickoffs & client success."); },
     linkedin: "https://linkedin.com",
-    badge: "Partnerships",
+    get badge() { return tx("about/TeamSection.partnerships", "Partnerships"); },
   },
   {
     id: "shariful-islam",
-    name: "Shariful Islam",
-    role: "Web Developer",
+    get name() { return tx("about/TeamSection.shariful-islam", "Shariful Islam"); },
+    get role() { return tx("about/TeamSection.web-developer", "Web Developer"); },
     image: "/images/team/shariful-islam.jpg",
-    bio: "Full-stack engineer crafting high-performance, pixel-perfect web applications.",
+    get bio() { return tx("about/TeamSection.full-stack-engineer-crafting-high-performance", "Full-stack engineer crafting high-performance, pixel-perfect web applications."); },
     linkedin: "https://linkedin.com",
-    badge: "Engineering",
+    get badge() { return tx("about/TeamSection.engineering", "Engineering"); },
   },
   {
     id: "sowrov-kazi",
-    name: "Sowrov Kazi",
-    role: "Webflow Developer",
+    get name() { return tx("about/TeamSection.sowrov-kazi", "Sowrov Kazi"); },
+    get role() { return tx("about/TeamSection.webflow-developer", "Webflow Developer"); },
     image: "/images/team/sowrov-kazi.jpg",
-    bio: "No-code & interactive developer translating intricate UI into smooth animations.",
+    get bio() { return tx("about/TeamSection.no-code-interactive-developer-translating-intric", "No-code & interactive developer translating intricate UI into smooth animations."); },
     linkedin: "https://linkedin.com",
-    badge: "Interactions",
+    get badge() { return tx("about/TeamSection.interactions", "Interactions"); },
   },
 ];
 
@@ -145,13 +146,12 @@ export const TeamSection: React.FC<TeamSectionProps> = ({
         {/* Left Column: Heading, Subtitle & Studio Culture Video */}
         <div className="lg:col-span-5 flex flex-col justify-between">
           <div>
-            <Eyebrow>In-House Specialists</Eyebrow>
+            <Eyebrow>{tx("about/TeamSection.in-house-specialists", "In-House Specialists")}</Eyebrow>
             <h2 className="mt-4 font-agency text-3xl sm:text-4xl lg:text-[46px] font-extrabold text-white tracking-tight leading-[1.08]">
-              The team your project <GradientText>actually lands with</GradientText>
+              {tx("about/TeamSection.the-team-your-project", "The team your project")} <GradientText>{tx("about/TeamSection.actually-lands-with", "actually lands with")}</GradientText>
             </h2>
             <p className="mt-4 text-base sm:text-lg text-slate-300 leading-relaxed max-w-xl">
-              The people behind every Pixim project. Senior, experienced, and built for startups and SaaS teams worldwide.
-              No subcontracting, no junior handoffs.
+              {tx("about/TeamSection.the-people-behind-every-pixim-project", "The people behind every Pixim project. Senior, experienced, and built for startups and SaaS teams worldwide. No subcontracting, no junior handoffs.")}
             </p>
           </div>
 
@@ -187,7 +187,7 @@ export const TeamSection: React.FC<TeamSectionProps> = ({
                 <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#081330]/85 backdrop-blur-md border border-white/10 text-[11px] font-semibold text-slate-200 shadow-md">
                   <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
                   <MapPin className="w-3 h-3 text-[#FF8500]" />
-                  <span>Dhaka Creative Hub</span>
+                  <span>{tx("about/TeamSection.dhaka-creative-hub", "Dhaka Creative Hub")}</span>
                 </div>
 
                 <button
@@ -220,14 +220,14 @@ export const TeamSection: React.FC<TeamSectionProps> = ({
                 <div>
                   <div className="text-xs font-bold text-white flex items-center gap-1.5">
                     <Sparkles className="w-3.5 h-3.5 text-[#FFA133]" />
-                    <span>Collaborative Studio Culture</span>
+                    <span>{tx("about/TeamSection.collaborative-studio-culture", "Collaborative Studio Culture")}</span>
                   </div>
                   <p className="text-[11px] text-slate-400 mt-0.5">
-                    Watch our designers &amp; engineers in action
+                    {tx("about/TeamSection.watch-our-designers-engineers-in-action", "Watch our designers & engineers in action")}
                   </p>
                 </div>
                 <span className="text-[10px] uppercase font-mono px-2 py-0.5 rounded bg-[#FF8500]/15 text-[#FFA133] border border-[#FF8500]/30 font-bold">
-                  In-House
+                  {tx("about/TeamSection.in-house", "In-House")}
                 </span>
               </div>
             </div>

@@ -4,10 +4,11 @@ import React, { useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight } from "@/content/lucide";
 import { GsapMagneticButton } from "@/components/animations/GsapMagneticButton";
 import { useHome } from "@/content/ContentProvider";
 import { RichTitle } from "@/content/RichTitle";
+import { tx } from "@/content/text";
 
 interface WhyPiximSectionProps {
   onOpenContact?: (service?: string, notes?: string) => void;
@@ -392,16 +393,16 @@ export const WhyPiximSection: React.FC<WhyPiximSectionProps> = ({ onOpenContact 
                 </span>
                 <span className="hidden sm:inline-block w-1.5 h-1.5 rounded-full bg-[#FF8500]/60" />
                 <span className="hidden md:inline-block text-[10px] font-mono uppercase tracking-wider text-slate-400">
-                  INSIGHT
+                  {tx("WhyPiximSection.insight", "INSIGHT")}
                 </span>
               </div>
 
               <h3 className="font-agency text-xs sm:text-xl md:text-2xl lg:text-3xl font-bold text-white tracking-tight leading-tight">
-                Strategy
+                {tx("WhyPiximSection.strategy", "Strategy")}
               </h3>
               <p className="mt-1 sm:mt-2 text-[9px] sm:text-xs md:text-sm text-slate-300 leading-snug sm:leading-relaxed font-normal">
-                <span className="sm:hidden">Audience insights & market positioning.</span>
-                <span className="hidden sm:inline">Before opening any tool, we decode your product, audience, and market positioning. Design without strategy is just decoration.</span>
+                <span className="sm:hidden">{tx("WhyPiximSection.audience-insights-market-positioning", "Audience insights & market positioning.")}</span>
+                <span className="hidden sm:inline">{tx("WhyPiximSection.before-opening-any-tool-we-decode", "Before opening any tool, we decode your product, audience, and market positioning. Design without strategy is just decoration.")}</span>
               </p>
             </div>
           </div>
@@ -502,16 +503,16 @@ export const WhyPiximSection: React.FC<WhyPiximSectionProps> = ({ onOpenContact 
                 </span>
                 <span className="hidden sm:inline-block w-1.5 h-1.5 rounded-full bg-[#FF8500]/60" />
                 <span className="hidden md:inline-block text-[10px] font-mono uppercase tracking-wider text-slate-400">
-                  EXECUTION
+                  {tx("WhyPiximSection.execution", "EXECUTION")}
                 </span>
               </div>
 
               <h3 className="font-agency text-xs sm:text-xl md:text-2xl lg:text-3xl font-bold text-white tracking-tight leading-tight">
-                Craft
+                {tx("WhyPiximSection.craft", "Craft")}
               </h3>
               <p className="mt-1 sm:mt-2 text-[9px] sm:text-xs md:text-sm text-slate-300 leading-snug sm:leading-relaxed font-normal">
-                <span className="sm:hidden">Pixel-perfect visual & motion excellence.</span>
-                <span className="hidden sm:inline">Every frame, letterform, and micro-interaction is executed with surgical precision. We build work that defines industry standards.</span>
+                <span className="sm:hidden">{tx("WhyPiximSection.pixel-perfect-visual-motion-excellence", "Pixel-perfect visual & motion excellence.")}</span>
+                <span className="hidden sm:inline">{tx("WhyPiximSection.every-frame-letterform-and-micro-interaction", "Every frame, letterform, and micro-interaction is executed with surgical precision. We build work that defines industry standards.")}</span>
               </p>
             </div>
           </div>
@@ -636,16 +637,16 @@ export const WhyPiximSection: React.FC<WhyPiximSectionProps> = ({ onOpenContact 
                 </span>
                 <span className="hidden sm:inline-block w-1.5 h-1.5 rounded-full bg-[#FF8500]/60" />
                 <span className="hidden md:inline-block text-[10px] font-mono uppercase tracking-wider text-slate-400">
-                  RESULTS
+                  {tx("WhyPiximSection.results", "RESULTS")}
                 </span>
               </div>
 
               <h3 className="font-agency text-xs sm:text-xl md:text-2xl lg:text-3xl font-bold text-white tracking-tight leading-tight">
-                Impact
+                {tx("WhyPiximSection.impact", "Impact")}
               </h3>
               <p className="mt-1 sm:mt-2 text-[9px] sm:text-xs md:text-sm text-slate-300 leading-snug sm:leading-relaxed font-normal">
-                <span className="sm:hidden">High conversion & measurable brand growth.</span>
-                <span className="hidden sm:inline">Design engineered to drive action. We turn passive viewers into loyal advocates, maximizing measurable business growth and conversion.</span>
+                <span className="sm:hidden">{tx("WhyPiximSection.high-conversion-measurable-brand-growth", "High conversion & measurable brand growth.")}</span>
+                <span className="hidden sm:inline">{tx("WhyPiximSection.design-engineered-to-drive-action-we", "Design engineered to drive action. We turn passive viewers into loyal advocates, maximizing measurable business growth and conversion.")}</span>
               </p>
             </div>
           </div>
@@ -659,7 +660,7 @@ export const WhyPiximSection: React.FC<WhyPiximSectionProps> = ({ onOpenContact 
             strength={0.25}
             className="px-6 sm:px-8 py-3 sm:py-3.5 text-xs sm:text-sm font-bold uppercase tracking-wider !text-white shadow-xl shadow-orange-500/20"
           >
-            <span>Start Your Project</span>
+            <span>{tx("WhyPiximSection.start-your-project", "Start Your Project")}</span>
             <ArrowRight className="w-4 h-4 ml-1.5 sm:ml-2" />
           </GsapMagneticButton>
         </div>

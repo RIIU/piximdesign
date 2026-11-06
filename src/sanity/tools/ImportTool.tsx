@@ -4,7 +4,8 @@ import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { useClient } from "sanity";
 import { Box, Button, Card, Container, Flex, Heading, Stack, Text } from "@sanity/ui";
 import { apiVersion } from "../env";
-import { buildAllDocs } from "./importContent";
+import { buildAllDocs, buildLibraryItems } from "./importContent";
+import { TEXT_AREAS } from "@/content/textManifest";
 
 type Status = { state: "idle" | "working" | "done" | "error"; message?: string };
 
@@ -13,6 +14,8 @@ const LABELS: Record<string, string> = {
   homePage: "Home Page",
   servicesCatalog: "Services & Prices",
   mediaLibrary: "Images & Videos",
+  iconLibrary: "Icons",
+  ...Object.fromEntries(TEXT_AREAS.map((a) => [`text-${a.id}`, `Website text: ${a.title}`])),
 };
 const label = (id: string) =>
   LABELS[id] ??
@@ -44,6 +47,50 @@ export function ImportTool() {
 
   const missing = existing ? docs.filter((d) => !existing.has(d._id)) : [];
 
+  // New texts / icons / images added to the code since the lists were imported
+  const libraries = useMemo(() => buildLibraryItems(), []);
+  const [newItems, setNewItems] = useState<{ docId: string; items: { [k: string]: unknown }[] }[]>([]);
+  const checkLibraries = useCallback(async () => {
+    const libIds = libraries.map((l) => l._id);
+    const found: { _id: string; keys?: (string | null)[]; srcs?: (string | null)[] }[] = await client.fetch(
+      `*[_id in $ids]{_id, "keys": items[].key, "srcs": items[].src}`,
+      { ids: [...libIds, ...libIds.map((id) => `drafts.${id}`)] }
+    );
+    const result: { docId: string; items: { [k: string]: unknown }[] }[] = [];
+    for (const doc of found) {
+      const lib = libraries.find((l) => l._id === doc._id.replace(/^drafts\./, ""));
+      if (!lib) continue;
+      const have = new Set((lib.idField === "key" ? doc.keys : doc.srcs) ?? []);
+      const add = lib.items.filter((item) => !have.has(item[lib.idField] as string));
+      if (add.length) result.push({ docId: doc._id, items: add });
+    }
+    setNewItems(result);
+  }, [client, libraries]);
+
+  useEffect(() => {
+    const t = setTimeout(() => checkLibraries().catch(() => setNewItems([])), 0);
+    return () => clearTimeout(t);
+  }, [checkLibraries]);
+
+  const newCount = newItems.filter((n) => !n.docId.startsWith("drafts.")).reduce((sum, n) => sum + n.items.length, 0) ||
+    newItems.reduce((sum, n) => sum + n.items.length, 0);
+
+  const addNewItems = async () => {
+    if (!newItems.length) return;
+    setStatus({ state: "working", message: "Adding new items…" });
+    try {
+      const tx = client.transaction();
+      for (const n of newItems) {
+        tx.patch(n.docId, (p) => p.setIfMissing({ items: [] }).insert("after", "items[-1]", n.items));
+      }
+      await tx.commit();
+      setStatus({ state: "done", message: `Done – ${newCount} new item(s) added. Your existing changes were kept.` });
+      checkLibraries();
+    } catch (err) {
+      setStatus({ state: "error", message: err instanceof Error ? err.message : String(err) });
+    }
+  };
+
   const run = async (mode: "missing" | "reset") => {
     if (
       mode === "reset" &&
@@ -63,6 +110,7 @@ export function ImportTool() {
       await tx.commit();
       setStatus({ state: "done", message: `Done – ${list.length} page(s) imported. Open them under “Content” to edit.` });
       check();
+      checkLibraries();
     } catch (err) {
       setStatus({ state: "error", message: err instanceof Error ? err.message : String(err) });
     }
@@ -92,6 +140,12 @@ export function ImportTool() {
             tone="primary"
             disabled={status.state === "working" || !existing || !missing.length}
             onClick={() => run("missing")}
+          />
+          <Button
+            text={newCount ? `Add new texts, icons & images (${newCount})` : "Texts, icons & images are up to date"}
+            tone="positive"
+            disabled={status.state === "working" || !newCount}
+            onClick={addNewItems}
           />
           <Button
             text="Reset everything to the original website content"

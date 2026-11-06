@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { ArrowRight, Check, DollarSign, Coins, ShieldCheck } from "lucide-react";
+import { ArrowRight, Check, DollarSign, Coins, ShieldCheck } from "@/content/lucide";
 import { GsapMagneticButton } from "@/components/animations/GsapMagneticButton";
 import { useCurrency } from "@/lib/currency";
 

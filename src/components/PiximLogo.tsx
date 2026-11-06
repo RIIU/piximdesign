@@ -3,6 +3,7 @@
 import React from "react";
 import Image from "next/image";
 import { media } from "@/content/media";
+import { tx } from "@/content/text";
 
 interface PiximLogoProps {
   variant?: "full" | "icon" | "badge";
@@ -39,7 +40,7 @@ export const PiximLogo: React.FC<PiximLogoProps> = ({
         <div className="relative flex items-center justify-center overflow-hidden rounded-xl bg-white p-2 border border-[#2651B9]/15 shadow-sm">
           <Image
             src={media("/images/logo.webp")}
-            alt="Pixim Design Icon"
+            alt={tx("PiximLogo.pixim-design-icon", "Pixim Design Icon")}
             width={currentSize.iconSize}
             height={currentSize.iconSize}
             className="object-contain drop-shadow-[0_4px_12px_rgba(38,81,185,0.12)] transition-transform duration-500 group-hover:scale-105"
@@ -55,7 +56,7 @@ export const PiximLogo: React.FC<PiximLogoProps> = ({
       <div className={`relative flex items-center justify-center ${className}`}>
         <Image
           src={media("/images/logo.webp")}
-          alt="Pixim Design Emblem"
+          alt={tx("PiximLogo.pixim-design-emblem", "Pixim Design Emblem")}
           width={currentSize.iconSize}
           height={currentSize.iconSize}
           className="object-contain"
@@ -69,7 +70,7 @@ export const PiximLogo: React.FC<PiximLogoProps> = ({
     <div className={`flex items-center gap-3 ${className}`}>
       <Image
         src={media("/images/logo.webp")}
-        alt="Pixim Design"
+        alt={tx("PiximLogo.pixim-design", "Pixim Design")}
         width={currentSize.width}
         height={currentSize.height}
         className="object-contain h-auto w-auto max-h-[44px]"

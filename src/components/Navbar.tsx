@@ -5,10 +5,11 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import gsap from "gsap";
 import { PiximLogo } from "./PiximLogo";
-import { ArrowUpRight, ArrowRight, ChevronDown, Layers } from "lucide-react";
+import { ArrowUpRight, ArrowRight, ChevronDown, Layers } from "@/content/lucide";
 import { GsapMagneticButton } from "@/components/animations/GsapMagneticButton";
 import { SERVICE_ICONS } from "./serviceIcons";
 import { useServices, useSettings } from "@/content/ContentProvider";
+import { tx } from "@/content/text";
 
 interface NavbarProps {
   onOpenContact: () => void;
@@ -77,12 +78,12 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenContact }) => {
   }, []);
 
   const navLinks = [
-    { name: "Home", href: "/" },
-    { name: "Services", href: "/services" },
-    { name: "Projects", href: "/projects" },
-    { name: "Pricing", href: "/pricing" },
-    { name: "About", href: "/about" },
-    { name: "Contact", href: "/contact" },
+    { name: tx("Navbar.home", "Home"), href: "/" },
+    { name: tx("Navbar.services", "Services"), href: "/services" },
+    { name: tx("Navbar.projects", "Projects"), href: "/projects" },
+    { name: tx("Navbar.pricing", "Pricing"), href: "/pricing" },
+    { name: tx("Navbar.about", "About"), href: "/about" },
+    { name: tx("Navbar.contact", "Contact"), href: "/contact" },
   ];
 
   // 1. Orchestrated forward open sequence
@@ -400,10 +401,10 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenContact }) => {
             <div className="relative flex flex-col justify-between p-5 lg:p-6 bg-gradient-to-br from-[#FF8500]/20 via-[#0A1A45] to-[#0A1A45]">
               <div>
                 <span className="text-[10px] uppercase tracking-[0.18em] font-bold text-[#FFA133]">
-                  Not sure where to start?
+                  {tx("Navbar.not-sure-where-to-start", "Not sure where to start?")}
                 </span>
                 <p className="mt-2 font-agency text-lg font-extrabold text-white leading-tight">
-                  Get a free 30-min brand consultation
+                  {tx("Navbar.get-a-free-30-min-brand", "Get a free 30-min brand consultation")}
                 </p>
               </div>
               <div className="mt-4 flex flex-col gap-2">
@@ -415,7 +416,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenContact }) => {
                   }}
                   className="inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#FF8500] to-[#FFA133] px-4 py-2.5 text-xs font-bold text-white shadow-md shadow-orange-500/25 hover:shadow-orange-500/40 transition-shadow cursor-pointer"
                 >
-                  Book a Call
+                  {tx("Navbar.book-a-call", "Book a Call")}
                   <ArrowUpRight className="w-3.5 h-3.5" />
                 </button>
                 <Link
@@ -423,7 +424,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenContact }) => {
                   onClick={() => setServicesOpen(false)}
                   className="group inline-flex items-center justify-center gap-1.5 text-xs font-bold text-slate-300 hover:text-white transition-colors py-1"
                 >
-                  View all services
+                  {tx("Navbar.view-all-services", "View all services")}
                   <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />
                 </Link>
               </div>
@@ -492,7 +493,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenContact }) => {
                           onClick={() => closeMenuOrchestratedEaseReverse()}
                           className="flex items-center gap-2 py-2 px-3 text-xs font-bold text-slate-400 hover:text-white"
                         >
-                          View all services <ArrowRight className="w-3.5 h-3.5" />
+                          {tx("Navbar.view-all-services", "View all services")} <ArrowRight className="w-3.5 h-3.5" />
                         </Link>
                       </div>
                     </div>
@@ -523,7 +524,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenContact }) => {
           <div className="orchestrated-menu-item pt-4 border-t border-slate-200 dark:border-slate-800 flex flex-col gap-3 will-change-transform">
             <div className="flex items-center gap-2 text-xs text-emerald-600 dark:text-emerald-400 font-medium">
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-              <span>Available for new projects • 500+ Happy Clients</span>
+              <span>{tx("Navbar.available-for-new-projects-500-happy", "Available for new projects • 500+ Happy Clients")}</span>
             </div>
             <button
               onClick={() => {
@@ -534,7 +535,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenContact }) => {
               className="w-full flex items-center justify-center gap-2 py-3.5 rounded-2xl bg-gradient-to-r from-[#FF8500] via-[#FFA133] to-[#FF8500] text-white font-extrabold text-sm shadow-xl shadow-orange-500/20 cursor-pointer transition-transform hover:scale-[1.02] active:scale-95"
             >
               <ArrowRight className="w-4 h-4" />
-              <span>Start a Project</span>
+              <span>{tx("Navbar.start-a-project", "Start a Project")}</span>
             </button>
           </div>
         </div>

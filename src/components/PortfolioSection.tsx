@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { PORTFOLIO_PROJECTS } from "@/data/agencyData";
-import { ArrowUpRight, X, TrendingUp, Calendar, User } from "lucide-react";
+import { ArrowUpRight, X, TrendingUp, Calendar, User } from "@/content/lucide";
 import { GsapMagneticButton } from "@/components/animations/GsapMagneticButton";
 import { media } from "@/content/media";
 

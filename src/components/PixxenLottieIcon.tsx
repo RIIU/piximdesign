@@ -3,6 +3,7 @@
 import React, { useRef, useEffect, useState } from "react";
 import type { AnimationItem } from "lottie-web";
 import { STATIC_SERVICE_SVGS, SERVICE_TYPE_MAP } from "./serviceIconsData";
+import { CustomIcon, customIcon } from "@/content/icons";
 
 interface PixxenLottieIconProps {
   type: string;
@@ -204,6 +205,20 @@ export const PixxenLottieIcon: React.FC<PixxenLottieIconProps> = ({
       animRef.current.setSpeed(1.3);
     }
   };
+
+  // Replaced in the editor ("Icons" → service icon)? Show the upload instead of the animation.
+  const custom = customIcon(`service:${type}`);
+  if (custom) {
+    return (
+      <div
+        className={`relative flex items-center justify-center select-none transition-transform duration-300 group-hover:scale-105 ${!size && !className.includes("w-") ? "w-16 h-16" : ""} ${className}`}
+        style={size ? { width: size, height: size } : undefined}
+        aria-hidden="true"
+      >
+        <CustomIcon icon={custom} className="w-full h-full" />
+      </div>
+    );
+  }
 
   return (
     <div

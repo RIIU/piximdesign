@@ -9,7 +9,8 @@ import { phoneUrl, whatsappUrl } from "@/data/company";
 import { useSettings } from "@/content/ContentProvider";
 import { PaymentMethodsSection } from "./PaymentMethodsSection";
 import { useContactModal } from "./AppLayoutWrapper";
-import { ArrowRight, Phone, Mail, MapPin, Clock, Download, ArrowUp } from "lucide-react";
+import { ArrowRight, Phone, Mail, MapPin, Clock, Download, ArrowUp } from "@/content/lucide";
+import { tx } from "@/content/text";
 
 
 export const Footer: React.FC = () => {
@@ -49,7 +50,7 @@ export const Footer: React.FC = () => {
 
               {/* Social Icons Row (Placed above the button) */}
               <div className="mt-5 sm:mt-6 flex items-center gap-2 sm:gap-2.5 flex-wrap">
-                {[...ALL_SOCIALS, { network: "whatsapp" as const, label: "WhatsApp", url: whatsappUrl(undefined, company.whatsapp) }].map(
+                {[...ALL_SOCIALS, { network: "whatsapp" as const, label: tx("Footer.whatsapp", "WhatsApp"), url: whatsappUrl(undefined, company.whatsapp) }].map(
                   (social) => (
                     <a
                       key={social.label}
@@ -87,42 +88,42 @@ export const Footer: React.FC = () => {
           {/* Column 2: Navigation Links Col 1 (Services, How We Work, Why Us...) */}
           <div className="col-span-1 lg:col-span-2">
             <h4 className="text-[11px] uppercase font-mono font-bold tracking-widest text-[#FFA133] mb-4">
-              Explore
+              {tx("Footer.explore", "Explore")}
             </h4>
             <ul className="space-y-2.5 text-xs sm:text-sm text-slate-300">
               <li>
                 <Link href="/services" prefetch={true} className="hover:text-[#FFA133] transition-colors py-0.5 block">
-                  Services
+                  {tx("Footer.services", "Services")}
                 </Link>
               </li>
               <li>
                 <Link href="/about" prefetch={true} className="hover:text-[#FFA133] transition-colors py-0.5 block">
-                  How We Work
+                  {tx("Footer.how-we-work", "How We Work")}
                 </Link>
               </li>
               <li>
                 <Link href="/#why-pixim" prefetch={true} className="hover:text-[#FFA133] transition-colors py-0.5 block">
-                  Why Us
+                  {tx("Footer.why-us", "Why Us")}
                 </Link>
               </li>
               <li>
                 <Link href="/#testimonials" prefetch={true} className="hover:text-[#FFA133] transition-colors py-0.5 block">
-                  Reviews
+                  {tx("Footer.reviews", "Reviews")}
                 </Link>
               </li>
               <li>
                 <Link href="/pricing" prefetch={true} className="hover:text-[#FFA133] transition-colors py-0.5 block">
-                  Pricing Plans
+                  {tx("Footer.pricing-plans", "Pricing Plans")}
                 </Link>
               </li>
               <li>
                 <Link href="/projects" prefetch={true} className="hover:text-[#FFA133] transition-colors py-0.5 block">
-                  Case Studies
+                  {tx("Footer.case-studies", "Case Studies")}
                 </Link>
               </li>
               <li>
                 <Link href="/services/logo-design" prefetch={true} className="hover:text-[#FFA133] transition-colors py-0.5 block">
-                  Brand Identity
+                  {tx("Footer.brand-identity", "Brand Identity")}
                 </Link>
               </li>
             </ul>
@@ -131,12 +132,12 @@ export const Footer: React.FC = () => {
           {/* Column 3: Navigation Links Col 2 (Contact, Consult, FAQ, Payment...) */}
           <div className="col-span-1 lg:col-span-2">
             <h4 className="text-[11px] uppercase font-mono font-bold tracking-widest text-[#FFA133] mb-4">
-              Company
+              {tx("Footer.company", "Company")}
             </h4>
             <ul className="space-y-2.5 text-xs sm:text-sm text-slate-300">
               <li>
                 <Link href="/contact" prefetch={true} className="hover:text-[#FFA133] transition-colors py-0.5 block">
-                  Contact
+                  {tx("Footer.contact", "Contact")}
                 </Link>
               </li>
               <li>
@@ -145,35 +146,35 @@ export const Footer: React.FC = () => {
                   onClick={() => openContact("Consultation", "Direct consultation request")}
                   className="hover:text-[#FFA133] transition-colors py-0.5 block text-left cursor-pointer"
                 >
-                  Consult
+                  {tx("Footer.consult", "Consult")}
                 </button>
               </li>
               <li>
                 <Link href="/contact" prefetch={true} className="hover:text-[#FFA133] transition-colors py-0.5 block">
-                  Help Centre
+                  {tx("Footer.help-centre", "Help Centre")}
                 </Link>
               </li>
               <li>
                 <Link href="/#faq" prefetch={true} className="hover:text-[#FFA133] transition-colors py-0.5 block">
-                  FAQ
+                  {tx("Footer.faq", "FAQ")}
                 </Link>
               </li>
               <li>
                 <Link href="/pricing#payment" prefetch={true} className="inline-flex items-center hover:text-[#FFA133] transition-colors py-0.5">
-                  <span>Payment</span>
+                  <span>{tx("Footer.payment", "Payment")}</span>
                   <span className="ml-1.5 px-1.5 py-0.5 text-[9px] font-extrabold rounded bg-[#FF8500] text-[#081330] leading-none uppercase">
-                    PAY
+                    {tx("Footer.pay", "PAY")}
                   </span>
                 </Link>
               </li>
               <li>
                 <Link href="/terms" prefetch={true} className="hover:text-[#FFA133] transition-colors py-0.5 block">
-                  Terms &amp; Conditions
+                  {tx("Footer.terms-conditions", "Terms & Conditions")}
                 </Link>
               </li>
               <li>
                 <Link href="/privacy-policy" prefetch={true} className="hover:text-[#FFA133] transition-colors py-0.5 block">
-                  Privacy Policy
+                  {tx("Footer.privacy-policy", "Privacy Policy")}
                 </Link>
               </li>
             </ul>
@@ -182,7 +183,7 @@ export const Footer: React.FC = () => {
           {/* Column 4: Contact & Studio Location Info with Icons */}
           <div className="col-span-2 md:col-span-1 lg:col-span-3 pt-2 md:pt-0 border-t border-white/5 md:border-none">
             <h4 className="text-[11px] uppercase font-mono font-bold tracking-widest text-[#FFA133] mb-4">
-              Direct Contact
+              {tx("Footer.direct-contact", "Direct Contact")}
             </h4>
             <div className="space-y-3.5 text-xs sm:text-sm text-slate-300">
               {company.phone && (
@@ -251,17 +252,17 @@ export const Footer: React.FC = () => {
             </span>
             <div>
               <p className="text-xs font-bold text-white leading-tight group-hover:text-[#FFA133] transition-colors">
-                Company Deck
+                {tx("Footer.company-deck", "Company Deck")}
               </p>
               <p className="text-[10px] text-slate-400 font-mono mt-0.5">
-                PDF, 3 MB
+                {tx("Footer.pdf-3-mb", "PDF, 3 MB")}
               </p>
             </div>
           </button>
 
           {/* Center: Copyright Notice */}
           <div className="text-xs text-slate-400 font-mono text-center">
-            &copy; 2021–{new Date().getFullYear()}, Pixim Design | All Rights Reserved.
+            &copy; 2021–{new Date().getFullYear()}{tx("Footer.pixim-design-all-rights-reserved", ", Pixim Design | All Rights Reserved.")}
           </div>
 
           {/* Right: Mini Social Glyphs + Currency Toggle + Back to Top */}
@@ -291,7 +292,7 @@ export const Footer: React.FC = () => {
               aria-label="Back to top"
             >
               <ArrowUp className="w-3.5 h-3.5 text-[#FFA133]" />
-              <span className="hidden md:inline">Top</span>
+              <span className="hidden md:inline">{tx("Footer.top", "Top")}</span>
             </button>
           </div>
 

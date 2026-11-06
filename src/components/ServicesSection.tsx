@@ -5,10 +5,11 @@ import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight } from "@/content/lucide";
 import { PixxenLottieIcon } from "./PixxenLottieIcon";
 import { useHome, useServices } from "@/content/ContentProvider";
 import { RichTitle } from "@/content/RichTitle";
+import { tx } from "@/content/text";
 
 interface ServicesSectionProps {
   onSelectService?: (serviceTitle: string) => void;
@@ -23,10 +24,10 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onSelectServic
   const gridRef = useRef<HTMLDivElement>(null);
 
   const categories = [
-    { id: "all", label: "All 7 Capabilities" },
-    { id: "branding", label: "Branding & Packaging" },
-    { id: "digital", label: "Social & Digital Marketing" },
-    { id: "web-video", label: "Web, Video & SEO" },
+    { id: "all", label: tx("ServicesSection.all-7-capabilities", "All 7 Capabilities") },
+    { id: "branding", label: tx("ServicesSection.branding-packaging", "Branding & Packaging") },
+    { id: "digital", label: tx("ServicesSection.social-digital-marketing", "Social & Digital Marketing") },
+    { id: "web-video", label: tx("ServicesSection.web-video-seo", "Web, Video & SEO") },
   ];
 
   const filteredServices = SERVICES.filter((s) => {

@@ -1,4 +1,5 @@
 import React from "react";
+import { Tx } from "@/content/text";
 
 // Concentric-diamond sample mark used across service page visuals ("yourbrand")
 export const SAMPLE_MARK_PATH = "M24 3 45 24 24 45 3 24Z M24 13 35 24 24 35 13 24Z M24 19.5 28.5 24 24 28.5 19.5 24Z";
@@ -13,7 +14,7 @@ export const SampleMark: React.FC<{ className?: string; color?: string }> = ({
 );
 
 export const Wordmark: React.FC<{ className?: string }> = ({ className = "" }) => (
-  <span className={`font-agency font-extrabold tracking-tight ${className}`}>yourbrand</span>
+  <span className={`font-agency font-extrabold tracking-tight ${className}`}><Tx k="page-kit/shared.yourbrand" d="yourbrand" /></span>
 );
 
 export const GradientText: React.FC<{ children: React.ReactNode }> = ({ children }) => (

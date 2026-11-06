@@ -8,7 +8,7 @@ import { structureTool } from "sanity/structure";
 import { presentationTool } from "sanity/presentation";
 import { UploadIcon } from "@sanity/icons";
 import { dataset, projectId } from "./src/sanity/env";
-import { FIXED_TYPES, LEGAL_DOCS, PAGE_DOCS, SERVICE_PAGE_DOCS, schemaTypes, SINGLETONS } from "./src/sanity/schemaTypes";
+import { FIXED_TYPES, LEGAL_DOCS, PAGE_DOCS, SERVICE_PAGE_DOCS, schemaTypes, SINGLETONS, TEXT_DOCS } from "./src/sanity/schemaTypes";
 import { ImportTool } from "./src/sanity/tools/ImportTool";
 
 const singletonTypes = FIXED_TYPES;
@@ -80,6 +80,22 @@ export default defineConfig({
                   )
               ),
             S.listItem()
+              .title("Website text (buttons, labels…)")
+              .id("websiteText")
+              .child(
+                S.list()
+                  .title("Website text")
+                  .items(
+                    TEXT_DOCS.map((p) =>
+                      S.listItem()
+                        .title(p.title)
+                        .id(p.id)
+                        .schemaType("textGroup")
+                        .child(S.document().schemaType("textGroup").documentId(p.id).title(`Text – ${p.title}`))
+                    )
+                  )
+              ),
+            S.listItem()
               .title("Legal pages")
               .id("legalPages")
               .child(
@@ -137,6 +153,16 @@ export default defineConfig({
               return page ? { locations: [{ title: page.title, href: `/services/${page.slug}` }] } : null;
             },
           },
+          textGroup: {
+            select: { docId: "_id" },
+            resolve: (doc) => {
+              const id = String(doc?.docId ?? "").replace(/^drafts\./, "");
+              const page = TEXT_DOCS.find((p) => p.id === id);
+              return page ? { locations: [{ title: page.title, href: page.href }] } : null;
+            },
+          },
+          iconLibrary: { message: "Icons are used on every page", tone: "positive", locations: [{ title: "Home page", href: "/" }] },
+          mediaLibrary: { message: "Images & videos are used on every page", tone: "positive", locations: [{ title: "Home page", href: "/" }] },
           siteSettings: {
             message: "Used on every page",
             tone: "positive",

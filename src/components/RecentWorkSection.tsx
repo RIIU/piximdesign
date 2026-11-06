@@ -4,11 +4,12 @@ import React, { useRef, useEffect, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
-import { Play, Eye, X, ArrowUpRight, ArrowRight } from "lucide-react";
+import { Play, Eye, X, ArrowUpRight, ArrowRight } from "@/content/lucide";
 import { useHome } from "@/content/ContentProvider";
 import type { RecentProject } from "@/content/homeData";
 import { RichTitle } from "@/content/RichTitle";
 import { media } from "@/content/media";
+import { tx } from "@/content/text";
 
 interface RecentWorkProps {
   onOpenContact?: () => void;
@@ -192,7 +193,7 @@ export const RecentWorkSection: React.FC<RecentWorkProps> = ({ onOpenContact }) 
 
           {/* Trusted by avatars badge (Clean, no sparkle icons) */}
           <div className="mt-4 inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs text-slate-300">
-            <span className="text-[11px] font-medium text-slate-400">Trusted by</span>
+            <span className="text-[11px] font-medium text-slate-400">{tx("RecentWorkSection.trusted-by", "Trusted by")}</span>
             <div className="flex -space-x-1.5">
               <span className="w-5 h-5 rounded-full bg-indigo-500 border border-black/40 flex items-center justify-center text-[9px] text-white font-bold">C</span>
               <span className="w-5 h-5 rounded-full bg-[#FF8500] border border-black/40 flex items-center justify-center text-[9px] text-white font-bold">P</span>
@@ -250,12 +251,12 @@ export const RecentWorkSection: React.FC<RecentWorkProps> = ({ onOpenContact }) 
                     {proj.type === "video" ? (
                       <>
                         <Play className="w-2.5 h-2.5 fill-current" />
-                        <span>Video Reel</span>
+                        <span>{tx("RecentWorkSection.video-reel", "Video Reel")}</span>
                       </>
                     ) : (
                       <>
                         <Eye className="w-2.5 h-2.5" />
-                        <span>Case Study</span>
+                        <span>{tx("RecentWorkSection.case-study", "Case Study")}</span>
                       </>
                     )}
                   </span>
@@ -284,7 +285,7 @@ export const RecentWorkSection: React.FC<RecentWorkProps> = ({ onOpenContact }) 
                 <div>
                   <div className="flex items-center justify-between text-xs text-slate-400 mb-1">
                     <span>
-                      Made For <strong className="text-white font-bold">{proj.clientLabel}</strong>
+                      {tx("RecentWorkSection.made-for", "Made For")} <strong className="text-white font-bold">{proj.clientLabel}</strong>
                     </span>
                     <span className="text-[10px] uppercase tracking-wider text-slate-400">
                       {proj.badgeLabel}
@@ -381,7 +382,7 @@ export const RecentWorkSection: React.FC<RecentWorkProps> = ({ onOpenContact }) 
             <div className="px-4 sm:px-6 py-3.5 sm:py-4 bg-[#07112B] border-t border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
               <div className="flex flex-col min-w-0">
                 <div className="flex items-center gap-2 text-xs text-slate-400">
-                  <span>Client:</span>
+                  <span>{tx("RecentWorkSection.client", "Client:")}</span>
                   <span className="font-semibold text-white">{activeItem.clientLabel}</span>
                   <span>•</span>
                   <span className="text-slate-300">{activeItem.category}</span>
@@ -398,7 +399,7 @@ export const RecentWorkSection: React.FC<RecentWorkProps> = ({ onOpenContact }) 
                 }}
                 className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-[#FF8500] hover:bg-[#FFA030] text-[#081330] font-bold text-xs sm:text-sm uppercase tracking-wider transition-all duration-200 cursor-pointer shadow-lg shadow-orange-500/20 shrink-0"
               >
-                <span>Get Similar Project</span>
+                <span>{tx("RecentWorkSection.get-similar-project", "Get Similar Project")}</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </button>
             </div>

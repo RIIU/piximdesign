@@ -19,6 +19,7 @@ import { ServicePreviousProjects } from "./sections/ServicePreviousProjects";
 import type { ServiceConfig } from "./types";
 import { applyServiceOverride, type ServicePageOverride } from "./applyOverride";
 import { usePricing } from "@/content/ContentProvider";
+import { tx } from "@/content/text";
 
 export interface ServicePageProps {
   /** Editable content from Sanity (optional) */
@@ -89,7 +90,7 @@ export const ServiceLandingPage: React.FC<{ config: ServiceConfig; slug: string 
 
       {/* 10. Client reviews */}
       <section className="relative py-10 sm:py-14">
-        <GsapReviewsInfiniteSlider title={config.reviewsTitle} subtitle="PROVEN TRACK RECORD" speed={38} />
+        <GsapReviewsInfiniteSlider title={config.reviewsTitle} subtitle={tx("service-landing/ServiceLandingPage.proven-track-record", "PROVEN TRACK RECORD")} speed={38} />
       </section>
 
       {/* 11. Final CTA */}
@@ -111,7 +112,7 @@ export const ServiceLandingPage: React.FC<{ config: ServiceConfig; slug: string 
         title={
           config.faqTitle ?? (
             <>
-              {shortName} Questions, <GradientText>Answered</GradientText>
+              {shortName} {tx("service-landing/ServiceLandingPage.questions", "Questions,")} <GradientText>{tx("service-landing/ServiceLandingPage.answered", "Answered")}</GradientText>
             </>
           )
         }

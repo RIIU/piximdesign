@@ -2,11 +2,12 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
-import { CheckCircle2, ArrowRight, MessageSquare, ChevronDown, Check } from "lucide-react";
+import { CheckCircle2, ArrowRight, MessageSquare, ChevronDown, Check } from "@/content/lucide";
 import { useCurrency } from "@/lib/currency";
 import { useHome } from "@/content/ContentProvider";
 import { RichTitle } from "@/content/RichTitle";
 import { media } from "@/content/media";
+import { tx } from "@/content/text";
 
 interface FreeConsultationSectionProps {
   onOpenContact?: () => void;
@@ -131,7 +132,7 @@ export const FreeConsultationSection: React.FC<FreeConsultationSectionProps> = (
                 {/* Free Strategy Pill */}
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.05] border border-white/10 text-xs font-semibold text-[#FFA133] mb-4">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#FF8500] animate-pulse" />
-                  Free 30-Min Discovery & Strategy Call
+                  {tx("FreeConsultationSection.free-30-min-discovery-strategy-call", "Free 30-Min Discovery & Strategy Call")}
                 </div>
 
                 {/* Main Headline - Balanced & Clean Wrapping */}
@@ -165,7 +166,7 @@ export const FreeConsultationSection: React.FC<FreeConsultationSectionProps> = (
                   <div className="relative w-12 h-12 sm:w-14 sm:h-14 rounded-2xl overflow-hidden bg-[#e0d6ff] shrink-0 border border-white/20 shadow-md">
                     <Image
                       src={media("/images/consultation/director-portrait.png")}
-                      alt="Sabbir Ahmed - Head of Business"
+                      alt={tx("FreeConsultationSection.sabbir-ahmed-head-of-business", "Sabbir Ahmed - Head of Business")}
                       fill
                       sizes="56px"
                       className="object-cover object-top"
@@ -174,14 +175,14 @@ export const FreeConsultationSection: React.FC<FreeConsultationSectionProps> = (
 
                   <div className="min-w-0 flex-1">
                     <h3 className="font-agency text-lg sm:text-xl font-bold text-white tracking-tight whitespace-nowrap">
-                      Sabbir Ahmed
+                      {tx("FreeConsultationSection.sabbir-ahmed", "Sabbir Ahmed")}
                     </h3>
                     <p className="text-xs text-slate-400 font-medium whitespace-nowrap">
-                      Head of Business, Pixim Design
+                      {tx("FreeConsultationSection.head-of-business-pixim-design", "Head of Business, Pixim Design")}
                     </p>
                     <div className="mt-1 flex items-center gap-1.5 text-xs text-emerald-300">
                       <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                      <span className="font-medium whitespace-nowrap">Available for consultation</span>
+                      <span className="font-medium whitespace-nowrap">{tx("FreeConsultationSection.available-for-consultation", "Available for consultation")}</span>
                     </div>
                   </div>
                 </div>
@@ -200,7 +201,7 @@ export const FreeConsultationSection: React.FC<FreeConsultationSectionProps> = (
                     href="tel:+8801752971287"
                     className="inline-flex items-center justify-center gap-1 text-xs font-bold text-[#FFA133] hover:text-white transition-all px-3.5 py-2 rounded-xl bg-white/[0.04] border border-white/10 hover:bg-[#FF8500]/20 hover:border-[#FF8500]/40 shrink-0 whitespace-nowrap shadow-xs"
                   >
-                    <span>Direct Call</span>
+                    <span>{tx("FreeConsultationSection.direct-call", "Direct Call")}</span>
                     <ArrowRight className="w-3 h-3 text-[#FFA133]" />
                   </a>
                 </div>
@@ -214,13 +215,13 @@ export const FreeConsultationSection: React.FC<FreeConsultationSectionProps> = (
               {/* Form Header */}
               <div className="mb-4 sm:mb-5">
                 <span className="text-[11px] sm:text-xs font-black uppercase tracking-widest text-[#FFA133] font-mono block">
-                  START A PROJECT
+                  {tx("FreeConsultationSection.start-a-project", "START A PROJECT")}
                 </span>
                 <h3 className="font-agency text-2xl sm:text-3xl md:text-[32px] font-black text-white tracking-tight leading-tight mt-1">
-                  Tell us what you want to build.
+                  {tx("FreeConsultationSection.tell-us-what-you-want-to", "Tell us what you want to build.")}
                 </h3>
                 <p className="text-xs sm:text-sm text-slate-300 mt-2 leading-relaxed font-normal">
-                  Fill this in once and we will come back with ideas and a clear quote. It takes about two minutes.
+                  {tx("FreeConsultationSection.fill-this-in-once-and-we", "Fill this in once and we will come back with ideas and a clear quote. It takes about two minutes.")}
                 </p>
               </div>
 
@@ -228,14 +229,14 @@ export const FreeConsultationSection: React.FC<FreeConsultationSectionProps> = (
                 {/* Full name */}
                 <div>
                   <label className="block text-xs sm:text-sm font-bold text-white mb-1.5">
-                    Full name
+                    {tx("FreeConsultationSection.full-name", "Full name")}
                   </label>
                   <input
                     type="text"
                     required
                     value={fullName}
                     onChange={(e) => setFullName(e.target.value)}
-                    placeholder="Your name"
+                    placeholder={tx("FreeConsultationSection.your-name", "Your name")}
                     className="w-full bg-[#081330]/80 border border-[#2651B9]/30 rounded-xl px-3.5 sm:px-4 py-2.5 sm:py-3 text-sm text-white placeholder:text-slate-500 focus:outline-none focus:border-[#FF8500] focus:ring-1 focus:ring-[#FF8500]/30 transition-all"
                   />
                 </div>
@@ -244,7 +245,7 @@ export const FreeConsultationSection: React.FC<FreeConsultationSectionProps> = (
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 sm:gap-4">
                   <div>
                     <label className="block text-xs sm:text-sm font-bold text-white mb-1.5">
-                      Email <span className="text-[#FF8500]">*</span>
+                      {tx("FreeConsultationSection.email", "Email")} <span className="text-[#FF8500]">*</span>
                     </label>
                     <input
                       type="email"
@@ -258,7 +259,7 @@ export const FreeConsultationSection: React.FC<FreeConsultationSectionProps> = (
 
                   <div>
                     <label className="block text-xs sm:text-sm font-bold text-white mb-1.5">
-                      WhatsApp number
+                      {tx("FreeConsultationSection.whatsapp-number", "WhatsApp number")}
                     </label>
                     <div className="flex gap-2">
                       <div className="relative shrink-0">
@@ -279,7 +280,7 @@ export const FreeConsultationSection: React.FC<FreeConsultationSectionProps> = (
                         type="tel"
                         value={whatsapp}
                         onChange={(e) => setWhatsapp(e.target.value)}
-                        placeholder="1XXX XXXXXX"
+                        placeholder={tx("FreeConsultationSection.1xxx-xxxxxx", "1XXX XXXXXX")}
                         className="w-full bg-[#081330]/80 border border-[#2651B9]/30 rounded-xl px-3.5 sm:px-4 py-2.5 sm:py-3 text-sm text-white placeholder:text-slate-500 focus:outline-none focus:border-[#FF8500] focus:ring-1 focus:ring-[#FF8500]/30 transition-all"
                       />
                     </div>
@@ -290,10 +291,10 @@ export const FreeConsultationSection: React.FC<FreeConsultationSectionProps> = (
                 <div>
                   <div className="flex items-center justify-between mb-2">
                     <label className="text-xs sm:text-sm font-bold text-white">
-                      What do you need? <span className="text-[#FF8500]">*</span>
+                      {tx("FreeConsultationSection.what-do-you-need", "What do you need?")} <span className="text-[#FF8500]">*</span>
                     </label>
                     <span className="text-[11px] text-slate-400 font-medium">
-                      Pick one or more
+                      {tx("FreeConsultationSection.pick-one-or-more", "Pick one or more")}
                     </span>
                   </div>
 
@@ -325,7 +326,7 @@ export const FreeConsultationSection: React.FC<FreeConsultationSectionProps> = (
                 <div>
                   <div className="flex items-center justify-between mb-2">
                     <label className="text-xs sm:text-sm font-bold text-white">
-                      Project budget
+                      {tx("FreeConsultationSection.project-budget", "Project budget")}
                     </label>
 
                     {/* Currency toggle ($ USD / ৳ BDT) */}
@@ -339,7 +340,7 @@ export const FreeConsultationSection: React.FC<FreeConsultationSectionProps> = (
                             : "text-slate-400 hover:text-white"
                         }`}
                       >
-                        USD $
+                        {tx("FreeConsultationSection.usd", "USD $")}
                       </button>
                       <button
                         type="button"
@@ -350,7 +351,7 @@ export const FreeConsultationSection: React.FC<FreeConsultationSectionProps> = (
                             : "text-slate-400 hover:text-white"
                         }`}
                       >
-                        BDT ৳
+                        {tx("FreeConsultationSection.bdt", "BDT ৳")}
                       </button>
                     </div>
                   </div>
@@ -385,14 +386,14 @@ export const FreeConsultationSection: React.FC<FreeConsultationSectionProps> = (
                 {/* Project details * */}
                 <div>
                   <label className="block text-xs sm:text-sm font-bold text-white mb-1.5">
-                    Project details <span className="text-[#FF8500]">*</span>
+                    {tx("FreeConsultationSection.project-details", "Project details")} <span className="text-[#FF8500]">*</span>
                   </label>
                   <textarea
                     rows={3}
                     required
                     value={details}
                     onChange={(e) => setDetails(e.target.value)}
-                    placeholder="Tell us about your business, what you want designed, and any deadline."
+                    placeholder={tx("FreeConsultationSection.tell-us-about-your-business-what", "Tell us about your business, what you want designed, and any deadline.")}
                     className="w-full bg-[#081330]/80 border border-[#2651B9]/30 rounded-xl p-3.5 sm:p-4 text-sm text-white placeholder:text-slate-500 focus:outline-none focus:border-[#FF8500] focus:ring-1 focus:ring-[#FF8500]/30 transition-all resize-y min-h-[96px]"
                   />
                 </div>
@@ -408,7 +409,7 @@ export const FreeConsultationSection: React.FC<FreeConsultationSectionProps> = (
                   </button>
 
                   <p className="text-[11px] text-slate-400 leading-snug sm:max-w-[240px]">
-                    Your details stay private and are only used to reply to this inquiry.
+                    {tx("FreeConsultationSection.your-details-stay-private-and-are", "Your details stay private and are only used to reply to this inquiry.")}
                   </p>
                 </div>
               </form>
@@ -430,7 +431,7 @@ export const FreeConsultationSection: React.FC<FreeConsultationSectionProps> = (
           </div>
 
           <p className="text-xs sm:text-sm font-medium tracking-tight text-center sm:text-left text-slate-200">
-            Secure Your <span className="italic font-serif font-normal text-[#FFA133]">Brand&apos;s Future</span> Today. Why Risk It With The <span className="font-extrabold text-white">Wrong Partner?</span> <span className="bg-gradient-to-r from-[#FF8500] via-[#FFA229] to-amber-300 bg-clip-text text-transparent font-extrabold">Get 100% Value.</span>
+            {tx("FreeConsultationSection.secure-your", "Secure Your")} <span className="italic font-serif font-normal text-[#FFA133]">{tx("FreeConsultationSection.brand-s-future", "Brand's Future")}</span> {tx("FreeConsultationSection.today-why-risk-it-with-the", "Today. Why Risk It With The")} <span className="font-extrabold text-white">{tx("FreeConsultationSection.wrong-partner", "Wrong Partner?")}</span> <span className="bg-gradient-to-r from-[#FF8500] via-[#FFA229] to-amber-300 bg-clip-text text-transparent font-extrabold">{tx("FreeConsultationSection.get-100-value", "Get 100% Value.")}</span>
           </p>
         </div>
       </div>

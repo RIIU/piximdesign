@@ -1,9 +1,10 @@
 "use client";
 
 import React, { useState, useRef, useEffect } from "react";
-import { X, ArrowRight, ChevronDown, Check, CheckCircle2, Loader2 } from "lucide-react";
+import { X, ArrowRight, ChevronDown, Check, CheckCircle2, Loader2 } from "@/content/lucide";
 import { useDialog } from "@/lib/useDialog";
 import { useCurrency } from "@/lib/currency";
+import { tx } from "@/content/text";
 
 interface ContactModalProps {
   isOpen: boolean;
@@ -201,11 +202,11 @@ const ContactDialog: React.FC<Omit<ContactModalProps, "isOpen">> = ({
           </div>
 
           <h3 className="font-agency text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
-            Inquiry Sent Successfully!
+            {tx("ContactModal.inquiry-sent-successfully", "Inquiry Sent Successfully!")}
           </h3>
 
           <p className="mt-3 text-xs sm:text-sm text-slate-300 leading-relaxed max-w-sm mx-auto">
-            Thank you, <span className="text-white font-semibold">{fullName}</span>. Our lead team has received your brief and will get back to you at <span className="text-[#FFA133] font-semibold">{email}</span> within 24 hours.
+            {tx("ContactModal.thank-you", "Thank you,")} <span className="text-white font-semibold">{fullName}</span>{tx("ContactModal.our-lead-team-has-received-your", ". Our lead team has received your brief and will get back to you at")} <span className="text-[#FFA133] font-semibold">{email}</span> {tx("ContactModal.within-24-hours", "within 24 hours.")}
           </p>
 
           <div className="mt-8">
@@ -214,7 +215,7 @@ const ContactDialog: React.FC<Omit<ContactModalProps, "isOpen">> = ({
               onClick={onClose}
               className="px-8 py-3 rounded-xl bg-gradient-to-r from-[#FF8500] to-[#FFA133] text-white font-bold text-xs tracking-wider uppercase shadow-lg shadow-[#FF8500]/25 hover:opacity-95 transition-all cursor-pointer"
             >
-              Close Window
+              {tx("ContactModal.close-window", "Close Window")}
             </button>
           </div>
         </div>
@@ -244,7 +245,7 @@ const ContactDialog: React.FC<Omit<ContactModalProps, "isOpen">> = ({
         <div className="relative z-10 flex items-center justify-between mb-5 sm:mb-6">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/[0.05] border border-white/10 text-xs font-semibold text-[#FFA133]">
             <span className="w-1.5 h-1.5 rounded-full bg-[#FF8500] animate-pulse" />
-            Direct Project Inquiry
+            {tx("ContactModal.direct-project-inquiry", "Direct Project Inquiry")}
           </div>
 
           <button
@@ -268,14 +269,14 @@ const ContactDialog: React.FC<Omit<ContactModalProps, "isOpen">> = ({
           {/* Full Name */}
           <div>
             <label className="block text-xs font-bold uppercase tracking-wider text-white mb-2">
-              Full Name<span className="text-[#FF8500]">*</span>
+              {tx("ContactModal.full-name", "Full Name")}<span className="text-[#FF8500]">*</span>
             </label>
             <input
               type="text"
               required
               value={fullName}
               onChange={(e) => setFullName(e.target.value)}
-              placeholder="John Doe"
+              placeholder={tx("ContactModal.john-doe", "John Doe")}
               className="w-full bg-transparent border-b border-white/20 pb-2 text-sm sm:text-base text-white placeholder-slate-500 focus:outline-none focus:border-[#FF8500] transition-colors"
             />
           </div>
@@ -284,7 +285,7 @@ const ContactDialog: React.FC<Omit<ContactModalProps, "isOpen">> = ({
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
             <div>
               <label className="block text-xs font-bold uppercase tracking-wider text-white mb-2">
-                Your Email<span className="text-[#FF8500]">*</span>
+                {tx("ContactModal.your-email", "Your Email")}<span className="text-[#FF8500]">*</span>
               </label>
               <input
                 type="email"
@@ -298,7 +299,7 @@ const ContactDialog: React.FC<Omit<ContactModalProps, "isOpen">> = ({
 
             <div>
               <label className="block text-xs font-bold uppercase tracking-wider text-white mb-2">
-                Whatsapp Number
+                {tx("ContactModal.whatsapp-number", "Whatsapp Number")}
               </label>
               <input
                 type="tel"
@@ -314,7 +315,7 @@ const ContactDialog: React.FC<Omit<ContactModalProps, "isOpen">> = ({
           <div>
             <div className="flex items-center justify-between mb-2.5">
               <label className="block text-xs font-bold uppercase tracking-wider text-white">
-                Project Budget
+                {tx("ContactModal.project-budget", "Project Budget")}
               </label>
 
               {/* Currency Switcher Toggle ($ USD / ৳ BDT) */}
@@ -328,7 +329,7 @@ const ContactDialog: React.FC<Omit<ContactModalProps, "isOpen">> = ({
                       : "text-slate-400 hover:text-white"
                   }`}
                 >
-                  $ USD
+                  {tx("ContactModal.usd", "$ USD")}
                 </button>
                 <button
                   type="button"
@@ -339,7 +340,7 @@ const ContactDialog: React.FC<Omit<ContactModalProps, "isOpen">> = ({
                       : "text-slate-400 hover:text-white"
                   }`}
                 >
-                  ৳ BDT
+                  {tx("ContactModal.bdt", "৳ BDT")}
                 </button>
               </div>
             </div>
@@ -368,7 +369,7 @@ const ContactDialog: React.FC<Omit<ContactModalProps, "isOpen">> = ({
           {/* Select Project (Clean Minimal Luxury Dropdown) */}
           <div className="relative" ref={dropdownRef}>
             <label className="block text-xs font-bold uppercase tracking-wider text-white mb-2">
-              Select Project<span className="text-[#FF8500]">*</span>
+              {tx("ContactModal.select-project", "Select Project")}<span className="text-[#FF8500]">*</span>
             </label>
 
             <button
@@ -437,14 +438,14 @@ const ContactDialog: React.FC<Omit<ContactModalProps, "isOpen">> = ({
           {/* Project Details */}
           <div>
             <label className="block text-xs font-bold uppercase tracking-wider text-white mb-2">
-              Project Details<span className="text-[#FF8500]">*</span>
+              {tx("ContactModal.project-details", "Project Details")}<span className="text-[#FF8500]">*</span>
             </label>
             <textarea
               rows={2}
               required
               value={details}
               onChange={(e) => setDetails(e.target.value)}
-              placeholder="I want to redesign my website.."
+              placeholder={tx("ContactModal.i-want-to-redesign-my-website", "I want to redesign my website..")}
               className="w-full bg-transparent border-b border-white/20 pb-2 text-sm sm:text-base text-white placeholder-slate-500 focus:outline-none focus:border-[#FF8500] transition-colors resize-none"
             />
           </div>
@@ -459,11 +460,11 @@ const ContactDialog: React.FC<Omit<ContactModalProps, "isOpen">> = ({
               {isSubmitting ? (
                 <>
                   <Loader2 className="w-4 h-4 animate-spin" />
-                  <span>Sending...</span>
+                  <span>{tx("ContactModal.sending", "Sending...")}</span>
                 </>
               ) : (
                 <>
-                  <span>Send Inquiry</span>
+                  <span>{tx("ContactModal.send-inquiry", "Send Inquiry")}</span>
                   <ArrowRight className="w-4 h-4" />
                 </>
               )}

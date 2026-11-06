@@ -14,13 +14,14 @@ import {
   ShoppingCart,
   Trophy,
   TrendingUp,
-} from "lucide-react";
+} from "@/content/lucide";
 import { ServiceLandingPage, type ServicePageProps } from "../ServiceLandingPage";
 import { GradientText, SampleMark, Wordmark } from "@/components/page-kit/shared";
 import { Bars, ChipDot, ChipIconBox, FloatingChip, Lines, MonoLabel, Sparkline, TILE_DARK } from "@/components/page-kit/primitives";
 import { ServiceHeroVideo } from "../sections/ServiceHeroVideo";
 import type { ServiceConfig } from "../types";
 import { SERVICE_PRICING } from "@/data/servicePricing";
+import { tx } from "@/content/text";
 
 const PRICING = SERVICE_PRICING["digital-marketing"];
 
@@ -50,8 +51,8 @@ const MiniAd: React.FC<{ variant?: "orange" | "blue"; cta?: string; className?: 
         <SampleMark className="w-2.5 h-2.5" color="#FFFFFF" />
       </span>
       <span className="leading-tight">
-        <span className="block text-[9px] font-semibold text-white">yourbrand</span>
-        <span className="block text-[7px] text-slate-500">Sponsored</span>
+        <span className="block text-[9px] font-semibold text-white">{tx("service-landing/services/digital-marketing.yourbrand", "yourbrand")}</span>
+        <span className="block text-[7px] text-slate-500">{tx("service-landing/services/digital-marketing.sponsored", "Sponsored")}</span>
       </span>
     </div>
     <div
@@ -62,15 +63,15 @@ const MiniAd: React.FC<{ variant?: "orange" | "blue"; cta?: string; className?: 
       <span className="font-agency text-lg font-extrabold text-white text-center leading-none">
         {variant === "orange" ? (
           <>
-            Fresh
+            {tx("service-landing/services/digital-marketing.fresh", "Fresh")}
             <br />
-            Arrivals
+            {tx("service-landing/services/digital-marketing.arrivals", "Arrivals")}
           </>
         ) : (
           <>
-            Free
+            {tx("service-landing/services/digital-marketing.free", "Free")}
             <br />
-            Delivery
+            {tx("service-landing/services/digital-marketing.delivery", "Delivery")}
           </>
         )}
       </span>
@@ -86,13 +87,13 @@ const SearchAd: React.FC<{ className?: string }> = ({ className = "" }) => (
   <div className={`rounded-xl bg-white p-3 ${className}`}>
     <div className="flex items-center gap-2 rounded-full border border-slate-200 px-3 py-1.5">
       <Search className="w-3 h-3 text-slate-400" />
-      <span className="text-[10px] text-slate-500 truncate">organic honey online</span>
+      <span className="text-[10px] text-slate-500 truncate">{tx("service-landing/services/digital-marketing.organic-honey-online", "organic honey online")}</span>
     </div>
     <div className="mt-2.5">
       <span className="text-[9px] text-slate-700">
-        <b>Sponsored</b> · yourbrand.com
+        <b>{tx("service-landing/services/digital-marketing.sponsored", "Sponsored")}</b> {tx("service-landing/services/digital-marketing.yourbrand-com", "· yourbrand.com")}
       </span>
-      <span className="block text-[12px] font-semibold text-[#1A0DAB] leading-snug">Organic Honey, Delivered Fresh</span>
+      <span className="block text-[12px] font-semibold text-[#1A0DAB] leading-snug">{tx("service-landing/services/digital-marketing.organic-honey-delivered-fresh", "Organic Honey, Delivered Fresh")}</span>
       <Lines widths={["w-full", "w-4/5"]} className="mt-1 space-y-1" barClass="h-1 bg-slate-200" />
     </div>
   </div>
@@ -104,7 +105,7 @@ const HeroVisual = () => (
   <ServiceHeroVideo
     videoSrc="/video/Grow-Your-Business-with-Creative-Design-_-Pixim-Design-Agency.mp4"
     posterSrc="/video/posters/Grow-Your-Business-with-Creative-Design-_-Pixim-Design-Agency.webp"
-    badge="Performance Ads Reel"
+    badge={tx("service-landing/services/digital-marketing.performance-ads-reel", "Performance Ads Reel")}
     topChip={
       <FloatingChip
         className="right-3 -top-4 sm:-top-5"
@@ -113,7 +114,7 @@ const HeroVisual = () => (
             <Check className="w-2.5 h-2.5" strokeWidth={3.5} />
           </ChipDot>
         }
-        title="Pixel tracking active"
+        title={tx("service-landing/services/digital-marketing.pixel-tracking-active", "Pixel tracking active")}
       />
     }
     bottomChip={
@@ -125,8 +126,8 @@ const HeroVisual = () => (
             <ChartColumn className="w-3.5 h-3.5" />
           </ChipIconBox>
         }
-        title="ROAS 4.8x average"
-        sub="Meta + Google Ads · Scaling"
+        title={tx("service-landing/services/digital-marketing.roas-4-8x-average", "ROAS 4.8x average")}
+        sub={tx("service-landing/services/digital-marketing.meta-google-ads-scaling", "Meta + Google Ads · Scaling")}
       />
     }
   />
@@ -144,11 +145,11 @@ const MetaAdsVisual = () => (
           <span className="h-0.5 flex-1 rounded bg-white/40" />
         </div>
         <span className="font-agency text-base font-extrabold text-white text-center leading-none">
-          Free
+          {tx("service-landing/services/digital-marketing.free", "Free")}
           <br />
-          Delivery
+          {tx("service-landing/services/digital-marketing.delivery", "Delivery")}
         </span>
-        <span className="rounded-full bg-white px-2 py-0.5 text-[7px] font-bold text-[#2651B9] text-center">Shop now</span>
+        <span className="rounded-full bg-white px-2 py-0.5 text-[7px] font-bold text-[#2651B9] text-center">{tx("service-landing/services/digital-marketing.shop-now", "Shop now")}</span>
       </div>
     </div>
     <div className="mt-3 flex flex-wrap justify-center gap-1.5">
@@ -166,14 +167,14 @@ const GoogleAdsVisual = () => (
     <div className="w-full rounded-xl bg-white p-3">
       <div className="flex items-center gap-2 rounded-full border border-slate-200 px-3 py-1">
         <Search className="w-3 h-3 text-slate-400" />
-        <span className="text-[10px] text-slate-500">organic honey online</span>
+        <span className="text-[10px] text-slate-500">{tx("service-landing/services/digital-marketing.organic-honey-online", "organic honey online")}</span>
       </div>
       <div className="mt-2 grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-2">
         <div>
           <span className="text-[9px] text-slate-700">
-            <b>Sponsored</b> · yourbrand.com
+            <b>{tx("service-landing/services/digital-marketing.sponsored", "Sponsored")}</b> {tx("service-landing/services/digital-marketing.yourbrand-com", "· yourbrand.com")}
           </span>
-          <span className="block text-[11px] font-semibold text-[#1A0DAB]">Organic Honey, Delivered Fresh</span>
+          <span className="block text-[11px] font-semibold text-[#1A0DAB]">{tx("service-landing/services/digital-marketing.organic-honey-delivered-fresh", "Organic Honey, Delivered Fresh")}</span>
           <div className="mt-1 flex flex-wrap gap-1">
             {["Shop", "Offers", "Reviews"].map((s) => (
               <span key={s} className="rounded-full border border-slate-200 px-1.5 py-0.5 text-[8px] text-[#1A0DAB]">
@@ -183,7 +184,7 @@ const GoogleAdsVisual = () => (
           </div>
         </div>
         <div className="hidden sm:block opacity-50">
-          <span className="text-[9px] text-slate-500">competitor.com</span>
+          <span className="text-[9px] text-slate-500">{tx("service-landing/services/digital-marketing.competitor-com", "competitor.com")}</span>
           <Lines widths={["w-4/5", "w-full", "w-3/5"]} className="mt-1 space-y-1" barClass="h-1 bg-slate-200" />
         </div>
       </div>
@@ -223,16 +224,16 @@ const TrackingVisual = () => (
   <div className="flex h-full flex-col justify-center gap-2.5">
     <div className="rounded-lg bg-[#05070D] border border-white/10 p-2.5 font-mono text-[9px] leading-relaxed text-slate-300">
       <div>
-        <span className="text-[#C084FC]">fbq</span>(<span className="text-[#FFA133]">&apos;track&apos;</span>,{" "}
-        <span className="text-emerald-400">&apos;Purchase&apos;</span>)
+        <span className="text-[#C084FC]">{tx("service-landing/services/digital-marketing.fbq", "fbq")}</span>(<span className="text-[#FFA133]">{tx("service-landing/services/digital-marketing.track", "'track'")}</span>,{" "}
+        <span className="text-emerald-400">{tx("service-landing/services/digital-marketing.purchase", "'Purchase'")}</span>)
       </div>
       <div>
-        <span className="text-[#C084FC]">gtag</span>(<span className="text-[#FFA133]">&apos;event&apos;</span>,{" "}
-        <span className="text-emerald-400">&apos;conversion&apos;</span>)
+        <span className="text-[#C084FC]">{tx("service-landing/services/digital-marketing.gtag", "gtag")}</span>(<span className="text-[#FFA133]">{tx("service-landing/services/digital-marketing.event", "'event'")}</span>,{" "}
+        <span className="text-emerald-400">{tx("service-landing/services/digital-marketing.conversion", "'conversion'")}</span>)
       </div>
     </div>
     <span className="flex items-center gap-1.5 text-[10px] font-semibold text-emerald-400">
-      <Check className="w-3 h-3" strokeWidth={3} /> Events firing correctly
+      <Check className="w-3 h-3" strokeWidth={3} /> {tx("service-landing/services/digital-marketing.events-firing-correctly", "Events firing correctly")}
     </span>
   </div>
 );
@@ -241,10 +242,10 @@ const RetargetingVisual = () => (
   <div className="relative flex h-full flex-col justify-center">
     <div className="flex items-center justify-between gap-1">
       {[
-        { icon: <Eye className="w-4 h-4" />, l: "Saw ad" },
-        { icon: <MousePointerClick className="w-4 h-4" />, l: "Visited" },
-        { icon: <ShoppingCart className="w-4 h-4" />, l: "Added to cart" },
-        { icon: <Check className="w-4 h-4" strokeWidth={3} />, l: "Purchased" },
+        { icon: <Eye className="w-4 h-4" />, l: tx("service-landing/services/digital-marketing.saw-ad", "Saw ad") },
+        { icon: <MousePointerClick className="w-4 h-4" />, l: tx("service-landing/services/digital-marketing.visited", "Visited") },
+        { icon: <ShoppingCart className="w-4 h-4" />, l: tx("service-landing/services/digital-marketing.added-to-cart", "Added to cart") },
+        { icon: <Check className="w-4 h-4" strokeWidth={3} />, l: tx("service-landing/services/digital-marketing.purchased", "Purchased") },
       ].map((s, i, arr) => (
         <React.Fragment key={s.l}>
           <div className="flex flex-col items-center gap-1.5">
@@ -264,7 +265,7 @@ const RetargetingVisual = () => (
       ))}
     </div>
     <div className="mt-3 mx-auto flex items-center gap-2 rounded-full border border-dashed border-[#FF8500]/50 px-3 py-1 text-[10px] font-semibold text-[#FFA133]">
-      Retarget visitors who didn&apos;t buy
+      {tx("service-landing/services/digital-marketing.retarget-visitors-who-didn-t-buy", "Retarget visitors who didn't buy")}
     </div>
   </div>
 );
@@ -272,13 +273,13 @@ const RetargetingVisual = () => (
 const ReportingVisual = () => (
   <div className="flex h-full flex-col">
     <div className="flex items-center justify-between">
-      <MonoLabel>Weekly results</MonoLabel>
+      <MonoLabel>{tx("service-landing/services/digital-marketing.weekly-results", "Weekly results")}</MonoLabel>
       <div className="flex gap-3">
         <span className="flex items-center gap-1 text-[9px] text-slate-400">
-          <span className="w-2 h-2 rounded-sm bg-[#2651B9]" /> Spend
+          <span className="w-2 h-2 rounded-sm bg-[#2651B9]" /> {tx("service-landing/services/digital-marketing.spend", "Spend")}
         </span>
         <span className="flex items-center gap-1 text-[9px] text-slate-400">
-          <span className="w-2 h-2 rounded-sm bg-[#FF8500]" /> Revenue
+          <span className="w-2 h-2 rounded-sm bg-[#FF8500]" /> {tx("service-landing/services/digital-marketing.revenue", "Revenue")}
         </span>
       </div>
     </div>
@@ -304,11 +305,11 @@ const AudienceMapPanel = () => (
       ))}
     </svg>
     {[
-      { l: "Lookalike audiences", s: "w-32 h-32 sm:w-36 sm:h-36", pos: "left-[6%] top-[12%]", c: "bg-[#2651B9]/45 border-[#3B82F6]/60" },
-      { l: "Website visitors", s: "w-24 h-24 sm:w-28 sm:h-28", pos: "right-[10%] top-[8%]", c: "bg-[#FF8500]/35 border-[#FF8500]/70" },
-      { l: "Engaged followers", s: "w-24 h-24", pos: "left-[40%] top-[40%]", c: "bg-[#3B82F6]/35 border-[#60A5FA]/60" },
-      { l: "Cart abandoners", s: "w-20 h-20", pos: "right-[8%] bottom-[10%]", c: "bg-[#FFA133]/40 border-[#FFA133]/80" },
-      { l: "Interest targeting", s: "w-24 h-24", pos: "left-[10%] bottom-[6%]", c: "bg-[#1E3A8A]/60 border-[#3B82F6]/40" },
+      { l: tx("service-landing/services/digital-marketing.lookalike-audiences", "Lookalike audiences"), s: "w-32 h-32 sm:w-36 sm:h-36", pos: "left-[6%] top-[12%]", c: "bg-[#2651B9]/45 border-[#3B82F6]/60" },
+      { l: tx("service-landing/services/digital-marketing.website-visitors", "Website visitors"), s: "w-24 h-24 sm:w-28 sm:h-28", pos: "right-[10%] top-[8%]", c: "bg-[#FF8500]/35 border-[#FF8500]/70" },
+      { l: tx("service-landing/services/digital-marketing.engaged-followers", "Engaged followers"), s: "w-24 h-24", pos: "left-[40%] top-[40%]", c: "bg-[#3B82F6]/35 border-[#60A5FA]/60" },
+      { l: tx("service-landing/services/digital-marketing.cart-abandoners", "Cart abandoners"), s: "w-20 h-20", pos: "right-[8%] bottom-[10%]", c: "bg-[#FFA133]/40 border-[#FFA133]/80" },
+      { l: tx("service-landing/services/digital-marketing.interest-targeting", "Interest targeting"), s: "w-24 h-24", pos: "left-[10%] bottom-[6%]", c: "bg-[#1E3A8A]/60 border-[#3B82F6]/40" },
     ].map((b) => (
       <span
         key={b.l}
@@ -323,9 +324,9 @@ const AudienceMapPanel = () => (
 const FunnelPlanPanel = () => (
   <div className="space-y-3">
     {[
-      { stage: "TOFU", goal: "Reach new customers", formats: ["Video views", "Reels", "Broad interests"], c: "bg-[#2651B9]" },
-      { stage: "MOFU", goal: "Build consideration", formats: ["Carousels", "Lead forms", "Engagers"], c: "bg-[#3B82F6]" },
-      { stage: "BOFU", goal: "Convert & retarget", formats: ["Offers", "Catalogue ads", "Cart abandoners"], c: "bg-gradient-to-r from-[#FF8500] to-[#FFA133]" },
+      { stage: "TOFU", goal: tx("service-landing/services/digital-marketing.reach-new-customers", "Reach new customers"), formats: ["Video views", "Reels", "Broad interests"], c: "bg-[#2651B9]" },
+      { stage: "MOFU", goal: tx("service-landing/services/digital-marketing.build-consideration", "Build consideration"), formats: ["Carousels", "Lead forms", "Engagers"], c: "bg-[#3B82F6]" },
+      { stage: "BOFU", goal: tx("service-landing/services/digital-marketing.convert-retarget", "Convert & retarget"), formats: ["Offers", "Catalogue ads", "Cart abandoners"], c: "bg-gradient-to-r from-[#FF8500] to-[#FFA133]" },
     ].map((row, i) => (
       <div key={row.stage} className="flex items-center gap-3 rounded-2xl bg-[#081330] border border-[#2651B9]/35 p-3 sm:p-4" style={{ marginLeft: `${i * 6}%`, marginRight: `${i * 6}%` }}>
         <span className={`shrink-0 rounded-lg ${row.c} px-2.5 py-1 font-mono text-[10px] font-bold text-white`}>{row.stage}</span>
@@ -356,14 +357,14 @@ const CreativeTestPanel = () => (
       >
         {v.winner && (
           <span className="absolute -top-2.5 right-3 flex items-center gap-1 rounded-full bg-gradient-to-r from-[#FF8500] to-[#FFA133] px-2 py-0.5 text-[10px] font-bold text-white">
-            <Trophy className="w-3 h-3" /> Winner
+            <Trophy className="w-3 h-3" /> {tx("service-landing/services/digital-marketing.winner", "Winner")}
           </span>
         )}
         <span className="text-xs font-semibold text-white">{v.name}</span>
         <MiniAd variant={v.variant} className="mt-2" />
         <div className="mt-3">
           <div className="flex items-center justify-between text-[10px] text-slate-400">
-            <span>Click-through rate</span>
+            <span>{tx("service-landing/services/digital-marketing.click-through-rate", "Click-through rate")}</span>
           </div>
           <div className="mt-1 h-2 rounded-full bg-white/10">
             <div className={`h-full rounded-full ${v.ctr} ${v.winner ? "bg-[#FF8500]" : "bg-[#60A5FA]"}`} />
@@ -381,17 +382,17 @@ const WeeklyReportPanel = () => (
         <SampleMark className="w-5 h-5" color="#FF8500" />
         <Wordmark className="text-sm text-[#081330]" />
       </div>
-      <span className="rounded-full bg-[#081330] px-2.5 py-0.5 text-[10px] font-mono text-white">Weekly report</span>
+      <span className="rounded-full bg-[#081330] px-2.5 py-0.5 text-[10px] font-mono text-white">{tx("service-landing/services/digital-marketing.weekly-report", "Weekly report")}</span>
     </div>
     <div className="mt-3 rounded-xl bg-white border border-slate-200 p-3">
       <div className="flex items-center justify-between">
-        <span className="text-[10px] font-mono uppercase tracking-widest text-slate-500">Return on ad spend</span>
+        <span className="text-[10px] font-mono uppercase tracking-widest text-slate-500">{tx("service-landing/services/digital-marketing.return-on-ad-spend", "Return on ad spend")}</span>
         <TrendingUp className="w-4 h-4 text-emerald-500" />
       </div>
       <Sparkline points={[12, 14, 13, 17, 19, 18, 23, 26]} className="mt-1 w-full h-16" color="#FF8500" />
     </div>
     <div className="mt-3">
-      <span className="text-[10px] font-mono uppercase tracking-widest text-slate-500">Next week</span>
+      <span className="text-[10px] font-mono uppercase tracking-widest text-slate-500">{tx("service-landing/services/digital-marketing.next-week", "Next week")}</span>
       <ul className="mt-2 space-y-1.5">
         {["Scale the winning ad set", "Pause low-CTR creatives", "Test a new video hook"].map((item) => (
           <li key={item} className="flex items-center gap-2 text-xs text-slate-700">

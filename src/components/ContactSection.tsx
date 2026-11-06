@@ -2,10 +2,11 @@
 
 import React, { useId, useState } from "react";
 import Link from "next/link";
-import { Mail, Send, CheckCircle2, Clock, ShieldCheck, Loader2, AlertCircle, ChevronDown } from "lucide-react";
+import { Mail, Send, CheckCircle2, Clock, ShieldCheck, Loader2, AlertCircle, ChevronDown } from "@/content/lucide";
 import { GsapMagneticButton } from "@/components/animations/GsapMagneticButton";
 import { useCurrency } from "@/lib/currency";
 import { useSettings } from "@/content/ContentProvider";
+import { tx } from "@/content/text";
 
 export interface ServiceArea {
   number: string;
@@ -16,7 +17,7 @@ export interface ServiceArea {
 export const PIXIM_SERVICE_AREAS: ServiceArea[] = [
   {
     number: "01",
-    category: "Logo & Brand Identity",
+    get category() { return tx("ContactSection.logo-brand-identity", "Logo & Brand Identity"); },
     items: [
       "Logo Design",
       "Brand Identity Design",
@@ -27,7 +28,7 @@ export const PIXIM_SERVICE_AREAS: ServiceArea[] = [
   },
   {
     number: "02",
-    category: "Social Media & Content Design",
+    get category() { return tx("ContactSection.social-media-content-design", "Social Media & Content Design"); },
     items: [
       "Social Media Post Design",
       "Social Media Cover Design",
@@ -36,7 +37,7 @@ export const PIXIM_SERVICE_AREAS: ServiceArea[] = [
   },
   {
     number: "03",
-    category: "Packaging Design",
+    get category() { return tx("ContactSection.packaging-design", "Packaging Design"); },
     items: [
       "Product Packaging",
       "Label Design",
@@ -45,7 +46,7 @@ export const PIXIM_SERVICE_AREAS: ServiceArea[] = [
   },
   {
     number: "04",
-    category: "Video & Motion Design",
+    get category() { return tx("ContactSection.video-motion-design", "Video & Motion Design"); },
     items: [
       "Motion Graphics",
       "Brand Intro Video",
@@ -54,7 +55,7 @@ export const PIXIM_SERVICE_AREAS: ServiceArea[] = [
   },
   {
     number: "05",
-    category: "Digital Marketing & Ads",
+    get category() { return tx("ContactSection.digital-marketing-ads", "Digital Marketing & Ads"); },
     items: [
       "Meta Ads",
       "Google Ads",
@@ -63,7 +64,7 @@ export const PIXIM_SERVICE_AREAS: ServiceArea[] = [
   },
   {
     number: "06",
-    category: "Website Design & Development",
+    get category() { return tx("ContactSection.website-design-development", "Website Design & Development"); },
     items: [
       "Business Website",
       "Landing Page",
@@ -72,7 +73,7 @@ export const PIXIM_SERVICE_AREAS: ServiceArea[] = [
   },
   {
     number: "07",
-    category: "SEO & Organic Growth",
+    get category() { return tx("ContactSection.seo-organic-growth", "SEO & Organic Growth"); },
     items: [
       "On-Page SEO",
       "Keyword Research",
@@ -170,10 +171,9 @@ export const ContactForm: React.FC<ContactFormProps> = ({ initialService = "", i
         <div className="w-16 h-16 rounded-full bg-emerald-50 dark:bg-emerald-950/50 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mb-4">
           <CheckCircle2 className="w-8 h-8" />
         </div>
-        <h3 className="text-2xl font-bold text-slate-900 dark:text-white">Inquiry Received!</h3>
+        <h3 className="text-2xl font-bold text-slate-900 dark:text-white">{tx("ContactSection.inquiry-received", "Inquiry Received!")}</h3>
         <p className="mt-2 text-sm text-slate-600 dark:text-slate-300 max-w-md">
-          Thank you, <span className="text-slate-900 dark:text-white font-semibold">{name}</span>. Our team will review your
-          project requirements and follow up at <span className="text-[#FF8500] font-semibold">{email}</span> within 2 hours.
+          {tx("ContactSection.thank-you", "Thank you,")} <span className="text-slate-900 dark:text-white font-semibold">{name}</span>{tx("ContactSection.our-team-will-review-your-project", ". Our team will review your project requirements and follow up at")} <span className="text-[#FF8500] font-semibold">{email}</span> {tx("ContactSection.within-2-hours", "within 2 hours.")}
         </p>
         <button
           type="button"
@@ -187,7 +187,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({ initialService = "", i
           }}
           className="mt-6 px-6 py-2 rounded-full bg-slate-200 dark:bg-[#0E235E] text-xs font-semibold text-slate-800 dark:text-white hover:bg-slate-300 dark:hover:bg-[#153282] transition-colors cursor-pointer"
         >
-          Send Another Inquiry
+          {tx("ContactSection.send-another-inquiry", "Send Another Inquiry")}
         </button>
       </div>
     );
@@ -210,7 +210,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({ initialService = "", i
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
           <label htmlFor={`${id}-name`} className={LABEL_CLASS}>
-            Your Name *
+            {tx("ContactSection.your-name", "Your Name *")}
           </label>
           <input
             id={`${id}-name`}
@@ -219,14 +219,14 @@ export const ContactForm: React.FC<ContactFormProps> = ({ initialService = "", i
             autoComplete="name"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            placeholder="Alex Morgan"
+            placeholder={tx("ContactSection.alex-morgan", "Alex Morgan")}
             className={INPUT_CLASS}
           />
         </div>
 
         <div>
           <label htmlFor={`${id}-email`} className={LABEL_CLASS}>
-            Email *
+            {tx("ContactSection.email", "Email *")}
           </label>
           <input
             id={`${id}-email`}
@@ -245,7 +245,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({ initialService = "", i
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
           <label htmlFor={`${id}-phone`} className={LABEL_CLASS}>
-            WhatsApp / Phone
+            {tx("ContactSection.whatsapp-phone", "WhatsApp / Phone")}
           </label>
           <input
             id={`${id}-phone`}
@@ -253,14 +253,14 @@ export const ContactForm: React.FC<ContactFormProps> = ({ initialService = "", i
             autoComplete="tel"
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
-            placeholder="+880 1XXX-XXXXXX"
+            placeholder={tx("ContactSection.880-1xxx-xxxxxx", "+880 1XXX-XXXXXX")}
             className={INPUT_CLASS}
           />
         </div>
 
         <div>
           <label htmlFor={`${id}-service`} className={LABEL_CLASS}>
-            Service Needed
+            {tx("ContactSection.service-needed", "Service Needed")}
           </label>
           <div className="relative">
             <select
@@ -284,10 +284,10 @@ export const ContactForm: React.FC<ContactFormProps> = ({ initialService = "", i
                 </option>
               ))}
               <option value="All-in-One Complete Branding" className="bg-white dark:bg-[#081538] text-slate-900 dark:text-white py-2 font-medium">
-                All-in-One Complete Branding
+                {tx("ContactSection.all-in-one-complete-branding", "All-in-One Complete Branding")}
               </option>
               <option value="Other / Custom Requirement" className="bg-white dark:bg-[#081538] text-slate-900 dark:text-white py-2 font-medium">
-                Other / Custom Requirement
+                {tx("ContactSection.other-custom-requirement", "Other / Custom Requirement")}
               </option>
             </select>
             <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3.5 text-slate-500 dark:text-slate-400">
@@ -299,7 +299,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({ initialService = "", i
 
       {/* 3. Budget Tier */}
       <fieldset>
-        <legend className={`${LABEL_CLASS} !mb-2.5`}>Estimated Project Budget</legend>
+        <legend className={`${LABEL_CLASS} !mb-2.5`}>{tx("ContactSection.estimated-project-budget", "Estimated Project Budget")}</legend>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
           {budgetTiers.map((tier, i) => (
             <button
@@ -322,14 +322,14 @@ export const ContactForm: React.FC<ContactFormProps> = ({ initialService = "", i
       {/* 4. Message / Project Notes */}
       <div>
         <label htmlFor={`${id}-message`} className={LABEL_CLASS}>
-          Project Goals & Timeline
+          {tx("ContactSection.project-goals-timeline", "Project Goals & Timeline")}
         </label>
         <textarea
           id={`${id}-message`}
           rows={4}
           value={message}
           onChange={(e) => setMessage(e.target.value)}
-          placeholder="Tell us about what you are looking to build, any inspirations, or target launch date..."
+          placeholder={tx("ContactSection.tell-us-about-what-you-are", "Tell us about what you are looking to build, any inspirations, or target launch date...")}
           className={`${INPUT_CLASS} resize-none`}
         />
       </div>
@@ -347,22 +347,22 @@ export const ContactForm: React.FC<ContactFormProps> = ({ initialService = "", i
         {isSubmitting ? (
           <>
             <Loader2 className="w-4 h-4 animate-spin inline-block" />
-            <span>Sending Project Brief...</span>
+            <span>{tx("ContactSection.sending-project-brief", "Sending Project Brief...")}</span>
           </>
         ) : (
           <>
             <Send className="w-4 h-4 inline-block" />
-            <span>Send Project Brief</span>
+            <span>{tx("ContactSection.send-project-brief", "Send Project Brief")}</span>
           </>
         )}
       </GsapMagneticButton>
 
       <p className="text-[11px] text-slate-500 dark:text-slate-400">
-        By sending this form you agree to our{" "}
+        {tx("ContactSection.by-sending-this-form-you-agree", "By sending this form you agree to our")}{" "}
         <Link href="/privacy-policy" className="underline underline-offset-2 hover:text-[#FF8500]">
-          Privacy Policy
+          {tx("ContactSection.privacy-policy", "Privacy Policy")}
         </Link>
-        . We only use your details to reply to your enquiry.
+        {tx("ContactSection.we-only-use-your-details-to", ". We only use your details to reply to your enquiry.")}
       </p>
     </form>
   );
@@ -392,14 +392,14 @@ export const ContactSection: React.FC<ContactFormProps> = ({ initialService = ""
         <div className="lg:col-span-5 flex flex-col justify-between">
           <div>
             <h2 className="font-agency text-2xl sm:text-3xl md:text-4xl lg:text-[42px] font-extrabold text-[#0F172A] dark:text-white tracking-tight leading-tight">
-              Let&apos;s Grow Your <br />
+              {tx("ContactSection.let-s-grow-your", "Let's Grow Your")} <br />
               <span className="bg-gradient-to-r from-[#FF8500] via-[#FFA229] to-amber-300 bg-clip-text text-transparent">
-                Brand Together.
+                {tx("ContactSection.brand-together", "Brand Together.")}
               </span>
             </h2>
 
             <p className="mt-4 text-sm sm:text-base text-slate-600 dark:text-blue-100/80 leading-relaxed">
-              Schedule a 30-minute consultation call to discuss your ideas. We will listen to your needs and help you find the best design &amp; digital strategy for your business growth.
+              {tx("ContactSection.schedule-a-30-minute-consultation-call", "Schedule a 30-minute consultation call to discuss your ideas. We will listen to your needs and help you find the best design & digital strategy for your business growth.")}
             </p>
 
             <div className="mt-8 space-y-4">
@@ -408,7 +408,7 @@ export const ContactSection: React.FC<ContactFormProps> = ({ initialService = ""
                   <Mail className="w-4 h-4" />
                 </div>
                 <div>
-                  <div className="text-xs text-slate-500 dark:text-slate-400">Direct Email</div>
+                  <div className="text-xs text-slate-500 dark:text-slate-400">{tx("ContactSection.direct-email", "Direct Email")}</div>
                   <a href={`mailto:${company.email}`} className="font-semibold text-slate-900 dark:text-white hover:text-[#FF8500] transition-colors">
                     {company.email}
                   </a>
@@ -420,8 +420,8 @@ export const ContactSection: React.FC<ContactFormProps> = ({ initialService = ""
                   <Clock className="w-4 h-4" />
                 </div>
                 <div>
-                  <div className="text-xs text-slate-500 dark:text-slate-400">Quick Response</div>
-                  <div className="font-semibold text-slate-900 dark:text-white">Under 2 hours response time</div>
+                  <div className="text-xs text-slate-500 dark:text-slate-400">{tx("ContactSection.quick-response", "Quick Response")}</div>
+                  <div className="font-semibold text-slate-900 dark:text-white">{tx("ContactSection.under-2-hours-response-time", "Under 2 hours response time")}</div>
                 </div>
               </div>
 
@@ -430,8 +430,8 @@ export const ContactSection: React.FC<ContactFormProps> = ({ initialService = ""
                   <ShieldCheck className="w-4 h-4" />
                 </div>
                 <div>
-                  <div className="text-xs text-slate-500 dark:text-slate-400">100% Quality Delivery</div>
-                  <div className="font-semibold text-slate-900 dark:text-white">All master vector source files included</div>
+                  <div className="text-xs text-slate-500 dark:text-slate-400">{tx("ContactSection.100-quality-delivery", "100% Quality Delivery")}</div>
+                  <div className="font-semibold text-slate-900 dark:text-white">{tx("ContactSection.all-master-vector-source-files-included", "All master vector source files included")}</div>
                 </div>
               </div>
             </div>
@@ -439,7 +439,7 @@ export const ContactSection: React.FC<ContactFormProps> = ({ initialService = ""
 
           <div className="mt-10 pt-6 border-t border-slate-200 dark:border-[#2651B9]/25 text-xs text-slate-500 dark:text-slate-400 flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-            <span>With 8+ years experience &amp; 500+ happy clients worldwide</span>
+            <span>{tx("ContactSection.with-8-years-experience-500-happy", "With 8+ years experience & 500+ happy clients worldwide")}</span>
           </div>
         </div>
 

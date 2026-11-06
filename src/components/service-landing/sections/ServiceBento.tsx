@@ -1,9 +1,10 @@
 "use client";
 
 import React from "react";
-import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { ArrowRight, ArrowUpRight } from "@/content/lucide";
 import { Eyebrow, SectionTitle } from "@/components/page-kit/shared";
 import type { ServiceConfig } from "../types";
+import { tx } from "@/content/text";
 
 // Fixed 4-column bento: large (2x2), wide, small, small, wide, wide
 const LAYOUT = [
@@ -35,7 +36,7 @@ export const ServiceBento: React.FC<ServiceBentoProps> = ({ bento, onSelect, onD
           onClick={onDiscuss}
           className="group mt-4 inline-flex items-center gap-2 text-sm font-bold text-[#FFA133] hover:text-white transition-colors cursor-pointer"
         >
-          Discuss your project
+          {tx("service-landing/sections/ServiceBento.discuss-your-project", "Discuss your project")}
           <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
         </button>
       </div>

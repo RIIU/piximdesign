@@ -2,9 +2,10 @@
 
 import React from "react";
 import Link from "next/link";
-import { ArrowRight, Star } from "lucide-react";
+import { ArrowRight, Star } from "@/content/lucide";
 import { GsapMagneticButton } from "@/components/animations/GsapMagneticButton";
 import type { Crumb } from "./types";
+import { tx } from "@/content/text";
 
 interface PageHeroProps {
   crumbs: Crumb[];
@@ -100,14 +101,14 @@ export const PageHero: React.FC<PageHeroProps> = ({
                 ))}
               </div>
               <span className="text-sm text-slate-300">
-                <strong className="text-white">4.9</strong> client rating
+                <strong className="text-white">4.9</strong> {tx("page-kit/PageHero.client-rating", "client rating")}
               </span>
             </div>
             <div className="text-sm text-slate-300">
-              <strong className="text-white">500+</strong> brands launched
+              <strong className="text-white">500+</strong> {tx("page-kit/PageHero.brands-launched", "brands launched")}
             </div>
             <div className="text-sm text-slate-300">
-              <strong className="text-white">8+</strong> years experience
+              <strong className="text-white">8+</strong> {tx("page-kit/PageHero.years-experience", "years experience")}
             </div>
           </div>
         )}
