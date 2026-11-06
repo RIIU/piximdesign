@@ -22,6 +22,26 @@ export const VideoShowcaseSection: React.FC<VideoShowcaseSectionProps> = () => {
   const [progress, setProgress] = useState(0);
   const [showControls, setShowControls] = useState(false);
   const [shouldLoadVideo, setShouldLoadVideo] = useState(false);
+  // Performance: the 2MB reel starts downloading only after the page has finished
+  // loading (poster image shows until then), so it never competes with the
+  // critical HTML/CSS/JS on first load.
+  const [pageReady, setPageReady] = useState(false);
+
+  React.useEffect(() => {
+    const w = window as Window & {
+      requestIdleCallback?: (cb: () => void, opts?: { timeout: number }) => number;
+    };
+    const markReady = () => {
+      if (w.requestIdleCallback) w.requestIdleCallback(() => setPageReady(true), { timeout: 1500 });
+      else window.setTimeout(() => setPageReady(true), 300);
+    };
+    if (document.readyState === "complete") {
+      markReady();
+      return;
+    }
+    window.addEventListener("load", markReady, { once: true });
+    return () => window.removeEventListener("load", markReady);
+  }, []);
 
   // Lazy load video and pause when offscreen
   React.useEffect(() => {
@@ -204,7 +224,7 @@ export const VideoShowcaseSection: React.FC<VideoShowcaseSectionProps> = () => {
             <div className="relative aspect-video w-full overflow-hidden">
               <video
                 ref={videoRef}
-                src={shouldLoadVideo ? "/video/Grow-Your-Business-with-Creative-Design-_-Pixim-Design-Agency.mp4" : undefined}
+                src={shouldLoadVideo && pageReady ? "/video/Grow-Your-Business-with-Creative-Design-_-Pixim-Design-Agency.mp4" : undefined}
                 poster="/video/posters/Grow-Your-Business-with-Creative-Design-_-Pixim-Design-Agency.webp"
                 preload="none"
                 autoPlay
