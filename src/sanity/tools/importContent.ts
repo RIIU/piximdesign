@@ -22,6 +22,8 @@ import { ABOUT_PAGE_DEFAULTS } from "@/components/pages/AboutView";
 import { CONTACT_PAGE_DEFAULTS } from "@/content/contactDefaults";
 import React from "react";
 import { MEDIA_MANIFEST } from "@/content/mediaManifest";
+import { TEXT_AREAS, TEXT_MANIFEST } from "@/content/textManifest";
+import { ICON_MANIFEST } from "@/content/iconManifest";
 import * as termsLegal from "@/content/legal/terms";
 import * as privacyLegal from "@/content/legal/privacy";
 import * as refundLegal from "@/content/legal/refund";
@@ -353,8 +355,64 @@ export function buildMediaDoc() {
   return {
     _id: "mediaLibrary",
     _type: "mediaLibrary",
-    items: MEDIA_MANIFEST.map((m) => ({ _key: key(), _type: "mediaItem", name: m.name, area: m.area, src: m.src, type: m.type })),
+    items: MEDIA_MANIFEST.map(mediaItem),
   };
+}
+
+/** Stable array key from a text/icon key, so later imports can tell which items already exist. */
+function stableKey(prefix: string, value: string) {
+  let h = 0x811c9dc5;
+  for (let i = 0; i < value.length; i++) {
+    h ^= value.charCodeAt(i);
+    h = Math.imul(h, 0x01000193);
+  }
+  return `${prefix}${(h >>> 0).toString(36)}${value.length.toString(36)}`;
+}
+
+export const textItem = (t: (typeof TEXT_MANIFEST)[number]) => ({
+  _key: stableKey("t", t.key),
+  _type: "textItem",
+  key: t.key,
+  section: t.section,
+  original: t.text,
+  text: t.text,
+});
+
+export function buildTextDocs() {
+  return TEXT_AREAS.map((a) => ({
+    _id: `text-${a.id}`,
+    _type: "textGroup",
+    title: a.title,
+    items: TEXT_MANIFEST.filter((t) => t.area === a.id).map(textItem),
+  }));
+}
+
+export const iconItem = (i: (typeof ICON_MANIFEST)[number]) => ({
+  _key: stableKey("i", i.key),
+  _type: "iconItem",
+  key: i.key,
+  name: i.name,
+  area: i.area,
+  // colourful service icons keep their own colours, line icons follow the site colour
+  tint: i.kind !== "service",
+});
+
+export function buildIconDoc() {
+  return { _id: "iconLibrary", _type: "iconLibrary", items: ICON_MANIFEST.map(iconItem) };
+}
+
+const mediaItem = (m: (typeof MEDIA_MANIFEST)[number]) => ({ _key: key(), _type: "mediaItem", name: m.name, area: m.area, src: m.src, type: m.type });
+
+/**
+ * Lists that grow when new texts/icons/images are added to the code.
+ * For each: the document, the field that identifies an item, and every item the code has.
+ */
+export function buildLibraryItems(): { _id: string; idField: "key" | "src"; items: { [k: string]: unknown }[] }[] {
+  return [
+    ...buildTextDocs().map((d) => ({ _id: d._id, idField: "key" as const, items: d.items })),
+    { _id: "iconLibrary", idField: "key", items: ICON_MANIFEST.map(iconItem) },
+    { _id: "mediaLibrary", idField: "src", items: MEDIA_MANIFEST.map(mediaItem) },
+  ];
 }
 
 /** Every document the import can create, in order. */
@@ -367,5 +425,7 @@ export function buildAllDocs(): { _id: string; _type: string; [key: string]: unk
     ...Object.keys(PAGE_DEFAULTS).map(buildPageDoc),
     ...(Object.keys(LEGAL) as (keyof typeof LEGAL)[]).map(buildLegalDoc),
     buildMediaDoc(),
+    buildIconDoc(),
+    ...buildTextDocs(),
   ];
 }

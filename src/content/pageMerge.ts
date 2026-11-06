@@ -1,7 +1,7 @@
 // Generic editable content for the inner pages (Services, Pricing, Projects, About, Contact).
 // Each page keeps its current text as DEFAULTS in code; Sanity → "Pages → <page>" overrides it.
 
-import type { LucideIcon } from "lucide-react";
+import type { LucideIcon } from "@/content/lucide";
 
 export interface PageSection {
   eyebrow?: string;

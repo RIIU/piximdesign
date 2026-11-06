@@ -2,9 +2,10 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight } from "@/content/lucide";
 import { Eyebrow, SectionTitle } from "./shared";
 import type { ShowcasePanel } from "./types";
+import { tx } from "@/content/text";
 
 interface StickyShowcaseProps {
   eyebrow: string;
@@ -25,7 +26,7 @@ export const StickyShowcase: React.FC<StickyShowcaseProps> = ({
   panels,
   ctaLabel,
   onStart,
-  secondary = { label: "See our projects", href: "/projects" },
+  secondary = { label: tx("page-kit/StickyShowcase.see-our-projects", "See our projects"), href: "/projects" },
   id = "showcase",
 }) => {
   const showcase = { eyebrow, title, description, panels, ctaLabel };

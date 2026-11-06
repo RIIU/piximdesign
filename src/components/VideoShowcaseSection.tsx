@@ -4,10 +4,11 @@ import React, { useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
-import { Play, Pause, Volume2, VolumeX, Maximize2 } from "lucide-react";
+import { Play, Pause, Volume2, VolumeX, Maximize2 } from "@/content/lucide";
 import { LogoCarousel } from "./LogoCarousel";
 import { useHome } from "@/content/ContentProvider";
 import { media } from "@/content/media";
+import { tx } from "@/content/text";
 
 interface VideoShowcaseSectionProps {
   onOpenContact?: () => void;
@@ -296,12 +297,12 @@ export const VideoShowcaseSection: React.FC<VideoShowcaseSectionProps> = () => {
                       {isMuted ? (
                         <>
                           <VolumeX className="w-4 h-4 text-slate-300" />
-                          <span className="hidden sm:inline">Unmute</span>
+                          <span className="hidden sm:inline">{tx("VideoShowcaseSection.unmute", "Unmute")}</span>
                         </>
                       ) : (
                         <>
                           <Volume2 className="w-4 h-4 text-[#FFA133]" />
-                          <span className="hidden sm:inline">Mute</span>
+                          <span className="hidden sm:inline">{tx("VideoShowcaseSection.mute", "Mute")}</span>
                         </>
                       )}
                     </button>

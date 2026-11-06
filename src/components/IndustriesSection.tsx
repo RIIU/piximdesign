@@ -20,10 +20,11 @@ import {
   Pause,
   Play,
   type LucideIcon,
-} from "lucide-react";
+} from "@/content/lucide";
 import { useHome, useServices } from "@/content/ContentProvider";
 import { RichTitle } from "@/content/RichTitle";
 import { GsapMagneticButton } from "@/components/animations/GsapMagneticButton";
+import { tx } from "@/content/text";
 
 const INDUSTRY_ICONS: Record<string, LucideIcon> = {
   ecommerce: ShoppingBag,
@@ -392,7 +393,7 @@ export const IndustriesSection: React.FC<IndustriesSectionProps> = ({ onOpenCont
             <div className="flex items-center justify-between gap-3">
               <span className="industry-panel-item inline-flex items-center gap-2 text-xs px-3 py-1 rounded-full bg-[#081330]/80 text-[#FFA133] border border-[#FF8500]/30 font-mono">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#FF8500]" />
-                {active.name} Playbook
+                {active.name} {tx("IndustriesSection.playbook", "Playbook")}
               </span>
               <span className="lg:hidden text-xs font-mono text-slate-400 bg-white/[0.05] px-2.5 py-1 rounded-full border border-white/10">
                 {currentIndex + 1} / {INDUSTRIES.length}
@@ -422,7 +423,7 @@ export const IndustriesSection: React.FC<IndustriesSectionProps> = ({ onOpenCont
             {/* Recommended service stack */}
             <div className="industry-panel-item mt-8 pt-6 border-t border-[#2651B9]/25">
               <p className="text-xs uppercase tracking-[0.18em] text-slate-500 font-semibold mb-3">
-                Recommended service stack
+                {tx("IndustriesSection.recommended-service-stack", "Recommended service stack")}
               </p>
               <div className="flex flex-wrap gap-2.5">
                 {stack.map((service) => (
@@ -456,7 +457,7 @@ export const IndustriesSection: React.FC<IndustriesSectionProps> = ({ onOpenCont
                 strength={0.25}
                 className="px-6 sm:px-7 py-3.5 text-xs sm:text-sm font-bold uppercase tracking-wider !bg-gradient-to-r !from-[#FF8500] !to-[#FFA133] hover:!from-[#e67700] hover:!to-[#FF8500] !text-white shadow-lg shadow-orange-500/25 w-full sm:w-auto"
               >
-                <span>Get My {active.shortName} Plan</span>
+                <span>{tx("IndustriesSection.get-my", "Get My")} {active.shortName} {tx("IndustriesSection.plan", "Plan")}</span>
                 <ArrowRight className="w-4 h-4" />
               </GsapMagneticButton>
             </div>
@@ -505,7 +506,7 @@ export const IndustriesSection: React.FC<IndustriesSectionProps> = ({ onOpenCont
             {/* Mobile swipe helper hint */}
             <div className="lg:hidden text-center mt-3">
               <span className="text-[11px] font-mono text-slate-500">
-                ← Swipe left / right to change →
+                {tx("IndustriesSection.swipe-left-right-to-change", "← Swipe left / right to change →")}
               </span>
             </div>
           </div>

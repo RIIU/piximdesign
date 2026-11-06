@@ -8,11 +8,12 @@ import {
   ArrowUpRight,
   X,
   Layers,
-} from "lucide-react";
+} from "@/content/lucide";
 import { CASE_STUDIES, type CaseStudy } from "@/data/caseStudies";
 import { useHome } from "@/content/ContentProvider";
 import { RichTitle } from "@/content/RichTitle";
 import { media } from "@/content/media";
+import { tx } from "@/content/text";
 
 interface BrandStoriesSectionProps {
   onOpenContact?: () => void;
@@ -42,7 +43,7 @@ export const BrandStoriesSection: React.FC<BrandStoriesSectionProps> = ({ onOpen
       <div className="common-line-shape-animation absolute bottom-0 left-0 z-10 pointer-events-none opacity-25">
         <Image
           src={media("/images/case-studies/workshape.svg")}
-          alt="decorative shape"
+          alt={tx("BrandStoriesSection.decorative-shape", "decorative shape")}
           width={400}
           height={400}
           className="w-48 sm:w-64 md:w-80 lg:w-96 h-auto"
@@ -78,7 +79,7 @@ export const BrandStoriesSection: React.FC<BrandStoriesSectionProps> = ({ onOpen
                   prefetch={true}
                   className="group relative inline-flex items-center gap-3.5 px-6 py-3.5 sm:py-4 rounded-xl bg-gradient-to-r from-[#FF8500] to-[#FFA133] text-white font-bold text-sm sm:text-base uppercase tracking-wider shadow-lg shadow-[#FF8500]/25 transition-all duration-300 hover:shadow-[#FF8500]/40 hover:scale-[1.02] active:scale-95"
                 >
-                  <span>See More Projects</span>
+                  <span>{tx("BrandStoriesSection.see-more-projects", "See More Projects")}</span>
                   <div className="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center transition-transform duration-300 group-hover:translate-x-1">
                     <ArrowRight className="w-3.5 h-3.5 text-white" />
                   </div>
@@ -186,7 +187,7 @@ export const BrandStoriesSection: React.FC<BrandStoriesSectionProps> = ({ onOpen
                           <ArrowUpRight className="w-4 h-4" />
                         </div>
                         <p className="text-white text-xs sm:text-sm font-semibold whitespace-nowrap">
-                          View details
+                          {tx("BrandStoriesSection.view-details", "View details")}
                         </p>
                       </div>
                     </div>
@@ -263,7 +264,7 @@ export const BrandStoriesSection: React.FC<BrandStoriesSectionProps> = ({ onOpen
             {/* Category & Number */}
             <div className="flex items-center gap-2 mb-3">
               <span className="text-xs px-3 py-1 rounded-full bg-[#FF8500]/15 text-[#FFA133] border border-[#FF8500]/30 font-semibold uppercase tracking-wider font-mono">
-                Case Study {activeCaseStudy.number}
+                {tx("BrandStoriesSection.case-study", "Case Study")} {activeCaseStudy.number}
               </span>
               <span className="text-xs px-3 py-1 rounded-full bg-white/10 text-slate-300 border border-white/15 font-medium">
                 {activeCaseStudy.category}
@@ -310,7 +311,7 @@ export const BrandStoriesSection: React.FC<BrandStoriesSectionProps> = ({ onOpen
                   }}
                   className="px-6 py-3 rounded-xl bg-gradient-to-r from-[#FF8500] to-[#FFA133] text-white font-bold text-sm shadow-md hover:scale-[1.02] transition-transform cursor-pointer"
                 >
-                  Start Similar Project
+                  {tx("BrandStoriesSection.start-similar-project", "Start Similar Project")}
                 </button>
               )}
               <Link
@@ -320,7 +321,7 @@ export const BrandStoriesSection: React.FC<BrandStoriesSectionProps> = ({ onOpen
                 className="px-6 py-3 rounded-xl bg-white/10 hover:bg-white/15 text-white font-semibold text-sm transition-colors flex items-center gap-1.5"
               >
                 <Layers className="w-4 h-4 text-[#FFA133]" />
-                <span>View Full Projects Portfolio →</span>
+                <span>{tx("BrandStoriesSection.view-full-projects-portfolio", "View Full Projects Portfolio →")}</span>
               </Link>
             </div>
           </div>

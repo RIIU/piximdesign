@@ -1,7 +1,8 @@
 "use client";
 
 import React from "react";
-import { Lock, ShieldCheck } from "lucide-react";
+import { Lock, ShieldCheck } from "@/content/lucide";
+import { tx } from "@/content/text";
 
 interface PaymentItem {
   id: string;
@@ -37,7 +38,7 @@ export const PaymentMethodsSection: React.FC<{ embedded?: boolean }> = ({ embedd
       name: "American Express",
       badge: (
         <div className="flex items-center justify-center px-1.5 py-0.5 rounded bg-[#006FCF] text-white">
-          <span className="font-black text-[9px] sm:text-[10px] tracking-tight">AMEX</span>
+          <span className="font-black text-[9px] sm:text-[10px] tracking-tight">{tx("PaymentMethodsSection.amex", "AMEX")}</span>
         </div>
       ),
     },
@@ -49,7 +50,7 @@ export const PaymentMethodsSection: React.FC<{ embedded?: boolean }> = ({ embedd
           <rect width="36" height="24" rx="2" fill="#E21836"/>
           <path d="M14 0H24L20 24H10L14 0Z" fill="#00457C"/>
           <path d="M22 0H34C35.1 0 36 0.9 36 2V22C36 23.1 35.1 24 34 24H20L22 0Z" fill="#007B80"/>
-          <text x="18" y="15" fill="white" fontSize="6.5" fontWeight="bold" fontFamily="sans-serif" textAnchor="middle">UnionPay</text>
+          <text x="18" y="15" fill="white" fontSize="6.5" fontWeight="bold" fontFamily="sans-serif" textAnchor="middle">{tx("PaymentMethodsSection.unionpay", "UnionPay")}</text>
         </svg>
       ),
     },
@@ -61,7 +62,7 @@ export const PaymentMethodsSection: React.FC<{ embedded?: boolean }> = ({ embedd
           <div className="w-3.5 h-3.5 rounded-full border-[1.5px] border-[#004A97] flex items-center justify-center">
             <div className="w-1.5 h-1.5 rounded-full bg-[#004A97]" />
           </div>
-          <span className="font-bold text-[8px] sm:text-[9px] tracking-tight text-[#004A97]">Diners</span>
+          <span className="font-bold text-[8px] sm:text-[9px] tracking-tight text-[#004A97]">{tx("PaymentMethodsSection.diners", "Diners")}</span>
         </div>
       ),
     },
@@ -72,8 +73,8 @@ export const PaymentMethodsSection: React.FC<{ embedded?: boolean }> = ({ embedd
         <div className="flex items-center gap-1">
           <div className="w-3.5 h-3.5 rounded-full bg-gradient-to-tr from-[#006633] to-[#E41E26] flex items-center justify-center text-[7px] font-bold text-white">N</div>
           <div className="flex flex-col leading-none text-left">
-            <span className="font-extrabold text-[7px] text-[#006633]">DBBL</span>
-            <span className="font-bold text-[6px] text-[#E41E26]">NEXUS</span>
+            <span className="font-extrabold text-[7px] text-[#006633]">{tx("PaymentMethodsSection.dbbl", "DBBL")}</span>
+            <span className="font-bold text-[6px] text-[#E41E26]">{tx("PaymentMethodsSection.nexus", "NEXUS")}</span>
           </div>
         </div>
       ),
@@ -84,7 +85,7 @@ export const PaymentMethodsSection: React.FC<{ embedded?: boolean }> = ({ embedd
       badge: (
         <div className="flex items-center gap-0.5">
           <span className="w-3.5 h-3.5 rounded bg-[#D62828] text-white font-black text-[8px] flex items-center justify-center">Q</span>
-          <span className="font-extrabold text-[8px] text-[#D62828]">CASH</span>
+          <span className="font-extrabold text-[8px] text-[#D62828]">{tx("PaymentMethodsSection.cash", "CASH")}</span>
         </div>
       ),
     },
@@ -94,7 +95,7 @@ export const PaymentMethodsSection: React.FC<{ embedded?: boolean }> = ({ embedd
       badge: (
         <div className="flex items-center gap-0.5">
           <span className="w-3 h-3 rounded-full bg-[#006A4E] text-white font-bold text-[7px] flex items-center justify-center">৳</span>
-          <span className="font-bold text-[8px] text-[#006A4E]">TakaPay</span>
+          <span className="font-bold text-[8px] text-[#006A4E]">{tx("PaymentMethodsSection.takapay", "TakaPay")}</span>
         </div>
       ),
     },
@@ -109,7 +110,7 @@ export const PaymentMethodsSection: React.FC<{ embedded?: boolean }> = ({ embedd
             <path d="M45 55L68 90L85 68L45 55Z" fill="#E2136E"/>
             <path d="M45 55L25 72L42 86L45 55Z" fill="#990B47"/>
           </svg>
-          <span className="font-black text-[10px] sm:text-[11px] tracking-tight text-[#E2136E]">bKash</span>
+          <span className="font-black text-[10px] sm:text-[11px] tracking-tight text-[#E2136E]">{tx("PaymentMethodsSection.bkash", "bKash")}</span>
         </div>
       ),
     },
@@ -123,7 +124,7 @@ export const PaymentMethodsSection: React.FC<{ embedded?: boolean }> = ({ embedd
             <path d="M50 28C50 28 39 42 39 55C39 64 44 71 50 75C56 71 61 64 61 55C61 42 50 28 50 28Z" fill="#E41E26"/>
             <circle cx="50" cy="58" r="5" fill="#FFE500"/>
           </svg>
-          <span className="font-black text-[10px] sm:text-[11px] tracking-tight text-[#E41E26]">নগদ</span>
+          <span className="font-black text-[10px] sm:text-[11px] tracking-tight text-[#E41E26]">{tx("PaymentMethodsSection.নগদ", "নগদ")}</span>
         </div>
       ),
     },
@@ -136,7 +137,7 @@ export const PaymentMethodsSection: React.FC<{ embedded?: boolean }> = ({ embedd
             <path d="M50 12L74 42H58V72L42 60V42H26L50 12Z" fill="#8C3494"/>
             <path d="M42 72L50 88L58 72H42Z" fill="#E91E63"/>
           </svg>
-          <span className="font-bold text-[9px] sm:text-[10px] tracking-tight text-[#8C3494]">রকেট</span>
+          <span className="font-bold text-[9px] sm:text-[10px] tracking-tight text-[#8C3494]">{tx("PaymentMethodsSection.রক-ট", "রকেট")}</span>
         </div>
       ),
     },
@@ -154,7 +155,7 @@ export const PaymentMethodsSection: React.FC<{ embedded?: boolean }> = ({ embedd
             <circle cx="65" cy="40" r="14" fill="#FFC72C"/>
             <path d="M25 58C25 58 35 78 50 78C65 78 75 58 75 58" stroke="#004B87" strokeWidth="8" strokeLinecap="round"/>
           </svg>
-          <span className="font-black text-[9px] sm:text-[10px] tracking-tight text-[#004B87]">upay</span>
+          <span className="font-black text-[9px] sm:text-[10px] tracking-tight text-[#004B87]">{tx("PaymentMethodsSection.upay", "upay")}</span>
         </div>
       ),
     },
@@ -164,7 +165,7 @@ export const PaymentMethodsSection: React.FC<{ embedded?: boolean }> = ({ embedd
       badge: (
         <div className="flex items-center gap-0.5">
           <span className="w-3.5 h-3.5 rounded-full bg-[#E51E25] flex items-center justify-center text-white text-[9px] font-black">t</span>
-          <span className="font-black text-[10px] text-[#E51E25]">tap</span>
+          <span className="font-black text-[10px] text-[#E51E25]">{tx("PaymentMethodsSection.tap", "tap")}</span>
         </div>
       ),
     },
@@ -176,7 +177,7 @@ export const PaymentMethodsSection: React.FC<{ embedded?: boolean }> = ({ embedd
           <div className="w-3.5 h-3.5 rounded bg-[#008037] flex items-center justify-center">
             <div className="w-1.5 h-1.5 rounded-full border border-white" />
           </div>
-          <span className="font-bold text-[9px] sm:text-[10px] text-[#008037]">Cellfin</span>
+          <span className="font-bold text-[9px] sm:text-[10px] text-[#008037]">{tx("PaymentMethodsSection.cellfin", "Cellfin")}</span>
         </div>
       ),
     },
@@ -185,8 +186,8 @@ export const PaymentMethodsSection: React.FC<{ embedded?: boolean }> = ({ embedd
       name: "OK Wallet",
       badge: (
         <div className="flex items-center gap-0.5">
-          <span className="text-[10px] font-black text-[#FFB300]">ok</span>
-          <span className="font-bold text-[9px] text-slate-700">wallet</span>
+          <span className="text-[10px] font-black text-[#FFB300]">{tx("PaymentMethodsSection.ok", "ok")}</span>
+          <span className="font-bold text-[9px] text-slate-700">{tx("PaymentMethodsSection.wallet", "wallet")}</span>
         </div>
       ),
     },
@@ -196,7 +197,7 @@ export const PaymentMethodsSection: React.FC<{ embedded?: boolean }> = ({ embedd
       badge: (
         <div className="flex items-center gap-0.5">
           <div className="w-3 h-3 rounded bg-[#ED1C24] flex items-center justify-center text-white font-black text-[7px]">C</div>
-          <span className="font-bold text-[8px] text-[#ED1C24]">CityTouch</span>
+          <span className="font-bold text-[8px] text-[#ED1C24]">{tx("PaymentMethodsSection.citytouch", "CityTouch")}</span>
         </div>
       ),
     },
@@ -205,8 +206,8 @@ export const PaymentMethodsSection: React.FC<{ embedded?: boolean }> = ({ embedd
       name: "EBL SKY",
       badge: (
         <div className="flex items-center gap-0.5">
-          <span className="font-black text-[8px] px-1 py-0.2 bg-[#F58220] text-white rounded">EBL</span>
-          <span className="font-bold text-[8px] text-[#0054A6]">SKY</span>
+          <span className="font-black text-[8px] px-1 py-0.2 bg-[#F58220] text-white rounded">{tx("PaymentMethodsSection.ebl", "EBL")}</span>
+          <span className="font-bold text-[8px] text-[#0054A6]">{tx("PaymentMethodsSection.sky", "SKY")}</span>
         </div>
       ),
     },
@@ -218,7 +219,7 @@ export const PaymentMethodsSection: React.FC<{ embedded?: boolean }> = ({ embedd
           <div className="w-3 h-3 border border-[#005596] flex items-center justify-center">
             <div className="w-1 h-1 bg-[#005596]" />
           </div>
-          <span className="font-bold text-[8px] text-[#005596]">Bank Asia</span>
+          <span className="font-bold text-[8px] text-[#005596]">{tx("PaymentMethodsSection.bank-asia", "Bank Asia")}</span>
         </div>
       ),
     },
@@ -228,7 +229,7 @@ export const PaymentMethodsSection: React.FC<{ embedded?: boolean }> = ({ embedd
       badge: (
         <div className="flex items-center gap-0.5">
           <div className="w-3 h-3 rounded-full bg-[#1062FE] text-white font-bold text-[7px] flex items-center justify-center">P</div>
-          <span className="font-bold text-[8px] text-[#1062FE]">Pathao</span>
+          <span className="font-bold text-[8px] text-[#1062FE]">{tx("PaymentMethodsSection.pathao", "Pathao")}</span>
         </div>
       ),
     },
@@ -240,7 +241,7 @@ export const PaymentMethodsSection: React.FC<{ embedded?: boolean }> = ({ embedd
           <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 170 170">
             <path d="M150.37 130.25c-2.45 5.66-5.35 10.87-8.71 15.66-4.58 6.53-8.33 11.05-11.22 13.56-4.48 4.12-9.28 6.23-14.42 6.35-3.69 0-8.14-1.05-13.32-3.18-5.19-2.12-9.97-3.17-14.34-3.17-4.58 0-9.49 1.05-14.75 3.17-5.26 2.13-9.5 3.24-12.74 3.35-4.35.13-9.16-1.9-14.42-6.08-3.7-3.04-7.58-7.7-11.64-13.98-5.77-8.91-10.36-19.16-13.77-30.74-3.41-11.58-5.12-22.61-5.12-33.1 0-14.42 3.65-26.68 10.96-36.78 7.31-10.1 16.59-15.28 27.84-15.54 4.58 0 9.87 1.25 15.87 3.75 6 2.5 10.02 3.81 12.06 3.93 1.93-.12 6.08-1.46 12.44-4.04 6.36-2.58 11.75-3.83 16.16-3.75 12.39.63 22.38 5.48 29.96 14.56-10.96 6.64-16.31 15.7-16.06 27.18.25 9.02 3.62 16.63 10.12 22.84 6.5 6.21 14.15 9.77 22.95 10.68-2.36 7.2-5.44 14.73-9.25 22.61zM119.22 31.84c0-7.31 2.65-14.28 7.96-20.92 5.3-6.64 11.96-10.63 19.96-11.98.24 1.24.36 2.43.36 3.56 0 7.31-2.73 14.36-8.2 21.14-5.46 6.78-12.18 10.6-20.14 11.47.06-1.07.06-2.16.06-3.27z"/>
           </svg>
-          <span className="font-bold text-[9px] sm:text-[10px]">Pay</span>
+          <span className="font-bold text-[9px] sm:text-[10px]">{tx("PaymentMethodsSection.pay", "Pay")}</span>
         </div>
       ),
     },
@@ -255,7 +256,7 @@ export const PaymentMethodsSection: React.FC<{ embedded?: boolean }> = ({ embedd
             <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z" fill="#FBBC05"/>
             <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" fill="#EA4335"/>
           </svg>
-          <span className="font-bold text-[9px] sm:text-[10px] text-slate-800">Pay</span>
+          <span className="font-bold text-[9px] sm:text-[10px] text-slate-800">{tx("PaymentMethodsSection.pay", "Pay")}</span>
         </div>
       ),
     },
@@ -267,7 +268,7 @@ export const PaymentMethodsSection: React.FC<{ embedded?: boolean }> = ({ embedd
           <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
             <path d="M3 21h18M3 10h18M5 10v11M19 10v11M9 10v11M14 10v11M12 3l9 7H3l9-7z"/>
           </svg>
-          <span className="font-bold text-[8px] whitespace-nowrap">Bank Wire</span>
+          <span className="font-bold text-[8px] whitespace-nowrap">{tx("PaymentMethodsSection.bank-wire", "Bank Wire")}</span>
         </div>
       ),
     },
@@ -285,10 +286,10 @@ export const PaymentMethodsSection: React.FC<{ embedded?: boolean }> = ({ embedd
               {/* Left Column: Pay With */}
               <div className="flex lg:flex-col items-center lg:items-center justify-center gap-1 flex-shrink-0 lg:pr-5 lg:border-r border-[#2651B9]/30">
                 <span className="text-sm font-bold text-[#FFA133] tracking-tight whitespace-nowrap">
-                  Pay With
+                  {tx("PaymentMethodsSection.pay-with", "Pay With")}
                 </span>
                 <span className="hidden lg:inline text-[10px] font-mono text-slate-400 whitespace-nowrap">
-                  Methods
+                  {tx("PaymentMethodsSection.methods", "Methods")}
                 </span>
               </div>
 
@@ -325,18 +326,18 @@ export const PaymentMethodsSection: React.FC<{ embedded?: boolean }> = ({ embedd
               <div className="flex lg:flex-col items-center justify-center gap-1.5 flex-shrink-0 lg:pl-5 lg:border-l border-[#2651B9]/30">
                 <div className="text-center">
                   <div className="text-[9px] uppercase font-mono font-semibold tracking-wider text-slate-400">
-                    Verified By
+                    {tx("PaymentMethodsSection.verified-by", "Verified By")}
                   </div>
                   <div className="mt-1 flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-[#013571] text-white shadow-xs hover:opacity-95 transition-opacity">
                     <Lock className="w-2.5 h-2.5 text-[#FF8500]" />
                     <span className="font-extrabold tracking-wider text-[10px] font-sans">
-                      SSLCOMMERZ
+                      {tx("PaymentMethodsSection.sslcommerz", "SSLCOMMERZ")}
                     </span>
                   </div>
                 </div>
                 <div className="hidden sm:flex items-center gap-1 text-[9px] text-emerald-400 font-medium">
                   <ShieldCheck className="w-3 h-3" />
-                  <span>256-bit Secure</span>
+                  <span>{tx("PaymentMethodsSection.256-bit-secure", "256-bit Secure")}</span>
                 </div>
               </div>
             </div>
@@ -359,10 +360,10 @@ export const PaymentMethodsSection: React.FC<{ embedded?: boolean }> = ({ embedd
             {/* Left Column: Pay With */}
             <div className="flex lg:flex-col items-center lg:items-center justify-center gap-1 flex-shrink-0 lg:pr-5 lg:border-r border-slate-200 dark:border-slate-800">
               <span className="text-sm font-bold text-[#1E3A8A] dark:text-[#93C5FD] tracking-tight whitespace-nowrap">
-                Pay With
+                {tx("PaymentMethodsSection.pay-with", "Pay With")}
               </span>
               <span className="hidden lg:inline text-[10px] font-mono text-slate-400 dark:text-slate-500 whitespace-nowrap">
-                Methods
+                {tx("PaymentMethodsSection.methods", "Methods")}
               </span>
             </div>
 
@@ -403,18 +404,18 @@ export const PaymentMethodsSection: React.FC<{ embedded?: boolean }> = ({ embedd
             <div className="flex lg:flex-col items-center justify-center gap-1.5 flex-shrink-0 lg:pl-5 lg:border-l border-slate-200 dark:border-slate-800">
               <div className="text-center">
                 <div className="text-[9px] uppercase font-mono font-semibold tracking-wider text-slate-400 dark:text-slate-500">
-                  Verified By
+                  {tx("PaymentMethodsSection.verified-by", "Verified By")}
                 </div>
                 <div className="mt-1 flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-[#013571] text-white shadow-xs hover:opacity-95 transition-opacity">
                   <Lock className="w-2.5 h-2.5 text-[#FF8500]" />
                   <span className="font-extrabold tracking-wider text-[10px] font-sans">
-                    SSLCOMMERZ
+                    {tx("PaymentMethodsSection.sslcommerz", "SSLCOMMERZ")}
                   </span>
                 </div>
               </div>
               <div className="hidden sm:flex items-center gap-1 text-[9px] text-emerald-600 dark:text-emerald-400 font-medium">
                 <ShieldCheck className="w-3 h-3" />
-                <span>256-bit Secure</span>
+                <span>{tx("PaymentMethodsSection.256-bit-secure", "256-bit Secure")}</span>
               </div>
             </div>
 

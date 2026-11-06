@@ -64,3 +64,21 @@ export const LEGAL_QUERY = defineQuery(`*[_id == $id][0]{title, intro, sections[
 export const MEDIA_QUERY = defineQuery(`*[_id == "mediaLibrary"][0].items[defined(image.asset) || defined(file.asset)]{
   src, "url": coalesce(image.asset->url, file.asset->url)
 }`);
+
+// Small texts ("Website text" pages): key → text.
+// Live site: only texts that differ from the original (keeps pages light).
+export const TEXT_CHANGED_QUERY = defineQuery(`*[_type == "textGroup"]{"items": items[defined(text) && text != original]{key, text}}`);
+// Visual Editing: every text, so each one can be clicked to edit.
+export const TEXT_ALL_QUERY = defineQuery(`*[_type == "textGroup"]{"items": items[defined(text)]{key, text}}`);
+
+// Replaced icons ("Icons"): key → uploaded file
+export const ICON_QUERY = defineQuery(`*[_id == "iconLibrary"][0].items[defined(image.asset)]{
+  key, "url": image.asset->url, "tint": coalesce(tint, true)
+}`);
+
+// Browser-tab / home-screen icon and share image (Site Settings → "Website icon & share image")
+export const BRAND_ICONS_QUERY = defineQuery(`*[_id == "siteSettings"][0]{
+  "faviconUrl": favicon.asset->url,
+  "appleIconUrl": appleIcon.asset->url,
+  "shareImageUrl": shareImage.asset->url
+}`);

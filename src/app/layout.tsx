@@ -6,8 +6,10 @@ import { draftMode } from "next/headers";
 import { VisualEditing } from "next-sanity/visual-editing";
 import { AppLayoutWrapper } from "@/components/AppLayoutWrapper";
 import { CatalogProvider, SettingsProvider } from "@/content/ContentProvider";
-import { getCatalog, getMediaMap, getSiteSettings } from "@/sanity/content";
+import { getBrandIcons, getCatalog, getIconMap, getMediaMap, getSiteSettings, getTextMap } from "@/sanity/content";
 import { MediaProvider } from "@/content/media";
+import { TextProvider } from "@/content/text";
+import { IconProvider } from "@/content/icons";
 import { SanityLive } from "@/sanity/live";
 import { isSanityConfigured } from "@/sanity/env";
 import { CURRENCY_BOOTSTRAP_SCRIPT } from "@/lib/currency-bootstrap";
@@ -53,7 +55,7 @@ const sherika = localFont({
   preload: false,
 });
 
-export const metadata: Metadata = {
+const BASE_METADATA: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: { default: SITE_TITLE, template: `%s | ${SITE_NAME}` },
   description: SITE_DESCRIPTION,
@@ -81,6 +83,18 @@ export const metadata: Metadata = {
   },
 };
 
+/** Browser-tab icon and phone home-screen icon can be replaced in Site Settings → "Website icon". */
+export async function generateMetadata(): Promise<Metadata> {
+  const brand = await getBrandIcons();
+  return {
+    ...BASE_METADATA,
+    icons: {
+      icon: brand.faviconUrl ? [{ url: brand.faviconUrl }] : [{ url: "/favicon.ico", sizes: "any" }, { url: "/icon.png", type: "image/png", sizes: "192x192" }],
+      apple: brand.appleIconUrl || brand.faviconUrl || "/apple-icon.png",
+    },
+  };
+}
+
 export const viewport: Viewport = {
   themeColor: "#081330",
   colorScheme: "dark",
@@ -91,7 +105,13 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const [settings, catalog, mediaMap] = await Promise.all([getSiteSettings(), getCatalog(), getMediaMap()]);
+  const [settings, catalog, mediaMap, textMap, iconMap] = await Promise.all([
+    getSiteSettings(),
+    getCatalog(),
+    getMediaMap(),
+    getTextMap(),
+    getIconMap(),
+  ]);
   const { isEnabled: isDraftMode } = await draftMode();
 
   return (
@@ -154,11 +174,15 @@ export default async function RootLayout({
         className="min-h-full flex flex-col bg-[#081330] text-[#F8FAFC] font-sans"
       >
         <MediaProvider value={mediaMap}>
-          <SettingsProvider value={settings}>
-            <CatalogProvider value={catalog}>
-              <AppLayoutWrapper>{children}</AppLayoutWrapper>
-            </CatalogProvider>
-          </SettingsProvider>
+          <TextProvider value={textMap}>
+            <IconProvider value={iconMap}>
+              <SettingsProvider value={settings}>
+                <CatalogProvider value={catalog}>
+                  <AppLayoutWrapper>{children}</AppLayoutWrapper>
+                </CatalogProvider>
+              </SettingsProvider>
+            </IconProvider>
+          </TextProvider>
         </MediaProvider>
         {/* Real-time content updates from Sanity + click-to-edit overlays in preview mode */}
         {isSanityConfigured && <SanityLive />}

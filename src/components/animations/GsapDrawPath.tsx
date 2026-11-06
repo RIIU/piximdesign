@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useState, useCallback } from "react";
 import gsap from "gsap";
-import { Play, RotateCcw, CheckCircle2, Sliders } from "lucide-react";
+import { Play, RotateCcw, CheckCircle2, Sliders } from "@/content/lucide";
 import { GsapMagneticButton } from "./GsapMagneticButton";
 
 export interface PathMilestone {

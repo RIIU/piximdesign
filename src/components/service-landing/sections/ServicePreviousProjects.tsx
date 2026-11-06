@@ -3,10 +3,11 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowUpRight, ArrowRight, X, Sparkles, ZoomIn, ChevronLeft, ChevronRight, TrendingUp } from "lucide-react";
+import { ArrowUpRight, ArrowRight, X, Sparkles, ZoomIn, ChevronLeft, ChevronRight, TrendingUp } from "@/content/lucide";
 import { Eyebrow, GradientText, SectionTitle } from "@/components/page-kit/shared";
 import { type ServiceProject, getServiceProjects } from "@/data/serviceProjects";
 import { media } from "@/content/media";
+import { tx } from "@/content/text";
 
 interface ServicePreviousProjectsProps {
   shortName: string;
@@ -71,10 +72,10 @@ export const ServicePreviousProjects: React.FC<ServicePreviousProjectsProps> = (
         <div>
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/[0.05] border border-white/10 text-xs font-semibold text-[#FFA133] mb-3">
             <Sparkles className="w-3.5 h-3.5 text-[#FF8500]" />
-            Previous Work
+            {tx("service-landing/sections/ServicePreviousProjects.previous-work", "Previous Work")}
           </div>
           <SectionTitle>
-            Previous <GradientText>{isLogoSection ? "Logo Designs" : `${shortName} Projects`}</GradientText>
+            {tx("service-landing/sections/ServicePreviousProjects.previous", "Previous")} <GradientText>{isLogoSection ? "Logo Designs" : `${shortName} Projects`}</GradientText>
           </SectionTitle>
           <p className="mt-3 text-slate-300 text-sm sm:text-base leading-relaxed max-w-xl">
             {isLogoSection
@@ -85,7 +86,7 @@ export const ServicePreviousProjects: React.FC<ServicePreviousProjectsProps> = (
 
         <div className="flex items-center gap-2 text-xs text-slate-400 font-mono shrink-0">
           <ZoomIn className="w-4 h-4 text-[#FF8500]" />
-          <span>Click any {isLogoSection ? "logo" : "project"} to zoom in</span>
+          <span>{tx("service-landing/sections/ServicePreviousProjects.click-any", "Click any")} {isLogoSection ? "logo" : "project"} {tx("service-landing/sections/ServicePreviousProjects.to-zoom-in", "to zoom in")}</span>
         </div>
       </div>
 
@@ -153,7 +154,7 @@ export const ServicePreviousProjects: React.FC<ServicePreviousProjectsProps> = (
                 <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20 pointer-events-none">
                   <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-[#030919]/80 border border-[#FF8500]/50 text-white shadow-xl backdrop-blur-md">
                     <ZoomIn className="w-4 h-4 text-[#FFA133]" />
-                    <span className="text-xs font-semibold tracking-wide uppercase">Click to Zoom</span>
+                    <span className="text-xs font-semibold tracking-wide uppercase">{tx("service-landing/sections/ServicePreviousProjects.click-to-zoom", "Click to Zoom")}</span>
                   </div>
                 </div>
 
@@ -244,7 +245,7 @@ export const ServicePreviousProjects: React.FC<ServicePreviousProjectsProps> = (
             <div className="mt-5 sm:mt-6 flex flex-col sm:flex-row items-center justify-between gap-4 w-full max-w-2xl px-2">
               <div className="text-center sm:text-left">
                 <span className="text-[10px] sm:text-xs font-mono uppercase tracking-widest text-[#FFA133] font-semibold">
-                  {currentZoomProject.categoryBadge} · {zoomedIndex + 1} of {allProjects.length}
+                  {currentZoomProject.categoryBadge} · {zoomedIndex + 1} {tx("service-landing/sections/ServicePreviousProjects.of", "of")} {allProjects.length}
                 </span>
                 <h3 className="font-agency text-xl sm:text-2xl font-extrabold text-white mt-0.5">
                   {currentZoomProject.title}
@@ -272,10 +273,10 @@ export const ServicePreviousProjects: React.FC<ServicePreviousProjectsProps> = (
       <div className="reveal-up mt-10 sm:mt-12 flex flex-col sm:flex-row items-center justify-between gap-4 p-6 rounded-2xl border border-[#2651B9]/30 bg-[#081433]/70">
         <div>
           <p className="font-agency text-lg font-bold text-white">
-            Looking for something specific or custom?
+            {tx("service-landing/sections/ServicePreviousProjects.looking-for-something-specific-or-custom", "Looking for something specific or custom?")}
           </p>
           <p className="text-xs sm:text-sm text-slate-400 mt-0.5">
-            Browse our full archive of 500+ projects or request a tailored design proposal.
+            {tx("service-landing/sections/ServicePreviousProjects.browse-our-full-archive-of-500", "Browse our full archive of 500+ projects or request a tailored design proposal.")}
           </p>
         </div>
 
@@ -284,7 +285,7 @@ export const ServicePreviousProjects: React.FC<ServicePreviousProjectsProps> = (
             href="/projects"
             className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-300 hover:text-white transition-colors px-4 py-2.5 rounded-xl border border-white/10 hover:border-white/20 bg-white/[0.04]"
           >
-            <span>All Case Studies</span>
+            <span>{tx("service-landing/sections/ServicePreviousProjects.all-case-studies", "All Case Studies")}</span>
             <ArrowRight className="w-3.5 h-3.5" />
           </Link>
 
@@ -293,7 +294,7 @@ export const ServicePreviousProjects: React.FC<ServicePreviousProjectsProps> = (
             onClick={() => onInquire(`Custom ${shortName} Inquiry`)}
             className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-white px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#FF8500] to-[#FFA133] shadow-md shadow-orange-500/25 hover:shadow-orange-500/40 transition-all cursor-pointer"
           >
-            <span>Start a Project</span>
+            <span>{tx("service-landing/sections/ServicePreviousProjects.start-a-project", "Start a Project")}</span>
             <ArrowUpRight className="w-3.5 h-3.5" />
           </button>
         </div>

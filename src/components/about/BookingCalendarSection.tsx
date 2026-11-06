@@ -12,7 +12,8 @@ import {
   CheckCircle2, 
   ArrowRight,
   MessageCircle
-} from "lucide-react";
+} from "@/content/lucide";
+import { tx } from "@/content/text";
 
 const MONTH_NAMES = [
   "January", "February", "March", "April", "May", "June",
@@ -31,11 +32,11 @@ const TIME_SLOTS = [
 ];
 
 const TIME_ZONES = [
-  { id: "Asia/Dhaka", label: "Asia/Dhaka (GMT+6)" },
-  { id: "America/New_York", label: "America/New_York (EST / GMT-5)" },
-  { id: "Europe/London", label: "Europe/London (GMT/BST)" },
-  { id: "Asia/Dubai", label: "Asia/Dubai (GST / GMT+4)" },
-  { id: "Asia/Singapore", label: "Asia/Singapore (SGT / GMT+8)" },
+  { id: "Asia/Dhaka", get label() { return tx("about/BookingCalendarSection.asia-dhaka-gmt-6", "Asia/Dhaka (GMT+6)"); } },
+  { id: "America/New_York", get label() { return tx("about/BookingCalendarSection.america-new-york-est-gmt-5", "America/New_York (EST / GMT-5)"); } },
+  { id: "Europe/London", get label() { return tx("about/BookingCalendarSection.europe-london-gmt-bst", "Europe/London (GMT/BST)"); } },
+  { id: "Asia/Dubai", get label() { return tx("about/BookingCalendarSection.asia-dubai-gst-gmt-4", "Asia/Dubai (GST / GMT+4)"); } },
+  { id: "Asia/Singapore", get label() { return tx("about/BookingCalendarSection.asia-singapore-sgt-gmt-8", "Asia/Singapore (SGT / GMT+8)"); } },
 ];
 
 export const BookingCalendarSection: React.FC = () => {
@@ -123,10 +124,10 @@ export const BookingCalendarSection: React.FC = () => {
       {/* Styled Header matching Image 3 */}
       <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-14">
         <h2 className="font-serif italic text-4xl sm:text-5xl lg:text-6xl text-white font-normal tracking-tight">
-          Let&apos;s Talk
+          {tx("about/BookingCalendarSection.let-s-talk", "Let's Talk")}
         </h2>
         <p className="mt-3 text-base sm:text-lg text-slate-300">
-          Schedule your free 30-minute discovery call and map out your project roadmap with our lead specialists.
+          {tx("about/BookingCalendarSection.schedule-your-free-30-minute-discovery", "Schedule your free 30-minute discovery call and map out your project roadmap with our lead specialists.")}
         </p>
       </div>
 
@@ -139,10 +140,10 @@ export const BookingCalendarSection: React.FC = () => {
           </div>
           <div>
             <h3 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white">
-              Event Calendar
+              {tx("about/BookingCalendarSection.event-calendar", "Event Calendar")}
             </h3>
             <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400">
-              Schedule your team meetings and discovery calls easily
+              {tx("about/BookingCalendarSection.schedule-your-team-meetings-and-discovery", "Schedule your team meetings and discovery calls easily")}
             </p>
           </div>
         </div>
@@ -220,7 +221,7 @@ export const BookingCalendarSection: React.FC = () => {
             {/* Selected Meeting Date Field */}
             <div>
               <label className="block text-xs font-semibold text-slate-600 dark:text-slate-300 mb-1.5">
-                Meeting date <span className="text-[#FF8500]">*</span>
+                {tx("about/BookingCalendarSection.meeting-date", "Meeting date")} <span className="text-[#FF8500]">*</span>
               </label>
               <div className="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-white/15 bg-white dark:bg-[#07112B] text-xs sm:text-sm text-slate-800 dark:text-slate-200 shadow-sm">
                 <CalendarIcon className="w-4 h-4 text-[#FF8500]" />
@@ -234,10 +235,10 @@ export const BookingCalendarSection: React.FC = () => {
             <div>
               <div className="flex items-center justify-between mb-2">
                 <label className="text-xs font-semibold text-slate-600 dark:text-slate-300">
-                  Available slots <span className="text-[#FF8500]">*</span>
+                  {tx("about/BookingCalendarSection.available-slots", "Available slots")} <span className="text-[#FF8500]">*</span>
                 </label>
                 <span className="text-[11px] font-mono text-emerald-500 dark:text-emerald-400 font-semibold">
-                  6 slots open
+                  {tx("about/BookingCalendarSection.6-slots-open", "6 slots open")}
                 </span>
               </div>
 
@@ -265,7 +266,7 @@ export const BookingCalendarSection: React.FC = () => {
             {/* Time Zone Selector */}
             <div>
               <label className="block text-xs font-semibold text-slate-600 dark:text-slate-300 mb-1.5">
-                Time zone
+                {tx("about/BookingCalendarSection.time-zone", "Time zone")}
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
@@ -292,7 +293,7 @@ export const BookingCalendarSection: React.FC = () => {
             <div className="p-3 rounded-xl bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-500/25 text-[11px] sm:text-xs text-emerald-800 dark:text-emerald-300 flex items-start gap-2">
               <CheckCircle2 className="w-4 h-4 shrink-0 text-emerald-500 mt-0.5" />
               <span>
-                Free 30-min discovery call over Google Meet / Zoom with our lead designer and strategist.
+                {tx("about/BookingCalendarSection.free-30-min-discovery-call-over", "Free 30-min discovery call over Google Meet / Zoom with our lead designer and strategist.")}
               </span>
             </div>
           </div>
@@ -302,10 +303,10 @@ export const BookingCalendarSection: React.FC = () => {
         <div className="mt-8 pt-6 border-t border-slate-200 dark:border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="text-xs sm:text-sm text-slate-600 dark:text-slate-400">
             <div>
-              <strong className="text-slate-900 dark:text-white">Date:</strong> {formattedSelectedDate}
+              <strong className="text-slate-900 dark:text-white">{tx("about/BookingCalendarSection.date", "Date:")}</strong> {formattedSelectedDate}
             </div>
             <div className="mt-0.5">
-              <strong className="text-slate-900 dark:text-white">Time:</strong> {selectedSlot} ({timeZone})
+              <strong className="text-slate-900 dark:text-white">{tx("about/BookingCalendarSection.time", "Time:")}</strong> {selectedSlot} ({timeZone})
             </div>
           </div>
 
@@ -318,7 +319,7 @@ export const BookingCalendarSection: React.FC = () => {
               }}
               className="w-1/2 sm:w-auto px-5 py-2.5 rounded-xl border border-slate-200 dark:border-white/15 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-white/10 text-xs sm:text-sm font-semibold transition-colors cursor-pointer"
             >
-              Reset
+              {tx("about/BookingCalendarSection.reset", "Reset")}
             </button>
 
             <button
@@ -326,7 +327,7 @@ export const BookingCalendarSection: React.FC = () => {
               onClick={handleBookDiscoveryCall}
               className="w-1/2 sm:w-auto px-6 py-2.5 rounded-xl bg-gradient-to-r from-emerald-500 via-teal-500 to-emerald-600 hover:from-emerald-400 hover:to-teal-500 text-white font-bold text-xs sm:text-sm shadow-lg shadow-emerald-500/25 active:scale-95 transition-all flex items-center justify-center gap-2 cursor-pointer"
             >
-              <span>Register to book</span>
+              <span>{tx("about/BookingCalendarSection.register-to-book", "Register to book")}</span>
               <ArrowRight className="w-4 h-4" />
             </button>
           </div>

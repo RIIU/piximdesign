@@ -1,9 +1,10 @@
 "use client";
 
 import React, { useState } from "react";
-import { ArrowUpRight, Plus } from "lucide-react";
+import { ArrowUpRight, Plus } from "@/content/lucide";
 import { Eyebrow, SectionTitle } from "./shared";
 import type { FaqItem } from "./types";
+import { tx } from "@/content/text";
 
 interface FaqSplitProps {
   id?: string;
@@ -36,13 +37,13 @@ export const FaqSplit: React.FC<FaqSplitProps> = ({
         <div className="lg:col-span-5">
           <div className="lg:sticky lg:top-28">
             <div className="reveal-up">
-              <Eyebrow>FAQ</Eyebrow>
+              <Eyebrow>{tx("page-kit/FaqSplit.faq", "FAQ")}</Eyebrow>
               <SectionTitle className="mt-4">{title}</SectionTitle>
               <p className="mt-4 text-slate-400 text-base sm:text-lg leading-relaxed">{intro}</p>
             </div>
 
             <div className="reveal-up mt-8 relative overflow-hidden rounded-3xl border border-[#FF8500]/30 bg-gradient-to-br from-[#FF8500]/15 via-[#0C1E4E] to-[#0C1E4E] p-6">
-              <span className="text-[10px] font-mono uppercase tracking-widest text-[#FFA133]">Still unsure?</span>
+              <span className="text-[10px] font-mono uppercase tracking-widest text-[#FFA133]">{tx("page-kit/FaqSplit.still-unsure", "Still unsure?")}</span>
               <p className="mt-2 font-agency text-xl font-extrabold text-white">{cardTitle}</p>
               <p className="mt-1.5 text-sm text-slate-400">{cardText}</p>
               <button

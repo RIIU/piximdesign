@@ -3,9 +3,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import Image from "next/image";
-import { Star, Quote, CheckCircle2, Pause, Play } from "lucide-react";
+import { Star, Quote, CheckCircle2, Pause, Play } from "@/content/lucide";
 import { TESTIMONIALS } from "@/data/agencyData";
 import { media } from "@/content/media";
+import { tx } from "@/content/text";
 
 export interface ReviewItem {
   quote: string;
@@ -173,7 +174,7 @@ export const GsapReviewsInfiniteSlider: React.FC<GsapReviewsInfiniteSliderProps>
           <div className="flex items-center gap-1.5">
             <span className="inline-flex items-center gap-1 text-[10.5px] font-semibold px-2.5 py-0.5 rounded-full bg-emerald-500/10 dark:bg-emerald-500/20 border border-emerald-500/20 text-emerald-700 dark:text-emerald-400">
               <CheckCircle2 className="w-3 h-3 text-emerald-600 dark:text-emerald-400" />
-              Verified
+              {tx("animations/GsapReviewsInfiniteSlider.verified", "Verified")}
             </span>
             {t.highlight && (
               <span className="text-[10.5px] font-bold px-2.5 py-0.5 rounded-full bg-[#FF8500]/12 dark:bg-[#FF8500]/20 border border-[#FF8500]/25 dark:border-[#FF8500]/30 text-[#C25E00] dark:text-[#FFA133]">
@@ -242,7 +243,7 @@ export const GsapReviewsInfiniteSlider: React.FC<GsapReviewsInfiniteSliderProps>
               </h2>
             )}
             <p className="mt-2 text-xs sm:text-sm text-slate-500 dark:text-slate-400 max-w-xl">
-              Real feedback from industry leaders, startup founders, and retail brands scaling with Pixim Design.
+              {tx("animations/GsapReviewsInfiniteSlider.real-feedback-from-industry-leaders-startup", "Real feedback from industry leaders, startup founders, and retail brands scaling with Pixim Design.")}
             </p>
           </div>
 

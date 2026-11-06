@@ -4,10 +4,11 @@ import React, { useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
-import { ArrowUpRight, Play, Globe } from "lucide-react";
+import { ArrowUpRight, Play, Globe } from "@/content/lucide";
 import { useHome } from "@/content/ContentProvider";
 import { RichTitle } from "@/content/RichTitle";
 import { media } from "@/content/media";
+import { tx } from "@/content/text";
 
 interface StatsBarProps {
   className?: string;
@@ -129,11 +130,11 @@ export const StatsBar: React.FC<StatsBarProps> = ({ className = "", onOpenContac
               {/* Tag Pill */}
               <div className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-[#FF8500]/15 border border-[#FF8500]/30 text-[9px] sm:text-[10px] font-bold text-[#FFA133] mb-1.5 shadow-xs">
                 <span>🔥</span>
-                <span>Elite Core</span>
+                <span>{tx("StatsBar.elite-core", "Elite Core")}</span>
               </div>
 
               <h3 className="font-agency text-base sm:text-xl md:text-2xl font-extrabold text-white leading-tight tracking-tight">
-                8<span className="text-[#FF8500]">+</span> Team Members
+                8<span className="text-[#FF8500]">+</span> {tx("StatsBar.team-members", "Team Members")}
               </h3>
             </div>
 
@@ -146,7 +147,7 @@ export const StatsBar: React.FC<StatsBarProps> = ({ className = "", onOpenContac
                   <div className="relative w-full h-12 sm:h-16 bg-[#0c1a40]">
                     <img
                       src={media("https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=240&auto=format&fit=crop")}
-                      alt="Sarah - Lead UI"
+                      alt={tx("StatsBar.sarah-lead-ui", "Sarah - Lead UI")}
                       className="w-full h-full object-cover object-top"
                       loading="lazy"
                     />
@@ -154,10 +155,10 @@ export const StatsBar: React.FC<StatsBarProps> = ({ className = "", onOpenContac
                   </div>
                   <div className="py-0.5 sm:py-1 px-1 bg-[#081330] text-center border-t border-white/10">
                     <span className="text-[7.5px] sm:text-[9px] font-mono font-bold text-slate-200 block truncate">
-                      Sarah K.
+                      {tx("StatsBar.sarah-k", "Sarah K.")}
                     </span>
                     <span className="text-[6.5px] sm:text-[7.5px] font-mono font-bold text-[#FFA133] block truncate">
-                      Lead UI
+                      {tx("StatsBar.lead-ui", "Lead UI")}
                     </span>
                   </div>
                 </div>
@@ -167,7 +168,7 @@ export const StatsBar: React.FC<StatsBarProps> = ({ className = "", onOpenContac
                   <div className="relative w-full h-13 sm:h-18 bg-[#0c1a40]">
                     <img
                       src={media("/images/consultation/director-portrait.png")}
-                      alt="Sabbir Ahmed - Head of Business"
+                      alt={tx("StatsBar.sabbir-ahmed-head-of-business", "Sabbir Ahmed - Head of Business")}
                       className="w-full h-full object-cover object-top"
                       loading="lazy"
                     />
@@ -175,10 +176,10 @@ export const StatsBar: React.FC<StatsBarProps> = ({ className = "", onOpenContac
                   </div>
                   <div className="py-0.5 sm:py-1 px-1 bg-[#081330] text-center border-t border-[#FF8500]/25">
                     <span className="text-[7.5px] sm:text-[9px] font-mono font-bold text-white block truncate">
-                      Sabbir Ahmed
+                      {tx("StatsBar.sabbir-ahmed", "Sabbir Ahmed")}
                     </span>
                     <span className="text-[6.5px] sm:text-[7.5px] font-mono font-bold text-[#FF8500] block truncate">
-                      Head of Business
+                      {tx("StatsBar.head-of-business", "Head of Business")}
                     </span>
                   </div>
                 </div>
@@ -188,7 +189,7 @@ export const StatsBar: React.FC<StatsBarProps> = ({ className = "", onOpenContac
                   <div className="relative w-full h-12 sm:h-16 bg-[#0c1a40]">
                     <img
                       src={media("https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=240&auto=format&fit=crop")}
-                      alt="Maya - Brand UX"
+                      alt={tx("StatsBar.maya-brand-ux", "Maya - Brand UX")}
                       className="w-full h-full object-cover object-top"
                       loading="lazy"
                     />
@@ -196,10 +197,10 @@ export const StatsBar: React.FC<StatsBarProps> = ({ className = "", onOpenContac
                   </div>
                   <div className="py-0.5 sm:py-1 px-1 bg-[#081330] text-center border-t border-white/10">
                     <span className="text-[7.5px] sm:text-[9px] font-mono font-bold text-slate-200 block truncate">
-                      Maya T.
+                      {tx("StatsBar.maya-t", "Maya T.")}
                     </span>
                     <span className="text-[6.5px] sm:text-[7.5px] font-mono font-bold text-[#38BDF8] block truncate">
-                      Brand UX
+                      {tx("StatsBar.brand-ux", "Brand UX")}
                     </span>
                   </div>
                 </div>
@@ -209,10 +210,10 @@ export const StatsBar: React.FC<StatsBarProps> = ({ className = "", onOpenContac
               <div className="relative z-20 w-[94%] sm:w-[90%] h-11 sm:h-15 rounded-xl sm:rounded-2xl bg-[#081330]/85 backdrop-blur-md border border-white/15 shadow-xl flex items-center justify-between px-3 sm:px-4">
                 <span className="text-[10px] sm:text-xs font-bold text-white flex items-center gap-1.5">
                   <span className="w-2 h-2 rounded-full bg-[#FF8500] animate-pulse" />
-                  Studio Core
+                  {tx("StatsBar.studio-core", "Studio Core")}
                 </span>
                 <span className="text-[9px] sm:text-[10px] font-mono font-bold text-[#FFA133] bg-[#FF8500]/15 px-2 py-0.5 rounded-full border border-[#FF8500]/25">
-                  +5 More
+                  {tx("StatsBar.5-more", "+5 More")}
                 </span>
               </div>
             </div>
@@ -281,7 +282,7 @@ export const StatsBar: React.FC<StatsBarProps> = ({ className = "", onOpenContac
               {/* Bottom Row: Check em out! + Dark Circle Arrow Button */}
               <div className="mt-4 sm:mt-8 flex items-center justify-between relative z-10 pt-1">
                 <span className="text-xs sm:text-sm font-extrabold text-[#081330] tracking-tight group-hover:underline transition-colors">
-                  Check em out!
+                  {tx("StatsBar.check-em-out", "Check em out!")}
                 </span>
 
                 {/* Dark Midnight Circle Arrow CTA Button */}

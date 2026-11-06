@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
-import { ArrowUpRight, Star, Award, TrendingUp } from "lucide-react";
+import { ArrowUpRight, Star, Award, TrendingUp } from "@/content/lucide";
 import Link from "next/link";
 
 export interface SliderCardItem {

@@ -1,9 +1,10 @@
 "use client";
 
 import React, { useState } from "react";
-import { ArrowRight, Check, DollarSign, Coins } from "lucide-react";
+import { ArrowRight, Check, DollarSign, Coins } from "@/content/lucide";
 import { GsapMagneticButton } from "@/components/animations/GsapMagneticButton";
 import { useCurrency } from "@/lib/currency";
+import { tx } from "@/content/text";
 
 interface ProjectEstimatorProps {
   onEstimateSubmit: (summary: string) => void;
@@ -17,40 +18,40 @@ export const ProjectEstimator: React.FC<ProjectEstimatorProps> = ({ onEstimateSu
   const [selectedGoal, setSelectedGoal] = useState("conversion");
 
   const services = [
-    { id: "logo-design", title: "Logo & Brand Identity", icon: "🎨" },
-    { id: "social-media", title: "Social Media & Content Design", icon: "📱" },
-    { id: "package-design", title: "Packaging Design", icon: "📦" },
-    { id: "motion-video", title: "Video & Motion Design", icon: "🎬" },
-    { id: "digital-marketing", title: "Digital Marketing & Ads", icon: "🎯" },
-    { id: "web-design", title: "Website Design & Development", icon: "💻" },
-    { id: "seo-growth", title: "SEO & Organic Growth", icon: "📈" },
+    { id: "logo-design", title: tx("ProjectEstimator.logo-brand-identity", "Logo & Brand Identity"), icon: "🎨" },
+    { id: "social-media", title: tx("ProjectEstimator.social-media-content-design", "Social Media & Content Design"), icon: "📱" },
+    { id: "package-design", title: tx("ProjectEstimator.packaging-design", "Packaging Design"), icon: "📦" },
+    { id: "motion-video", title: tx("ProjectEstimator.video-motion-design", "Video & Motion Design"), icon: "🎬" },
+    { id: "digital-marketing", title: tx("ProjectEstimator.digital-marketing-ads", "Digital Marketing & Ads"), icon: "🎯" },
+    { id: "web-design", title: tx("ProjectEstimator.website-design-development", "Website Design & Development"), icon: "💻" },
+    { id: "seo-growth", title: tx("ProjectEstimator.seo-organic-growth", "SEO & Organic Growth"), icon: "📈" },
   ];
 
   const packages = [
-    { id: "basic", label: "Basic", badge: "Starter Tier", desc: "Essential branding & quick launch assets" },
-    { id: "standard", label: "Standard", badge: "Most Popular", desc: "Complete business branding + source files" },
-    { id: "premium", label: "Premium", badge: "Enterprise Grade", desc: "Full custom execution, 3D/motion & VIP support" },
+    { id: "basic", label: tx("ProjectEstimator.basic", "Basic"), badge: tx("ProjectEstimator.starter-tier", "Starter Tier"), desc: tx("ProjectEstimator.essential-branding-quick-launch-assets", "Essential branding & quick launch assets") },
+    { id: "standard", label: tx("ProjectEstimator.standard", "Standard"), badge: tx("ProjectEstimator.most-popular", "Most Popular"), desc: tx("ProjectEstimator.complete-business-branding-source-files", "Complete business branding + source files") },
+    { id: "premium", label: tx("ProjectEstimator.premium", "Premium"), badge: tx("ProjectEstimator.enterprise-grade", "Enterprise Grade"), desc: tx("ProjectEstimator.full-custom-execution-3d-motion-vip", "Full custom execution, 3D/motion & VIP support") },
   ];
 
   const budgetsUSD = [
-    { label: "$0 – $100", range: "$50 - $100", desc: "Small gigs & single graphics" },
-    { label: "$100 – $200", range: "$100 - $200", desc: "Professional logo or poster pack" },
-    { label: "$200 – $500", range: "$200 - $500", desc: "Complete brand identity & packaging" },
-    { label: "More than $500", range: "$500+", desc: "Full-scale custom website & system" },
+    { label: "$0 – $100", range: "$50 - $100", desc: tx("ProjectEstimator.small-gigs-single-graphics", "Small gigs & single graphics") },
+    { label: "$100 – $200", range: "$100 - $200", desc: tx("ProjectEstimator.professional-logo-or-poster-pack", "Professional logo or poster pack") },
+    { label: "$200 – $500", range: "$200 - $500", desc: tx("ProjectEstimator.complete-brand-identity-packaging", "Complete brand identity & packaging") },
+    { label: tx("ProjectEstimator.more-than-500", "More than $500"), range: "$500+", desc: tx("ProjectEstimator.full-scale-custom-website-system", "Full-scale custom website & system") },
   ];
 
   const budgetsBDT = [
-    { label: "0 – ৳12,000", range: "৳6,000 - ৳12,000", desc: "Starter single asset or flyer" },
-    { label: "৳12,000 – ৳24,000", range: "৳12,000 - ৳24,000", desc: "Full logo identity or campaign kit" },
-    { label: "৳24,000 – ৳60,000", range: "৳24,000 - ৳60,000", desc: "Packaging series & dynamic website" },
-    { label: "More than ৳60,000", range: "৳60,000+", desc: "Full enterprise brand & multi-page site" },
+    { label: "0 – ৳12,000", range: "৳6,000 - ৳12,000", desc: tx("ProjectEstimator.starter-single-asset-or-flyer", "Starter single asset or flyer") },
+    { label: "৳12,000 – ৳24,000", range: "৳12,000 - ৳24,000", desc: tx("ProjectEstimator.full-logo-identity-or-campaign-kit", "Full logo identity or campaign kit") },
+    { label: "৳24,000 – ৳60,000", range: "৳24,000 - ৳60,000", desc: tx("ProjectEstimator.packaging-series-dynamic-website", "Packaging series & dynamic website") },
+    { label: tx("ProjectEstimator.more-than-60-000", "More than ৳60,000"), range: "৳60,000+", desc: tx("ProjectEstimator.full-enterprise-brand-multi-page-site", "Full enterprise brand & multi-page site") },
   ];
 
   const goals = [
-    { id: "customers", label: "I need more customers" },
-    { id: "conversion", label: "I need help with my conversion" },
-    { id: "traffic", label: "I need more organic traffic" },
-    { id: "social", label: "I need help with Social Media" },
+    { id: "customers", label: tx("ProjectEstimator.i-need-more-customers", "I need more customers") },
+    { id: "conversion", label: tx("ProjectEstimator.i-need-help-with-my-conversion", "I need help with my conversion") },
+    { id: "traffic", label: tx("ProjectEstimator.i-need-more-organic-traffic", "I need more organic traffic") },
+    { id: "social", label: tx("ProjectEstimator.i-need-help-with-social-media", "I need help with Social Media") },
   ];
 
   const currentBudgets = currency === "USD" ? budgetsUSD : budgetsBDT;
@@ -90,7 +91,7 @@ export const ProjectEstimator: React.FC<ProjectEstimatorProps> = ({ onEstimateSu
                   }`}
                 >
                   <DollarSign className="w-3 h-3" />
-                  <span>USD ($)</span>
+                  <span>{tx("ProjectEstimator.usd", "USD ($)")}</span>
                 </button>
                 <button
                   type="button"
@@ -102,22 +103,22 @@ export const ProjectEstimator: React.FC<ProjectEstimatorProps> = ({ onEstimateSu
                   }`}
                 >
                   <Coins className="w-3 h-3" />
-                  <span>BDT (৳)</span>
+                  <span>{tx("ProjectEstimator.bdt", "BDT (৳)")}</span>
                 </button>
               </div>
             </div>
 
             <h2 className="font-agency text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#0F172A] dark:text-white tracking-tight leading-tight">
-              Calculate Your Scope <br />
+              {tx("ProjectEstimator.calculate-your-scope", "Calculate Your Scope")} <br />
               <span className="bg-gradient-to-r from-[#FF8500] via-[#FFA229] to-amber-300 bg-clip-text text-transparent">
-                With Transparent Budget Tiers.
+                {tx("ProjectEstimator.with-transparent-budget-tiers", "With Transparent Budget Tiers.")}
               </span>
             </h2>
 
             {/* 1. Service Selection */}
             <div className="mt-8">
               <label className="text-xs uppercase font-mono font-bold tracking-wider text-slate-500 dark:text-slate-400 block mb-3">
-                1. Choose Your Service
+                {tx("ProjectEstimator.1-choose-your-service", "1. Choose Your Service")}
               </label>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                 {services.map((s) => (
@@ -140,7 +141,7 @@ export const ProjectEstimator: React.FC<ProjectEstimatorProps> = ({ onEstimateSu
             {/* 2. Package Tier */}
             <div className="mt-6">
               <label className="text-xs uppercase font-mono font-bold tracking-wider text-slate-500 dark:text-slate-400 block mb-3">
-                2. Select Package Tier
+                {tx("ProjectEstimator.2-select-package-tier", "2. Select Package Tier")}
               </label>
               <div className="grid grid-cols-3 gap-2">
                 {packages.map((pkg) => (
@@ -164,7 +165,7 @@ export const ProjectEstimator: React.FC<ProjectEstimatorProps> = ({ onEstimateSu
             <div className="mt-6">
               <div className="flex items-center justify-between mb-3">
                 <label className="text-xs uppercase font-mono font-bold tracking-wider text-slate-500 dark:text-slate-400">
-                  3. Project Budget ({currency})
+                  {tx("ProjectEstimator.3-project-budget", "3. Project Budget (")}{currency})
                 </label>
                 <span className="text-[11px] text-[#C25E00] dark:text-[#FFA133] font-mono font-semibold">
                   {currency === "USD" ? "Standard USD Rates" : "Local BDT Rates"}
@@ -190,7 +191,7 @@ export const ProjectEstimator: React.FC<ProjectEstimatorProps> = ({ onEstimateSu
             {/* 4. Primary Goal */}
             <div className="mt-6">
               <label className="text-xs uppercase font-mono font-bold tracking-wider text-slate-500 dark:text-slate-400 block mb-3">
-                4. Primary Launch Objective
+                {tx("ProjectEstimator.4-primary-launch-objective", "4. Primary Launch Objective")}
               </label>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                 {goals.map((g) => (
@@ -227,10 +228,10 @@ export const ProjectEstimator: React.FC<ProjectEstimatorProps> = ({ onEstimateSu
             <div className="relative z-10">
               <div className="flex items-center justify-between pb-4 border-b border-white/15">
                 <span className="text-xs uppercase font-mono font-bold tracking-wider text-blue-200">
-                  Target Investment Bracket
+                  {tx("ProjectEstimator.target-investment-bracket", "Target Investment Bracket")}
                 </span>
                 <span className="text-xs px-2.5 py-0.5 rounded-full bg-white/15 text-white border border-white/25 font-medium">
-                  {activePackageObj.label} Tier
+                  {activePackageObj.label} {tx("ProjectEstimator.tier", "Tier")}
                 </span>
               </div>
 
@@ -249,19 +250,19 @@ export const ProjectEstimator: React.FC<ProjectEstimatorProps> = ({ onEstimateSu
               <ul className="space-y-2.5 text-xs text-blue-50 py-5 border-t border-white/15">
                 <li className="flex items-center gap-2">
                   <Check className="w-4 h-4 text-emerald-300 shrink-0" />
-                  <span>All master vector source files (AI, EPS, SVG, PNG)</span>
+                  <span>{tx("ProjectEstimator.all-master-vector-source-files-ai", "All master vector source files (AI, EPS, SVG, PNG)")}</span>
                 </li>
                 <li className="flex items-center gap-2">
                   <Check className="w-4 h-4 text-emerald-300 shrink-0" />
-                  <span>100% intellectual property & commercial copyright</span>
+                  <span>{tx("ProjectEstimator.100-intellectual-property-commercial-copyright", "100% intellectual property & commercial copyright")}</span>
                 </li>
                 <li className="flex items-center gap-2">
                   <Check className="w-4 h-4 text-emerald-300 shrink-0" />
-                  <span>Direct consultation with lead design specialist</span>
+                  <span>{tx("ProjectEstimator.direct-consultation-with-lead-design-specialist", "Direct consultation with lead design specialist")}</span>
                 </li>
                 <li className="flex items-center gap-2">
                   <Check className="w-4 h-4 text-emerald-300 shrink-0" />
-                  <span>8+ Years experience & 500+ satisfied clients quality</span>
+                  <span>{tx("ProjectEstimator.8-years-experience-500-satisfied-clients", "8+ Years experience & 500+ satisfied clients quality")}</span>
                 </li>
               </ul>
             </div>
@@ -272,7 +273,7 @@ export const ProjectEstimator: React.FC<ProjectEstimatorProps> = ({ onEstimateSu
               strength={0.25}
               className="relative z-10 mt-6 w-full py-3.5 px-6 !bg-[#FF8500] hover:!bg-[#e67700] !text-white font-extrabold text-sm shadow-xl"
             >
-              <span>Lock In Quote & Free Consultation</span>
+              <span>{tx("ProjectEstimator.lock-in-quote-free-consultation", "Lock In Quote & Free Consultation")}</span>
               <ArrowRight className="w-4 h-4" />
             </GsapMagneticButton>
           </div>

@@ -1,13 +1,14 @@
 "use client";
 
 import React from "react";
-import { Box, Check, Layers, Printer, ShieldCheck } from "lucide-react";
+import { Box, Check, Layers, Printer, ShieldCheck } from "@/content/lucide";
 import { ServiceLandingPage, type ServicePageProps } from "../ServiceLandingPage";
 import { GradientText, SAMPLE_MARK_PATH, SampleMark, Wordmark } from "@/components/page-kit/shared";
 import { ChipDot, ChipIconBox, FloatingChip, Lines, MonoLabel, TILE_DARK } from "@/components/page-kit/primitives";
 import { ServiceHeroVideo } from "../sections/ServiceHeroVideo";
 import type { ServiceConfig } from "../types";
 import { SERVICE_PRICING } from "@/data/servicePricing";
+import { tx } from "@/content/text";
 
 const PRICING = SERVICE_PRICING["package-design"];
 
@@ -119,10 +120,10 @@ const Dieline: React.FC<{ className?: string; showBleed?: boolean }> = ({ classN
       <line x1="206" y1="165" x2="276" y2="165" />
     </g>
     <g fill="rgba(203,213,225,0.7)" fontSize="8" fontFamily="monospace" textAnchor="middle">
-      <text x="61" y="98">SIDE</text>
-      <text x="121" y="98">FRONT</text>
-      <text x="181" y="98">SIDE</text>
-      <text x="241" y="98">BACK</text>
+      <text x="61" y="98">{tx("service-landing/services/packaging.side", "SIDE")}</text>
+      <text x="121" y="98">{tx("service-landing/services/packaging.front", "FRONT")}</text>
+      <text x="181" y="98">{tx("service-landing/services/packaging.side", "SIDE")}</text>
+      <text x="241" y="98">{tx("service-landing/services/packaging.back", "BACK")}</text>
     </g>
     <g transform="translate(109 64) scale(0.5)">
       <path fillRule="evenodd" clipRule="evenodd" d={SAMPLE_MARK_PATH} fill="#FF8500" opacity="0.8" />
@@ -146,7 +147,7 @@ const HeroVisual = () => (
   <ServiceHeroVideo
     videoSrc="/video/Creative-Logo-Branding-Solutions-for-Your-Business-_-Pixim-Design.mp4"
     posterSrc="/video/posters/Creative-Logo-Branding-Solutions-for-Your-Business-_-Pixim-Design.webp"
-    badge="Packaging Showcase"
+    badge={tx("service-landing/services/packaging.packaging-showcase", "Packaging Showcase")}
     topChip={
       <FloatingChip
         className="right-3 -top-4 sm:-top-5"
@@ -155,7 +156,7 @@ const HeroVisual = () => (
             <Check className="w-2.5 h-2.5" strokeWidth={3.5} />
           </ChipDot>
         }
-        title="Print-ready"
+        title={tx("service-landing/services/packaging.print-ready", "Print-ready")}
       />
     }
     bottomChip={
@@ -167,8 +168,8 @@ const HeroVisual = () => (
             <Printer className="w-3.5 h-3.5" />
           </ChipIconBox>
         }
-        title="die-cut-box.pdf"
-        sub="300 DPI · Spot UV"
+        title={tx("service-landing/services/packaging.die-cut-box-pdf", "die-cut-box.pdf")}
+        sub={tx("service-landing/services/packaging.300-dpi-spot-uv", "300 DPI · Spot UV")}
       />
     }
   />
@@ -181,8 +182,8 @@ const BoxVisual = () => (
     <span className="absolute bottom-[10%] left-1/2 -translate-x-1/2 w-2/5 h-4 rounded-full bg-black/40 blur-md" />
     <IsoBox className="relative h-[85%] w-auto max-h-[300px] transition-transform duration-500 group-hover:-translate-y-2" />
     <div className="absolute left-2 top-2 rounded-lg border border-white/10 bg-[#081330]/80 px-2.5 py-1.5">
-      <MonoLabel>Dimensions</MonoLabel>
-      <span className="block text-[11px] font-mono text-white">120 × 80 × 40 mm</span>
+      <MonoLabel>{tx("service-landing/services/packaging.dimensions", "Dimensions")}</MonoLabel>
+      <span className="block text-[11px] font-mono text-white">{tx("service-landing/services/packaging.120-80-40-mm", "120 × 80 × 40 mm")}</span>
     </div>
   </div>
 );
@@ -196,10 +197,10 @@ const LabelVisual = () => (
         <span className="font-agency text-[11px] font-extrabold text-white text-center leading-none">
           100%
           <br />
-          Natural
+          {tx("service-landing/services/packaging.natural", "Natural")}
         </span>
       </span>
-      <MonoLabel>Sticker</MonoLabel>
+      <MonoLabel>{tx("service-landing/services/packaging.sticker", "Sticker")}</MonoLabel>
     </div>
   </div>
 );
@@ -224,11 +225,11 @@ const DielineVisual = () => (
     <div className="absolute right-1 bottom-0 flex gap-3">
       <span className="flex items-center gap-1 text-[9px] text-slate-400">
         <span className="w-3 h-0.5 bg-[#FF8500]" />
-        Cut
+        {tx("service-landing/services/packaging.cut", "Cut")}
       </span>
       <span className="flex items-center gap-1 text-[9px] text-slate-400">
         <span className="w-3 border-t border-dashed border-[#60A5FA]" />
-        Fold
+        {tx("service-landing/services/packaging.fold", "Fold")}
       </span>
     </div>
   </div>
@@ -256,10 +257,10 @@ const PrintSpecPanel = () => (
     <Dieline className="w-full h-auto" showBleed />
     <div className="mt-4 grid grid-cols-2 sm:grid-cols-4 gap-3">
       {[
-        { swatch: <span className="w-4 h-0.5 bg-[#FF8500]" />, label: "Cut line" },
-        { swatch: <span className="w-4 border-t border-dashed border-[#60A5FA]" />, label: "Fold line" },
-        { swatch: <span className="w-4 border-t border-dashed border-[#FF5F57]" />, label: "Bleed 3mm" },
-        { swatch: <span className="w-3 h-3 rounded-sm bg-[#FF8500]/20 border border-[#FF8500]/50" />, label: "Print area" },
+        { swatch: <span className="w-4 h-0.5 bg-[#FF8500]" />, label: tx("service-landing/services/packaging.cut-line", "Cut line") },
+        { swatch: <span className="w-4 border-t border-dashed border-[#60A5FA]" />, label: tx("service-landing/services/packaging.fold-line", "Fold line") },
+        { swatch: <span className="w-4 border-t border-dashed border-[#FF5F57]" />, label: tx("service-landing/services/packaging.bleed-3mm", "Bleed 3mm") },
+        { swatch: <span className="w-3 h-3 rounded-sm bg-[#FF8500]/20 border border-[#FF8500]/50" />, label: tx("service-landing/services/packaging.print-area", "Print area") },
       ].map((k) => (
         <span key={k.label} className="flex items-center gap-2 text-xs text-slate-300">
           {k.swatch}
@@ -276,7 +277,7 @@ const MockupPanel = () => (
       <span className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/30 to-transparent" />
       <span className="absolute bottom-[14%] left-1/2 -translate-x-1/2 w-1/3 h-5 rounded-full bg-black/50 blur-md" />
       <IsoBox className="relative h-48 w-auto drop-shadow-[0_25px_35px_rgba(255,133,0,0.3)]" />
-      <MonoLabel className="absolute top-3 left-3">Studio render</MonoLabel>
+      <MonoLabel className="absolute top-3 left-3">{tx("service-landing/services/packaging.studio-render", "Studio render")}</MonoLabel>
     </div>
     {[
       { name: "Front", cls: "bg-[#FF8500]" },
@@ -300,13 +301,13 @@ const LabelCompliancePanel = () => (
         <Wordmark className="text-sm text-white" />
       </div>
       <div>
-        <span className="block font-agency text-2xl font-extrabold text-white leading-none">Organic Honey</span>
-        <span className="mt-1 block text-[11px] text-white/85">Raw · Unfiltered · Net wt. 250g</span>
+        <span className="block font-agency text-2xl font-extrabold text-white leading-none">{tx("service-landing/services/packaging.organic-honey", "Organic Honey")}</span>
+        <span className="mt-1 block text-[11px] text-white/85">{tx("service-landing/services/packaging.raw-unfiltered-net-wt-250g", "Raw · Unfiltered · Net wt. 250g")}</span>
       </div>
     </div>
     <div className="flex flex-col justify-between gap-3">
       <div className="rounded-lg border-2 border-[#081330] p-2.5">
-        <span className="block font-agency text-sm font-extrabold text-[#081330]">Nutrition Facts</span>
+        <span className="block font-agency text-sm font-extrabold text-[#081330]">{tx("service-landing/services/packaging.nutrition-facts", "Nutrition Facts")}</span>
         <div className="mt-1.5 divide-y divide-slate-300">
           {["Energy", "Carbohydrate", "Sugars", "Protein"].map((row, i) => (
             <div key={row} className="flex items-center justify-between py-1 text-[10px] text-slate-700">
@@ -327,7 +328,7 @@ const LabelCompliancePanel = () => (
 const ColourPrintPanel = () => (
   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
     <div className="rounded-2xl bg-[#081330] border border-[#2651B9]/35 p-4">
-      <MonoLabel>CMYK separation</MonoLabel>
+      <MonoLabel>{tx("service-landing/services/packaging.cmyk-separation", "CMYK separation")}</MonoLabel>
       <div className="mt-3 space-y-2.5">
         {[
           { ch: "C", val: 0, color: "#22D3EE" },
@@ -346,11 +347,11 @@ const ColourPrintPanel = () => (
       </div>
       <div className="mt-4 flex items-center gap-2">
         <span className="w-6 h-6 rounded-md bg-[#FF8500]" />
-        <span className="text-xs text-slate-300">Sunrise Orange · print match</span>
+        <span className="text-xs text-slate-300">{tx("service-landing/services/packaging.sunrise-orange-print-match", "Sunrise Orange · print match")}</span>
       </div>
     </div>
     <div className="rounded-2xl bg-[#081330] border border-[#2651B9]/35 p-4">
-      <MonoLabel>Pre-flight checklist</MonoLabel>
+      <MonoLabel>{tx("service-landing/services/packaging.pre-flight-checklist", "Pre-flight checklist")}</MonoLabel>
       <ul className="mt-3 space-y-2.5">
         {["300 DPI images", "Fonts outlined", "3mm bleed on all edges", "Barcode scale verified", "Overprint checked"].map((item) => (
           <li key={item} className="flex items-center gap-2 text-xs text-slate-300">

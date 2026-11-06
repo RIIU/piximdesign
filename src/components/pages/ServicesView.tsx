@@ -3,7 +3,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ArrowUpRight, CalendarCheck, Check, FileCheck, Layers, Star, Timer, Wallet } from "lucide-react";
+import { ArrowUpRight, CalendarCheck, Check, FileCheck, Layers, Star, Timer, Wallet } from "@/content/lucide";
 import { useContactModal } from "@/components/AppLayoutWrapper";
 import { ReadyForLogoSection } from "@/components/ReadyForLogoSection";
 import { GsapReviewsInfiniteSlider } from "@/components/animations/GsapReviewsInfiniteSlider";
@@ -24,6 +24,7 @@ import { SERVICES as SERVICE_LIST } from "@/data/agencyData";
 import { useServices, useStartingFrom } from "@/content/ContentProvider";
 import { T, usePageContent, type PageContent } from "@/content/page";
 import { CTA_VIDEOS, INTERNATIONAL_FAQ, OWNERSHIP_FAQ, PAYMENT_FAQ, STUDIO_PROCESS } from "@/data/studioContent";
+import { tx } from "@/content/text";
 
 type Service = (typeof SERVICE_LIST)[number];
 
@@ -38,10 +39,10 @@ const SHORT_LABELS: Record<string, string> = {
 };
 
 const CATEGORIES = [
-  { id: "all", label: "All 7 Services", ids: SERVICE_LIST.map((s) => s.id) },
-  { id: "branding", label: "Branding & Packaging", ids: ["logo-design", "package-design"] },
-  { id: "digital", label: "Social & Ads", ids: ["social-media", "digital-marketing"] },
-  { id: "web-video", label: "Web, Video & SEO", ids: ["web-design", "motion-video", "seo-growth"] },
+  { id: "all", get label() { return tx("pages/ServicesView.all-7-services", "All 7 Services"); }, ids: SERVICE_LIST.map((s) => s.id) },
+  { id: "branding", get label() { return tx("pages/ServicesView.branding-packaging", "Branding & Packaging"); }, ids: ["logo-design", "package-design"] },
+  { id: "digital", get label() { return tx("pages/ServicesView.social-ads", "Social & Ads"); }, ids: ["social-media", "digital-marketing"] },
+  { id: "web-video", get label() { return tx("pages/ServicesView.web-video-seo", "Web, Video & SEO"); }, ids: ["web-design", "motion-video", "seo-growth"] },
 ];
 
 // Column span for the closing CTA card so it always completes the last grid row
@@ -54,7 +55,7 @@ const HeroVisual = () => (
   <ServiceHeroVideo
     videoSrc="/video/Grow-Your-Business-with-Creative-Design-_-Pixim-Design-Agency.mp4"
     posterSrc="/video/posters/Grow-Your-Business-with-Creative-Design-_-Pixim-Design-Agency.webp"
-    badge="7 Studio Services"
+    badge={tx("pages/ServicesView.7-studio-services", "7 Studio Services")}
     topChip={
       <FloatingChip
         className="right-3 -top-4 sm:-top-5"
@@ -63,8 +64,8 @@ const HeroVisual = () => (
             <CalendarCheck className="w-3.5 h-3.5" />
           </ChipIconBox>
         }
-        title="Free 30-min consultation"
-        sub="No obligation"
+        title={tx("pages/ServicesView.free-30-min-consultation", "Free 30-min consultation")}
+        sub={tx("pages/ServicesView.no-obligation", "No obligation")}
       />
     }
     bottomChip={
@@ -76,8 +77,8 @@ const HeroVisual = () => (
             <Check className="w-2.5 h-2.5" strokeWidth={3.5} />
           </ChipDot>
         }
-        title="Prices in ৳ BDT & $ USD"
-        sub="100% On-time guarantee"
+        title={tx("pages/ServicesView.prices-in-bdt-usd", "Prices in ৳ BDT & $ USD")}
+        sub={tx("pages/ServicesView.100-on-time-guarantee", "100% On-time guarantee")}
       />
     }
   />
@@ -127,7 +128,7 @@ const ServiceCard: React.FC<{ service: Service }> = ({ service }) => {
         <div className="flex items-end justify-between gap-4 border-t border-white/[0.08] pt-5">
           {from && (
             <span>
-              <span className="block text-[10px] font-mono uppercase tracking-widest text-slate-500">Starting from</span>
+              <span className="block text-[10px] font-mono uppercase tracking-widest text-slate-500">{tx("pages/ServicesView.starting-from", "Starting from")}</span>
               <span className="mt-1 block font-agency text-xl font-extrabold text-white">
                 <Price usd={from.usd} bdt={from.bdt} />
               </span>
@@ -135,7 +136,7 @@ const ServiceCard: React.FC<{ service: Service }> = ({ service }) => {
           )}
           <span className="flex w-10 h-10 shrink-0 items-center justify-center rounded-full border border-[#2651B9]/35 bg-[#081330] text-slate-300 transition-colors duration-300 group-hover:border-[#FF8500] group-hover:bg-[#FF8500] group-hover:text-white">
             <ArrowUpRight className="w-4 h-4" />
-            <span className="sr-only">View {service.title}</span>
+            <span className="sr-only">{tx("pages/ServicesView.view", "View")} {service.title}</span>
           </span>
         </div>
       </div>
@@ -259,7 +260,7 @@ export const ServicesView: React.FC = () => {
     <div ref={rootRef} className="w-full overflow-x-clip">
       {/* 1. Hero */}
       <PageHero
-        crumbs={[{ label: "Home", href: "/" }, { label: "Services" }]}
+        crumbs={[{ label: tx("pages/ServicesView.home", "Home"), href: "/" }, { label: tx("pages/ServicesView.services", "Services") }]}
         eyebrow={c.hero.eyebrow}
         title={<T text={c.hero.title} />}
         description={c.hero.description}
@@ -282,7 +283,7 @@ export const ServicesView: React.FC = () => {
             <p className="mt-4 text-slate-400 text-base sm:text-lg leading-relaxed">{grid.description}</p>
           </div>
           <FilterPills
-            label="Filter services"
+            label={tx("pages/ServicesView.filter-services", "Filter services")}
             options={CATEGORIES}
             value={category}
             onChange={setCategory}
@@ -341,7 +342,7 @@ export const ServicesView: React.FC = () => {
 
       {/* 6. Client reviews */}
       <section className="relative py-10 sm:py-14">
-        <GsapReviewsInfiniteSlider title={c.reviewsTitle!} subtitle="PROVEN TRACK RECORD" speed={38} />
+        <GsapReviewsInfiniteSlider title={c.reviewsTitle!} subtitle={tx("pages/ServicesView.proven-track-record", "PROVEN TRACK RECORD")} speed={38} />
       </section>
 
       {/* 7. CTA: Not Sure Where to Start? */}

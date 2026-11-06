@@ -3,7 +3,7 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ArrowUpRight, Rocket, Star, TrendingUp, X } from "lucide-react";
+import { ArrowUpRight, Rocket, Star, TrendingUp, X } from "@/content/lucide";
 import { useContactModal } from "@/components/AppLayoutWrapper";
 import { ReadyForLogoSection } from "@/components/ReadyForLogoSection";
 import { GsapInfiniteLoopedPanels } from "@/components/animations/GsapInfiniteLoopedPanels";
@@ -21,6 +21,7 @@ import { CASE_STUDIES, type CaseStudy } from "@/data/caseStudies";
 import { CTA_VIDEOS } from "@/data/studioContent";
 import { T, usePageContent, type PageContent } from "@/content/page";
 import { media } from "@/content/media";
+import { tx } from "@/content/text";
 
 type Project = (typeof PORTFOLIO_PROJECTS)[number];
 
@@ -51,14 +52,14 @@ const HeroVisual = () => (
           <Rocket className="w-3.5 h-3.5" />
         </ChipIconBox>
       }
-      title="500+ brands launched"
-      sub="Startups to enterprises"
+      title={tx("pages/ProjectsView.500-brands-launched", "500+ brands launched")}
+      sub={tx("pages/ProjectsView.startups-to-enterprises", "Startups to enterprises")}
     />
     <FloatingChip
       className="left-0 sm:-left-4 top-2 z-30"
       delayed
       icon={<Star className="w-3.5 h-3.5 fill-[#FFA133] text-[#FFA133]" />}
-      title="4.9 client rating"
+      title={tx("pages/ProjectsView.4-9-client-rating", "4.9 client rating")}
     />
   </div>
 );
@@ -184,16 +185,16 @@ const ProjectModal: React.FC<{ project: Project; onClose: () => void; onInquire:
 
         <div className="mt-5 inline-flex items-center gap-2 rounded-xl border border-emerald-400/30 bg-emerald-500/10 px-4 py-2.5 text-sm font-semibold text-emerald-300">
           <TrendingUp className="w-4 h-4" />
-          Key result: {project.metrics}
+          {tx("pages/ProjectsView.key-result", "Key result:")} {project.metrics}
         </div>
 
         <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div className="rounded-2xl border border-[#2651B9]/30 bg-[#081330]/70 p-5">
-            <span className="text-[10px] font-mono uppercase tracking-widest text-[#FFA133]">The challenge</span>
+            <span className="text-[10px] font-mono uppercase tracking-widest text-[#FFA133]">{tx("pages/ProjectsView.the-challenge", "The challenge")}</span>
             <p className="mt-2 text-sm text-slate-300 leading-relaxed">{project.challenge}</p>
           </div>
           <div className="rounded-2xl border border-[#2651B9]/30 bg-[#081330]/70 p-5">
-            <span className="text-[10px] font-mono uppercase tracking-widest text-emerald-300">Our solution</span>
+            <span className="text-[10px] font-mono uppercase tracking-widest text-emerald-300">{tx("pages/ProjectsView.our-solution", "Our solution")}</span>
             <p className="mt-2 text-sm text-slate-300 leading-relaxed">{project.solution}</p>
           </div>
         </div>
@@ -211,7 +212,7 @@ const ProjectModal: React.FC<{ project: Project; onClose: () => void; onInquire:
             onClick={onInquire}
             className="inline-flex shrink-0 items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#FF8500] to-[#FFA133] px-6 py-3 text-xs font-bold uppercase tracking-wider text-white shadow-md shadow-orange-500/25 transition-shadow hover:shadow-orange-500/40 cursor-pointer"
           >
-            Inquire similar scope
+            {tx("pages/ProjectsView.inquire-similar-scope", "Inquire similar scope")}
             <ArrowUpRight className="w-4 h-4" />
           </button>
         </div>
@@ -281,7 +282,7 @@ export const ProjectsView: React.FC = () => {
     <div ref={rootRef} className="w-full overflow-x-clip">
       {/* 1. Hero */}
       <PageHero
-        crumbs={[{ label: "Home", href: "/" }, { label: "Projects" }]}
+        crumbs={[{ label: tx("pages/ProjectsView.home", "Home"), href: "/" }, { label: tx("pages/ProjectsView.projects", "Projects") }]}
         eyebrow={c.hero.eyebrow}
         title={<T text={c.hero.title} />}
         description={c.hero.description}
@@ -320,7 +321,7 @@ export const ProjectsView: React.FC = () => {
             </SectionTitle>
             <p className="mt-4 text-slate-400 text-base sm:text-lg leading-relaxed">{featured.description}</p>
           </div>
-          <FilterPills label="Filter projects" options={FILTERS} value={filter} onChange={setFilter} className="lg:justify-end" />
+          <FilterPills label={tx("pages/ProjectsView.filter-projects", "Filter projects")} options={FILTERS} value={filter} onChange={setFilter} className="lg:justify-end" />
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-7">
@@ -342,11 +343,11 @@ export const ProjectsView: React.FC = () => {
       )}
 
       {/* 5. Looped impact panels */}
-      <GsapInfiniteLoopedPanels title={impact.title ?? ""} subtitle="REAL-WORLD EXECUTION" speed={36} />
+      <GsapInfiniteLoopedPanels title={impact.title ?? ""} subtitle={tx("pages/ProjectsView.real-world-execution", "REAL-WORLD EXECUTION")} speed={36} />
 
       {/* 6. Client reviews */}
       <section className="relative py-10 sm:py-14">
-        <GsapReviewsInfiniteSlider title={c.reviewsTitle!} subtitle="CLIENT SATISFACTION" speed={38} />
+        <GsapReviewsInfiniteSlider title={c.reviewsTitle!} subtitle={tx("pages/ProjectsView.client-satisfaction", "CLIENT SATISFACTION")} speed={38} />
       </section>
 
       {/* 7. Final CTA */}

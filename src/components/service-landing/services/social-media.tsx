@@ -14,13 +14,14 @@ import {
   Quote,
   Smartphone,
   Star,
-} from "lucide-react";
+} from "@/content/lucide";
 import { ServiceLandingPage, type ServicePageProps } from "../ServiceLandingPage";
 import { GradientText, SampleMark, Wordmark } from "@/components/page-kit/shared";
 import { ChipDot, ChipIconBox, FloatingChip, Lines, MonoLabel, PhoneFrame, Ring, TILE_DARK } from "@/components/page-kit/primitives";
 import { ServiceHeroVideo } from "../sections/ServiceHeroVideo";
 import type { ServiceConfig } from "../types";
 import { SERVICE_PRICING } from "@/data/servicePricing";
+import { tx } from "@/content/text";
 
 const PRICING = SERVICE_PRICING["social-media"];
 
@@ -54,7 +55,7 @@ const FeedTile: React.FC<{ i: number }> = ({ i }) => {
     case 3:
       return (
         <div className={`${base} bg-[#F8FAFC] p-[14%] items-end`}>
-          <span className="font-agency text-[clamp(8px,2.2vw,14px)] font-extrabold leading-none text-[#FF8500]">NEW</span>
+          <span className="font-agency text-[clamp(8px,2.2vw,14px)] font-extrabold leading-none text-[#FF8500]">{tx("service-landing/services/social-media.new", "NEW")}</span>
         </div>
       );
     case 4:
@@ -96,7 +97,7 @@ const HeroVisual = () => (
   <ServiceHeroVideo
     videoSrc="/video/Grow-Your-Business-with-Creative-Design-_-Pixim-Design-Agency.mp4"
     posterSrc="/video/posters/Grow-Your-Business-with-Creative-Design-_-Pixim-Design-Agency.webp"
-    badge="Social Content Reel"
+    badge={tx("service-landing/services/social-media.social-content-reel", "Social Content Reel")}
     topChip={
       <FloatingChip
         className="right-3 -top-4 sm:-top-5"
@@ -105,7 +106,7 @@ const HeroVisual = () => (
             <Check className="w-2.5 h-2.5" strokeWidth={3.5} />
           </ChipDot>
         }
-        title="On-brand aesthetic"
+        title={tx("service-landing/services/social-media.on-brand-aesthetic", "On-brand aesthetic")}
       />
     }
     bottomChip={
@@ -117,8 +118,8 @@ const HeroVisual = () => (
             <CalendarCheck className="w-3.5 h-3.5" />
           </ChipIconBox>
         }
-        title="Post scheduled"
-        sub="Friday · 7:00 PM"
+        title={tx("service-landing/services/social-media.post-scheduled", "Post scheduled")}
+        sub={tx("service-landing/services/social-media.friday-7-00-pm", "Friday · 7:00 PM")}
       />
     }
   />
@@ -133,9 +134,9 @@ const FeedGridVisual = () => (
         <span className="w-7 h-7 rounded-full bg-gradient-to-br from-[#FF8500] to-[#FFA133] flex items-center justify-center">
           <SampleMark className="w-3.5 h-3.5" color="#FFFFFF" />
         </span>
-        <span className="text-xs font-semibold text-white">@yourbrand</span>
+        <span className="text-xs font-semibold text-white">{tx("service-landing/services/social-media.yourbrand", "@yourbrand")}</span>
       </div>
-      <MonoLabel>Grid preview</MonoLabel>
+      <MonoLabel>{tx("service-landing/services/social-media.grid-preview", "Grid preview")}</MonoLabel>
     </div>
     <div className="mt-3 grid flex-1 grid-cols-3 content-start gap-1.5 sm:gap-2 max-w-[340px] w-full mx-auto">
       {Array.from({ length: 9 }).map((_, i) => (
@@ -152,7 +153,7 @@ const CoverVisual = () => (
     <div className="h-[62%] rounded-2xl bg-gradient-to-r from-[#0F2260] via-[#2651B9] to-[#FF8500] p-4 flex items-start justify-end">
       <div className="text-right">
         <Wordmark className="block text-lg text-white leading-none" />
-        <span className="text-[10px] text-white/80">Designed to be remembered</span>
+        <span className="text-[10px] text-white/80">{tx("service-landing/services/social-media.designed-to-be-remembered", "Designed to be remembered")}</span>
       </div>
     </div>
     <div className="absolute left-4 top-[42%] flex items-end gap-3">
@@ -160,11 +161,11 @@ const CoverVisual = () => (
         <SampleMark className="w-7 h-7" color="#FFFFFF" />
       </span>
       <div className="pb-1">
-        <span className="block text-xs font-bold text-white">yourbrand</span>
+        <span className="block text-xs font-bold text-white">{tx("service-landing/services/social-media.yourbrand-2", "yourbrand")}</span>
         <Lines widths={["w-16"]} className="mt-1" barClass="h-1 bg-white/25" />
       </div>
     </div>
-    <span className="absolute right-3 bottom-2 rounded-full bg-[#2651B9] px-3 py-1 text-[10px] font-bold text-white">Follow</span>
+    <span className="absolute right-3 bottom-2 rounded-full bg-[#2651B9] px-3 py-1 text-[10px] font-bold text-white">{tx("service-landing/services/social-media.follow", "Follow")}</span>
   </div>
 );
 
@@ -177,11 +178,11 @@ const StoryVisual = () => (
         <span className="h-0.5 flex-1 rounded bg-white/40" />
       </div>
       <span className="font-agency text-base font-extrabold text-white text-center leading-none">
-        New
+        {tx("service-landing/services/social-media.new-2", "New")}
         <br />
-        In
+        {tx("service-landing/services/social-media.in", "In")}
       </span>
-      <span className="rounded-full border border-white/40 px-2 py-0.5 text-[7px] text-white/80 text-center">Send message</span>
+      <span className="rounded-full border border-white/40 px-2 py-0.5 text-[7px] text-white/80 text-center">{tx("service-landing/services/social-media.send-message", "Send message")}</span>
     </div>
   </div>
 );
@@ -212,17 +213,17 @@ const AdCreativeVisual = () => (
           <SampleMark className="w-3 h-3" color="#FFFFFF" />
         </span>
         <div className="leading-tight">
-          <span className="block text-[10px] font-semibold text-white">yourbrand</span>
-          <span className="block text-[8px] text-slate-500">Sponsored</span>
+          <span className="block text-[10px] font-semibold text-white">{tx("service-landing/services/social-media.yourbrand-2", "yourbrand")}</span>
+          <span className="block text-[8px] text-slate-500">{tx("service-landing/services/social-media.sponsored", "Sponsored")}</span>
         </div>
       </div>
       <div className="h-14 sm:h-16 bg-gradient-to-r from-[#FF8500] via-[#FFA133] to-[#FFB866] flex items-center justify-between px-4">
-        <span className="font-agency text-xl font-extrabold text-white">Up to 30% off</span>
+        <span className="font-agency text-xl font-extrabold text-white">{tx("service-landing/services/social-media.up-to-30-off", "Up to 30% off")}</span>
         <span className="w-9 h-9 rounded-full bg-white/30" />
       </div>
       <div className="flex items-center justify-between gap-3 px-3 py-2">
         <Lines widths={["w-24", "w-16"]} className="space-y-1" barClass="h-1 bg-white/25" />
-        <span className="rounded-md bg-[#2651B9] px-2.5 py-1 text-[9px] font-bold text-white">Shop Now</span>
+        <span className="rounded-md bg-[#2651B9] px-2.5 py-1 text-[9px] font-bold text-white">{tx("service-landing/services/social-media.shop-now", "Shop Now")}</span>
       </div>
     </div>
   </div>
@@ -233,7 +234,7 @@ const PageSetupVisual = () => (
     <Ring value={100} size={84} stroke={7}>
       <span className="text-center leading-tight">
         <span className="block font-agency text-lg font-extrabold text-white">100%</span>
-        <span className="block text-[8px] text-slate-400">complete</span>
+        <span className="block text-[8px] text-slate-400">{tx("service-landing/services/social-media.complete", "complete")}</span>
       </span>
     </Ring>
     <ul className="flex-1 space-y-1.5">
@@ -254,16 +255,16 @@ const PageSetupVisual = () => (
 const PostTemplatesPanel = () => (
   <div className="grid grid-cols-2 gap-3">
     <div className="relative aspect-square rounded-2xl bg-gradient-to-br from-[#FF8500] to-[#FFA133] p-4 flex flex-col justify-between">
-      <MonoLabel className="text-white/80">Announcement</MonoLabel>
+      <MonoLabel className="text-white/80">{tx("service-landing/services/social-media.announcement", "Announcement")}</MonoLabel>
       <span className="font-agency text-2xl sm:text-4xl font-extrabold text-white leading-[0.9]">
-        Big
+        {tx("service-landing/services/social-media.big", "Big")}
         <br />
-        News
+        {tx("service-landing/services/social-media.news", "News")}
       </span>
       <Wordmark className="text-xs text-white/90" />
     </div>
     <div className="relative aspect-square rounded-2xl bg-[#0F2260] border border-[#2651B9]/40 p-4 flex flex-col justify-between">
-      <MonoLabel>Quote</MonoLabel>
+      <MonoLabel>{tx("service-landing/services/social-media.quote", "Quote")}</MonoLabel>
       <div>
         <Quote className="w-6 h-6 text-[#FFA133]" />
         <Lines widths={["w-full", "w-11/12", "w-2/3"]} className="mt-2 space-y-1.5" barClass="h-1.5 bg-white/40" />
@@ -271,7 +272,7 @@ const PostTemplatesPanel = () => (
       <Lines widths={["w-1/3"]} barClass="h-1 bg-[#FFA133]/70" />
     </div>
     <div className="relative aspect-square rounded-2xl bg-[#F8FAFC] p-4 flex flex-col justify-between">
-      <MonoLabel>Product</MonoLabel>
+      <MonoLabel>{tx("service-landing/services/social-media.product", "Product")}</MonoLabel>
       <span className="mx-auto w-1/2 aspect-square rounded-full bg-gradient-to-br from-[#2651B9] to-[#3B82F6] shadow-lg" />
       <div className="flex items-center justify-between">
         <Lines widths={["w-16"]} barClass="h-1.5 bg-slate-300" />
@@ -279,7 +280,7 @@ const PostTemplatesPanel = () => (
       </div>
     </div>
     <div className="relative aspect-square rounded-2xl bg-[#2651B9] p-4 flex flex-col justify-between">
-      <MonoLabel className="text-white/70">Testimonial</MonoLabel>
+      <MonoLabel className="text-white/70">{tx("service-landing/services/social-media.testimonial", "Testimonial")}</MonoLabel>
       <div className="flex text-[#FFB866]">
         {[0, 1, 2, 3, 4].map((s) => (
           <Star key={s} className="w-3.5 h-3.5 fill-current" />
@@ -293,9 +294,9 @@ const PostTemplatesPanel = () => (
 const StorySetPanel = () => (
   <div className="grid grid-cols-3 gap-3">
     {[
-      { bg: "bg-gradient-to-b from-[#FF8500] to-[#FFA133]", title: "Sale", sub: "Today only" },
-      { bg: "bg-gradient-to-b from-[#2651B9] to-[#0F2260]", title: "Poll", sub: "Vote now" },
-      { bg: "bg-[#F8FAFC]", title: "Tips", sub: "Swipe" },
+      { bg: "bg-gradient-to-b from-[#FF8500] to-[#FFA133]", title: tx("service-landing/services/social-media.sale", "Sale"), sub: tx("service-landing/services/social-media.today-only", "Today only") },
+      { bg: "bg-gradient-to-b from-[#2651B9] to-[#0F2260]", title: tx("service-landing/services/social-media.poll", "Poll"), sub: tx("service-landing/services/social-media.vote-now", "Vote now") },
+      { bg: "bg-[#F8FAFC]", title: tx("service-landing/services/social-media.tips", "Tips"), sub: tx("service-landing/services/social-media.swipe", "Swipe") },
     ].map((s, i) => (
       <div key={s.title} className={`relative aspect-[9/16] rounded-2xl ${s.bg} p-2.5 flex flex-col justify-between overflow-hidden`}>
         <div className="flex gap-0.5">
@@ -311,8 +312,8 @@ const StorySetPanel = () => (
         </div>
         {i === 1 ? (
           <div className="space-y-1">
-            <span className="block rounded-full bg-white/90 px-2 py-0.5 text-[8px] font-bold text-[#0F2260]">Option A · 64%</span>
-            <span className="block rounded-full bg-white/30 px-2 py-0.5 text-[8px] font-bold text-white">Option B</span>
+            <span className="block rounded-full bg-white/90 px-2 py-0.5 text-[8px] font-bold text-[#0F2260]">{tx("service-landing/services/social-media.option-a-64", "Option A · 64%")}</span>
+            <span className="block rounded-full bg-white/30 px-2 py-0.5 text-[8px] font-bold text-white">{tx("service-landing/services/social-media.option-b", "Option B")}</span>
           </div>
         ) : (
           <span className={`mx-auto rounded-full px-2 py-0.5 text-[8px] font-bold ${i === 2 ? "bg-[#081330] text-white" : "bg-white text-[#FF8500]"}`}>
@@ -343,8 +344,8 @@ const CALENDAR_PLAN: Record<number, string> = {
 const CalendarPanel = () => (
   <div className="rounded-2xl bg-[#081330] border border-[#2651B9]/35 p-4">
     <div className="flex items-center justify-between">
-      <span className="font-agency text-lg font-extrabold text-white">Content calendar</span>
-      <MonoLabel>30 days</MonoLabel>
+      <span className="font-agency text-lg font-extrabold text-white">{tx("service-landing/services/social-media.content-calendar", "Content calendar")}</span>
+      <MonoLabel>{tx("service-landing/services/social-media.30-days", "30 days")}</MonoLabel>
     </div>
     <div className="mt-3 grid grid-cols-7 gap-1.5 text-center">
       {["M", "T", "W", "T", "F", "S", "S"].map((d, i) => (
@@ -370,10 +371,10 @@ const CalendarPanel = () => (
     </div>
     <div className="mt-3 flex flex-wrap gap-3">
       {[
-        { c: "bg-[#FF8500]", l: "Post" },
-        { c: "bg-[#2651B9]", l: "Reel" },
-        { c: "bg-[#FFA133]", l: "Story" },
-        { c: "bg-emerald-500", l: "Ad" },
+        { c: "bg-[#FF8500]", l: tx("service-landing/services/social-media.post", "Post") },
+        { c: "bg-[#2651B9]", l: tx("service-landing/services/social-media.reel", "Reel") },
+        { c: "bg-[#FFA133]", l: tx("service-landing/services/social-media.story", "Story") },
+        { c: "bg-emerald-500", l: tx("service-landing/services/social-media.ad", "Ad") },
       ].map((k) => (
         <span key={k.l} className="flex items-center gap-1.5 text-[10px] text-slate-400">
           <span className={`w-2 h-2 rounded-full ${k.c}`} />
@@ -388,9 +389,9 @@ const SizesPanel = () => (
   <div className="rounded-2xl bg-[#081330] border border-[#2651B9]/35 p-4 sm:p-5">
     <div className="flex items-end justify-around gap-3">
       {[
-        { ratio: "aspect-square", w: "w-[22%]", label: "Feed", size: "1080×1080" },
-        { ratio: "aspect-[4/5]", w: "w-[22%]", label: "Portrait", size: "1080×1350" },
-        { ratio: "aspect-[9/16]", w: "w-[18%]", label: "Story / Reel", size: "1080×1920" },
+        { ratio: "aspect-square", w: "w-[22%]", label: tx("service-landing/services/social-media.feed", "Feed"), size: "1080×1080" },
+        { ratio: "aspect-[4/5]", w: "w-[22%]", label: tx("service-landing/services/social-media.portrait", "Portrait"), size: "1080×1350" },
+        { ratio: "aspect-[9/16]", w: "w-[18%]", label: tx("service-landing/services/social-media.story-reel", "Story / Reel"), size: "1080×1920" },
       ].map((s, i) => (
         <div key={s.label} className={`${s.w} flex flex-col items-center gap-2`}>
           <div
@@ -405,9 +406,9 @@ const SizesPanel = () => (
     </div>
     <div className="mt-5 flex flex-col items-center gap-2">
       <div className="w-3/4 aspect-[820/312] rounded-lg border-2 border-dashed border-[#FFA133]/60 bg-[#FFA133]/10 flex items-center justify-center">
-        <span className="text-[10px] font-semibold text-white">Page cover</span>
+        <span className="text-[10px] font-semibold text-white">{tx("service-landing/services/social-media.page-cover", "Page cover")}</span>
       </div>
-      <span className="text-[9px] font-mono text-slate-500">820×312 · Facebook · LinkedIn · YouTube banners</span>
+      <span className="text-[9px] font-mono text-slate-500">{tx("service-landing/services/social-media.820-312-facebook-linkedin-youtube-banners", "820×312 · Facebook · LinkedIn · YouTube banners")}</span>
     </div>
   </div>
 );

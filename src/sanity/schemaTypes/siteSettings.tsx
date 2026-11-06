@@ -11,6 +11,7 @@ export const siteSettings = defineType({
     { name: "contact", title: "Contact info", default: true },
     { name: "brands", title: "Client logos" },
     { name: "layout", title: "Header, footer & banner" },
+    { name: "brandIcons", title: "Website icon & share image" },
   ],
   fields: [
     defineField({
@@ -109,6 +110,30 @@ export const siteSettings = defineType({
         stringField("mobilePrimaryLabel", "Main button (mobile)"),
         stringField("mobileSecondaryLabel", "Second button (mobile)"),
       ],
+    }),
+    defineField({
+      name: "favicon",
+      title: "Website icon (browser tab)",
+      type: "image",
+      group: "brandIcons",
+      options: { accept: "image/png,image/svg+xml,image/x-icon,image/vnd.microsoft.icon,image/webp" },
+      description: "The small icon in the browser tab and bookmarks. Square PNG or SVG, at least 192×192. Leave empty to keep the current icon.",
+    }),
+    defineField({
+      name: "appleIcon",
+      title: "Phone home-screen icon",
+      type: "image",
+      group: "brandIcons",
+      options: { accept: "image/png" },
+      description: "Shown when someone adds the site to their phone's home screen. Square PNG, 180×180. Empty → the website icon above is used.",
+    }),
+    defineField({
+      name: "shareImage",
+      title: "Share image (Facebook, WhatsApp, LinkedIn, X)",
+      type: "image",
+      group: "brandIcons",
+      options: { hotspot: true },
+      description: "The picture shown when a link to the site is shared. 1200×630 works best. Empty → the built-in card with the logo is used.",
     }),
   ],
   preview: { prepare: () => ({ title: "Site Settings" }) },

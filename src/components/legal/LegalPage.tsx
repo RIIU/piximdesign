@@ -1,9 +1,10 @@
 import React from "react";
 import Link from "next/link";
-import { Mail, MapPin } from "lucide-react";
+import { Mail, MapPin } from "@/content/lucide";
 import { CONTACT_EMAIL } from "@/data/studioContent";
 import { PortableText, type PortableTextBlock } from "@portabletext/react";
 import { getLegalOverride, getSiteSettings } from "@/sanity/content";
+import { Tx } from "@/content/text";
 
 export interface LegalSection {
   id: string;
@@ -73,7 +74,7 @@ export const LegalPage = async ({ legalKey, title: defaultTitle, path, intro: de
           <ol className="flex flex-wrap items-center gap-2 text-xs text-slate-500">
             <li>
               <Link href="/" className="hover:text-[#FFA133] transition-colors">
-                Home
+                <Tx k="legal/LegalPage.home" d="Home" />
               </Link>
             </li>
             <li aria-hidden>/</li>
@@ -83,14 +84,14 @@ export const LegalPage = async ({ legalKey, title: defaultTitle, path, intro: de
           </ol>
         </nav>
         <span className="inline-flex items-center gap-2 text-xs px-3 py-1 rounded-full bg-[#FF8500]/15 text-[#FFA133] border border-[#FF8500]/35 font-mono font-bold">
-          Legal
+          <Tx k="legal/LegalPage.legal" d="Legal" />
         </span>
         <h1 className="mt-5 font-agency text-[34px] sm:text-5xl lg:text-[58px] font-extrabold text-white tracking-tight leading-[1.05]">
           {title}
         </h1>
         <p className="mt-5 text-base sm:text-lg text-slate-300 leading-relaxed">{intro}</p>
         <p className="mt-4 text-sm text-slate-500">
-          Last updated: <time dateTime={LEGAL_UPDATED.iso}>{LEGAL_UPDATED.label}</time>
+          <Tx k="legal/LegalPage.last-updated" d="Last updated:" /> <time dateTime={LEGAL_UPDATED.iso}>{LEGAL_UPDATED.label}</time>
         </p>
       </div>
     </section>
@@ -100,7 +101,7 @@ export const LegalPage = async ({ legalKey, title: defaultTitle, path, intro: de
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16">
         {/* Contents: collapsible on mobile, sticky on desktop */}
         <details className="lg:hidden rounded-2xl border border-[#2651B9]/30 bg-[#0C1E4E]/70 p-5">
-          <summary className="cursor-pointer text-sm font-bold text-white">On this page</summary>
+          <summary className="cursor-pointer text-sm font-bold text-white"><Tx k="legal/LegalPage.on-this-page" d="On this page" /></summary>
           <nav aria-label="Table of contents" className="mt-4">
             <TableOfContents sections={sections} />
           </nav>
@@ -108,12 +109,12 @@ export const LegalPage = async ({ legalKey, title: defaultTitle, path, intro: de
 
         <aside className="hidden lg:block lg:col-span-4">
           <div className="sticky top-28 rounded-[28px] border border-[#2651B9]/30 bg-[#0C1E4E]/70 p-6">
-            <p className="text-[10px] font-mono uppercase tracking-widest text-slate-500">On this page</p>
+            <p className="text-[10px] font-mono uppercase tracking-widest text-slate-500"><Tx k="legal/LegalPage.on-this-page" d="On this page" /></p>
             <nav aria-label="Table of contents" className="mt-3">
               <TableOfContents sections={sections} />
             </nav>
             <div className="mt-6 border-t border-white/[0.08] pt-5">
-              <p className="text-[10px] font-mono uppercase tracking-widest text-slate-500">Policies</p>
+              <p className="text-[10px] font-mono uppercase tracking-widest text-slate-500"><Tx k="legal/LegalPage.policies" d="Policies" /></p>
               <ul className="mt-3 space-y-1.5">
                 {POLICIES.map((policy) => (
                   <li key={policy.href}>
@@ -148,9 +149,9 @@ export const LegalPage = async ({ legalKey, title: defaultTitle, path, intro: de
 
           {/* Contact card */}
           <div className="mt-10 rounded-[28px] border border-[#FF8500]/30 bg-gradient-to-br from-[#FF8500]/15 via-[#0C1E4E] to-[#0C1E4E] p-6 sm:p-8">
-            <p className="text-[10px] font-mono uppercase tracking-widest text-[#FFA133]">Questions?</p>
-            <p className="mt-2 font-agency text-2xl font-extrabold text-white">We&apos;re happy to help.</p>
-            <p className="mt-1.5 text-sm text-slate-400">Contact us about this policy or anything related to your project.</p>
+            <p className="text-[10px] font-mono uppercase tracking-widest text-[#FFA133]"><Tx k="legal/LegalPage.questions" d="Questions?" /></p>
+            <p className="mt-2 font-agency text-2xl font-extrabold text-white"><Tx k="legal/LegalPage.we-re-happy-to-help" d="We're happy to help." /></p>
+            <p className="mt-1.5 text-sm text-slate-400"><Tx k="legal/LegalPage.contact-us-about-this-policy-or" d="Contact us about this policy or anything related to your project." /></p>
             <div className="mt-5 flex flex-col sm:flex-row gap-3 sm:gap-6 text-sm">
               <a href={`mailto:${CONTACT_EMAIL}`} className="inline-flex items-center gap-2 font-semibold text-white hover:text-[#FFA133]">
                 <Mail className="w-4 h-4 text-[#FFA133]" />

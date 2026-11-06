@@ -2,6 +2,7 @@ import { ImageResponse } from "next/og";
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { OG_IMAGE } from "@/lib/seo";
+import { getBrandIcons } from "@/sanity/content";
 
 // Shared social preview card (Facebook, LinkedIn, WhatsApp, X) for every page
 export const alt = OG_IMAGE.alt;
@@ -12,6 +13,17 @@ const SERVICES_LINE = "Logos · Packaging · Social Media · Video · Websites �
 const BADGES = ["Dhaka, Bangladesh", "Clients worldwide", "Prices in BDT & USD"];
 
 export default async function Image() {
+  // A share image uploaded in Site Settings → "Website icon & share image" replaces the generated card.
+  const { shareImageUrl } = await getBrandIcons();
+  if (shareImageUrl) {
+    try {
+      const res = await fetch(`${shareImageUrl}?w=${size.width}&h=${size.height}&fit=crop&fm=png`);
+      if (res.ok) return new Response(res.body, { headers: { "content-type": contentType } });
+    } catch {
+      // fall back to the generated card
+    }
+  }
+
   const [agency, logo] = await Promise.all([
     readFile(join(process.cwd(), "public/fonts/agency.otf")),
     readFile(join(process.cwd(), "public/images/logo.png")),

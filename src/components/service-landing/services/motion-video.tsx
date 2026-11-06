@@ -13,13 +13,14 @@ import {
   Smartphone,
   Zap,
   User,
-} from "lucide-react";
+} from "@/content/lucide";
 import { ServiceLandingPage, type ServicePageProps } from "../ServiceLandingPage";
 import { GradientText, SampleMark, Wordmark } from "@/components/page-kit/shared";
 import { ChipIconBox, FloatingChip, Lines, MonoLabel, TILE_DARK } from "@/components/page-kit/primitives";
 import { ServiceHeroVideo } from "../sections/ServiceHeroVideo";
 import type { ServiceConfig } from "../types";
 import { SERVICE_PRICING } from "@/data/servicePricing";
+import { tx } from "@/content/text";
 
 const PRICING = SERVICE_PRICING["motion-video"];
 
@@ -117,12 +118,12 @@ const HeroVisual = () => (
   <ServiceHeroVideo
     videoSrc="/video/Creative-Logo-Branding-Solutions-for-Your-Business-_-Pixim-Design.mp4"
     posterSrc="/video/posters/Creative-Logo-Branding-Solutions-for-Your-Business-_-Pixim-Design.webp"
-    badge="4K Motion Reel"
+    badge={tx("service-landing/services/motion-video.4k-motion-reel", "4K Motion Reel")}
     topChip={
       <FloatingChip
         className="right-3 -top-4 sm:-top-5"
         icon={<span className="w-2 h-2 rounded-full bg-[#FF5F57] animate-pulse" />}
-        title="4K · 60fps"
+        title={tx("service-landing/services/motion-video.4k-60fps", "4K · 60fps")}
       />
     }
     bottomChip={
@@ -134,8 +135,8 @@ const HeroVisual = () => (
             <Music className="w-3.5 h-3.5" />
           </ChipIconBox>
         }
-        title="Sound design added"
-        sub="Licensed music · mixed"
+        title={tx("service-landing/services/motion-video.sound-design-added", "Sound design added")}
+        sub={tx("service-landing/services/motion-video.licensed-music-mixed", "Licensed music · mixed")}
       />
     }
   />
@@ -173,7 +174,7 @@ const MotionPathVisual = () => {
         </g>
       </svg>
       <div className="absolute right-2 top-2 rounded-xl border border-white/10 bg-[#081330]/85 p-2.5">
-        <MonoLabel>Ease out</MonoLabel>
+        <MonoLabel>{tx("service-landing/services/motion-video.ease-out", "Ease out")}</MonoLabel>
         <svg viewBox="0 0 60 36" className="mt-1 w-16 h-10" aria-hidden="true">
           <path d="M2 34 C 20 4, 36 2, 58 2" stroke="#FFA133" strokeWidth={2} fill="none" strokeLinecap="round" />
           <line x1="2" y1="34" x2="58" y2="34" stroke="rgba(255,255,255,0.15)" />
@@ -242,9 +243,9 @@ const SoundVisual = () => (
     <Waveform className="h-16" mirrored />
     <div className="flex items-center justify-between text-[9px] font-mono text-slate-500">
       <span className="flex items-center gap-1 text-[#FFA133]">
-        <Music className="w-3 h-3" /> score.wav
+        <Music className="w-3 h-3" /> {tx("service-landing/services/motion-video.score-wav", "score.wav")}
       </span>
-      <span>-14 LUFS</span>
+      <span>{tx("service-landing/services/motion-video.14-lufs", "-14 LUFS")}</span>
     </div>
   </div>
 );
@@ -262,9 +263,9 @@ const PromoVisual = () => (
 const ExplainerVisual = () => (
   <div className="flex h-full items-center gap-1.5 sm:gap-2">
     {[
-      { icon: <User className="w-6 h-6 text-slate-300" />, label: "Problem" },
-      { icon: <Smartphone className="w-6 h-6 text-[#FFA133]" />, label: "Solution" },
-      { icon: <CheckCircle2 className="w-6 h-6 text-emerald-400" />, label: "Result" },
+      { icon: <User className="w-6 h-6 text-slate-300" />, label: tx("service-landing/services/motion-video.problem", "Problem") },
+      { icon: <Smartphone className="w-6 h-6 text-[#FFA133]" />, label: tx("service-landing/services/motion-video.solution", "Solution") },
+      { icon: <CheckCircle2 className="w-6 h-6 text-emerald-400" />, label: tx("service-landing/services/motion-video.result", "Result") },
     ].map((scene, i) => (
       <React.Fragment key={scene.label}>
         <div className="flex flex-1 flex-col items-center gap-1.5">
@@ -299,7 +300,7 @@ const StoryboardPanel = () => (
         </div>
         <div className="mt-2 flex items-center justify-between">
           <span className="text-[10px] font-semibold text-white">{panel.scene}</span>
-          <span className="text-[9px] font-mono text-slate-500">SC 0{i + 1}</span>
+          <span className="text-[9px] font-mono text-slate-500">{tx("service-landing/services/motion-video.sc-0", "SC 0")}{i + 1}</span>
         </div>
         <Lines widths={["w-full", "w-2/3"]} className="mt-1.5 space-y-1" barClass="h-1 bg-white/15" />
       </div>
@@ -323,10 +324,10 @@ const FormatsPanel = () => (
   <div className="rounded-2xl bg-[#081330] border border-[#2651B9]/35 p-4 sm:p-5">
     <div className="flex items-end justify-between gap-2 sm:gap-3">
       {[
-        { ratio: "aspect-video", w: "w-[38%]", label: "16:9", use: "YouTube · Web", res: "3840×2160" },
-        { ratio: "aspect-square", w: "w-[20%]", label: "1:1", use: "Feed", res: "1080×1080" },
-        { ratio: "aspect-[4/5]", w: "w-[18%]", label: "4:5", use: "Portrait", res: "1080×1350" },
-        { ratio: "aspect-[9/16]", w: "w-[14%]", label: "9:16", use: "Reels", res: "1080×1920" },
+        { ratio: "aspect-video", w: "w-[38%]", label: "16:9", use: tx("service-landing/services/motion-video.youtube-web", "YouTube · Web"), res: "3840×2160" },
+        { ratio: "aspect-square", w: "w-[20%]", label: "1:1", use: tx("service-landing/services/motion-video.feed", "Feed"), res: "1080×1080" },
+        { ratio: "aspect-[4/5]", w: "w-[18%]", label: "4:5", use: tx("service-landing/services/motion-video.portrait", "Portrait"), res: "1080×1350" },
+        { ratio: "aspect-[9/16]", w: "w-[14%]", label: "9:16", use: tx("service-landing/services/motion-video.reels", "Reels"), res: "1080×1920" },
       ].map((f, i) => (
         <div key={f.label} className={`${f.w} flex flex-col items-center gap-1.5`}>
           <div
@@ -349,8 +350,8 @@ const SoundFinishPanel = () => (
   <div className="space-y-3">
     <div className="rounded-2xl bg-[#081330] border border-[#2651B9]/35 p-4">
       <div className="mb-3 flex items-center justify-between">
-        <MonoLabel>Final mix</MonoLabel>
-        <MonoLabel className="text-[#FFA133]">Music · SFX · VO</MonoLabel>
+        <MonoLabel>{tx("service-landing/services/motion-video.final-mix", "Final mix")}</MonoLabel>
+        <MonoLabel className="text-[#FFA133]">{tx("service-landing/services/motion-video.music-sfx-vo", "Music · SFX · VO")}</MonoLabel>
       </div>
       <Waveform className="h-20" mirrored />
     </div>

@@ -1,9 +1,10 @@
 ﻿"use client";
 
 import React, { useRef, useState } from "react";
-import { ArrowRight, Send, Volume2, VolumeX, Play } from "lucide-react";
+import { ArrowRight, Send, Volume2, VolumeX, Play } from "@/content/lucide";
 import { GsapMagneticButton } from "@/components/animations/GsapMagneticButton";
 import { media } from "@/content/media";
+import { tx } from "@/content/text";
 
 interface ReadyForLogoSectionProps {
   onOpenContact?: (service?: string, note?: string) => void;
@@ -193,7 +194,7 @@ export const ReadyForLogoSection: React.FC<ReadyForLogoSectionProps> = ({
                       : "!bg-gradient-to-r !from-[#FF8500] !to-[#FFA133] hover:!from-[#e67700] hover:!to-[#FF8500] !text-white shadow-lg shadow-orange-500/25 transition-all duration-300 hover:shadow-orange-500/40 hover:scale-[1.02] active:scale-95"
                   }`}
                 >
-                  <span>GET STARTED</span>
+                  <span>{tx("ReadyForLogoSection.get-started", "GET STARTED")}</span>
                   <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
                 </GsapMagneticButton>
 
@@ -210,7 +211,7 @@ export const ReadyForLogoSection: React.FC<ReadyForLogoSectionProps> = ({
                       : "!bg-white/[0.08] hover:!bg-white/[0.15] !text-white border border-white/25 backdrop-blur-md shadow-sm transition-all duration-300 hover:border-white/40 hover:scale-[1.02] active:scale-95"
                   }`}
                 >
-                  <span>BOOK NOW</span>
+                  <span>{tx("ReadyForLogoSection.book-now", "BOOK NOW")}</span>
                   <Send className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5 -rotate-12" />
                 </GsapMagneticButton>
               </div>

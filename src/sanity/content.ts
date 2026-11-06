@@ -1,6 +1,20 @@
 import { isSanityConfigured } from "./env";
 import { sanityFetch } from "./live";
-import { CATALOG_QUERY, HOME_QUERY, LEGAL_QUERY, MEDIA_QUERY, PAGE_QUERY, SERVICE_PAGE_QUERY, SETTINGS_QUERY } from "./queries";
+import {
+  BRAND_ICONS_QUERY,
+  CATALOG_QUERY,
+  HOME_QUERY,
+  ICON_QUERY,
+  LEGAL_QUERY,
+  MEDIA_QUERY,
+  PAGE_QUERY,
+  SERVICE_PAGE_QUERY,
+  SETTINGS_QUERY,
+  TEXT_ALL_QUERY,
+  TEXT_CHANGED_QUERY,
+} from "./queries";
+import { draftMode } from "next/headers";
+import type { CustomIconData } from "@/content/icons";
 import type { PageOverride } from "@/content/pageMerge";
 import type { ServicePageOverride } from "@/components/service-landing/applyOverride";
 import { CATALOG_DEFAULTS, mergeCatalog, type Catalog } from "@/content/catalog";
@@ -88,6 +102,59 @@ export async function getMediaMap(): Promise<Record<string, string>> {
     return map;
   } catch (err) {
     console.error("[sanity] media fetch failed, using original files:", err instanceof Error ? err.message : err);
+    return {};
+  }
+}
+
+/** Edited small texts: key → text (empty → built-in text is used). */
+export async function getTextMap(): Promise<Record<string, string>> {
+  if (!isSanityConfigured) return {};
+  try {
+    const { isEnabled: preview } = await draftMode();
+    const { data } = await sanityFetch({ query: preview ? TEXT_ALL_QUERY : TEXT_CHANGED_QUERY });
+    const map: Record<string, string> = {};
+    for (const group of (data as { items?: { key?: string; text?: string }[] }[] | null) ?? []) {
+      for (const item of group?.items ?? []) {
+        if (item?.key && typeof item.text === "string" && item.text.trim() !== "") map[item.key] = item.text;
+      }
+    }
+    return map;
+  } catch (err) {
+    console.error("[sanity] text fetch failed, using built-in texts:", err instanceof Error ? err.message : err);
+    return {};
+  }
+}
+
+/** Replaced icons: key → uploaded icon. */
+export async function getIconMap(): Promise<Record<string, CustomIconData>> {
+  if (!isSanityConfigured) return {};
+  try {
+    const { data } = await sanityFetch({ query: ICON_QUERY, stega: false });
+    const map: Record<string, CustomIconData> = {};
+    for (const item of (data as { key?: string; url?: string; tint?: boolean }[] | null) ?? []) {
+      if (item?.key && item?.url) map[item.key] = { url: item.url, tint: item.tint !== false };
+    }
+    return map;
+  } catch (err) {
+    console.error("[sanity] icon fetch failed, using built-in icons:", err instanceof Error ? err.message : err);
+    return {};
+  }
+}
+
+export interface BrandIcons {
+  faviconUrl?: string;
+  appleIconUrl?: string;
+  shareImageUrl?: string;
+}
+
+/** Website icon (browser tab), phone home-screen icon and social share image. */
+export async function getBrandIcons(): Promise<BrandIcons> {
+  if (!isSanityConfigured) return {};
+  try {
+    const { data } = await sanityFetch({ query: BRAND_ICONS_QUERY, stega: false });
+    return (data as BrandIcons | null) ?? {};
+  } catch (err) {
+    console.error("[sanity] brand icon fetch failed, using built-in icons:", err instanceof Error ? err.message : err);
     return {};
   }
 }

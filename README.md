@@ -1,5 +1,34 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## Editing the website (Sanity Studio)
+
+Everything on the site can be changed at `/studio` without touching code:
+
+| Studio section | What it changes |
+| --- | --- |
+| Site Settings | Contact info, social links, client logos, header/footer/banner, **website icon (favicon), phone icon, share image** |
+| Home Page, Pages, Service pages, Legal pages | Main texts, lists, FAQs, prices of each page |
+| Website text (buttons, labels…) | Every small text on each page: buttons, labels, card texts, chips, team roles … |
+| Images & Videos | Every picture and video on the site |
+| Icons | Every icon (line icons, social icons, service icons) |
+
+Tip: in **Visual Editing** click any text on the page to jump straight to it.
+
+### For developers – keeping the editor lists up to date
+
+- Write new small texts as `tx("component.some-key", "Default text")` (from `@/content/text`) so they appear in the editor.
+- Import icons from `@/content/lucide` (not `lucide-react`) so they can be replaced.
+- Wrap image/video paths with `media("/images/…")` (from `@/content/media`).
+- Then regenerate the lists and commit them:
+
+```bash
+node scripts/text-manifest.mjs
+node scripts/icon-manifest.mjs
+node scripts/media-manifest.mjs
+```
+
+After deploying, open `/studio/import` and press **“Add new texts, icons & images”** (your existing edits are kept).
+
 ## Getting Started
 
 First, run the development server:

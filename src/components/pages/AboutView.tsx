@@ -3,7 +3,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, CheckCircle2, FileCheck, Handshake, LifeBuoy, MessageCircle } from "lucide-react";
+import { ArrowRight, CheckCircle2, FileCheck, Handshake, LifeBuoy, MessageCircle } from "@/content/lucide";
 import { SERVICE_ICONS } from "@/components/serviceIcons";
 import { Eyebrow, GradientText, SectionTitle } from "@/components/page-kit/shared";
 import { AGENCY_STATS } from "@/data/agencyData";
@@ -13,6 +13,7 @@ import { TeamSection } from "@/components/about/TeamSection";
 import { ProcessSection } from "@/components/about/ProcessSection";
 import { BookingCalendarSection } from "@/components/about/BookingCalendarSection";
 import { media } from "@/content/media";
+import { tx } from "@/content/text";
 
 export const ABOUT_PAGE_DEFAULTS: PageContent = {
   hero: {
@@ -88,12 +89,12 @@ export const AboutView: React.FC = () => {
           <ol className="flex items-center gap-2 text-xs text-slate-500">
             <li>
               <Link href="/" className="hover:text-[#FFA133] transition-colors">
-                Home
+                {tx("pages/AboutView.home", "Home")}
               </Link>
             </li>
             <li aria-hidden>/</li>
             <li className="text-slate-300" aria-current="page">
-              About
+              {tx("pages/AboutView.about", "About")}
             </li>
           </ol>
         </nav>
@@ -129,7 +130,7 @@ export const AboutView: React.FC = () => {
         <figure className="relative mx-auto w-full max-w-md">
           <Image
             src={media("/images/consultation/director-card-clean.png")}
-            alt="Pixim Design's design director"
+            alt={tx("pages/AboutView.pixim-design-s-design-director", "Pixim Design's design director")}
             width={466}
             height={411}
             sizes="(max-width: 1024px) 90vw, 448px"

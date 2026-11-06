@@ -10,7 +10,8 @@ import {
   Download, 
   Layers,
   Sparkles
-} from "lucide-react";
+} from "@/content/lucide";
+import { tx } from "@/content/text";
 
 interface StepItem {
   id: string;
@@ -23,30 +24,26 @@ const PROCESS_STEPS: StepItem[] = [
   {
     id: "questionnaire",
     stepNumber: "01",
-    title: "Questionnaire",
-    description:
-      "You fill out a short form that takes about ten minutes, and from your answers we learn what your product does, who buys it, and why anyone should care.",
+    get title() { return tx("about/ProcessSection.questionnaire", "Questionnaire"); },
+    get description() { return tx("about/ProcessSection.you-fill-out-a-short-form", "You fill out a short form that takes about ten minutes, and from your answers we learn what your product does, who buys it, and why anyone should care."); },
   },
   {
     id: "storyboarding",
     stepNumber: "02",
-    title: "Story boarding",
-    description:
-      "Before we start animating anything, you see exactly what the design will communicate and how every frame will look, and once you give your notes we lock the whole thing in.",
+    get title() { return tx("about/ProcessSection.story-boarding", "Story boarding"); },
+    get description() { return tx("about/ProcessSection.before-we-start-animating-anything-you", "Before we start animating anything, you see exactly what the design will communicate and how every frame will look, and once you give your notes we lock the whole thing in."); },
   },
   {
     id: "animation-dev",
     stepNumber: "03",
-    title: "Final Animation",
-    description:
-      "Custom animation, illustrations, sound design, and clean code all come from the same in-house team, working on your project from the first day to the last.",
+    get title() { return tx("about/ProcessSection.final-animation", "Final Animation"); },
+    get description() { return tx("about/ProcessSection.custom-animation-illustrations-sound-design-and", "Custom animation, illustrations, sound design, and clean code all come from the same in-house team, working on your project from the first day to the last."); },
   },
   {
     id: "delivery",
     stepNumber: "04",
-    title: "Delivery",
-    description:
-      "You get the variations for every platform you post on, usually within 2 weeks from kickoff.",
+    get title() { return tx("about/ProcessSection.delivery", "Delivery"); },
+    get description() { return tx("about/ProcessSection.you-get-the-variations-for-every", "You get the variations for every platform you post on, usually within 2 weeks from kickoff."); },
   },
 ];
 
@@ -60,12 +57,12 @@ export const ProcessSection: React.FC = () => {
 
       {/* Header */}
       <div className="max-w-2xl mb-14 sm:mb-20">
-        <Eyebrow>How We Work</Eyebrow>
+        <Eyebrow>{tx("about/ProcessSection.how-we-work", "How We Work")}</Eyebrow>
         <h2 className="mt-4 font-agency text-3xl sm:text-4xl lg:text-[46px] font-extrabold text-white tracking-tight leading-[1.08]">
-          How your project moves <GradientText>from brief to launch</GradientText>
+          {tx("about/ProcessSection.how-your-project-moves", "How your project moves")} <GradientText>{tx("about/ProcessSection.from-brief-to-launch", "from brief to launch")}</GradientText>
         </h2>
         <p className="mt-3 text-base sm:text-lg text-slate-300 leading-relaxed">
-          A predictable, transparent four-step pipeline from first brief to global launch.
+          {tx("about/ProcessSection.a-predictable-transparent-four-step-pipeline", "A predictable, transparent four-step pipeline from first brief to global launch.")}
         </p>
       </div>
 
@@ -97,7 +94,7 @@ export const ProcessSection: React.FC = () => {
 
                 <div className="flex items-center gap-2 mb-2 lg:hidden">
                   <span className="w-2 h-2 rounded-[2px] bg-[#FF8500]" />
-                  <span className="text-xs font-mono font-bold text-[#FFA133]">Step {step.stepNumber}</span>
+                  <span className="text-xs font-mono font-bold text-[#FFA133]">{tx("about/ProcessSection.step", "Step")} {step.stepNumber}</span>
                 </div>
 
                 {/* Minimal Title + Superscript Badge */}
@@ -126,40 +123,40 @@ export const ProcessSection: React.FC = () => {
                       {/* Bubble 1: Studio Question */}
                       <div className="flex items-start gap-2.5 max-w-[85%]">
                         <div className="w-6 h-6 rounded-md bg-gradient-to-tr from-[#2452C7] to-[#FF8500] flex items-center justify-center text-white text-[9px] font-black shrink-0">
-                          PX
+                          {tx("about/ProcessSection.px", "PX")}
                         </div>
                         <div className="p-2.5 sm:p-3 rounded-2xl rounded-tl-sm bg-[#16295C]/80 border border-[#2651B9]/40 text-xs text-slate-200">
-                          What does your product do?
+                          {tx("about/ProcessSection.what-does-your-product-do", "What does your product do?")}
                         </div>
                       </div>
 
                       {/* Bubble 2: Client Answer */}
                       <div className="flex items-start gap-2.5 max-w-[85%] ml-auto justify-end">
                         <div className="p-2.5 sm:p-3 rounded-2xl rounded-tr-sm bg-gradient-to-r from-[#FF8500] to-[#E66000] text-white text-xs font-medium shadow-md shadow-orange-500/15">
-                          SaaS project management tool for startups
+                          {tx("about/ProcessSection.saas-project-management-tool-for-startups", "SaaS project management tool for startups")}
                         </div>
                         <div className="w-6 h-6 rounded-md bg-slate-700 border border-white/20 flex items-center justify-center text-white text-[9px] font-bold shrink-0">
-                          YOU
+                          {tx("about/ProcessSection.you", "YOU")}
                         </div>
                       </div>
 
                       {/* Bubble 3: Studio Question 2 */}
                       <div className="flex items-start gap-2.5 max-w-[85%]">
                         <div className="w-6 h-6 rounded-md bg-gradient-to-tr from-[#2452C7] to-[#FF8500] flex items-center justify-center text-white text-[9px] font-black shrink-0">
-                          PX
+                          {tx("about/ProcessSection.px", "PX")}
                         </div>
                         <div className="p-2.5 sm:p-3 rounded-2xl rounded-tl-sm bg-[#16295C]/80 border border-[#2651B9]/40 text-xs text-slate-200">
-                          Who is your ideal customer?
+                          {tx("about/ProcessSection.who-is-your-ideal-customer", "Who is your ideal customer?")}
                         </div>
                       </div>
 
                       {/* Bubble 4: Client Answer 2 */}
                       <div className="flex items-start gap-2.5 max-w-[85%] ml-auto justify-end">
                         <div className="p-2.5 sm:p-3 rounded-2xl rounded-tr-sm bg-gradient-to-r from-[#FF8500] to-[#E66000] text-white text-xs font-medium shadow-md shadow-orange-500/15">
-                          Founders &amp; operation teams at early-stage startups
+                          {tx("about/ProcessSection.founders-operation-teams-at-early-stage", "Founders & operation teams at early-stage startups")}
                         </div>
                         <div className="w-6 h-6 rounded-md bg-slate-700 border border-white/20 flex items-center justify-center text-white text-[9px] font-bold shrink-0">
-                          YOU
+                          {tx("about/ProcessSection.you", "YOU")}
                         </div>
                       </div>
 
@@ -180,7 +177,7 @@ export const ProcessSection: React.FC = () => {
                         <div className="p-3 rounded-xl bg-[#091535] border border-[#2651B9]/35 hover:border-[#FF8500]/40 transition-colors">
                           <div className="flex items-center gap-1.5 text-xs font-bold text-white mb-2">
                             <Palette className="w-3 h-3 text-[#FF8500]" />
-                            <span>Color Palette</span>
+                            <span>{tx("about/ProcessSection.color-palette", "Color Palette")}</span>
                           </div>
                           <div className="flex gap-1.5">
                             <span className="w-5 h-5 rounded-md bg-[#081330] border border-white/20" />
@@ -194,7 +191,7 @@ export const ProcessSection: React.FC = () => {
                         <div className="p-3 rounded-xl bg-[#091535] border border-[#2651B9]/35 hover:border-[#FF8500]/40 transition-colors">
                           <div className="flex items-center gap-1.5 text-xs font-bold text-white mb-1.5">
                             <Film className="w-3 h-3 text-cyan-400" />
-                            <span>Motion Style</span>
+                            <span>{tx("about/ProcessSection.motion-style", "Motion Style")}</span>
                           </div>
                           <div className="h-5 flex items-center gap-1">
                             <span className="w-1 h-3 bg-cyan-400/80 rounded-full" />
@@ -208,14 +205,14 @@ export const ProcessSection: React.FC = () => {
                         <div className="p-3 rounded-xl bg-[#091535] border border-[#2651B9]/35 hover:border-[#FF8500]/40 transition-colors col-span-2 sm:col-span-1">
                           <div className="flex items-center gap-1.5 text-xs font-bold text-white mb-1.5">
                             <Sliders className="w-3 h-3 text-emerald-400" />
-                            <span>Tone &amp; Voice</span>
+                            <span>{tx("about/ProcessSection.tone-voice", "Tone & Voice")}</span>
                           </div>
                           <div className="flex gap-1">
                             <span className="text-[9px] px-1.5 py-0.5 rounded bg-emerald-400/10 text-emerald-300 font-semibold border border-emerald-400/20">
-                              Bold
+                              {tx("about/ProcessSection.bold", "Bold")}
                             </span>
                             <span className="text-[9px] px-1.5 py-0.5 rounded bg-blue-400/10 text-blue-300 font-semibold border border-blue-400/20">
-                              Clean
+                              {tx("about/ProcessSection.clean", "Clean")}
                             </span>
                           </div>
                         </div>
@@ -223,29 +220,29 @@ export const ProcessSection: React.FC = () => {
                         {/* Card: Scene Direction */}
                         <div className="p-3 rounded-xl bg-[#091535] border border-[#2651B9]/35 hover:border-[#FF8500]/40 transition-colors col-span-2 sm:col-span-2">
                           <div className="flex items-center justify-between text-xs font-bold text-white mb-2">
-                            <span>Scene Direction</span>
-                            <span className="text-[10px] font-mono text-[#FFA133]">04 Sections</span>
+                            <span>{tx("about/ProcessSection.scene-direction", "Scene Direction")}</span>
+                            <span className="text-[10px] font-mono text-[#FFA133]">{tx("about/ProcessSection.04-sections", "04 Sections")}</span>
                           </div>
                           <div className="grid grid-cols-4 gap-1.5 h-9">
                             <div className="rounded bg-[#16295C]/60 border border-blue-400/20 p-1 flex items-end">
-                              <span className="text-[8px] font-mono text-slate-300 truncate">Intro</span>
+                              <span className="text-[8px] font-mono text-slate-300 truncate">{tx("about/ProcessSection.intro", "Intro")}</span>
                             </div>
                             <div className="rounded bg-[#16295C]/60 border border-blue-400/20 p-1 flex items-end">
-                              <span className="text-[8px] font-mono text-slate-300 truncate">Core</span>
+                              <span className="text-[8px] font-mono text-slate-300 truncate">{tx("about/ProcessSection.core", "Core")}</span>
                             </div>
                             <div className="rounded bg-[#16295C]/60 border border-blue-400/20 p-1 flex items-end">
-                              <span className="text-[8px] font-mono text-slate-300 truncate">Stats</span>
+                              <span className="text-[8px] font-mono text-slate-300 truncate">{tx("about/ProcessSection.stats", "Stats")}</span>
                             </div>
                             <div className="rounded bg-[#FF8500]/15 border border-[#FF8500]/40 p-1 flex items-end">
-                              <span className="text-[8px] font-mono text-[#FFA133] truncate">CTA</span>
+                              <span className="text-[8px] font-mono text-[#FFA133] truncate">{tx("about/ProcessSection.cta", "CTA")}</span>
                             </div>
                           </div>
                         </div>
 
                         {/* Card: Visual Reference */}
                         <div className="p-3 rounded-xl bg-[#091535] border border-[#2651B9]/35 hover:border-[#FF8500]/40 transition-colors">
-                          <div className="text-xs font-bold text-white mb-1">Visual Reference</div>
-                          <div className="text-[9px] text-slate-400">Dark High-Tech UI</div>
+                          <div className="text-xs font-bold text-white mb-1">{tx("about/ProcessSection.visual-reference", "Visual Reference")}</div>
+                          <div className="text-[9px] text-slate-400">{tx("about/ProcessSection.dark-high-tech-ui", "Dark High-Tech UI")}</div>
                         </div>
                       </div>
                     </div>
@@ -261,40 +258,40 @@ export const ProcessSection: React.FC = () => {
                             <Sparkles className="w-4 h-4" />
                           </div>
                           <div>
-                            <div className="text-xs font-bold text-white">Interactive Production Track</div>
-                            <div className="text-[9px] text-slate-400 font-mono">React 19 • GSAP Motion • CSS</div>
+                            <div className="text-xs font-bold text-white">{tx("about/ProcessSection.interactive-production-track", "Interactive Production Track")}</div>
+                            <div className="text-[9px] text-slate-400 font-mono">{tx("about/ProcessSection.react-19-gsap-motion-css", "React 19 • GSAP Motion • CSS")}</div>
                           </div>
                         </div>
                         <span className="px-2 py-0.5 rounded text-[9px] font-mono bg-emerald-500/20 text-emerald-300 font-bold border border-emerald-500/30">
-                          Active
+                          {tx("about/ProcessSection.active", "Active")}
                         </span>
                       </div>
 
                       {/* Timeline Tracks */}
                       <div className="space-y-1.5 font-mono text-[10px]">
                         <div className="flex items-center gap-2">
-                          <span className="w-16 text-slate-400 text-[9px] shrink-0">UI Engine</span>
+                          <span className="w-16 text-slate-400 text-[9px] shrink-0">{tx("about/ProcessSection.ui-engine", "UI Engine")}</span>
                           <div className="flex-1 h-4 rounded bg-slate-900 border border-white/5 flex items-center overflow-hidden p-0.5">
                             <div className="h-full w-2/3 rounded bg-gradient-to-r from-blue-600 to-indigo-500 px-1.5 text-[8px] text-white flex items-center">
-                              Components
+                              {tx("about/ProcessSection.components", "Components")}
                             </div>
                           </div>
                         </div>
 
                         <div className="flex items-center gap-2">
-                          <span className="w-16 text-slate-400 text-[9px] shrink-0">Motion</span>
+                          <span className="w-16 text-slate-400 text-[9px] shrink-0">{tx("about/ProcessSection.motion", "Motion")}</span>
                           <div className="flex-1 h-4 rounded bg-slate-900 border border-white/5 flex items-center overflow-hidden p-0.5">
                             <div className="h-full w-4/5 rounded bg-gradient-to-r from-[#FF8500] to-amber-500 px-1.5 text-[8px] text-slate-900 font-bold flex items-center">
-                              Keyframes &amp; Easing
+                              {tx("about/ProcessSection.keyframes-easing", "Keyframes & Easing")}
                             </div>
                           </div>
                         </div>
 
                         <div className="flex items-center gap-2">
-                          <span className="w-16 text-slate-400 text-[9px] shrink-0">Audio</span>
+                          <span className="w-16 text-slate-400 text-[9px] shrink-0">{tx("about/ProcessSection.audio", "Audio")}</span>
                           <div className="flex-1 h-4 rounded bg-slate-900 border border-white/5 flex items-center overflow-hidden p-0.5">
                             <div className="h-full w-1/2 rounded bg-gradient-to-r from-cyan-600 to-emerald-500 px-1.5 text-[8px] text-white flex items-center">
-                              Sound Layers
+                              {tx("about/ProcessSection.sound-layers", "Sound Layers")}
                             </div>
                           </div>
                         </div>
@@ -314,32 +311,32 @@ export const ProcessSection: React.FC = () => {
                           </div>
                           <div>
                             <div className="text-xs font-bold text-white font-agency tracking-wide">
-                              pixim_master_deliverables.zip
+                              {tx("about/ProcessSection.pixim-master-deliverables-zip", "pixim_master_deliverables.zip")}
                             </div>
                             <div className="text-[10px] text-slate-400">
-                              Master Vector Files • Figma • Source Code
+                              {tx("about/ProcessSection.master-vector-files-figma-source-code", "Master Vector Files • Figma • Source Code")}
                             </div>
                           </div>
                         </div>
 
                         <span className="px-2.5 py-1 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 text-[10px] font-mono font-bold shrink-0">
-                          Ready
+                          {tx("about/ProcessSection.ready", "Ready")}
                         </span>
                       </div>
 
                       {/* Format Badges */}
                       <div className="mt-3 grid grid-cols-4 gap-1.5 text-center">
                         <div className="p-2 rounded-lg bg-[#081330] border border-white/10 text-[10px] font-mono text-white">
-                          .AI / .EPS
+                          {tx("about/ProcessSection.ai-eps", ".AI / .EPS")}
                         </div>
                         <div className="p-2 rounded-lg bg-[#081330] border border-white/10 text-[10px] font-mono text-[#FFA133]">
-                          FIGMA
+                          {tx("about/ProcessSection.figma", "FIGMA")}
                         </div>
                         <div className="p-2 rounded-lg bg-[#081330] border border-white/10 text-[10px] font-mono text-cyan-400">
-                          CODE
+                          {tx("about/ProcessSection.code", "CODE")}
                         </div>
                         <div className="p-2 rounded-lg bg-[#081330] border border-white/10 text-[10px] font-mono text-emerald-400">
-                          WARRANTY
+                          {tx("about/ProcessSection.warranty", "WARRANTY")}
                         </div>
                       </div>
                     </div>

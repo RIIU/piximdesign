@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Star, ShieldCheck, Globe, ChevronRight } from "lucide-react";
+import { Star, ShieldCheck, Globe, ChevronRight } from "@/content/lucide";
 
 interface RotatingTrustBadgeProps {
   onClick?: () => void;

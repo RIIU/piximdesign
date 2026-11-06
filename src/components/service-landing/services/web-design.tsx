@@ -1,13 +1,14 @@
 "use client";
 
 import React from "react";
-import { ArrowRight, Check, MousePointer2, MousePointerClick, Rocket, ShieldCheck, ShoppingCart, SquarePen, Zap } from "lucide-react";
+import { ArrowRight, Check, MousePointer2, MousePointerClick, Rocket, ShieldCheck, ShoppingCart, SquarePen, Zap } from "@/content/lucide";
 import { ServiceLandingPage, type ServicePageProps } from "../ServiceLandingPage";
 import { GradientText, SampleMark, Wordmark } from "@/components/page-kit/shared";
 import { BrowserFrame, ChipIconBox, FloatingChip, Lines, MonoLabel, PhoneFrame, Ring, TILE_DARK } from "@/components/page-kit/primitives";
 import { ServiceHeroVideo } from "../sections/ServiceHeroVideo";
 import type { ServiceConfig } from "../types";
 import { SERVICE_PRICING } from "@/data/servicePricing";
+import { tx } from "@/content/text";
 
 const PRICING = SERVICE_PRICING["web-design"];
 
@@ -30,7 +31,7 @@ const SitePreview: React.FC<{ compact?: boolean }> = ({ compact = false }) => (
           ))}
         </div>
       )}
-      <span className="rounded-full bg-[#FF8500] px-2 py-0.5 text-[7px] font-bold text-white">Get started</span>
+      <span className="rounded-full bg-[#FF8500] px-2 py-0.5 text-[7px] font-bold text-white">{tx("service-landing/services/web-design.get-started", "Get started")}</span>
     </div>
     <div className={`grid gap-3 items-center ${compact ? "grid-cols-1" : "grid-cols-5"}`}>
       <div className={compact ? "" : "col-span-3"}>
@@ -61,12 +62,12 @@ const HeroVisual = () => (
   <ServiceHeroVideo
     videoSrc="/video/Grow-Your-Business-with-Creative-Design-_-Pixim-Design-Agency.mp4"
     posterSrc="/video/posters/Grow-Your-Business-with-Creative-Design-_-Pixim-Design-Agency.webp"
-    badge="Web Experience Reel"
+    badge={tx("service-landing/services/web-design.web-experience-reel", "Web Experience Reel")}
     topChip={
       <FloatingChip
         className="right-3 -top-4 sm:-top-5"
         icon={<Zap className="w-3.5 h-3.5 text-[#FFA133] fill-[#FFA133]" />}
-        title="Sub-second load"
+        title={tx("service-landing/services/web-design.sub-second-load", "Sub-second load")}
       />
     }
     bottomChip={
@@ -78,8 +79,8 @@ const HeroVisual = () => (
             <Rocket className="w-3.5 h-3.5" />
           </ChipIconBox>
         }
-        title="Deployed to production"
-        sub="Mobile-first · SEO-ready"
+        title={tx("service-landing/services/web-design.deployed-to-production", "Deployed to production")}
+        sub={tx("service-landing/services/web-design.mobile-first-seo-ready", "Mobile-first · SEO-ready")}
       />
     }
   />
@@ -111,10 +112,10 @@ const BusinessSiteVisual = () => (
 const LandingPageVisual = () => (
   <div className="flex h-full items-center gap-1.5 sm:gap-2">
     {[
-      { l: "Hero", c: "bg-gradient-to-br from-[#2651B9] to-[#0F2260]" },
-      { l: "Benefits", c: "bg-[#0F2260]" },
-      { l: "Proof", c: "bg-[#0F2260]" },
-      { l: "Book a call", c: "bg-gradient-to-br from-[#FF8500] to-[#FFA133]" },
+      { l: tx("service-landing/services/web-design.hero", "Hero"), c: "bg-gradient-to-br from-[#2651B9] to-[#0F2260]" },
+      { l: tx("service-landing/services/web-design.benefits", "Benefits"), c: "bg-[#0F2260]" },
+      { l: tx("service-landing/services/web-design.proof", "Proof"), c: "bg-[#0F2260]" },
+      { l: tx("service-landing/services/web-design.book-a-call", "Book a call"), c: "bg-gradient-to-br from-[#FF8500] to-[#FFA133]" },
     ].map((s, i, arr) => (
       <React.Fragment key={s.l}>
         <div className={`flex flex-1 aspect-[3/4] flex-col justify-between rounded-lg border border-white/10 p-2 ${s.c}`}>
@@ -140,7 +141,7 @@ const EcommerceVisual = () => (
       <div className="mt-2 flex items-center justify-between">
         <span className="text-xs font-bold text-white">$29</span>
         <span className="flex items-center gap-1 rounded-md bg-[#2651B9] px-1.5 py-0.5 text-[8px] font-bold text-white">
-          <ShoppingCart className="w-2.5 h-2.5" /> Add
+          <ShoppingCart className="w-2.5 h-2.5" /> {tx("service-landing/services/web-design.add", "Add")}
         </span>
       </div>
     </div>
@@ -150,8 +151,8 @@ const EcommerceVisual = () => (
 const CmsVisual = () => (
   <div className="flex h-full flex-col justify-center gap-2">
     <div className="rounded-lg border border-white/10 bg-[#081330] px-2.5 py-1.5">
-      <span className="block text-[8px] font-mono text-slate-500">Page title</span>
-      <span className="block text-[11px] text-white">Summer Collection</span>
+      <span className="block text-[8px] font-mono text-slate-500">{tx("service-landing/services/web-design.page-title", "Page title")}</span>
+      <span className="block text-[11px] text-white">{tx("service-landing/services/web-design.summer-collection", "Summer Collection")}</span>
     </div>
     <div className="rounded-lg border border-white/10 bg-[#081330] p-2.5">
       <div className="mb-1.5 flex gap-1.5 text-[9px] font-bold text-slate-400">
@@ -161,7 +162,7 @@ const CmsVisual = () => (
       </div>
       <Lines widths={["w-full", "w-4/5"]} className="space-y-1" barClass="h-1 bg-white/20" />
     </div>
-    <span className="self-end rounded-md bg-gradient-to-r from-[#FF8500] to-[#FFA133] px-3 py-1 text-[10px] font-bold text-white">Publish</span>
+    <span className="self-end rounded-md bg-gradient-to-r from-[#FF8500] to-[#FFA133] px-3 py-1 text-[10px] font-bold text-white">{tx("service-landing/services/web-design.publish", "Publish")}</span>
   </div>
 );
 
@@ -170,14 +171,14 @@ const SpeedVisual = () => (
     <Ring value={100} size={86} stroke={7} color="#22C55E">
       <span className="text-center leading-tight">
         <span className="block font-agency text-2xl font-extrabold text-white">100</span>
-        <span className="block text-[8px] text-slate-400">Performance</span>
+        <span className="block text-[8px] text-slate-400">{tx("service-landing/services/web-design.performance", "Performance")}</span>
       </span>
     </Ring>
     <div className="flex-1 space-y-2">
       {[
-        { k: "Largest Contentful Paint", v: "Good" },
-        { k: "Layout Shift", v: "Good" },
-        { k: "Interaction to Next Paint", v: "Good" },
+        { k: tx("service-landing/services/web-design.largest-contentful-paint", "Largest Contentful Paint"), v: "Good" },
+        { k: tx("service-landing/services/web-design.layout-shift", "Layout Shift"), v: "Good" },
+        { k: tx("service-landing/services/web-design.interaction-to-next-paint", "Interaction to Next Paint"), v: "Good" },
       ].map((m) => (
         <div key={m.k} className="flex items-center justify-between gap-2 rounded-lg bg-[#081330] border border-white/10 px-2.5 py-1.5">
           <span className="text-[10px] text-slate-300 truncate">{m.k}</span>
@@ -200,7 +201,7 @@ const InteractionVisual = () => (
       <MousePointer2 className="absolute -bottom-3 -right-2 w-5 h-5 text-white fill-white drop-shadow" />
     </div>
     <span className="absolute left-2 bottom-1 rounded-md border border-[#88CE02]/40 bg-[#88CE02]/10 px-2 py-0.5 text-[9px] font-mono text-[#88CE02]">
-      ease: power3.out
+      {tx("service-landing/services/web-design.ease-power3-out", "ease: power3.out")}
     </span>
   </div>
 );
@@ -220,7 +221,7 @@ const SitemapNode: React.FC<{ label: string; primary?: boolean }> = ({ label, pr
 const SitemapPanel = () => (
   <div className="rounded-2xl bg-[#081330] border border-[#2651B9]/35 p-4 sm:p-6">
     <div className="flex flex-col items-center">
-      <SitemapNode label="Home" primary />
+      <SitemapNode label={tx("service-landing/services/web-design.home", "Home")} primary />
       <span className="h-5 w-px bg-[#2651B9]/70" />
       <div className="relative grid w-full grid-cols-4">
         <span className="absolute top-0 left-[12.5%] right-[12.5%] h-px bg-[#2651B9]/70" />
@@ -262,13 +263,13 @@ const ResponsivePanel = () => (
       <BrowserFrame>
         <SitePreview />
       </BrowserFrame>
-      <MonoLabel className="mt-2 block text-center">Desktop</MonoLabel>
+      <MonoLabel className="mt-2 block text-center">{tx("service-landing/services/web-design.desktop", "Desktop")}</MonoLabel>
     </div>
     <div className="w-[25%]">
       <div className="overflow-hidden rounded-xl border-4 border-[#1B2A55] bg-[#081330]">
         <SitePreview compact />
       </div>
-      <MonoLabel className="mt-2 block text-center">Tablet</MonoLabel>
+      <MonoLabel className="mt-2 block text-center">{tx("service-landing/services/web-design.tablet", "Tablet")}</MonoLabel>
     </div>
     <div className="w-[17%]">
       <PhoneFrame className="rounded-[16px] border-4">
@@ -276,7 +277,7 @@ const ResponsivePanel = () => (
           <SitePreview compact />
         </div>
       </PhoneFrame>
-      <MonoLabel className="mt-2 block text-center">Mobile</MonoLabel>
+      <MonoLabel className="mt-2 block text-center">{tx("service-landing/services/web-design.mobile", "Mobile")}</MonoLabel>
     </div>
   </div>
 );
@@ -284,26 +285,26 @@ const ResponsivePanel = () => (
 const DesignSystemPanel = () => (
   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
     <div className="rounded-2xl bg-[#081330] border border-[#2651B9]/35 p-4">
-      <MonoLabel>Colour tokens</MonoLabel>
+      <MonoLabel>{tx("service-landing/services/web-design.colour-tokens", "Colour tokens")}</MonoLabel>
       <div className="mt-3 grid grid-cols-5 gap-1.5">
         {["#FF8500", "#FFA133", "#2651B9", "#0F2260", "#F8FAFC"].map((c) => (
           <span key={c} className="aspect-square rounded-lg border border-white/10" style={{ background: c }} />
         ))}
       </div>
-      <MonoLabel className="mt-4 block">Type scale</MonoLabel>
+      <MonoLabel className="mt-4 block">{tx("service-landing/services/web-design.type-scale", "Type scale")}</MonoLabel>
       <div className="mt-2 space-y-1">
-        <span className="block font-agency text-2xl font-extrabold text-white leading-none">Heading</span>
-        <span className="block font-agency text-lg font-extrabold text-white leading-none">Subheading</span>
-        <span className="block text-xs text-slate-300">Body copy for readable paragraphs.</span>
+        <span className="block font-agency text-2xl font-extrabold text-white leading-none">{tx("service-landing/services/web-design.heading", "Heading")}</span>
+        <span className="block font-agency text-lg font-extrabold text-white leading-none">{tx("service-landing/services/web-design.subheading", "Subheading")}</span>
+        <span className="block text-xs text-slate-300">{tx("service-landing/services/web-design.body-copy-for-readable-paragraphs", "Body copy for readable paragraphs.")}</span>
       </div>
     </div>
     <div className="rounded-2xl bg-[#081330] border border-[#2651B9]/35 p-4 space-y-3">
-      <MonoLabel>Components</MonoLabel>
+      <MonoLabel>{tx("service-landing/services/web-design.components", "Components")}</MonoLabel>
       <div className="flex flex-wrap gap-2">
-        <span className="rounded-full bg-gradient-to-r from-[#FF8500] to-[#FFA133] px-3 py-1.5 text-[11px] font-bold text-white">Primary</span>
-        <span className="rounded-full border border-white/25 px-3 py-1.5 text-[11px] font-bold text-white">Secondary</span>
+        <span className="rounded-full bg-gradient-to-r from-[#FF8500] to-[#FFA133] px-3 py-1.5 text-[11px] font-bold text-white">{tx("service-landing/services/web-design.primary", "Primary")}</span>
+        <span className="rounded-full border border-white/25 px-3 py-1.5 text-[11px] font-bold text-white">{tx("service-landing/services/web-design.secondary", "Secondary")}</span>
       </div>
-      <div className="rounded-lg border border-white/15 bg-[#0C1E4E] px-3 py-2 text-[11px] text-slate-400">you@company.com</div>
+      <div className="rounded-lg border border-white/15 bg-[#0C1E4E] px-3 py-2 text-[11px] text-slate-400">{tx("service-landing/services/web-design.you-company-com", "you@company.com")}</div>
       <div className="rounded-xl border border-white/10 bg-[#0C1E4E] p-3">
         <span className="block w-6 h-6 rounded-lg bg-[#FF8500]/80" />
         <Lines widths={["w-2/3", "w-full"]} className="mt-2 space-y-1" barClass="h-1 bg-white/20" />
@@ -317,7 +318,7 @@ const SpeedSeoPanel = () => (
     <Ring value={100} size={120} stroke={9} color="#22C55E">
       <span className="text-center leading-tight">
         <span className="block font-agency text-4xl font-extrabold text-white">100</span>
-        <span className="block text-[10px] text-slate-400">Performance</span>
+        <span className="block text-[10px] text-slate-400">{tx("service-landing/services/web-design.performance", "Performance")}</span>
       </span>
     </Ring>
     <ul className="flex-1 w-full space-y-2">

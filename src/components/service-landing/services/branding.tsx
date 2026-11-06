@@ -1,13 +1,14 @@
 "use client";
 
 import React from "react";
-import { ArrowRight, Check, Clock, FileCheck, FileText, Gem, MessagesSquare } from "lucide-react";
+import { ArrowRight, Check, Clock, FileCheck, FileText, Gem, MessagesSquare } from "@/content/lucide";
 import { ServiceLandingPage, type ServicePageProps } from "../ServiceLandingPage";
 import { GradientText, SAMPLE_MARK_PATH, SampleMark, Wordmark } from "@/components/page-kit/shared";
 import { ChipDot, ChipIconBox, FloatingChip, MonoLabel, TILE_DARK } from "@/components/page-kit/primitives";
 import { ServiceHeroVideo } from "../sections/ServiceHeroVideo";
 import type { ServiceConfig } from "../types";
 import { SERVICE_PRICING } from "@/data/servicePricing";
+import { tx } from "@/content/text";
 
 const PRICING = SERVICE_PRICING["logo-design"];
 
@@ -17,7 +18,7 @@ const HeroVisual = () => (
   <ServiceHeroVideo
     videoSrc="/video/Creative-Logo-Branding-Solutions-for-Your-Business-_-Pixim-Design.mp4"
     posterSrc="/video/posters/Creative-Logo-Branding-Solutions-for-Your-Business-_-Pixim-Design.webp"
-    badge="Brand Identity Reel"
+    badge={tx("service-landing/services/branding.brand-identity-reel", "Brand Identity Reel")}
     topChip={
       <FloatingChip
         className="right-3 -top-4 sm:-top-5"
@@ -26,7 +27,7 @@ const HeroVisual = () => (
             <Check className="w-2.5 h-2.5" strokeWidth={3.5} />
           </ChipDot>
         }
-        title="Vector ready"
+        title={tx("service-landing/services/branding.vector-ready", "Vector ready")}
       />
     }
     bottomChip={
@@ -38,8 +39,8 @@ const HeroVisual = () => (
             <FileText className="w-3.5 h-3.5" />
           </ChipIconBox>
         }
-        title="brand-guidelines.pdf"
-        sub="24 pages · ready"
+        title={tx("service-landing/services/branding.brand-guidelines-pdf", "brand-guidelines.pdf")}
+        sub={tx("service-landing/services/branding.24-pages-ready", "24 pages · ready")}
       />
     }
   />
@@ -73,7 +74,7 @@ const LogoConstructionVisual = () => {
         <rect key={`${x}-${y}`} x={x - 3.5} y={y - 3.5} width={7} height={7} fill="#081330" stroke="#FFFFFF" strokeWidth={1.2} />
       ))}
       <text x={14} y={208} fill="rgba(148,163,184,0.7)" fontSize={9} fontFamily="monospace">
-        grid 40 · golden ratio
+        {tx("service-landing/services/branding.grid-40-golden-ratio", "grid 40 · golden ratio")}
       </text>
     </svg>
   );
@@ -102,14 +103,14 @@ const PaletteVisual = () => (
 
 const TypeVisual = () => (
   <div className="flex h-full flex-col justify-between">
-    <span className="font-agency text-6xl font-extrabold text-white leading-none">Aa</span>
+    <span className="font-agency text-6xl font-extrabold text-white leading-none">{tx("service-landing/services/branding.aa", "Aa")}</span>
     <div className="space-y-1">
       <div className="flex items-baseline gap-2 text-slate-300">
-        <span className="text-xs font-normal">Regular</span>
-        <span className="text-xs font-semibold">Medium</span>
-        <span className="text-xs font-extrabold">Bold</span>
+        <span className="text-xs font-normal">{tx("service-landing/services/branding.regular", "Regular")}</span>
+        <span className="text-xs font-semibold">{tx("service-landing/services/branding.medium", "Medium")}</span>
+        <span className="text-xs font-extrabold">{tx("service-landing/services/branding.bold", "Bold")}</span>
       </div>
-      <span className="block text-[10px] font-mono text-slate-500 truncate">ABCDEFGHIJKLMNOPQRSTUVWXYZ</span>
+      <span className="block text-[10px] font-mono text-slate-500 truncate">{tx("service-landing/services/branding.abcdefghijklmnopqrstuvwxyz", "ABCDEFGHIJKLMNOPQRSTUVWXYZ")}</span>
     </div>
   </div>
 );
@@ -120,8 +121,8 @@ const GuidelinesVisual = () => (
       <div className="flex-1 bg-[#F8FAFC] p-2.5 flex flex-col justify-between">
         <SampleMark className="w-5 h-5" color="#FF8500" />
         <div>
-          <span className="block font-agency text-[11px] font-extrabold text-[#081330] leading-none">Brand Book</span>
-          <span className="block text-[7px] text-slate-500 mt-0.5">v1.0 · guidelines</span>
+          <span className="block font-agency text-[11px] font-extrabold text-[#081330] leading-none">{tx("service-landing/services/branding.brand-book", "Brand Book")}</span>
+          <span className="block text-[7px] text-slate-500 mt-0.5">{tx("service-landing/services/branding.v1-0-guidelines", "v1.0 · guidelines")}</span>
         </div>
       </div>
       <div className="flex-1 bg-white border-l border-slate-200 p-2.5 space-y-1.5">
@@ -170,16 +171,16 @@ const RebrandVisual = () => (
   <div className="flex h-full items-center justify-center gap-4 sm:gap-6">
     <div className="flex flex-col items-center gap-2">
       <span className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-slate-700/60 border border-slate-600 flex items-center justify-center">
-        <span className="font-serif italic text-xl sm:text-2xl text-slate-400">Yb</span>
+        <span className="font-serif italic text-xl sm:text-2xl text-slate-400">{tx("service-landing/services/branding.yb", "Yb")}</span>
       </span>
-      <MonoLabel>Before</MonoLabel>
+      <MonoLabel>{tx("service-landing/services/branding.before", "Before")}</MonoLabel>
     </div>
     <ArrowRight className="w-5 h-5 text-[#FFA133] transition-transform duration-500 group-hover:translate-x-1" />
     <div className="flex flex-col items-center gap-2">
       <span className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-br from-[#FF8500] to-[#FFA133] flex items-center justify-center shadow-lg shadow-orange-500/30">
         <SampleMark className="w-9 h-9 sm:w-10 sm:h-10" color="#FFFFFF" />
       </span>
-      <MonoLabel className="text-[#FFA133]">After</MonoLabel>
+      <MonoLabel className="text-[#FFA133]">{tx("service-landing/services/branding.after", "After")}</MonoLabel>
     </div>
   </div>
 );
@@ -200,24 +201,24 @@ const Variant: React.FC<{ label: string; className: string; labelClass?: string;
 
 const LogoSuitePanel = () => (
   <div className="grid grid-cols-2 gap-3">
-    <Variant label="Primary" className="bg-gradient-to-br from-[#FF8500] to-[#FFA133]">
+    <Variant label={tx("service-landing/services/branding.primary", "Primary")} className="bg-gradient-to-br from-[#FF8500] to-[#FFA133]">
       <div className="flex items-center gap-2">
         <SampleMark className="w-7 h-7 sm:w-9 sm:h-9" color="#FFFFFF" />
         <Wordmark className="text-xl sm:text-3xl text-white" />
       </div>
     </Variant>
-    <Variant label="Secondary" className="bg-[#081330] border border-[#2651B9]/40" labelClass="text-slate-500">
+    <Variant label={tx("service-landing/services/branding.secondary", "Secondary")} className="bg-[#081330] border border-[#2651B9]/40" labelClass="text-slate-500">
       <div className="flex flex-col items-center gap-1.5">
         <SampleMark className="w-9 h-9 sm:w-11 sm:h-11" color="#FF8500" />
         <Wordmark className="text-base sm:text-xl text-white" />
       </div>
     </Variant>
-    <Variant label="Icon" className="bg-[#F8FAFC]" labelClass="text-slate-500">
+    <Variant label={tx("service-landing/services/branding.icon", "Icon")} className="bg-[#F8FAFC]" labelClass="text-slate-500">
       <span className="w-14 h-14 sm:w-16 sm:h-16 rounded-[22%] bg-gradient-to-br from-[#FF8500] to-[#FFA133] flex items-center justify-center shadow-lg shadow-orange-500/30">
         <SampleMark className="w-8 h-8 sm:w-9 sm:h-9" color="#FFFFFF" />
       </span>
     </Variant>
-    <Variant label="Monochrome" className="bg-[#05070D] border border-white/10" labelClass="text-slate-500">
+    <Variant label={tx("service-landing/services/branding.monochrome", "Monochrome")} className="bg-[#05070D] border border-white/10" labelClass="text-slate-500">
       <div className="flex items-center gap-2">
         <SampleMark className="w-6 h-6 sm:w-8 sm:h-8" color="#FFFFFF" />
         <Wordmark className="text-lg sm:text-2xl text-white" />
@@ -230,27 +231,27 @@ const ColourSystemPanel = () => (
   <div className="space-y-3">
     <div className="grid grid-cols-3 gap-3">
       <div className="col-span-2 row-span-2 flex min-h-[200px] flex-col justify-between rounded-2xl bg-[#FF8500] p-4 sm:p-5">
-        <MonoLabel className="text-white/80">Primary</MonoLabel>
+        <MonoLabel className="text-white/80">{tx("service-landing/services/branding.primary", "Primary")}</MonoLabel>
         <div>
-          <span className="block font-agency text-2xl sm:text-3xl font-extrabold text-white">Sunrise Orange</span>
+          <span className="block font-agency text-2xl sm:text-3xl font-extrabold text-white">{tx("service-landing/services/branding.sunrise-orange", "Sunrise Orange")}</span>
           <div className="mt-2 grid grid-cols-1 sm:grid-cols-3 gap-x-3 gap-y-0.5 text-[10px] sm:text-[11px] font-mono text-white/90">
-            <span>HEX #FF8500</span>
-            <span>RGB 255 133 0</span>
-            <span>CMYK 0 48 100 0</span>
+            <span>{tx("service-landing/services/branding.hex-ff8500", "HEX #FF8500")}</span>
+            <span>{tx("service-landing/services/branding.rgb-255-133-0", "RGB 255 133 0")}</span>
+            <span>{tx("service-landing/services/branding.cmyk-0-48-100-0", "CMYK 0 48 100 0")}</span>
           </div>
         </div>
       </div>
       <div className="flex flex-col justify-between rounded-2xl bg-[#081330] border border-[#2651B9]/40 p-3 sm:p-4">
-        <MonoLabel>Base</MonoLabel>
+        <MonoLabel>{tx("service-landing/services/branding.base", "Base")}</MonoLabel>
         <span>
-          <span className="block font-agency text-base font-extrabold text-white">Midnight</span>
+          <span className="block font-agency text-base font-extrabold text-white">{tx("service-landing/services/branding.midnight", "Midnight")}</span>
           <span className="block text-[10px] font-mono text-slate-400">#081330</span>
         </span>
       </div>
       <div className="flex flex-col justify-between rounded-2xl bg-[#2651B9] p-3 sm:p-4">
-        <MonoLabel className="text-white/70">Accent</MonoLabel>
+        <MonoLabel className="text-white/70">{tx("service-landing/services/branding.accent", "Accent")}</MonoLabel>
         <span>
-          <span className="block font-agency text-base font-extrabold text-white">Electric</span>
+          <span className="block font-agency text-base font-extrabold text-white">{tx("service-landing/services/branding.electric", "Electric")}</span>
           <span className="block text-[10px] font-mono text-white/80">#2651B9</span>
         </span>
       </div>
@@ -270,7 +271,7 @@ const ColourSystemPanel = () => (
     </div>
     <div className="rounded-2xl bg-[#081330]/80 border border-[#2651B9]/30 p-3 sm:p-4">
       <div className="flex items-center justify-between">
-        <MonoLabel>Usage ratio</MonoLabel>
+        <MonoLabel>{tx("service-landing/services/branding.usage-ratio", "Usage ratio")}</MonoLabel>
         <MonoLabel>60 · 30 · 10</MonoLabel>
       </div>
       <div className="mt-2.5 flex h-3 overflow-hidden rounded-full">
@@ -286,24 +287,24 @@ const TypographyPanel = () => (
   <div className="space-y-3">
     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
       <div className="rounded-2xl bg-[#081330] border border-[#2651B9]/35 p-5">
-        <MonoLabel>Headings</MonoLabel>
-        <span className="mt-2 block font-agency text-6xl font-extrabold text-white leading-none">Aa</span>
-        <span className="mt-3 block font-agency text-lg font-extrabold text-white">Agency</span>
-        <span className="block text-[10px] font-mono text-slate-500 truncate">ABCDEFGHIJKLMNOPQRSTUVWXYZ</span>
+        <MonoLabel>{tx("service-landing/services/branding.headings", "Headings")}</MonoLabel>
+        <span className="mt-2 block font-agency text-6xl font-extrabold text-white leading-none">{tx("service-landing/services/branding.aa", "Aa")}</span>
+        <span className="mt-3 block font-agency text-lg font-extrabold text-white">{tx("service-landing/services/branding.agency", "Agency")}</span>
+        <span className="block text-[10px] font-mono text-slate-500 truncate">{tx("service-landing/services/branding.abcdefghijklmnopqrstuvwxyz", "ABCDEFGHIJKLMNOPQRSTUVWXYZ")}</span>
       </div>
       <div className="rounded-2xl bg-[#F8FAFC] p-5">
-        <MonoLabel>Body</MonoLabel>
-        <span className="mt-2 block font-sans text-6xl font-semibold text-[#081330] leading-none">Aa</span>
-        <span className="mt-3 block font-sans text-lg font-bold text-[#081330]">Plus Jakarta Sans</span>
-        <span className="block text-[10px] font-mono text-slate-500 truncate">abcdefghijklmnopqrstuvwxyz 0123456789</span>
+        <MonoLabel>{tx("service-landing/services/branding.body", "Body")}</MonoLabel>
+        <span className="mt-2 block font-sans text-6xl font-semibold text-[#081330] leading-none">{tx("service-landing/services/branding.aa", "Aa")}</span>
+        <span className="mt-3 block font-sans text-lg font-bold text-[#081330]">{tx("service-landing/services/branding.plus-jakarta-sans", "Plus Jakarta Sans")}</span>
+        <span className="block text-[10px] font-mono text-slate-500 truncate">{tx("service-landing/services/branding.abcdefghijklmnopqrstuvwxyz-0123456789", "abcdefghijklmnopqrstuvwxyz 0123456789")}</span>
       </div>
     </div>
     <div className="rounded-2xl bg-[#081330] border border-[#2651B9]/35 p-4 sm:p-5 divide-y divide-white/5">
       {[
-        { tag: "H1", size: "56px", sample: "Build a brand", cls: "font-agency text-2xl sm:text-3xl font-extrabold" },
-        { tag: "H2", size: "40px", sample: "Stand out", cls: "font-agency text-xl sm:text-2xl font-extrabold" },
-        { tag: "H3", size: "28px", sample: "Stay consistent", cls: "font-agency text-lg sm:text-xl font-extrabold" },
-        { tag: "Body", size: "16px", sample: "Clear, readable copy for every touchpoint.", cls: "font-sans text-sm" },
+        { tag: "H1", size: "56px", sample: tx("service-landing/services/branding.build-a-brand", "Build a brand"), cls: "font-agency text-2xl sm:text-3xl font-extrabold" },
+        { tag: "H2", size: "40px", sample: tx("service-landing/services/branding.stand-out", "Stand out"), cls: "font-agency text-xl sm:text-2xl font-extrabold" },
+        { tag: "H3", size: "28px", sample: tx("service-landing/services/branding.stay-consistent", "Stay consistent"), cls: "font-agency text-lg sm:text-xl font-extrabold" },
+        { tag: tx("service-landing/services/branding.body", "Body"), size: "16px", sample: tx("service-landing/services/branding.clear-readable-copy-for-every-touchpoint", "Clear, readable copy for every touchpoint."), cls: "font-sans text-sm" },
       ].map((row) => (
         <div key={row.tag} className="flex items-center gap-3 sm:gap-4 py-2">
           <span className="w-10 shrink-0 text-[10px] font-mono text-[#FFA133]">{row.tag}</span>
@@ -323,17 +324,17 @@ const ApplicationsPanel = () => (
         <Wordmark className="text-sm text-white" />
       </div>
       <span className="font-agency text-2xl sm:text-4xl font-extrabold text-white leading-[0.95]">
-        Grand
+        {tx("service-landing/services/branding.grand", "Grand")}
         <br />
-        Opening
+        {tx("service-landing/services/branding.opening", "Opening")}
       </span>
-      <MonoLabel className="text-white/80">Social post</MonoLabel>
+      <MonoLabel className="text-white/80">{tx("service-landing/services/branding.social-post", "Social post")}</MonoLabel>
     </div>
     <div className="col-span-3 flex flex-col items-center justify-center gap-2 rounded-2xl bg-[#081330] border border-[#2651B9]/35 p-3">
       <span className="w-12 h-12 sm:w-14 sm:h-14 rounded-[22%] bg-gradient-to-br from-[#FF8500] to-[#FFA133] flex items-center justify-center shadow-lg shadow-orange-500/25">
         <SampleMark className="w-7 h-7" color="#FFFFFF" />
       </span>
-      <MonoLabel>App icon</MonoLabel>
+      <MonoLabel>{tx("service-landing/services/branding.app-icon", "App icon")}</MonoLabel>
     </div>
     <div className="col-span-3 flex items-center justify-center rounded-2xl bg-[#0C1E4E] border border-[#2651B9]/35 p-3">
       <div className="w-full max-w-[150px] aspect-[1.75/1] rounded-lg bg-[#081330] border border-[#2651B9]/50 shadow-xl p-2.5 flex flex-col justify-between rotate-[-4deg]">
@@ -354,7 +355,7 @@ const ApplicationsPanel = () => (
       </div>
       <span className="hidden sm:block h-8 w-px bg-[#FF8500]" />
       <Wordmark className="hidden sm:block text-lg text-[#081330]" />
-      <MonoLabel className="text-slate-400 sm:hidden">Email</MonoLabel>
+      <MonoLabel className="text-slate-400 sm:hidden">{tx("service-landing/services/branding.email", "Email")}</MonoLabel>
     </div>
   </div>
 );
