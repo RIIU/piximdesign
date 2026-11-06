@@ -6,7 +6,7 @@ import { apiVersion, dataset, projectId, studioUrl, isSanityConfigured } from ".
 const NON_TEXT_KEYS = new Set([
   "_key", "_type", "_id", "id", "key", "slug", "href", "url", "link", "src", "image", "video",
   "poster", "logo", "icon", "iconType", "current", "color", "bgColor", "accent", "network", "email",
-  "phone", "whatsapp", "rating", "value", "avatarBg", "type", "mediaSrc", "thumbnailSrc",
+  "phone", "whatsapp", "rating", "value", "usd", "bdt", "serviceId", "anchor", "avatarBg", "type", "mediaSrc", "thumbnailSrc",
 ]);
 
 export const client = createClient({
@@ -18,7 +18,7 @@ export const client = createClient({
   stega: {
     studioUrl,
     filter: (props) => {
-      if (props.sourcePath.some((seg) => seg === "serviceSlugs" || seg === "socials")) return false;
+      if (props.sourcePath.some((seg) => seg === "serviceSlugs" || seg === "socials" || seg === "highlights")) return false;
       const last = props.sourcePath.at(-1);
       if (typeof last === "string" && (NON_TEXT_KEYS.has(last) || /(url|href|src|slug|color|id)$/i.test(last))) {
         return false;
