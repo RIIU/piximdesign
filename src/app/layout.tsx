@@ -31,15 +31,19 @@ const jersey25 = Jersey_25({
 });
 
 const agency = localFont({
-  src: "../../public/fonts/agency.otf",
+  src: "../../public/fonts/agency.woff2",
   variable: "--font-agency",
   display: "swap",
+  // Headings render with the 'Agency' @font-face from globals.css (preloaded in <head>),
+  // so this copy is not preloaded to avoid downloading the same font twice.
+  preload: false,
 });
 
 const sherika = localFont({
-  src: "../../public/fonts/sherika-regular.otf",
+  src: "../../public/fonts/sherika-regular.woff2",
   variable: "--font-sherika",
   display: "swap",
+  preload: false,
 });
 
 export const metadata: Metadata = {
@@ -88,6 +92,7 @@ export default function RootLayout({
       className={`${plusJakartaSans.variable} ${geistMono.variable} ${jersey25.variable} ${agency.variable} ${sherika.variable} dark h-full antialiased selection:bg-[#FF8500]/25 selection:text-white`}
     >
       <head>
+        <link rel="preload" href="/fonts/agency.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
         <script
           dangerouslySetInnerHTML={{
             __html: `

@@ -6,7 +6,7 @@ import { usePathname, useRouter } from "next/navigation";
 import gsap from "gsap";
 import { PiximLogo } from "./PiximLogo";
 import { ArrowUpRight, ArrowRight, ChevronDown, Layers } from "lucide-react";
-import { GsapMagneticButton } from "./animations";
+import { GsapMagneticButton } from "@/components/animations/GsapMagneticButton";
 import { SERVICES } from "@/data/agencyData";
 import { SERVICE_ICONS } from "./serviceIcons";
 

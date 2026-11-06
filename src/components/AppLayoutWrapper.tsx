@@ -1,13 +1,18 @@
 "use client";
 
-import React, { useState, createContext, useContext } from "react";
+import React, { useState, useEffect, createContext, useContext } from "react";
+import dynamic from "next/dynamic";
 import { ThemeProvider } from "@/context/ThemeContext";
 import { Navbar } from "./Navbar";
 import { Footer } from "./Footer";
 import { TakeFirstStepSection } from "./TakeFirstStepSection";
 import { PaymentMethodsSection } from "./PaymentMethodsSection";
-import { ContactModal } from "./ContactModal";
-import { GlobalBackgroundAnimation } from "./animations";
+import { GlobalBackgroundAnimation } from "@/components/animations/GlobalBackgroundAnimation";
+
+// Performance: the contact modal (form + validation) is split into its own chunk.
+// It is fetched in the background once the page is idle, and only mounted when opened.
+const loadContactModal = () => import("./ContactModal");
+const ContactModal = dynamic(() => loadContactModal().then((m) => m.ContactModal), { ssr: false });
 
 interface ContactContextType {
   openContact: (service?: string, notes?: string) => void;
@@ -25,6 +30,17 @@ export const AppLayoutWrapper: React.FC<{ children: React.ReactNode }> = ({ chil
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalService, setModalService] = useState("");
   const [modalNotes, setModalNotes] = useState("");
+
+  useEffect(() => {
+    const w = window as Window & { requestIdleCallback?: (cb: () => void, opts?: { timeout: number }) => number };
+    const prefetch = () => { loadContactModal().catch(() => {}); };
+    if (w.requestIdleCallback) {
+      const id = window.setTimeout(() => w.requestIdleCallback!(prefetch, { timeout: 4000 }), 2500);
+      return () => window.clearTimeout(id);
+    }
+    const id = window.setTimeout(prefetch, 3500);
+    return () => window.clearTimeout(id);
+  }, []);
 
   const openContact = (service = "", notes = "") => {
     setModalService(service);
@@ -71,12 +87,14 @@ export const AppLayoutWrapper: React.FC<{ children: React.ReactNode }> = ({ chil
         </div>
 
         {/* Global Consultation & Inquiry Modal */}
+        {isModalOpen && (
         <ContactModal
           isOpen={isModalOpen}
           onClose={closeContact}
           initialService={modalService}
           initialNotes={modalNotes}
         />
+        )}
       </div>
     </ContactContext.Provider>
     </ThemeProvider>

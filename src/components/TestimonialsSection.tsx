@@ -115,13 +115,39 @@ export const TestimonialsSection: React.FC<TestimonialsSectionProps> = () => {
   const tweenRef = useRef<gsap.core.Tween | null>(null);
   const [isPaused, setIsPaused] = useState(false);
 
+
+  // Performance: server HTML renders a single set of cards. The two extra copies
+  // needed for the seamless infinite loop are added only when the section
+  // approaches the viewport (smaller HTML, faster hydration, same visuals).
+  const [loopCopies, setLoopCopies] = useState(1);
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+    if (typeof IntersectionObserver === "undefined") {
+      setLoopCopies(3);
+      return;
+    }
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setLoopCopies(3);
+          io.disconnect();
+        }
+      },
+      { rootMargin: "400px 0px" }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
   // Triple items for gapless infinite translation
-  const infiniteReviews = [...TESTIMONIALS_DATA, ...TESTIMONIALS_DATA, ...TESTIMONIALS_DATA];
+  const infiniteReviews =
+    loopCopies === 3 ? [...TESTIMONIALS_DATA, ...TESTIMONIALS_DATA, ...TESTIMONIALS_DATA] : TESTIMONIALS_DATA;
 
   // GSAP continuous fast infinite carousel setup
   useEffect(() => {
     const track = trackRef.current;
-    if (!track) return;
+    if (!track || loopCopies !== 3) return;
 
     const ctx = gsap.context(() => {
       // Width of a single set of 8 cards
@@ -144,7 +170,7 @@ export const TestimonialsSection: React.FC<TestimonialsSectionProps> = () => {
     }, sectionRef);
 
     return () => ctx.revert();
-  }, []);
+  }, [loopCopies]);
 
   // Pause when off-screen to preserve 100% CPU/GPU performance
   useEffect(() => {

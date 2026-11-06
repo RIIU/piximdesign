@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import { PORTFOLIO_PROJECTS } from "@/data/agencyData";
 import { ArrowUpRight, X, TrendingUp, Calendar, User } from "lucide-react";
-import { GsapMagneticButton } from "./animations";
+import { GsapMagneticButton } from "@/components/animations/GsapMagneticButton";
 
 interface PortfolioSectionProps {
   onOpenContact: () => void;

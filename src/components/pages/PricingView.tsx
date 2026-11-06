@@ -6,7 +6,7 @@ import { ArrowRight, BadgeCheck, Check, FileCheck, LifeBuoy, ShieldCheck, Wallet
 import { useContactModal } from "@/components/AppLayoutWrapper";
 import { ReadyForLogoSection } from "@/components/ReadyForLogoSection";
 import { ProjectEstimator } from "@/components/ProjectEstimator";
-import { GsapReviewsInfiniteSlider } from "@/components/animations";
+import { GsapReviewsInfiniteSlider } from "@/components/animations/GsapReviewsInfiniteSlider";
 import { SERVICE_ICONS } from "@/components/serviceIcons";
 import { Price } from "@/components/currency/Price";
 import { CurrencyToggle } from "@/components/currency/CurrencyToggle";

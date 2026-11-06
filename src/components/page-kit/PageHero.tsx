@@ -3,7 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import { ArrowRight, Star } from "lucide-react";
-import { GsapMagneticButton } from "@/components/animations";
+import { GsapMagneticButton } from "@/components/animations/GsapMagneticButton";
 import type { Crumb } from "./types";
 
 interface PageHeroProps {

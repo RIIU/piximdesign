@@ -22,7 +22,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { INDUSTRIES, SERVICES } from "@/data/agencyData";
-import { GsapMagneticButton } from "@/components/animations";
+import { GsapMagneticButton } from "@/components/animations/GsapMagneticButton";
 
 const INDUSTRY_ICONS: Record<string, LucideIcon> = {
   ecommerce: ShoppingBag,
