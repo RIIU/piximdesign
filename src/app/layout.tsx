@@ -2,7 +2,13 @@ import type { Metadata, Viewport } from "next";
 import { Plus_Jakarta_Sans, Geist_Mono, Jersey_25 } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
+import { draftMode } from "next/headers";
+import { VisualEditing } from "next-sanity/visual-editing";
 import { AppLayoutWrapper } from "@/components/AppLayoutWrapper";
+import { SettingsProvider } from "@/content/ContentProvider";
+import { getSiteSettings } from "@/sanity/content";
+import { SanityLive } from "@/sanity/live";
+import { isSanityConfigured } from "@/sanity/env";
 import { CURRENCY_BOOTSTRAP_SCRIPT } from "@/lib/currency-bootstrap";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { BASE_OPEN_GRAPH, OG_IMAGE, SITE_DESCRIPTION, SITE_JSON_LD, SITE_NAME, SITE_TITLE, SITE_URL } from "@/lib/seo";
@@ -79,11 +85,14 @@ export const viewport: Viewport = {
   colorScheme: "dark",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const settings = await getSiteSettings();
+  const { isEnabled: isDraftMode } = await draftMode();
+
   return (
     <html
       lang="en"
@@ -143,7 +152,12 @@ export default function RootLayout({
         suppressHydrationWarning
         className="min-h-full flex flex-col bg-[#081330] text-[#F8FAFC] font-sans"
       >
-        <AppLayoutWrapper>{children}</AppLayoutWrapper>
+        <SettingsProvider value={settings}>
+          <AppLayoutWrapper>{children}</AppLayoutWrapper>
+        </SettingsProvider>
+        {/* Real-time content updates from Sanity + click-to-edit overlays in preview mode */}
+        {isSanityConfigured && <SanityLive />}
+        {isSanityConfigured && isDraftMode && <VisualEditing />}
       </body>
     </html>
   );
