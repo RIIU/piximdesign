@@ -1,51 +1,66 @@
 "use client";
 
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { useClient } from "sanity";
 import { Box, Button, Card, Container, Flex, Heading, Stack, Text } from "@sanity/ui";
 import { apiVersion } from "../env";
-import { buildHomePageDoc, buildSiteSettingsDoc } from "./importContent";
+import { buildAllDocs } from "./importContent";
 
 type Status = { state: "idle" | "working" | "done" | "error"; message?: string };
 
-/** Studio tool: copies the website's current content into Sanity with one click. */
+const LABELS: Record<string, string> = {
+  siteSettings: "Site Settings",
+  homePage: "Home Page",
+  servicesCatalog: "Services & Prices",
+};
+const label = (id: string) =>
+  LABELS[id] ??
+  (id.startsWith("page-")
+    ? `Page: ${id.replace("page-", "")}`
+    : id.startsWith("legal-")
+      ? `Legal: ${id.replace("legal-", "")}`
+      : `Service page: ${id.replace("servicePage-", "")}`);
+
+/** Studio tool: copies the website's built-in content into Sanity. */
 export function ImportTool() {
   const client = useClient({ apiVersion });
-  const [existing, setExisting] = useState<{ siteSettings: boolean; homePage: boolean } | null>(null);
+  const docs = useMemo(() => buildAllDocs(), []);
+  const ids = useMemo(() => docs.map((d) => d._id), [docs]);
+  const [existing, setExisting] = useState<Set<string> | null>(null);
   const [status, setStatus] = useState<Status>({ state: "idle" });
 
   const check = useCallback(async () => {
-    const ids: string[] = await client.fetch(`*[_id in ["siteSettings","homePage","drafts.siteSettings","drafts.homePage"]]._id`);
-    setExisting({
-      siteSettings: ids.some((id) => id.endsWith("siteSettings")),
-      homePage: ids.some((id) => id.endsWith("homePage")),
+    const found: string[] = await client.fetch(`*[_id in $ids || _id in $drafts]._id`, {
+      ids,
+      drafts: ids.map((id) => `drafts.${id}`),
     });
-  }, [client]);
+    setExisting(new Set(found.map((id) => id.replace(/^drafts\./, ""))));
+  }, [client, ids]);
 
   useEffect(() => {
-    check().catch(() => setExisting({ siteSettings: false, homePage: false }));
+    check().catch(() => setExisting(new Set()));
   }, [check]);
 
-  const runImport = async () => {
-    const already = existing && (existing.siteSettings || existing.homePage);
+  const missing = existing ? docs.filter((d) => !existing.has(d._id)) : [];
+
+  const run = async (mode: "missing" | "reset") => {
     if (
-      already &&
-      !window.confirm(
-        "Some content already exists in Sanity. Importing will REPLACE it with the website's original content. Continue?"
-      )
+      mode === "reset" &&
+      !window.confirm("This REPLACES all content in the editor with the website's original content. Your edits will be lost. Continue?")
     ) {
       return;
     }
+    const list = mode === "reset" ? docs : missing;
+    if (!list.length) return;
     setStatus({ state: "working", message: "Importing…" });
     try {
-      await client
-        .transaction()
-        .createOrReplace(buildSiteSettingsDoc())
-        .createOrReplace(buildHomePageDoc())
-        .delete("drafts.siteSettings")
-        .delete("drafts.homePage")
-        .commit();
-      setStatus({ state: "done", message: "Done! Open “Site Settings” or “Home Page” to start editing." });
+      const tx = client.transaction();
+      for (const doc of list) {
+        if (mode === "reset") tx.createOrReplace(doc).delete(`drafts.${doc._id}`);
+        else tx.createIfNotExists(doc);
+      }
+      await tx.commit();
+      setStatus({ state: "done", message: `Done – ${list.length} page(s) imported. Open them under “Content” to edit.` });
       check();
     } catch (err) {
       setStatus({ state: "error", message: err instanceof Error ? err.message : String(err) });
@@ -57,25 +72,32 @@ export function ImportTool() {
       <Stack space={5}>
         <Heading size={3}>Import website content</Heading>
         <Text muted>
-          Copies everything that is currently on the website (texts, lists, links and the current images/videos) into
-          the editor, so you can change it here. You normally only need to do this once.
+          Copies the website&apos;s current texts, lists, prices and media into the editor so they can be changed here.
+          Existing content is never touched by “Import new pages”.
         </Text>
-        <Card padding={4} radius={3} shadow={1} tone={existing && (existing.siteSettings || existing.homePage) ? "caution" : "primary"}>
+        <Card padding={4} radius={3} shadow={1}>
           <Stack space={3}>
-            <Text size={1}>
-              Site Settings: <b>{existing ? (existing.siteSettings ? "already has content" : "empty") : "checking…"}</b>
-            </Text>
-            <Text size={1}>
-              Home Page: <b>{existing ? (existing.homePage ? "already has content" : "empty") : "checking…"}</b>
-            </Text>
+            {docs.map((d) => (
+              <Text key={d._id} size={1}>
+                {label(d._id)}:{" "}
+                <b>{existing ? (existing.has(d._id) ? "✓ in editor" : "not imported yet") : "checking…"}</b>
+              </Text>
+            ))}
           </Stack>
         </Card>
-        <Flex gap={3} align="center">
+        <Flex gap={3} wrap="wrap" align="center">
           <Button
-            text={status.state === "working" ? "Importing…" : "Import current website content"}
+            text={missing.length ? `Import new pages (${missing.length})` : "Everything is imported"}
             tone="primary"
+            disabled={status.state === "working" || !existing || !missing.length}
+            onClick={() => run("missing")}
+          />
+          <Button
+            text="Reset everything to the original website content"
+            tone="critical"
+            mode="ghost"
             disabled={status.state === "working" || !existing}
-            onClick={runImport}
+            onClick={() => run("reset")}
           />
         </Flex>
         {status.message && (
