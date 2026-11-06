@@ -2,7 +2,7 @@
 
 import React from "react";
 import { ArrowRight, Check, MousePointer2, MousePointerClick, Rocket, ShieldCheck, ShoppingCart, SquarePen, Zap } from "lucide-react";
-import { ServiceLandingPage } from "../ServiceLandingPage";
+import { ServiceLandingPage, type ServicePageProps } from "../ServiceLandingPage";
 import { GradientText, SampleMark, Wordmark } from "@/components/page-kit/shared";
 import { BrowserFrame, ChipIconBox, FloatingChip, Lines, MonoLabel, PhoneFrame, Ring, TILE_DARK } from "@/components/page-kit/primitives";
 import { ServiceHeroVideo } from "../sections/ServiceHeroVideo";
@@ -335,7 +335,7 @@ const SpeedSeoPanel = () => (
 
 /* ---------- Config ---------- */
 
-const config: ServiceConfig = {
+export const config: ServiceConfig = {
   serviceName: "Website Design & Development",
   shortName: "Website",
   projectLabel: "a website project",
@@ -523,4 +523,6 @@ const config: ServiceConfig = {
   },
 };
 
-export const WebDesignServicePage: React.FC = () => <ServiceLandingPage config={config} />;
+export const WebDesignServicePage: React.FC<ServicePageProps> = ({ override }) => (
+  <ServiceLandingPage config={config} slug="web-design" override={override} />
+);

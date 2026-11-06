@@ -2,7 +2,7 @@
 
 import React from "react";
 import { ChartColumn, Check, FileSearch, Gauge, MapPin, Search, Star, Target, TrendingUp, X } from "lucide-react";
-import { ServiceLandingPage } from "../ServiceLandingPage";
+import { ServiceLandingPage, type ServicePageProps } from "../ServiceLandingPage";
 import { GradientText, SampleMark } from "@/components/page-kit/shared";
 import { ChipDot, ChipIconBox, FloatingChip, Lines, MonoLabel, Ring, Sparkline, TILE_DARK } from "@/components/page-kit/primitives";
 import { ServiceHeroVideo } from "../sections/ServiceHeroVideo";
@@ -366,7 +366,7 @@ const MonthlyReportPanel = () => (
 
 /* ---------- Config ---------- */
 
-const config: ServiceConfig = {
+export const config: ServiceConfig = {
   serviceName: "SEO & Organic Growth",
   shortName: "SEO",
   projectLabel: "an SEO project",
@@ -554,4 +554,6 @@ const config: ServiceConfig = {
   },
 };
 
-export const SeoGrowthServicePage: React.FC = () => <ServiceLandingPage config={config} />;
+export const SeoGrowthServicePage: React.FC<ServicePageProps> = ({ override }) => (
+  <ServiceLandingPage config={config} slug="seo-growth" override={override} />
+);

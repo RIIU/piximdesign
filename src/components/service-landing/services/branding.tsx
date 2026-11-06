@@ -2,7 +2,7 @@
 
 import React from "react";
 import { ArrowRight, Check, Clock, FileCheck, FileText, Gem, MessagesSquare } from "lucide-react";
-import { ServiceLandingPage } from "../ServiceLandingPage";
+import { ServiceLandingPage, type ServicePageProps } from "../ServiceLandingPage";
 import { GradientText, SAMPLE_MARK_PATH, SampleMark, Wordmark } from "@/components/page-kit/shared";
 import { ChipDot, ChipIconBox, FloatingChip, MonoLabel, TILE_DARK } from "@/components/page-kit/primitives";
 import { ServiceHeroVideo } from "../sections/ServiceHeroVideo";
@@ -361,7 +361,7 @@ const ApplicationsPanel = () => (
 
 /* ---------- Config ---------- */
 
-const config: ServiceConfig = {
+export const config: ServiceConfig = {
   serviceName: "Logo & Brand Identity",
   shortName: "Branding",
   projectLabel: "a branding project",
@@ -564,4 +564,6 @@ const config: ServiceConfig = {
   },
 };
 
-export const BrandingServicePage: React.FC = () => <ServiceLandingPage config={config} />;
+export const BrandingServicePage: React.FC<ServicePageProps> = ({ override }) => (
+  <ServiceLandingPage config={config} slug="logo-design" override={override} />
+);
