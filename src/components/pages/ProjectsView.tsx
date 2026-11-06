@@ -19,6 +19,7 @@ import { useDialog } from "@/lib/useDialog";
 import { PORTFOLIO_PROJECTS } from "@/data/agencyData";
 import { CASE_STUDIES, type CaseStudy } from "@/data/caseStudies";
 import { CTA_VIDEOS } from "@/data/studioContent";
+import { T, usePageContent, type PageContent } from "@/content/page";
 
 type Project = (typeof PORTFOLIO_PROJECTS)[number];
 
@@ -220,6 +221,42 @@ const ProjectModal: React.FC<{ project: Project; onClose: () => void; onInquire:
 
 /* ---------- Page ---------- */
 
+export const PROJECTS_PAGE_DEFAULTS: PageContent = {
+  hero: {
+    eyebrow: "Our Work",
+    title: "Featured Work & *Case Studies*",
+    description:
+      "Explore how we partner with venture-backed startups, retail brands, and global enterprises to craft iconic visual identities and high-performing web platforms.",
+    primaryLabel: "Start Your Project",
+    secondaryLabel: "Explore Services",
+  },
+  sections: {
+    caseStudies: {
+      label: "Case studies heading",
+      eyebrow: "Case Studies",
+      title: "Product Design *Case Studies*",
+      description:
+        "A closer look at how we research, design and ship digital products, from the first user persona to the final pixel.",
+      buttonLabel: "Start a Similar Project",
+      secondaryLabel: "Explore our services",
+    },
+    featured: {
+      label: "Featured projects heading",
+      eyebrow: "Featured Projects",
+      title: "Selected *Product Builds*",
+      description: "Web apps, AI platforms, e-commerce and mobile products we've designed and engineered end to end.",
+    },
+    impact: { label: "Impact slider title", title: "Cross-Service Impact & Deployments" },
+  },
+  reviewsTitle: "What Founders Say About Our Work",
+  cta: {
+    titleLead: "Have a Launch or",
+    titleHighlight: "Rebrand Coming Up?",
+    description:
+      "Let's talk about how Pixim Design can bring your vision to life, with clear milestones and careful, fast execution.",
+  },
+};
+
 export const ProjectsView: React.FC = () => {
   const { openContact } = useContactModal();
   const rootRef = useRef<HTMLDivElement>(null);
@@ -236,21 +273,19 @@ export const ProjectsView: React.FC = () => {
 
   const projects = PORTFOLIO_PROJECTS.filter((p) => filter === "All" || p.category === filter);
   const startProject = (note: string) => openContact("Project Inquiry", note);
+  const c = usePageContent(PROJECTS_PAGE_DEFAULTS);
+  const { caseStudies, featured, impact } = c.sections;
 
   return (
     <div ref={rootRef} className="w-full overflow-x-clip">
       {/* 1. Hero */}
       <PageHero
         crumbs={[{ label: "Home", href: "/" }, { label: "Projects" }]}
-        eyebrow="Our Work"
-        title={
-          <>
-            Featured Work & <GradientText>Case Studies</GradientText>
-          </>
-        }
-        description="Explore how we partner with venture-backed startups, retail brands, and global enterprises to craft iconic visual identities and high-performing web platforms."
-        primary={{ label: "Start Your Project", onClick: () => startProject("I'd like to discuss a new project.") }}
-        secondary={{ label: "Explore Services", href: "/services" }}
+        eyebrow={c.hero.eyebrow}
+        title={<T text={c.hero.title} />}
+        description={c.hero.description}
+        primary={{ label: c.hero.primaryLabel, onClick: () => startProject("I'd like to discuss a new project.") }}
+        secondary={{ label: c.hero.secondaryLabel, href: "/services" }}
         visual={<HeroVisual />}
       />
 
@@ -260,35 +295,29 @@ export const ProjectsView: React.FC = () => {
       {/* 3. Sticky case studies */}
       <StickyShowcase
         id="case-studies"
-        eyebrow="Case Studies"
-        title={
-          <>
-            Product Design <GradientText>Case Studies</GradientText>
-          </>
-        }
-        description="A closer look at how we research, design and ship digital products, from the first user persona to the final pixel."
+        eyebrow={caseStudies.eyebrow ?? ""}
+        title={<T text={caseStudies.title} />}
+        description={caseStudies.description ?? ""}
         panels={CASE_STUDIES.map((study) => ({
           id: study.id,
           title: study.title,
           desc: study.tagline,
           visual: <CaseStudyVisual study={study} />,
         }))}
-        ctaLabel="Start a Similar Project"
+        ctaLabel={caseStudies.buttonLabel ?? ""}
         onStart={() => startProject("I'd like to start a product design project.")}
-        secondary={{ label: "Explore our services", href: "/services" }}
+        secondary={{ label: caseStudies.secondaryLabel ?? "", href: "/services" }}
       />
 
       {/* 4. Filterable featured projects */}
       <section id="featured-projects" className="relative py-20 sm:py-28 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto scroll-mt-24">
         <div className="reveal-up flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-10 sm:mb-12">
           <div className="max-w-2xl">
-            <Eyebrow>Featured Projects</Eyebrow>
+            <Eyebrow>{featured.eyebrow}</Eyebrow>
             <SectionTitle className="mt-4">
-              Selected <GradientText>Product Builds</GradientText>
+              <T text={featured.title} />
             </SectionTitle>
-            <p className="mt-4 text-slate-400 text-base sm:text-lg leading-relaxed">
-              Web apps, AI platforms, e-commerce and mobile products we&apos;ve designed and engineered end to end.
-            </p>
+            <p className="mt-4 text-slate-400 text-base sm:text-lg leading-relaxed">{featured.description}</p>
           </div>
           <FilterPills label="Filter projects" options={FILTERS} value={filter} onChange={setFilter} className="lg:justify-end" />
         </div>
@@ -312,19 +341,19 @@ export const ProjectsView: React.FC = () => {
       )}
 
       {/* 5. Looped impact panels */}
-      <GsapInfiniteLoopedPanels title="Cross-Service Impact & Deployments" subtitle="REAL-WORLD EXECUTION" speed={36} />
+      <GsapInfiniteLoopedPanels title={impact.title ?? ""} subtitle="REAL-WORLD EXECUTION" speed={36} />
 
       {/* 6. Client reviews */}
       <section className="relative py-10 sm:py-14">
-        <GsapReviewsInfiniteSlider title="What Founders Say About Our Work" subtitle="CLIENT SATISFACTION" speed={38} />
+        <GsapReviewsInfiniteSlider title={c.reviewsTitle!} subtitle="CLIENT SATISFACTION" speed={38} />
       </section>
 
       {/* 7. Final CTA */}
       <ReadyForLogoSection
         onOpenContact={(service, note) => openContact(service, note)}
-        titleLead="Have a Launch or"
-        titleHighlight="Rebrand Coming Up?"
-        description="Let's talk about how Pixim Design can bring your vision to life, with clear milestones and careful, fast execution."
+        titleLead={c.cta!.titleLead}
+        titleHighlight={c.cta!.titleHighlight}
+        description={c.cta!.description}
         primaryService="Project Inquiry"
         primaryNote="I have an upcoming launch or rebrand and would like to discuss it."
         secondaryService="Project Consultation"

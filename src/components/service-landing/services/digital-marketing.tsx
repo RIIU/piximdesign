@@ -15,7 +15,7 @@ import {
   Trophy,
   TrendingUp,
 } from "lucide-react";
-import { ServiceLandingPage } from "../ServiceLandingPage";
+import { ServiceLandingPage, type ServicePageProps } from "../ServiceLandingPage";
 import { GradientText, SampleMark, Wordmark } from "@/components/page-kit/shared";
 import { Bars, ChipDot, ChipIconBox, FloatingChip, Lines, MonoLabel, Sparkline, TILE_DARK } from "@/components/page-kit/primitives";
 import { ServiceHeroVideo } from "../sections/ServiceHeroVideo";
@@ -406,7 +406,7 @@ const WeeklyReportPanel = () => (
 
 /* ---------- Config ---------- */
 
-const config: ServiceConfig = {
+export const config: ServiceConfig = {
   serviceName: "Digital Marketing & Ads",
   shortName: "Digital Marketing",
   projectLabel: "a digital marketing campaign",
@@ -593,4 +593,6 @@ const config: ServiceConfig = {
   },
 };
 
-export const DigitalMarketingServicePage: React.FC = () => <ServiceLandingPage config={config} />;
+export const DigitalMarketingServicePage: React.FC<ServicePageProps> = ({ override }) => (
+  <ServiceLandingPage config={config} slug="digital-marketing" override={override} />
+);

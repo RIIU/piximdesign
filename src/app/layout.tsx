@@ -5,8 +5,8 @@ import "./globals.css";
 import { draftMode } from "next/headers";
 import { VisualEditing } from "next-sanity/visual-editing";
 import { AppLayoutWrapper } from "@/components/AppLayoutWrapper";
-import { SettingsProvider } from "@/content/ContentProvider";
-import { getSiteSettings } from "@/sanity/content";
+import { CatalogProvider, SettingsProvider } from "@/content/ContentProvider";
+import { getCatalog, getSiteSettings } from "@/sanity/content";
 import { SanityLive } from "@/sanity/live";
 import { isSanityConfigured } from "@/sanity/env";
 import { CURRENCY_BOOTSTRAP_SCRIPT } from "@/lib/currency-bootstrap";
@@ -90,7 +90,7 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const settings = await getSiteSettings();
+  const [settings, catalog] = await Promise.all([getSiteSettings(), getCatalog()]);
   const { isEnabled: isDraftMode } = await draftMode();
 
   return (
@@ -153,7 +153,9 @@ export default async function RootLayout({
         className="min-h-full flex flex-col bg-[#081330] text-[#F8FAFC] font-sans"
       >
         <SettingsProvider value={settings}>
-          <AppLayoutWrapper>{children}</AppLayoutWrapper>
+          <CatalogProvider value={catalog}>
+            <AppLayoutWrapper>{children}</AppLayoutWrapper>
+          </CatalogProvider>
         </SettingsProvider>
         {/* Real-time content updates from Sanity + click-to-edit overlays in preview mode */}
         {isSanityConfigured && <SanityLive />}

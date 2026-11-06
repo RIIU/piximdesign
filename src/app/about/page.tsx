@@ -1,4 +1,6 @@
 import { AboutView } from "@/components/pages/AboutView";
+import { PageContentProvider } from "@/content/page";
+import { getPageOverride } from "@/sanity/content";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
 
@@ -9,11 +11,14 @@ export const metadata = pageMetadata({
   path: "/about",
 });
 
-export default function Page() {
+export default async function Page() {
+  const override = await getPageOverride("about");
   return (
     <>
       <JsonLd data={breadcrumbJsonLd([{ name: "About", path: "/about" }])} />
-      <AboutView />
+      <PageContentProvider value={override}>
+        <AboutView />
+      </PageContentProvider>
     </>
   );
 }

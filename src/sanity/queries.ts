@@ -37,3 +37,26 @@ export const HOME_QUERY = defineQuery(`*[_id == "homePage"][0]{
   consultation,
   faq{title, description, cardTitle, cardText, cardCta, items[]{question, answer}}
 }`);
+
+export const CATALOG_QUERY = defineQuery(`*[_id == "servicesCatalog"][0]{
+  services[]{"id": serviceId, title, tagline, badge, features, basic, standard, premium}
+}`);
+
+export const SERVICE_PAGE_QUERY = defineQuery(`*[_id == $id][0]{
+  hero, statement, bento, showcase, process, why, packages, reviewsTitle, faqTitle, faqs[]{q, a},
+  cta{
+    titleLead, titleHighlight, description,
+    "videoSrc": coalesce(video.asset->url, videoUrl),
+    "posterSrc": coalesce(poster.asset->url, posterUrl)
+  }
+}`);
+
+export const PAGE_QUERY = defineQuery(`*[_id == $id][0]{
+  hero, sections[]{key, eyebrow, title, description, buttonLabel, secondaryLabel},
+  process{title, description, steps[]{title, desc, output}},
+  why{title, items[]{title, desc}, tools, highlight},
+  cards[]{title, desc}, points, stats[]{value, label}, packages,
+  reviewsTitle, cta, faq{title, items[]{q, a}}
+}`);
+
+export const LEGAL_QUERY = defineQuery(`*[_id == $id][0]{title, intro, sections[]{anchor, title, body}}`);

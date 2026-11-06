@@ -4,7 +4,9 @@ import { Clock, Mail, MapPin, Phone, Timer, type LucideIcon } from "lucide-react
 import { ContactForm } from "@/components/ContactSection";
 import { SocialIcon } from "@/components/SocialIcon";
 import { mapUrlFor, phoneUrl, whatsappUrl } from "@/data/company";
-import { getSiteSettings } from "@/sanity/content";
+import { getPageOverride, getSiteSettings } from "@/sanity/content";
+import { mergePage } from "@/content/pageMerge";
+import { CONTACT_PAGE_DEFAULTS } from "@/content/contactDefaults";
 
 interface ContactRow {
   label: string;
@@ -17,11 +19,13 @@ interface ContactRow {
 
 /** Simple contact page: details on the left, the brief form on the right. */
 export const ContactView = async () => {
-  const { company, socials } = await getSiteSettings();
+  const [{ company, socials }, override] = await Promise.all([getSiteSettings(), getPageOverride("contact")]);
+  const c = mergePage(CONTACT_PAGE_DEFAULTS, override);
+  const { details, form } = c.sections;
   const ROWS: ContactRow[] = [
     { icon: Mail, label: "Email", value: company.email, href: `mailto:${company.email}` },
     ...(company.phone ? [{ icon: Phone, label: "Phone", value: company.phone, href: phoneUrl(company.phone) }] : []),
-    { icon: "whatsapp", label: "WhatsApp", value: "Chat with us on WhatsApp", href: whatsappUrl(undefined, company.whatsapp), external: true },
+    { icon: "whatsapp", label: "WhatsApp", value: details.description ?? "", href: whatsappUrl(undefined, company.whatsapp), external: true },
     { icon: MapPin, label: "Office", value: company.address, href: mapUrlFor(company.address), external: true },
     ...(company.hours ? [{ icon: Clock, label: "Office hours", value: company.hours }] : []),
     { icon: Timer, label: "Response time", value: company.responseTime },
@@ -49,12 +53,9 @@ export const ContactView = async () => {
           </ol>
         </nav>
         <h1 className="font-agency text-[38px] sm:text-5xl lg:text-[56px] font-extrabold text-white tracking-tight leading-[1.05]">
-          Contact Us
+          {c.hero.title}
         </h1>
-        <p className="mt-4 text-base sm:text-lg text-slate-300 leading-relaxed">
-          Have a project in mind or a quick question? Send us a message or reach us on WhatsApp. We usually reply within 2
-          hours.
-        </p>
+        <p className="mt-4 text-base sm:text-lg text-slate-300 leading-relaxed">{c.hero.description}</p>
       </div>
     </section>
 
@@ -62,7 +63,7 @@ export const ContactView = async () => {
     <section className="relative px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto pb-20 sm:pb-28">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
         <aside className="lg:col-span-5 rounded-[28px] border border-[#2651B9]/30 bg-[#0C1E4E]/70 p-6 sm:p-8">
-          <h2 className="font-agency text-2xl font-extrabold text-white">Get in touch</h2>
+          <h2 className="font-agency text-2xl font-extrabold text-white">{details.title}</h2>
 
           <ul className="mt-4 divide-y divide-white/[0.07]">
             {ROWS.map(({ icon: Icon, label, value, href, external }) => (
@@ -90,7 +91,7 @@ export const ContactView = async () => {
 
           {socials.length > 0 && (
             <div className="mt-4 border-t border-white/[0.07] pt-6">
-              <span className="text-xs text-slate-500">Follow us</span>
+              <span className="text-xs text-slate-500">{details.eyebrow}</span>
               <div className="mt-3 flex flex-wrap gap-2.5">
                 {socials.map((social) => (
                   <a
@@ -110,10 +111,8 @@ export const ContactView = async () => {
         </aside>
 
         <div className="lg:col-span-7 rounded-[28px] border border-[#FF8500]/30 bg-[#0C1E4E]/85 p-6 sm:p-9 shadow-[0_30px_70px_-35px_rgba(255,133,0,0.45)]">
-          <h2 className="font-agency text-2xl sm:text-3xl font-extrabold text-white">Send us a message</h2>
-          <p className="mt-2 text-sm text-slate-400">
-            Tell us a little about your project and we&apos;ll come back with ideas, a timeline and a quote.
-          </p>
+          <h2 className="font-agency text-2xl sm:text-3xl font-extrabold text-white">{form.title}</h2>
+          <p className="mt-2 text-sm text-slate-400">{form.description}</p>
           <div className="mt-6">
             <ContactForm />
           </div>

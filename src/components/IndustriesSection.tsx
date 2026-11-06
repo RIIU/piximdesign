@@ -21,8 +21,7 @@ import {
   Play,
   type LucideIcon,
 } from "lucide-react";
-import { SERVICES } from "@/data/agencyData";
-import { useHome } from "@/content/ContentProvider";
+import { useHome, useServices } from "@/content/ContentProvider";
 import { RichTitle } from "@/content/RichTitle";
 import { GsapMagneticButton } from "@/components/animations/GsapMagneticButton";
 
@@ -41,6 +40,7 @@ interface IndustriesSectionProps {
 
 export const IndustriesSection: React.FC<IndustriesSectionProps> = ({ onOpenContact }) => {
   const { industries: content } = useHome();
+  const SERVICES = useServices();
   const INDUSTRIES = content.items;
   const [activeId, setActiveId] = useState<string>(INDUSTRIES[0]?.id ?? "");
   const sectionRef = useRef<HTMLElement>(null);

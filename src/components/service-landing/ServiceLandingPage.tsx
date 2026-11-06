@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef } from "react";
+import React, { useMemo, useRef } from "react";
 import { useContactModal } from "@/components/AppLayoutWrapper";
 import { ReadyForLogoSection } from "@/components/ReadyForLogoSection";
 import { GsapReviewsInfiniteSlider } from "@/components/animations/GsapReviewsInfiniteSlider";
@@ -17,8 +17,21 @@ import { ServiceHero } from "./sections/ServiceHero";
 import { ServiceBento } from "./sections/ServiceBento";
 import { ServicePreviousProjects } from "./sections/ServicePreviousProjects";
 import type { ServiceConfig } from "./types";
+import { applyServiceOverride, type ServicePageOverride } from "./applyOverride";
+import { usePricing } from "@/content/ContentProvider";
 
-export const ServiceLandingPage: React.FC<{ config: ServiceConfig }> = ({ config }) => {
+export interface ServicePageProps {
+  /** Editable content from Sanity (optional) */
+  override?: ServicePageOverride | null;
+}
+
+export const ServiceLandingPage: React.FC<{ config: ServiceConfig; slug: string } & ServicePageProps> = ({
+  config: baseConfig,
+  slug,
+  override,
+}) => {
+  const pricing = usePricing();
+  const config = useMemo(() => applyServiceOverride(baseConfig, slug, pricing, override), [baseConfig, slug, pricing, override]);
   const { openContact } = useContactModal();
   const rootRef = useRef<HTMLDivElement>(null);
   const { serviceName, shortName, projectLabel } = config;
@@ -96,9 +109,11 @@ export const ServiceLandingPage: React.FC<{ config: ServiceConfig }> = ({ config
       {/* 12. Two-column FAQ (Placed directly above the closing TakeFirstStepSection banner) */}
       <FaqSplit
         title={
-          <>
-            {shortName} Questions, <GradientText>Answered</GradientText>
-          </>
+          config.faqTitle ?? (
+            <>
+              {shortName} Questions, <GradientText>Answered</GradientText>
+            </>
+          )
         }
         faqs={config.faqs}
         onAsk={() => start(`I have a few questions before starting ${projectLabel}.`)}

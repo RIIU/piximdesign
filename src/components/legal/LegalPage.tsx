@@ -2,7 +2,8 @@ import React from "react";
 import Link from "next/link";
 import { Mail, MapPin } from "lucide-react";
 import { CONTACT_EMAIL } from "@/data/studioContent";
-import { getSiteSettings } from "@/sanity/content";
+import { PortableText, type PortableTextBlock } from "@portabletext/react";
+import { getLegalOverride, getSiteSettings } from "@/sanity/content";
 
 export interface LegalSection {
   id: string;
@@ -19,6 +20,8 @@ const POLICIES = [
 export const LEGAL_UPDATED = { label: "5 October 2026", iso: "2026-10-05" };
 
 interface LegalPageProps {
+  /** Which legal document in Sanity can override this page: terms | privacy | refund */
+  legalKey?: string;
   title: string;
   path: string;
   intro: string;
@@ -42,8 +45,22 @@ const TableOfContents: React.FC<{ sections: LegalSection[] }> = ({ sections }) =
 );
 
 /** Static, server-rendered layout shared by the privacy, terms and refund pages. */
-export const LegalPage = async ({ title, path, intro, sections }: LegalPageProps) => {
-  const { company } = await getSiteSettings();
+const has = (v: unknown): v is string => typeof v === "string" && v.trim() !== "";
+const slug = (text: string, i: number) =>
+  text.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") || `section-${i + 1}`;
+
+export const LegalPage = async ({ legalKey, title: defaultTitle, path, intro: defaultIntro, sections: defaultSections }: LegalPageProps) => {
+  const [{ company }, override] = await Promise.all([getSiteSettings(), legalKey ? getLegalOverride(legalKey) : null]);
+  const title = has(override?.title) ? override.title : defaultTitle;
+  const intro = has(override?.intro) ? override.intro : defaultIntro;
+  const edited = (override?.sections ?? []).filter((s) => has(s?.title) && Array.isArray(s.body) && s.body.length);
+  const sections: LegalSection[] = edited.length
+    ? edited.map((s, i) => ({
+        id: has(s.anchor) ? s.anchor : slug(s.title as string, i),
+        title: s.title as string,
+        content: <PortableText value={s.body as PortableTextBlock[]} />,
+      }))
+    : defaultSections;
   return (
   <div className="w-full overflow-x-clip">
     {/* Header */}

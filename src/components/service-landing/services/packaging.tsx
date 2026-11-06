@@ -2,7 +2,7 @@
 
 import React from "react";
 import { Box, Check, Layers, Printer, ShieldCheck } from "lucide-react";
-import { ServiceLandingPage } from "../ServiceLandingPage";
+import { ServiceLandingPage, type ServicePageProps } from "../ServiceLandingPage";
 import { GradientText, SAMPLE_MARK_PATH, SampleMark, Wordmark } from "@/components/page-kit/shared";
 import { ChipDot, ChipIconBox, FloatingChip, Lines, MonoLabel, TILE_DARK } from "@/components/page-kit/primitives";
 import { ServiceHeroVideo } from "../sections/ServiceHeroVideo";
@@ -367,7 +367,7 @@ const ColourPrintPanel = () => (
 
 /* ---------- Config ---------- */
 
-const config: ServiceConfig = {
+export const config: ServiceConfig = {
   serviceName: "Packaging Design",
   shortName: "Packaging",
   projectLabel: "a packaging project",
@@ -555,4 +555,6 @@ const config: ServiceConfig = {
   },
 };
 
-export const PackagingServicePage: React.FC = () => <ServiceLandingPage config={config} />;
+export const PackagingServicePage: React.FC<ServicePageProps> = ({ override }) => (
+  <ServiceLandingPage config={config} slug="package-design" override={override} />
+);

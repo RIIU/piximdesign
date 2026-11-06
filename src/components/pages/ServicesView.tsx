@@ -20,11 +20,12 @@ import { Eyebrow, GradientText, SampleMark, SectionTitle } from "@/components/pa
 import { ChipDot, ChipIconBox, FloatingChip, TILE_DARK, TILE_DEEP, TILE_ORANGE } from "@/components/page-kit/primitives";
 import { useRevealAnimations } from "@/components/page-kit/useRevealAnimations";
 import type { FaqItem, WhyContent } from "@/components/page-kit/types";
-import { SERVICES } from "@/data/agencyData";
-import { startingFrom } from "@/data/servicePricing";
+import { SERVICES as SERVICE_LIST } from "@/data/agencyData";
+import { useServices, useStartingFrom } from "@/content/ContentProvider";
+import { T, usePageContent, type PageContent } from "@/content/page";
 import { CTA_VIDEOS, INTERNATIONAL_FAQ, OWNERSHIP_FAQ, PAYMENT_FAQ, STUDIO_PROCESS } from "@/data/studioContent";
 
-type Service = (typeof SERVICES)[number];
+type Service = (typeof SERVICE_LIST)[number];
 
 const SHORT_LABELS: Record<string, string> = {
   "logo-design": "Branding",
@@ -37,7 +38,7 @@ const SHORT_LABELS: Record<string, string> = {
 };
 
 const CATEGORIES = [
-  { id: "all", label: "All 7 Services", ids: SERVICES.map((s) => s.id) },
+  { id: "all", label: "All 7 Services", ids: SERVICE_LIST.map((s) => s.id) },
   { id: "branding", label: "Branding & Packaging", ids: ["logo-design", "package-design"] },
   { id: "digital", label: "Social & Ads", ids: ["social-media", "digital-marketing"] },
   { id: "web-video", label: "Web, Video & SEO", ids: ["web-design", "motion-video", "seo-growth"] },
@@ -86,6 +87,7 @@ const HeroVisual = () => (
 
 const ServiceCard: React.FC<{ service: Service }> = ({ service }) => {
   const Icon = SERVICE_ICONS[service.id];
+  const startingFrom = useStartingFrom();
   const from = startingFrom(service.id);
 
   return (
@@ -143,63 +145,101 @@ const ServiceCard: React.FC<{ service: Service }> = ({ service }) => {
 
 /* ---------- Content ---------- */
 
-const WHY: WhyContent = {
-  title: (
-    <>
-      One Team for Your <GradientText>Entire Brand</GradientText>
-    </>
-  ),
-  items: [
-    {
-      icon: Layers,
-      title: "Everything under one roof",
-      desc: "Branding, packaging, social, video, web and ads from one team, so every touchpoint looks and sounds like the same brand.",
+export const SERVICES_PAGE_DEFAULTS: PageContent = {
+  hero: {
+    eyebrow: "Our Services",
+    title: "One Studio for Every Part of *Your Brand's Growth*",
+    description:
+      "We provide complete branding, web engineering, packaging, and digital solutions to turn your idea into a successful online brand. Built with 8+ years of expertise.",
+    primaryLabel: "Get a Free Quote",
+    secondaryLabel: "View Pricing",
+  },
+  sections: {
+    grid: {
+      label: "Services grid heading",
+      eyebrow: "What We Do",
+      title: "Seven Services, *One Standard of Quality*",
+      description:
+        "Choose a single service or combine several. Every project gets the same senior team, clear pricing and full ownership of the final files.",
     },
-    {
-      icon: Wallet,
-      title: "Clear pricing in ৳ and $",
-      desc: "Fixed quotes before work starts, billed in Taka for Bangladesh and in US dollars for international clients.",
+    ctaCard: {
+      label: "“Not sure yet?” card",
+      eyebrow: "Not sure yet?",
+      title: "Get a free recommendation for your brand.",
+      description:
+        "Tell us where your business is today. In a free 30-minute call we'll suggest the right mix of services, timeline and budget.",
+      buttonLabel: "Book a free call",
+      secondaryLabel: "Compare prices",
     },
-    {
-      icon: FileCheck,
-      title: "You own every file",
-      desc: "All master source files and full commercial rights transfer to your business on final payment.",
-    },
-    {
-      icon: Timer,
-      title: "Fast, dependable delivery",
-      desc: "Agreed milestones, quick replies on WhatsApp and email, and 30 days of support after delivery.",
-    },
-  ],
-  tools: ["Figma", "Illustrator", "Photoshop", "After Effects", "Blender", "Next.js", "WordPress", "Meta Ads", "Google Ads", "Search Console"],
-  highlight: {
-    value: "7",
-    label: "Services under one roof",
-    chips: Object.values(SHORT_LABELS),
+  },
+  process: {
+    title: "From First Call to *Final Files*",
+    description:
+      "Every service follows the same clear five-step process, so you always know what happens next and what you'll receive.",
+    steps: STUDIO_PROCESS,
+  },
+  why: {
+    title: "One Team for Your *Entire Brand*",
+    items: [
+      {
+        icon: Layers,
+        title: "Everything under one roof",
+        desc: "Branding, packaging, social, video, web and ads from one team, so every touchpoint looks and sounds like the same brand.",
+      },
+      {
+        icon: Wallet,
+        title: "Clear pricing in ৳ and $",
+        desc: "Fixed quotes before work starts, billed in Taka for Bangladesh and in US dollars for international clients.",
+      },
+      {
+        icon: FileCheck,
+        title: "You own every file",
+        desc: "All master source files and full commercial rights transfer to your business on final payment.",
+      },
+      {
+        icon: Timer,
+        title: "Fast, dependable delivery",
+        desc: "Agreed milestones, quick replies on WhatsApp and email, and 30 days of support after delivery.",
+      },
+    ],
+    tools: ["Figma", "Illustrator", "Photoshop", "After Effects", "Blender", "Next.js", "WordPress", "Meta Ads", "Google Ads", "Search Console"],
+    highlight: { value: "7", label: "Services under one roof", chips: Object.values(SHORT_LABELS) },
+  },
+  reviewsTitle: "Verified Client Reviews Across Services",
+  cta: {
+    titleLead: "Not Sure Where",
+    titleHighlight: "to Start?",
+    description:
+      "Tell us about your business and goals. In a free 30-minute call we'll recommend the right services, timeline and budget.",
+  },
+  faq: {
+    title: "Service Questions, *Answered*",
+    items: [
+      {
+        q: "Which service should I start with?",
+        a: "Most new businesses start with a logo and brand identity, because social posts, packaging and your website all build on it. If you're unsure, book a free 30-minute call and we'll recommend the right starting point for your stage and budget.",
+      },
+      {
+        q: "Can I combine several services in one project?",
+        a: "Yes. Many clients bundle branding, a social media kit and a website. A combined project runs on one brief with one team, and you receive a single quote that covers everything.",
+      },
+      {
+        q: "How long does a typical project take?",
+        a: "Logos and brand identities usually take 3 to 7 business days, and full custom websites 2 to 3 weeks. We agree the milestones with you before any work begins.",
+      },
+      OWNERSHIP_FAQ,
+      PAYMENT_FAQ,
+      INTERNATIONAL_FAQ,
+    ],
   },
 };
-
-const FAQS: FaqItem[] = [
-  {
-    q: "Which service should I start with?",
-    a: "Most new businesses start with a logo and brand identity, because social posts, packaging and your website all build on it. If you're unsure, book a free 30-minute call and we'll recommend the right starting point for your stage and budget.",
-  },
-  {
-    q: "Can I combine several services in one project?",
-    a: "Yes. Many clients bundle branding, a social media kit and a website. A combined project runs on one brief with one team, and you receive a single quote that covers everything.",
-  },
-  {
-    q: "How long does a typical project take?",
-    a: "Logos and brand identities usually take 3 to 7 business days, and full custom websites 2 to 3 weeks. We agree the milestones with you before any work begins.",
-  },
-  OWNERSHIP_FAQ,
-  PAYMENT_FAQ,
-  INTERNATIONAL_FAQ,
-];
 
 /* ---------- Page ---------- */
 
 export const ServicesView: React.FC = () => {
+  const SERVICES = useServices();
+  const c = usePageContent(SERVICES_PAGE_DEFAULTS);
+  const { grid, ctaCard } = c.sections;
   const { openContact } = useContactModal();
   const rootRef = useRef<HTMLDivElement>(null);
   const [category, setCategory] = useState("all");
@@ -220,15 +260,11 @@ export const ServicesView: React.FC = () => {
       {/* 1. Hero */}
       <PageHero
         crumbs={[{ label: "Home", href: "/" }, { label: "Services" }]}
-        eyebrow="Our Services"
-        title={
-          <>
-            One Studio for Every Part of <GradientText>Your Brand&apos;s Growth</GradientText>
-          </>
-        }
-        description="We provide complete branding, web engineering, packaging, and digital solutions to turn your idea into a successful online brand. Built with 8+ years of expertise."
-        primary={{ label: "Get a Free Quote", onClick: () => consult("I'd like a quote for my project.") }}
-        secondary={{ label: "View Pricing", href: "/pricing" }}
+        eyebrow={c.hero.eyebrow}
+        title={<T text={c.hero.title} />}
+        description={c.hero.description}
+        primary={{ label: c.hero.primaryLabel, onClick: () => consult("I'd like a quote for my project.") }}
+        secondary={{ label: c.hero.secondaryLabel, href: "/pricing" }}
         visual={<HeroVisual />}
       />
 
@@ -239,14 +275,11 @@ export const ServicesView: React.FC = () => {
       <section id="all-services" className="relative py-20 sm:py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto scroll-mt-24">
         <div className="reveal-up flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-10 sm:mb-12">
           <div className="max-w-2xl">
-            <Eyebrow>What We Do</Eyebrow>
+            <Eyebrow>{grid.eyebrow}</Eyebrow>
             <SectionTitle className="mt-4">
-              Seven Services, <GradientText>One Standard of Quality</GradientText>
+              <T text={grid.title} />
             </SectionTitle>
-            <p className="mt-4 text-slate-400 text-base sm:text-lg leading-relaxed">
-              Choose a single service or combine several. Every project gets the same senior team, clear pricing and full
-              ownership of the final files.
-            </p>
+            <p className="mt-4 text-slate-400 text-base sm:text-lg leading-relaxed">{grid.description}</p>
           </div>
           <FilterPills
             label="Filter services"
@@ -270,12 +303,11 @@ export const ServicesView: React.FC = () => {
           >
             <SampleMark className="pointer-events-none absolute -right-10 -bottom-10 w-48 h-48 opacity-10" color="#FF8500" />
             <div className="relative">
-              <span className="text-[10px] font-mono uppercase tracking-widest text-[#FFA133]">Not sure yet?</span>
-              <h3 className="mt-2 font-agency text-2xl sm:text-3xl font-extrabold text-white">Get a free recommendation for your brand.</h3>
-              <p className="mt-2 max-w-md text-sm text-slate-400 leading-relaxed">
-                Tell us where your business is today. In a free 30-minute call we&apos;ll suggest the right mix of services,
-                timeline and budget.
-              </p>
+              <span className="text-[10px] font-mono uppercase tracking-widest text-[#FFA133]">{ctaCard.eyebrow}</span>
+              <h3 className="mt-2 font-agency text-2xl sm:text-3xl font-extrabold text-white">
+                <T text={ctaCard.title} />
+              </h3>
+              <p className="mt-2 max-w-md text-sm text-slate-400 leading-relaxed">{ctaCard.description}</p>
             </div>
             <div className="relative flex flex-wrap items-center gap-3">
               <button
@@ -283,14 +315,14 @@ export const ServicesView: React.FC = () => {
                 onClick={() => consult("I'd like a recommendation on which services fit my brand.")}
                 className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#FF8500] to-[#FFA133] px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-white shadow-md shadow-orange-500/25 transition-shadow hover:shadow-orange-500/40 cursor-pointer"
               >
-                Book a free call
+                {ctaCard.buttonLabel}
                 <ArrowUpRight className="w-4 h-4" />
               </button>
               <Link
                 href="/pricing"
                 className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/[0.06] px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-white transition-colors hover:border-white/40 hover:bg-white/[0.1]"
               >
-                Compare prices
+                {ctaCard.secondaryLabel}
               </Link>
             </div>
           </div>
@@ -299,29 +331,25 @@ export const ServicesView: React.FC = () => {
 
       {/* 4. Shared process */}
       <ProcessTimeline
-        title={
-          <>
-            From First Call to <GradientText>Final Files</GradientText>
-          </>
-        }
-        description="Every service follows the same clear five-step process, so you always know what happens next and what you'll receive."
-        steps={STUDIO_PROCESS}
+        title={<T text={c.process!.title} />}
+        description={c.process!.description}
+        steps={c.process!.steps}
       />
 
       {/* 5. Why Pixim + stats */}
-      <WhySplit why={WHY} />
+      <WhySplit why={{ ...c.why!, title: <T text={c.why!.title} /> }} />
 
       {/* 6. Client reviews */}
       <section className="relative py-10 sm:py-14">
-        <GsapReviewsInfiniteSlider title="Verified Client Reviews Across Services" subtitle="PROVEN TRACK RECORD" speed={38} />
+        <GsapReviewsInfiniteSlider title={c.reviewsTitle!} subtitle="PROVEN TRACK RECORD" speed={38} />
       </section>
 
       {/* 7. CTA: Not Sure Where to Start? */}
       <ReadyForLogoSection
         onOpenContact={(service, note) => openContact(service, note)}
-        titleLead="Not Sure Where"
-        titleHighlight="to Start?"
-        description="Tell us about your business and goals. In a free 30-minute call we'll recommend the right services, timeline and budget."
+        titleLead={c.cta!.titleLead}
+        titleHighlight={c.cta!.titleHighlight}
+        description={c.cta!.description}
         primaryService="Free Consultation"
         primaryNote="I'd like help choosing the right services for my brand."
         secondaryService="Service Consultation"
@@ -331,12 +359,8 @@ export const ServicesView: React.FC = () => {
 
       {/* 8. FAQ */}
       <FaqSplit
-        title={
-          <>
-            Service Questions, <GradientText>Answered</GradientText>
-          </>
-        }
-        faqs={FAQS}
+        title={<T text={c.faq!.title} />}
+        faqs={c.faq!.items}
         onAsk={() => consult("I have a few questions about your services.")}
       />
     </div>

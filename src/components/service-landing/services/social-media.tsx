@@ -15,7 +15,7 @@ import {
   Smartphone,
   Star,
 } from "lucide-react";
-import { ServiceLandingPage } from "../ServiceLandingPage";
+import { ServiceLandingPage, type ServicePageProps } from "../ServiceLandingPage";
 import { GradientText, SampleMark, Wordmark } from "@/components/page-kit/shared";
 import { ChipDot, ChipIconBox, FloatingChip, Lines, MonoLabel, PhoneFrame, Ring, TILE_DARK } from "@/components/page-kit/primitives";
 import { ServiceHeroVideo } from "../sections/ServiceHeroVideo";
@@ -414,7 +414,7 @@ const SizesPanel = () => (
 
 /* ---------- Config ---------- */
 
-const config: ServiceConfig = {
+export const config: ServiceConfig = {
   serviceName: "Social Media & Content Design",
   shortName: "Social Media",
   projectLabel: "a social media project",
@@ -606,4 +606,6 @@ const config: ServiceConfig = {
   },
 };
 
-export const SocialMediaServicePage: React.FC = () => <ServiceLandingPage config={config} />;
+export const SocialMediaServicePage: React.FC<ServicePageProps> = ({ override }) => (
+  <ServiceLandingPage config={config} slug="social-media" override={override} />
+);

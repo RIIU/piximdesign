@@ -14,7 +14,7 @@ import {
   Zap,
   User,
 } from "lucide-react";
-import { ServiceLandingPage } from "../ServiceLandingPage";
+import { ServiceLandingPage, type ServicePageProps } from "../ServiceLandingPage";
 import { GradientText, SampleMark, Wordmark } from "@/components/page-kit/shared";
 import { ChipIconBox, FloatingChip, Lines, MonoLabel, TILE_DARK } from "@/components/page-kit/primitives";
 import { ServiceHeroVideo } from "../sections/ServiceHeroVideo";
@@ -369,7 +369,7 @@ const SoundFinishPanel = () => (
 
 /* ---------- Config ---------- */
 
-const config: ServiceConfig = {
+export const config: ServiceConfig = {
   serviceName: "Video & Motion Design",
   shortName: "Video & Motion",
   projectLabel: "a video project",
@@ -556,4 +556,6 @@ const config: ServiceConfig = {
   },
 };
 
-export const MotionVideoServicePage: React.FC = () => <ServiceLandingPage config={config} />;
+export const MotionVideoServicePage: React.FC<ServicePageProps> = ({ override }) => (
+  <ServiceLandingPage config={config} slug="motion-video" override={override} />
+);

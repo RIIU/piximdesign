@@ -5,10 +5,9 @@ import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
-import { SERVICES } from "@/data/agencyData";
 import { ArrowRight } from "lucide-react";
 import { PixxenLottieIcon } from "./PixxenLottieIcon";
-import { useHome } from "@/content/ContentProvider";
+import { useHome, useServices } from "@/content/ContentProvider";
 import { RichTitle } from "@/content/RichTitle";
 
 interface ServicesSectionProps {
@@ -16,6 +15,7 @@ interface ServicesSectionProps {
 }
 
 export const ServicesSection: React.FC<ServicesSectionProps> = ({ onSelectService }) => {
+  const SERVICES = useServices();
   const { services: content } = useHome();
   const [activeTab, setActiveTab] = useState<string>("all");
   const [hoveredId, setHoveredId] = useState<string | null>(null);
