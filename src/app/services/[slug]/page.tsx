@@ -4,6 +4,8 @@ import { notFound } from "next/navigation";
 import { SERVICES } from "@/data/agencyData";
 import { startingFrom } from "@/data/servicePricing";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { getServicePageOverride } from "@/sanity/content";
+import type { ServicePageProps as LandingProps } from "@/components/service-landing/ServiceLandingPage";
 import { ORGANIZATION_ID, absoluteUrl, breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
 import { BrandingServicePage } from "@/components/service-landing/services/branding";
 import { SocialMediaServicePage } from "@/components/service-landing/services/social-media";
@@ -48,7 +50,7 @@ function resolveServiceSlug(rawSlug: string): string {
 }
 
 // One landing page per service, all built on the shared service-landing template
-const SERVICE_PAGES: Record<string, React.ComponentType> = {
+const SERVICE_PAGES: Record<string, React.ComponentType<LandingProps>> = {
   "logo-design": BrandingServicePage,
   "social-media": SocialMediaServicePage,
   "package-design": PackagingServicePage,
@@ -92,6 +94,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
 
   const path = `/services/${canonicalSlug}`;
   const from = startingFrom(canonicalSlug);
+  const override = await getServicePageOverride(canonicalSlug);
   const serviceJsonLd = {
     "@context": "https://schema.org",
     "@type": "Service",
@@ -118,7 +121,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
           { name: service.title, path },
         ])}
       />
-      <ServicePage />
+      <ServicePage override={override} />
     </>
   );
 }
