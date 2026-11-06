@@ -4,14 +4,16 @@ import { servicePage, servicesCatalog } from "./servicePage";
 import { siteSettings } from "./siteSettings";
 import { sitePage } from "./sitePage";
 import { legalPage } from "./legalPage";
+import { mediaLibrary } from "./mediaLibrary";
 
-export const schemaTypes = [siteSettings, homePage, servicesCatalog, servicePage, sitePage, legalPage];
+export const schemaTypes = [siteSettings, homePage, servicesCatalog, servicePage, sitePage, legalPage, mediaLibrary];
 
 /** Documents that exist exactly once (fixed IDs) */
 export const SINGLETONS = [
   { type: "siteSettings", id: "siteSettings", title: "Site Settings" },
   { type: "homePage", id: "homePage", title: "Home Page" },
   { type: "servicesCatalog", id: "servicesCatalog", title: "Services & Prices" },
+  { type: "mediaLibrary", id: "mediaLibrary", title: "Images & Videos" },
 ] as const;
 
 /** One fixed page document per service */

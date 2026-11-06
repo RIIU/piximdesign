@@ -60,3 +60,7 @@ export const PAGE_QUERY = defineQuery(`*[_id == $id][0]{
 }`);
 
 export const LEGAL_QUERY = defineQuery(`*[_id == $id][0]{title, intro, sections[]{anchor, title, body}}`);
+
+export const MEDIA_QUERY = defineQuery(`*[_id == "mediaLibrary"][0].items[defined(image.asset) || defined(file.asset)]{
+  src, "url": coalesce(image.asset->url, file.asset->url)
+}`);

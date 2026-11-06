@@ -2,6 +2,7 @@
 
 import React, { useRef, useState, useEffect } from "react";
 import { Play, Volume2, VolumeX } from "lucide-react";
+import { media } from "@/content/media";
 
 export interface ServiceHeroVideoProps {
   videoSrc: string;
@@ -112,8 +113,8 @@ export const ServiceHeroVideo: React.FC<ServiceHeroVideoProps> = ({
         {/* HTML5 Video */}
         <video
           ref={videoRef}
-          src={videoSrc}
-          poster={posterSrc}
+          src={media(videoSrc)}
+          poster={media(posterSrc)}
           autoPlay
           muted={isMuted}
           loop

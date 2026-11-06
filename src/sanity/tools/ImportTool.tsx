@@ -12,6 +12,7 @@ const LABELS: Record<string, string> = {
   siteSettings: "Site Settings",
   homePage: "Home Page",
   servicesCatalog: "Services & Prices",
+  mediaLibrary: "Images & Videos",
 };
 const label = (id: string) =>
   LABELS[id] ??

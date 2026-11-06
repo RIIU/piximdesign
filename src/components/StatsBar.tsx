@@ -7,6 +7,7 @@ import { useGSAP } from "@gsap/react";
 import { ArrowUpRight, Play, Globe } from "lucide-react";
 import { useHome } from "@/content/ContentProvider";
 import { RichTitle } from "@/content/RichTitle";
+import { media } from "@/content/media";
 
 interface StatsBarProps {
   className?: string;
@@ -144,7 +145,7 @@ export const StatsBar: React.FC<StatsBarProps> = ({ className = "", onOpenContac
                 <div className="relative w-14 sm:w-19 rounded-xl overflow-hidden bg-[#081330] border border-white/20 group-hover:border-[#FFA229]/70 shadow-2xl transition-all duration-500 ease-out -translate-y-4 sm:-translate-y-6 rotate-[-5deg] group-hover:-translate-y-9 sm:group-hover:-translate-y-13 group-hover:translate-x-2 sm:group-hover:-translate-x-3 group-hover:rotate-[-9deg]">
                   <div className="relative w-full h-12 sm:h-16 bg-[#0c1a40]">
                     <img
-                      src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=240&auto=format&fit=crop"
+                      src={media("https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=240&auto=format&fit=crop")}
                       alt="Sarah - Lead UI"
                       className="w-full h-full object-cover object-top"
                       loading="lazy"
@@ -165,7 +166,7 @@ export const StatsBar: React.FC<StatsBarProps> = ({ className = "", onOpenContac
                 <div className="relative w-16 sm:w-22 rounded-xl overflow-hidden bg-[#081330] border border-[#FF8500]/70 group-hover:border-[#FF8500] shadow-[0_0_15px_rgba(255,133,0,0.25)] transition-all duration-500 ease-out -translate-y-5 sm:-translate-y-8 rotate-0 z-10 group-hover:-translate-y-11 sm:group-hover:-translate-y-16 group-hover:scale-105">
                   <div className="relative w-full h-13 sm:h-18 bg-[#0c1a40]">
                     <img
-                      src="/images/consultation/director-portrait.png"
+                      src={media("/images/consultation/director-portrait.png")}
                       alt="Sabbir Ahmed - Head of Business"
                       className="w-full h-full object-cover object-top"
                       loading="lazy"
@@ -186,7 +187,7 @@ export const StatsBar: React.FC<StatsBarProps> = ({ className = "", onOpenContac
                 <div className="relative w-14 sm:w-19 rounded-xl overflow-hidden bg-[#081330] border border-white/20 group-hover:border-[#38BDF8]/70 shadow-2xl transition-all duration-500 ease-out -translate-y-4 sm:-translate-y-6 rotate-[5deg] group-hover:-translate-y-9 sm:group-hover:-translate-y-13 group-hover:translate-x-2 sm:group-hover:translate-x-3 group-hover:rotate-[9deg]">
                   <div className="relative w-full h-12 sm:h-16 bg-[#0c1a40]">
                     <img
-                      src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=240&auto=format&fit=crop"
+                      src={media("https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=240&auto=format&fit=crop")}
                       alt="Maya - Brand UX"
                       className="w-full h-full object-cover object-top"
                       loading="lazy"

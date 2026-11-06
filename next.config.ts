@@ -19,6 +19,11 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "images.unsplash.com",
       },
+      {
+        // Images uploaded in the website editor (Sanity)
+        protocol: "https",
+        hostname: "cdn.sanity.io",
+      },
     ],
   },
 

@@ -6,7 +6,8 @@ import { draftMode } from "next/headers";
 import { VisualEditing } from "next-sanity/visual-editing";
 import { AppLayoutWrapper } from "@/components/AppLayoutWrapper";
 import { CatalogProvider, SettingsProvider } from "@/content/ContentProvider";
-import { getCatalog, getSiteSettings } from "@/sanity/content";
+import { getCatalog, getMediaMap, getSiteSettings } from "@/sanity/content";
+import { MediaProvider } from "@/content/media";
 import { SanityLive } from "@/sanity/live";
 import { isSanityConfigured } from "@/sanity/env";
 import { CURRENCY_BOOTSTRAP_SCRIPT } from "@/lib/currency-bootstrap";
@@ -90,7 +91,7 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const [settings, catalog] = await Promise.all([getSiteSettings(), getCatalog()]);
+  const [settings, catalog, mediaMap] = await Promise.all([getSiteSettings(), getCatalog(), getMediaMap()]);
   const { isEnabled: isDraftMode } = await draftMode();
 
   return (
@@ -152,11 +153,13 @@ export default async function RootLayout({
         suppressHydrationWarning
         className="min-h-full flex flex-col bg-[#081330] text-[#F8FAFC] font-sans"
       >
-        <SettingsProvider value={settings}>
-          <CatalogProvider value={catalog}>
-            <AppLayoutWrapper>{children}</AppLayoutWrapper>
-          </CatalogProvider>
-        </SettingsProvider>
+        <MediaProvider value={mediaMap}>
+          <SettingsProvider value={settings}>
+            <CatalogProvider value={catalog}>
+              <AppLayoutWrapper>{children}</AppLayoutWrapper>
+            </CatalogProvider>
+          </SettingsProvider>
+        </MediaProvider>
         {/* Real-time content updates from Sanity + click-to-edit overlays in preview mode */}
         {isSanityConfigured && <SanityLive />}
         {isSanityConfigured && isDraftMode && <VisualEditing />}

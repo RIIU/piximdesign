@@ -8,6 +8,7 @@ import { Play, Eye, X, ArrowUpRight, ArrowRight } from "lucide-react";
 import { useHome } from "@/content/ContentProvider";
 import type { RecentProject } from "@/content/homeData";
 import { RichTitle } from "@/content/RichTitle";
+import { media } from "@/content/media";
 
 interface RecentWorkProps {
   onOpenContact?: () => void;
@@ -225,7 +226,7 @@ export const RecentWorkSection: React.FC<RecentWorkProps> = ({ onOpenContact }) 
               {/* Top Media Showcase Canvas (Real Video Poster or Case Study Image) */}
               <div className="relative aspect-[16/10] w-full overflow-hidden bg-[#050D24]">
                 <img
-                  src={proj.thumbnailSrc}
+                  src={media(proj.thumbnailSrc)}
                   alt={proj.title}
                   width={720}
                   height={450}
@@ -356,8 +357,8 @@ export const RecentWorkSection: React.FC<RecentWorkProps> = ({ onOpenContact }) 
               {activeItem.type === "video" ? (
                 <div className="relative aspect-video w-full max-h-[65vh] rounded-xl overflow-hidden bg-black flex items-center justify-center shadow-inner">
                   <video
-                    src={activeItem.mediaSrc}
-                    poster={activeItem.thumbnailSrc}
+                    src={media(activeItem.mediaSrc)}
+                    poster={media(activeItem.thumbnailSrc)}
                     controls
                     autoPlay
                     playsInline
@@ -367,7 +368,7 @@ export const RecentWorkSection: React.FC<RecentWorkProps> = ({ onOpenContact }) 
               ) : (
                 <div className="relative w-full max-h-[65vh] flex items-center justify-center overflow-hidden rounded-xl">
                   <img
-                    src={activeItem.mediaSrc}
+                    src={media(activeItem.mediaSrc)}
                     alt={activeItem.title}
                     decoding="async"
                     className="max-h-[65vh] w-auto max-w-full object-contain rounded-lg shadow-2xl"

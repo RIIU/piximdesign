@@ -1,6 +1,6 @@
 import { isSanityConfigured } from "./env";
 import { sanityFetch } from "./live";
-import { CATALOG_QUERY, HOME_QUERY, LEGAL_QUERY, PAGE_QUERY, SERVICE_PAGE_QUERY, SETTINGS_QUERY } from "./queries";
+import { CATALOG_QUERY, HOME_QUERY, LEGAL_QUERY, MEDIA_QUERY, PAGE_QUERY, SERVICE_PAGE_QUERY, SETTINGS_QUERY } from "./queries";
 import type { PageOverride } from "@/content/pageMerge";
 import type { ServicePageOverride } from "@/components/service-landing/applyOverride";
 import { CATALOG_DEFAULTS, mergeCatalog, type Catalog } from "@/content/catalog";
@@ -73,5 +73,21 @@ export async function getLegalOverride(key: string): Promise<LegalOverride | nul
   } catch (err) {
     console.error("[sanity] legal page fetch failed, using defaults:", err instanceof Error ? err.message : err);
     return null;
+  }
+}
+
+/** Replaced images/videos: original path → uploaded file URL. */
+export async function getMediaMap(): Promise<Record<string, string>> {
+  if (!isSanityConfigured) return {};
+  try {
+    const { data } = await sanityFetch({ query: MEDIA_QUERY });
+    const map: Record<string, string> = {};
+    for (const item of (data as { src?: string; url?: string }[] | null) ?? []) {
+      if (item?.src && item?.url) map[item.src] = item.url;
+    }
+    return map;
+  } catch (err) {
+    console.error("[sanity] media fetch failed, using original files:", err instanceof Error ? err.message : err);
+    return {};
   }
 }

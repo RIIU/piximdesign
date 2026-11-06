@@ -7,6 +7,7 @@ import { useGSAP } from "@gsap/react";
 import { Play, Pause, Volume2, VolumeX, Maximize2 } from "lucide-react";
 import { LogoCarousel } from "./LogoCarousel";
 import { useHome } from "@/content/ContentProvider";
+import { media } from "@/content/media";
 
 interface VideoShowcaseSectionProps {
   onOpenContact?: () => void;
@@ -226,8 +227,8 @@ export const VideoShowcaseSection: React.FC<VideoShowcaseSectionProps> = () => {
             <div className="relative aspect-video w-full overflow-hidden">
               <video
                 ref={videoRef}
-                src={shouldLoadVideo && pageReady ? showcase.videoSrc : undefined}
-                poster={showcase.posterSrc}
+                src={media(shouldLoadVideo && pageReady ? showcase.videoSrc : undefined)}
+                poster={media(showcase.posterSrc)}
                 preload="none"
                 autoPlay
                 muted={isMuted}

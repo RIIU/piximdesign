@@ -6,6 +6,7 @@ import Link from "next/link";
 import { ArrowUpRight, ArrowRight, X, Sparkles, ZoomIn, ChevronLeft, ChevronRight, TrendingUp } from "lucide-react";
 import { Eyebrow, GradientText, SectionTitle } from "@/components/page-kit/shared";
 import { type ServiceProject, getServiceProjects } from "@/data/serviceProjects";
+import { media } from "@/content/media";
 
 interface ServicePreviousProjectsProps {
   shortName: string;
@@ -116,7 +117,7 @@ export const ServicePreviousProjects: React.FC<ServicePreviousProjectsProps> = (
               {/* Clean Logo Image */}
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src={project.image}
+                src={media(project.image)}
                 alt={project.title}
                 loading="lazy"
                 className="relative z-10 max-h-14 sm:max-h-16 lg:max-h-20 w-auto max-w-[85%] object-contain filter drop-shadow-[0_6px_20px_rgba(0,0,0,0.7)] transition-transform duration-300 group-hover:scale-110"
@@ -138,7 +139,7 @@ export const ServicePreviousProjects: React.FC<ServicePreviousProjectsProps> = (
               {/* Image Stage: Pure clean visual artwork */}
               <div className="relative aspect-[16/10] overflow-hidden bg-[#081330] w-full">
                 <Image
-                  src={project.image}
+                  src={media(project.image)}
                   alt={project.title}
                   fill
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
@@ -222,14 +223,14 @@ export const ServicePreviousProjects: React.FC<ServicePreviousProjectsProps> = (
               {currentZoomProject.isLogo ? (
                 // eslint-disable-next-line @next/next/no-img-element
                 <img
-                  src={currentZoomProject.image}
+                  src={media(currentZoomProject.image)}
                   alt={currentZoomProject.title}
                   className="relative z-10 max-h-36 sm:max-h-52 md:max-h-64 w-auto max-w-[85%] object-contain filter drop-shadow-[0_12px_36px_rgba(0,0,0,0.9)] animate-in zoom-in-95 duration-200"
                 />
               ) : (
                 <div className="relative w-full h-full">
                   <Image
-                    src={currentZoomProject.image}
+                    src={media(currentZoomProject.image)}
                     alt={currentZoomProject.title}
                     fill
                     sizes="(max-width: 1024px) 90vw, 800px"

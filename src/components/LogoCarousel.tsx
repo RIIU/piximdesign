@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { useSettings } from "@/content/ContentProvider";
+import { media } from "@/content/media";
 
 // Client logos from the public/client logo directory
 
@@ -42,7 +43,7 @@ export const LogoCarousel: React.FC = () => {
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src={logo.src}
+              src={media(logo.src)}
               alt={logo.name}
               width={260}
               height={100}
@@ -69,7 +70,7 @@ export const LogoCarousel: React.FC = () => {
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src={logo.src}
+              src={media(logo.src)}
               alt={logo.name}
               width={260}
               height={100}

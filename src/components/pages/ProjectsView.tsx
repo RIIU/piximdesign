@@ -20,6 +20,7 @@ import { PORTFOLIO_PROJECTS } from "@/data/agencyData";
 import { CASE_STUDIES, type CaseStudy } from "@/data/caseStudies";
 import { CTA_VIDEOS } from "@/data/studioContent";
 import { T, usePageContent, type PageContent } from "@/content/page";
+import { media } from "@/content/media";
 
 type Project = (typeof PORTFOLIO_PROJECTS)[number];
 
@@ -32,15 +33,15 @@ const [HERO_MAIN, HERO_LEFT, HERO_RIGHT] = [CASE_STUDIES[3], CASE_STUDIES[1], CA
 const HeroVisual = () => (
   <div className="relative px-2 pt-8 pb-14 sm:px-6">
     <div className="absolute right-0 top-0 z-0 w-[42%] rotate-[5deg] overflow-hidden rounded-2xl border border-white/10 shadow-xl">
-      <Image src={HERO_RIGHT.image} alt="" width={736} height={491} sizes="200px" className="w-full h-auto" />
+      <Image src={media(HERO_RIGHT.image)} alt="" width={736} height={491} sizes="200px" className="w-full h-auto" />
     </div>
 
     <BrowserFrame url="ecoray.app/dashboard" className="relative z-10">
-      <Image src={HERO_MAIN.image} alt="" width={736} height={491} sizes="(max-width: 1024px) 90vw, 460px" loading="eager" className="w-full h-auto" />
+      <Image src={media(HERO_MAIN.image)} alt="" width={736} height={491} sizes="(max-width: 1024px) 90vw, 460px" loading="eager" className="w-full h-auto" />
     </BrowserFrame>
 
     <div className="absolute bottom-0 left-0 z-20 w-[46%] -rotate-[4deg] overflow-hidden rounded-2xl border border-white/15 shadow-2xl">
-      <Image src={HERO_LEFT.image} alt="" width={736} height={491} sizes="220px" className="w-full h-auto" />
+      <Image src={media(HERO_LEFT.image)} alt="" width={736} height={491} sizes="220px" className="w-full h-auto" />
     </div>
 
     <FloatingChip
@@ -68,7 +69,7 @@ const CaseStudyVisual: React.FC<{ study: CaseStudy }> = ({ study }) => (
   <div>
     <div className="relative overflow-hidden rounded-2xl border border-white/10">
       <Image
-        src={study.image}
+        src={media(study.image)}
         alt=""
         width={736}
         height={491}
@@ -97,7 +98,7 @@ const ProjectCard: React.FC<{ project: Project; onOpen: () => void }> = ({ proje
   <article className="group relative flex flex-col overflow-hidden rounded-[28px] border border-[#2651B9]/30 bg-[#0C1E4E]/70 transition-[translate,border-color,box-shadow] duration-500 hover:-translate-y-1 hover:border-[#FF8500]/55 hover:shadow-[0_20px_45px_-18px_rgba(255,133,0,0.35)] has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-[#FF8500]">
     <div className="relative aspect-[16/10] overflow-hidden bg-[#081330]">
       <Image
-        src={project.image}
+        src={media(project.image)}
         alt=""
         fill
         sizes="(max-width: 768px) 100vw, 50vw"
@@ -164,7 +165,7 @@ const ProjectModal: React.FC<{ project: Project; onClose: () => void; onInquire:
         </button>
 
         <div className="relative aspect-[16/9] overflow-hidden rounded-2xl">
-          <Image src={project.image} alt={project.title} fill sizes="(max-width: 768px) 100vw, 720px" className="object-cover" />
+          <Image src={media(project.image)} alt={project.title} fill sizes="(max-width: 768px) 100vw, 720px" className="object-cover" />
         </div>
 
         <div className="mt-6 flex flex-wrap items-center gap-2">
