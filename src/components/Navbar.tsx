@@ -9,6 +9,7 @@ import { ArrowUpRight, ArrowRight, ChevronDown, Layers } from "lucide-react";
 import { GsapMagneticButton } from "@/components/animations/GsapMagneticButton";
 import { SERVICES } from "@/data/agencyData";
 import { SERVICE_ICONS } from "./serviceIcons";
+import { useSettings } from "@/content/ContentProvider";
 
 interface NavbarProps {
   onOpenContact: () => void;
@@ -17,6 +18,7 @@ interface NavbarProps {
 export const Navbar: React.FC<NavbarProps> = ({ onOpenContact }) => {
   const router = useRouter();
   const pathname = usePathname();
+  const { navCtaLabel } = useSettings();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
@@ -286,7 +288,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenContact }) => {
                 style={{ textShadow: "none", filter: "none" }}
                 className="text-white font-bold text-sm lg:text-[15px] tracking-wide [text-shadow:none] [filter:none]"
               >
-                Let&apos;s Talk
+                {navCtaLabel}
               </span>
               <ArrowUpRight
                 style={{ filter: "none" }}
@@ -308,7 +310,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenContact }) => {
                 style={{ textShadow: "none", filter: "none" }}
                 className="relative z-10 tracking-tight font-bold text-white [text-shadow:none] [filter:none]"
               >
-                Let&apos;s Talk
+                {navCtaLabel}
               </span>
               <ArrowRight
                 style={{ filter: "none" }}

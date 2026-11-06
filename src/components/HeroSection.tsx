@@ -6,6 +6,8 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { Globe, ShieldCheck, Star, ArrowRight } from "lucide-react";
 import { RotatingDotOrbit } from "./RotatingDotOrbit";
+import { useHome } from "@/content/ContentProvider";
+import { RichTitle } from "@/content/RichTitle";
 
 interface HeroSectionProps {
   onOpenContact?: () => void;
@@ -40,6 +42,7 @@ const CELESTIAL_STARS = [
 
 export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenContact }) => {
   const heroRef = useRef<HTMLDivElement>(null);
+  const { hero } = useHome();
 
   const handleCtaClick = async () => {
     try {
@@ -189,7 +192,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenContact }) => {
 
         {/* Service Pill Tags */}
         <div className="hero-pills flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 pb-2 sm:pb-3.5 md:pb-6">
-          {["Branding", "Web Design", "Digital Marketing"].map(
+          {hero.pills.map(
             (tag) => (
               <span
                 key={tag}
@@ -203,18 +206,15 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenContact }) => {
 
         {/* Main Heading */}
         <h1 className="hero-heading font-agency font-black text-[34px] xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-[80px] tracking-tight text-white leading-[1.04] max-w-5xl px-3 sm:px-2">
-          One Stop Solution for{" "}
-          <span className="relative inline-block bg-gradient-to-r from-[#38bdf8] via-[#FF8500] to-[#FF8500] bg-clip-text text-transparent drop-shadow-[0_2px_16px_rgba(255,133,0,0.35)]">
-            Branding
-          </span>
+          <RichTitle
+            text={hero.title}
+            highlightClassName="relative inline-block bg-gradient-to-r from-[#38bdf8] via-[#FF8500] to-[#FF8500] bg-clip-text text-transparent drop-shadow-[0_2px_16px_rgba(255,133,0,0.35)]"
+          />
         </h1>
 
         {/* Description */}
         <p className="hero-desc font-sherika mt-2.5 sm:mt-4 text-[13px] sm:text-base md:text-lg lg:text-xl text-slate-200/85 max-w-md sm:max-w-2xl lg:max-w-3xl font-normal leading-[1.55] px-4 sm:px-2">
-          Pixim Design is a highly specialized branding &amp; creative agency that
-          brings your bold, disruptive idea to life. We craft iconic brand
-          identities, high-performing websites, and stunning visuals for
-          ambitious founders and market leaders.
+          {hero.description}
         </p>
 
         {/* Dual CTA Buttons */}
@@ -228,15 +228,15 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenContact }) => {
             <span className="flex items-center justify-center w-6 h-6 rounded-full bg-[#081330]/90 shrink-0">
               <ArrowRight className="w-3.5 h-3.5 text-[#FF8500] transition-transform duration-200 group-hover:translate-x-0.5" />
             </span>
-            <span>Get Your Free Quote</span>
+            <span>{hero.primaryCta}</span>
           </button>
 
           {/* Secondary CTA */}
           <Link
-            href="/services"
+            href={hero.secondaryHref || "/services"}
             className="group w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 sm:px-7 md:px-8 py-3.5 md:py-4 rounded-xl border border-white/20 bg-white/[0.04] backdrop-blur-sm text-white font-semibold text-sm sm:text-base md:text-lg uppercase tracking-wide transition-all duration-300 hover:bg-white hover:text-[#081330] active:scale-[0.97]"
           >
-            <span>Our Services</span>
+            <span>{hero.secondaryCta}</span>
             <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5 opacity-60 group-hover:opacity-100" />
           </Link>
         </div>
@@ -245,18 +245,18 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenContact }) => {
         <div className="hero-trust flex md:hidden items-center justify-between mt-4 w-full max-w-[340px] px-3 py-2 rounded-xl border border-[#3B82F6]/20 bg-[#0C1E4E]/60 backdrop-blur-xl shadow-[0_4px_20px_rgba(4,10,28,0.4)] text-[11px] text-white/85 z-20">
           <div className="flex items-center gap-1">
             <Star className="w-3 h-3 fill-amber-400 text-amber-400 shrink-0" />
-            <span className="font-semibold text-white">4.9/5.0</span>
-            <span className="text-white/60">(500+)</span>
+            <span className="font-semibold text-white">{hero.rating.replace(/\s+/g, "")}</span>
+            <span className="text-white/60">{hero.reviewsShort}</span>
           </div>
           <span className="text-white/20">|</span>
           <div className="flex items-center gap-1">
             <Globe className="w-3 h-3 text-[#FF8500] shrink-0" />
-            <span className="font-medium text-white/95">500+ Brands</span>
+            <span className="font-medium text-white/95">{hero.brandsShort}</span>
           </div>
           <span className="text-white/20">|</span>
           <div className="flex items-center gap-1">
             <ShieldCheck className="w-3 h-3 text-[#38BDF8] shrink-0" />
-            <span className="font-medium text-white/95">100% Vector IP</span>
+            <span className="font-medium text-white/95">{hero.ownershipShort}</span>
           </div>
         </div>
 
@@ -273,10 +273,10 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenContact }) => {
                   ))}
                 </div>
                 <span className="font-semibold text-white text-sm">
-                  4.9 / 5.0
+                  {hero.rating}
                 </span>
                 <span className="text-white/60 text-sm">
-                  (500+ Reviews)
+                  {hero.reviews}
                 </span>
               </div>
 
@@ -284,7 +284,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenContact }) => {
               <div className="flex items-center justify-center gap-2 whitespace-nowrap">
                 <Globe className="w-3.5 h-3.5 text-[#FF8500] shrink-0" />
                 <span className="text-white font-medium text-sm">
-                  500+ Brands Worldwide
+                  {hero.brands}
                 </span>
               </div>
 
@@ -292,7 +292,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenContact }) => {
               <div className="flex items-center justify-center gap-2 whitespace-nowrap">
                 <ShieldCheck className="w-3.5 h-3.5 text-[#60A5FA] shrink-0" />
                 <span className="text-white font-medium text-sm">
-                  100% Vector IP Ownership
+                  {hero.ownership}
                 </span>
               </div>
             </div>

@@ -10,12 +10,15 @@ import {
   Layers,
 } from "lucide-react";
 import { CASE_STUDIES, type CaseStudy } from "@/data/caseStudies";
+import { useHome } from "@/content/ContentProvider";
+import { RichTitle } from "@/content/RichTitle";
 
 interface BrandStoriesSectionProps {
   onOpenContact?: () => void;
 }
 
 export const BrandStoriesSection: React.FC<BrandStoriesSectionProps> = ({ onOpenContact }) => {
+  const { brandStories: content } = useHome();
   const [activeCaseStudy, setActiveCaseStudy] = useState<CaseStudy | null>(null);
 
   const sectionRef = useRef<HTMLElement>(null);
@@ -56,14 +59,15 @@ export const BrandStoriesSection: React.FC<BrandStoriesSectionProps> = ({ onOpen
               className="left-content lg:sticky lg:top-28 xl:top-32 flex flex-col items-center lg:items-start text-center lg:text-left justify-start py-4"
             >
               <h2 className="font-agency text-2xl sm:text-3xl md:text-4xl lg:text-[44px] font-extrabold text-white tracking-tight leading-[1.15] mb-4 sm:mb-6 text-center lg:text-left">
-                Experience Brand <br className="hidden sm:inline" />
-                <span className="bg-gradient-to-r from-white via-slate-100 to-slate-400 bg-clip-text text-transparent">
-                  Stories in Design
-                </span>
+                <RichTitle
+                  text={content.title}
+                  breakClassName="hidden sm:inline"
+                  highlightClassName="bg-gradient-to-r from-white via-slate-100 to-slate-400 bg-clip-text text-transparent"
+                />
               </h2>
 
               <p className="text-sm sm:text-base lg:text-lg text-[#A7BDB5] leading-relaxed mb-6 sm:mb-8 max-w-lg mx-auto lg:mx-0 font-normal text-center lg:text-left">
-                At Pixim, we believe design is more than just look and feel. It takes the end user through a mesmerizing journey that ends in conversion without any friction.
+                {content.description}
               </p>
 
               {/* Pixim Mega Reveal CTA Button */}

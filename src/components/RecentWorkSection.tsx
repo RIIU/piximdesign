@@ -5,112 +5,20 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { Play, Eye, X, ArrowUpRight, ArrowRight } from "lucide-react";
+import { useHome } from "@/content/ContentProvider";
+import type { RecentProject } from "@/content/homeData";
+import { RichTitle } from "@/content/RichTitle";
 
 interface RecentWorkProps {
   onOpenContact?: () => void;
 }
 
-export interface RecentProject {
-  id: string;
-  type: "video" | "image";
-  title: string;
-  clientLabel: string;
-  category: string;
-  subtext: string;
-  mediaSrc: string;
-  thumbnailSrc: string;
-  badgeLabel: string;
-  description: string;
-}
 
-const RECENT_PROJECTS: RecentProject[] = [
-  {
-    id: "branding-reel",
-    type: "video",
-    title: "Creative Logo & Brand Identity Reel",
-    clientLabel: "Pixim Studios",
-    category: "Brand Motion & Vector System",
-    subtext: "Dynamic Vector System & Iconic Mark",
-    mediaSrc: "/video/Creative-Logo-Branding-Solutions-for-Your-Business-_-Pixim-Design.mp4",
-    thumbnailSrc: "/video/posters/Creative-Logo-Branding-Solutions-for-Your-Business-_-Pixim-Design.webp",
-    badgeLabel: "Video Showcase",
-    description: "Full-motion brand identity and vector design system crafted for modern high-growth companies.",
-  },
-  {
-    id: "skyra-flight",
-    type: "image",
-    title: "Skyra AI Flight Booking App",
-    clientLabel: "Skyra AI",
-    category: "Mobile App & AI",
-    subtext: "Predictive Route Intelligence & Booking",
-    mediaSrc: "/images/case-studies/skyra-flight-booking.webp",
-    thumbnailSrc: "/images/case-studies/skyra-flight-booking.webp",
-    badgeLabel: "UI/UX Design",
-    description: "AI-powered flight route tracking, predictive pricing, and frictionless mobile booking flow.",
-  },
-  {
-    id: "agency-growth-reel",
-    type: "video",
-    title: "Digital Motion & Creative Agency Reel",
-    clientLabel: "Pixim Agency",
-    category: "Motion & 3D Video",
-    subtext: "60fps Fluid Agency Video Reel",
-    mediaSrc: "/video/Grow-Your-Business-with-Creative-Design-_-Pixim-Design-Agency.mp4",
-    thumbnailSrc: "/video/posters/Grow-Your-Business-with-Creative-Design-_-Pixim-Design-Agency.webp",
-    badgeLabel: "Agency Reel",
-    description: "High-octane agency motion reel featuring 3D product animations and dynamic UI transitions.",
-  },
-  {
-    id: "helixa-health",
-    type: "image",
-    title: "Helixa AI Health & Telemetry",
-    clientLabel: "Helixa Health",
-    category: "HealthTech & UI",
-    subtext: "Biometric Telemetry & Encrypted Consult",
-    mediaSrc: "/images/case-studies/helixa-health-app.webp",
-    thumbnailSrc: "/images/case-studies/helixa-health-app.webp",
-    badgeLabel: "Mobile App",
-    description: "Comprehensive cardiovascular telemetry, biometric tracking, and encrypted doctor consultations.",
-  },
-  {
-    id: "monoq-spatial",
-    type: "image",
-    title: "Monoq Spatial E-Commerce",
-    clientLabel: "Monoq 3D",
-    category: "Spatial UI & Web3",
-    subtext: "Interactive 3D Product Inspection",
-    mediaSrc: "/images/case-studies/monoq-spatial-ecommerce.webp",
-    thumbnailSrc: "/images/case-studies/monoq-spatial-ecommerce.webp",
-    badgeLabel: "Spatial UI",
-    description: "Tactile spatial e-commerce interface with real-time 3D models and micro-interaction design.",
-  },
-  {
-    id: "taskflux-dashboard",
-    type: "image",
-    title: "TaskFlux Enterprise Dashboard",
-    clientLabel: "TaskFlux SaaS",
-    category: "Enterprise SaaS",
-    subtext: "Real-Time Pipeline Analytics & Heatmaps",
-    mediaSrc: "/images/case-studies/taskflux-dashboard.webp",
-    thumbnailSrc: "/images/case-studies/taskflux-dashboard.webp",
-    badgeLabel: "SaaS Dashboard",
-    description: "Modern enterprise management dashboard converting complex metrics into actionable insights.",
-  },
-  {
-    id: "ecoray-solar",
-    type: "image",
-    title: "EcoRay Solar Intelligence",
-    clientLabel: "EcoRay Energy",
-    category: "CleanTech Dashboard",
-    subtext: "Sub-Second Inverter Telemetry & AI Alerts",
-    mediaSrc: "/images/case-studies/ecoray-solar-dashboard.webp",
-    thumbnailSrc: "/images/case-studies/ecoray-solar-dashboard.webp",
-    badgeLabel: "CleanTech UI",
-    description: "Predictive solar telemetry dashboard with automated inverter maintenance algorithms.",
-  },
-];
+
 
 export const RecentWorkSection: React.FC<RecentWorkProps> = ({ onOpenContact }) => {
+  const { recentWork: content } = useHome();
+  const RECENT_PROJECTS = content.projects;
   const sectionRef = useRef<HTMLElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const tweenRef = useRef<gsap.core.Tween | null>(null);
@@ -274,11 +182,11 @@ export const RecentWorkSection: React.FC<RecentWorkProps> = ({ onOpenContact }) 
         {/* Section Header */}
         <div className="recent-work-header text-center max-w-3xl mx-auto mb-8 sm:mb-10">
           <h2 className="font-agency text-2xl sm:text-3xl md:text-4xl lg:text-[44px] font-extrabold text-white tracking-tight leading-tight">
-            More Recent Work.
+            <RichTitle text={content.title} />
           </h2>
 
           <p className="font-sherika mt-3 sm:mt-4 text-xs sm:text-sm md:text-base text-slate-300 font-normal leading-relaxed max-w-md mx-auto">
-            Built for 50+ YC Companies. Most ship in under 2 weeks.
+            {content.description}
           </p>
 
           {/* Trusted by avatars badge (Clean, no sparkle icons) */}

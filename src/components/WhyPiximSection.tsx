@@ -6,12 +6,15 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { ArrowRight } from "lucide-react";
 import { GsapMagneticButton } from "@/components/animations/GsapMagneticButton";
+import { useHome } from "@/content/ContentProvider";
+import { RichTitle } from "@/content/RichTitle";
 
 interface WhyPiximSectionProps {
   onOpenContact?: (service?: string, notes?: string) => void;
 }
 
 export const WhyPiximSection: React.FC<WhyPiximSectionProps> = ({ onOpenContact }) => {
+  const { why: content } = useHome();
   const sectionRef = useRef<HTMLElement>(null);
   const card1Ref = useRef<HTMLDivElement>(null);
   const card2Ref = useRef<HTMLDivElement>(null);
@@ -296,12 +299,11 @@ export const WhyPiximSection: React.FC<WhyPiximSectionProps> = ({ onOpenContact 
         {/* Section Header */}
         <div className="wgiep-header text-center max-w-3xl mx-auto mb-7 sm:mb-9 md:mb-10">
           <h2 className="font-agency text-2xl sm:text-3xl md:text-4xl lg:text-[44px] font-extrabold text-white tracking-tight leading-tight">
-            What Goes Into <br />
-            Every Project.
+            <RichTitle text={content.title} />
           </h2>
 
           <p className="font-sherika mt-2.5 sm:mt-4 text-xs sm:text-sm md:text-base text-slate-300 font-normal leading-relaxed max-w-md mx-auto">
-            Three core pillars we engineer into every brand we build.
+            {content.description}
           </p>
         </div>
 

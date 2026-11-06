@@ -21,7 +21,9 @@ import {
   Play,
   type LucideIcon,
 } from "lucide-react";
-import { INDUSTRIES, SERVICES } from "@/data/agencyData";
+import { SERVICES } from "@/data/agencyData";
+import { useHome } from "@/content/ContentProvider";
+import { RichTitle } from "@/content/RichTitle";
 import { GsapMagneticButton } from "@/components/animations/GsapMagneticButton";
 
 const INDUSTRY_ICONS: Record<string, LucideIcon> = {
@@ -38,7 +40,9 @@ interface IndustriesSectionProps {
 }
 
 export const IndustriesSection: React.FC<IndustriesSectionProps> = ({ onOpenContact }) => {
-  const [activeId, setActiveId] = useState<string>(INDUSTRIES[0].id);
+  const { industries: content } = useHome();
+  const INDUSTRIES = content.items;
+  const [activeId, setActiveId] = useState<string>(INDUSTRIES[0]?.id ?? "");
   const sectionRef = useRef<HTMLElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
   const tabsContainerRef = useRef<HTMLDivElement>(null);
@@ -52,7 +56,7 @@ export const IndustriesSection: React.FC<IndustriesSectionProps> = ({ onOpenCont
   const pauseTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const active = INDUSTRIES.find((i) => i.id === activeId) ?? INDUSTRIES[0];
-  const ActiveIcon = INDUSTRY_ICONS[active.id];
+  const ActiveIcon = INDUSTRY_ICONS[active.icon || active.id] ?? Rocket;
   const stack = active.services
     .map((id) => SERVICES.find((s) => s.id === id))
     .filter((s): s is (typeof SERVICES)[number] => Boolean(s));
@@ -238,13 +242,13 @@ export const IndustriesSection: React.FC<IndustriesSectionProps> = ({ onOpenCont
       {/* Section Header */}
       <div className="industry-reveal text-center max-w-3xl mx-auto mb-8 sm:mb-10 relative z-10">
         <h2 className="font-agency text-2xl sm:text-3xl md:text-4xl lg:text-[44px] font-extrabold text-white tracking-tight leading-tight">
-          Branding Built Around <br />
-          <span className="bg-gradient-to-r from-[#FF8500] via-[#FFA229] to-amber-300 bg-clip-text text-transparent">
-            Your Industry
-          </span>
+          <RichTitle
+            text={content.title}
+            highlightClassName="bg-gradient-to-r from-[#FF8500] via-[#FFA229] to-amber-300 bg-clip-text text-transparent"
+          />
         </h2>
         <p className="mt-4 text-slate-400 text-base sm:text-lg">
-          Every market has its own rules. Pick yours and see the exact service stack we use to grow brands like you.
+          {content.description}
         </p>
       </div>
 
@@ -308,7 +312,7 @@ export const IndustriesSection: React.FC<IndustriesSectionProps> = ({ onOpenCont
               className="industry-reveal flex lg:flex-col gap-2.5 overflow-x-auto lg:overflow-visible -mx-4 px-4 sm:mx-0 sm:px-0 pb-2 lg:pb-0 snap-x snap-mandatory scroll-px-4 sm:scroll-px-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden relative"
             >
               {INDUSTRIES.map((industry, index) => {
-                const Icon = INDUSTRY_ICONS[industry.id];
+                const Icon = INDUSTRY_ICONS[industry.icon || industry.id] ?? Rocket;
                 const isActive = industry.id === activeId;
                 return (
                   <button

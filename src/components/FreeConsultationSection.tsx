@@ -4,6 +4,8 @@ import React, { useState } from "react";
 import Image from "next/image";
 import { CheckCircle2, ArrowRight, MessageSquare, ChevronDown, Check } from "lucide-react";
 import { useCurrency } from "@/lib/currency";
+import { useHome } from "@/content/ContentProvider";
+import { RichTitle } from "@/content/RichTitle";
 
 interface FreeConsultationSectionProps {
   onOpenContact?: () => void;
@@ -47,6 +49,7 @@ const COUNTRY_CODES = [
 ];
 
 export const FreeConsultationSection: React.FC<FreeConsultationSectionProps> = () => {
+  const { consultation: content } = useHome();
   const { currency, setCurrency } = useCurrency();
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
@@ -132,34 +135,25 @@ export const FreeConsultationSection: React.FC<FreeConsultationSectionProps> = (
 
                 {/* Main Headline - Balanced & Clean Wrapping */}
                 <h2 className="font-agency text-3xl sm:text-4xl lg:text-[32px] xl:text-[40px] 2xl:text-[46px] font-extrabold text-white tracking-tight leading-[1.12] mb-3 pt-1">
-                  <span className="block whitespace-normal sm:whitespace-nowrap">Enhance Your Brand</span>
-                  <span className="block whitespace-normal sm:whitespace-nowrap mt-0.5">
-                    Potential <span className="italic font-serif font-normal text-[#FFA133]">At No Cost!</span>
-                  </span>
+                  <RichTitle
+                    text={content.title}
+                    lineClassName="block whitespace-normal sm:whitespace-nowrap mt-0.5 first:mt-0"
+                    highlightClassName="italic font-serif font-normal text-[#FFA133]"
+                  />
                 </h2>
 
                 <p className="text-xs sm:text-sm text-slate-300/90 leading-relaxed mb-5 max-w-lg">
-                  Book a one-on-one strategy session with our creative leads. We analyze your brand, explore growth opportunities, and provide an actionable execution roadmap.
+                  {content.description}
                 </p>
 
                 {/* 4 Value Checklist Items - Clean Top Alignment & Responsive Columns */}
                 <div className="grid grid-cols-2 gap-x-2.5 sm:gap-x-4 gap-y-2.5 sm:gap-y-3 mb-6">
-                  <div className="flex items-start gap-1.5 sm:gap-2.5 text-[11.5px] min-[380px]:text-xs sm:text-[13px] text-slate-200">
-                    <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-400 shrink-0 mt-0.5" />
-                    <span className="leading-snug font-medium">Response within 24 hours</span>
-                  </div>
-                  <div className="flex items-start gap-1.5 sm:gap-2.5 text-[11.5px] min-[380px]:text-xs sm:text-[13px] text-slate-200">
-                    <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-400 shrink-0 mt-0.5" />
-                    <span className="leading-snug font-medium">Strict mutual NDA on request</span>
-                  </div>
-                  <div className="flex items-start gap-1.5 sm:gap-2.5 text-[11.5px] min-[380px]:text-xs sm:text-[13px] text-slate-200">
-                    <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-400 shrink-0 mt-0.5" />
-                    <span className="leading-snug font-medium">Dedicated product specialists</span>
-                  </div>
-                  <div className="flex items-start gap-1.5 sm:gap-2.5 text-[11.5px] min-[380px]:text-xs sm:text-[13px] text-slate-200">
-                    <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-400 shrink-0 mt-0.5" />
-                    <span className="leading-snug font-medium">Tailored scope & budget plan</span>
-                  </div>
+                  {content.points.map((point, i) => (
+                    <div key={i} className="flex items-start gap-1.5 sm:gap-2.5 text-[11.5px] min-[380px]:text-xs sm:text-[13px] text-slate-200">
+                      <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-400 shrink-0 mt-0.5" />
+                      <span className="leading-snug font-medium">{point}</span>
+                    </div>
+                  ))}
                 </div>
               </div>
 
