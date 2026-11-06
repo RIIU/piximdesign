@@ -8,4 +8,7 @@ export const { sanityFetch, SanityLive } = defineLive({
   client,
   serverToken: readToken || false,
   browserToken: readToken || false,
+  // Safety net: even if a live event is missed (e.g. nobody had the site open when
+  // content was published), pages refresh from Sanity at most 60 seconds later.
+  fetchOptions: { revalidate: 60 },
 });
