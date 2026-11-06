@@ -7,15 +7,15 @@ import gsap from "gsap";
 import { PiximLogo } from "./PiximLogo";
 import { ArrowUpRight, ArrowRight, ChevronDown, Layers } from "lucide-react";
 import { GsapMagneticButton } from "@/components/animations/GsapMagneticButton";
-import { SERVICES } from "@/data/agencyData";
 import { SERVICE_ICONS } from "./serviceIcons";
-import { useSettings } from "@/content/ContentProvider";
+import { useServices, useSettings } from "@/content/ContentProvider";
 
 interface NavbarProps {
   onOpenContact: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({ onOpenContact }) => {
+  const SERVICES = useServices();
   const router = useRouter();
   const pathname = usePathname();
   const { navCtaLabel } = useSettings();
