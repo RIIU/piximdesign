@@ -2,6 +2,7 @@
 
 import React from "react";
 import { useContactModal } from "@/components/AppLayoutWrapper";
+import { useHome } from "@/content/ContentProvider";
 import { HeroSection } from "@/components/HeroSection";
 import { VideoShowcaseSection } from "@/components/VideoShowcaseSection";
 import { StatsBar } from "@/components/StatsBar";
@@ -17,6 +18,7 @@ import { FaqSection } from "@/components/FaqSection";
 
 export function HomeView() {
   const { openContact } = useContactModal();
+  const { logoCta } = useHome();
 
   const handleSelectService = (serviceTitle: string) => {
     openContact(serviceTitle, `Interested in getting a scope for ${serviceTitle}`);
@@ -43,7 +45,14 @@ export function HomeView() {
       <BrandStoriesSection onOpenContact={() => openContact()} />
 
       {/* 7. Ready for a Professional Logo? Video Showcase CTA */}
-      <ReadyForLogoSection onOpenContact={(service, note) => openContact(service, note)} />
+      <ReadyForLogoSection
+        onOpenContact={(service, note) => openContact(service, note)}
+        titleLead={logoCta.titleLead}
+        titleHighlight={logoCta.titleHighlight}
+        description={logoCta.description}
+        videoSrc={logoCta.videoSrc}
+        posterSrc={logoCta.posterSrc}
+      />
 
       {/* 8. Key Metrics & Social Proof (5+ Years, 8+ Team Members, 200+ Happy Clients) */}
       <StatsBar onOpenContact={() => openContact()} />
