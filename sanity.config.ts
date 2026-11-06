@@ -8,10 +8,10 @@ import { structureTool } from "sanity/structure";
 import { presentationTool } from "sanity/presentation";
 import { UploadIcon } from "@sanity/icons";
 import { dataset, projectId } from "./src/sanity/env";
-import { schemaTypes, SINGLETONS } from "./src/sanity/schemaTypes";
+import { FIXED_TYPES, LEGAL_DOCS, PAGE_DOCS, SERVICE_PAGE_DOCS, schemaTypes, SINGLETONS } from "./src/sanity/schemaTypes";
 import { ImportTool } from "./src/sanity/tools/ImportTool";
 
-const singletonTypes = new Set<string>(SINGLETONS.map((s) => s.type));
+const singletonTypes = FIXED_TYPES;
 const singletonActions = new Set(["publish", "discardChanges", "restore"]);
 
 export default defineConfig({
@@ -38,15 +38,64 @@ export default defineConfig({
       structure: (S) =>
         S.list()
           .title("Website content")
-          .items(
-            SINGLETONS.map((s) =>
+          .items([
+            ...SINGLETONS.map((s) =>
               S.listItem()
                 .title(s.title)
                 .id(s.id)
                 .schemaType(s.type)
                 .child(S.document().schemaType(s.type).documentId(s.id).title(s.title))
-            )
-          ),
+            ),
+            S.divider(),
+            S.listItem()
+              .title("Pages")
+              .id("pages")
+              .child(
+                S.list()
+                  .title("Pages")
+                  .items(
+                    PAGE_DOCS.map((p) =>
+                      S.listItem()
+                        .title(p.title)
+                        .id(p.id)
+                        .schemaType("sitePage")
+                        .child(S.document().schemaType("sitePage").documentId(p.id).title(p.title))
+                    )
+                  )
+              ),
+            S.listItem()
+              .title("Service pages")
+              .id("servicePages")
+              .child(
+                S.list()
+                  .title("Service pages")
+                  .items(
+                    SERVICE_PAGE_DOCS.map((p) =>
+                      S.listItem()
+                        .title(p.title)
+                        .id(p.id)
+                        .schemaType("servicePage")
+                        .child(S.document().schemaType("servicePage").documentId(p.id).title(p.title))
+                    )
+                  )
+              ),
+            S.listItem()
+              .title("Legal pages")
+              .id("legalPages")
+              .child(
+                S.list()
+                  .title("Legal pages")
+                  .items(
+                    LEGAL_DOCS.map((p) =>
+                      S.listItem()
+                        .title(p.title)
+                        .id(p.id)
+                        .schemaType("legalPage")
+                        .child(S.document().schemaType("legalPage").documentId(p.id).title(p.title))
+                    )
+                  )
+              ),
+          ]),
     }),
     presentationTool({
       title: "Visual Editing",
@@ -57,6 +106,37 @@ export default defineConfig({
       resolve: {
         locations: {
           homePage: { locations: [{ title: "Home page", href: "/" }] },
+          servicesCatalog: {
+            locations: [
+              { title: "Services", href: "/services" },
+              { title: "Pricing", href: "/pricing" },
+              { title: "Home page", href: "/" },
+            ],
+          },
+          legalPage: {
+            select: { docId: "_id" },
+            resolve: (doc) => {
+              const id = String(doc?.docId ?? "").replace(/^drafts\./, "");
+              const page = LEGAL_DOCS.find((p) => p.id === id);
+              return page ? { locations: [{ title: page.title, href: page.href }] } : null;
+            },
+          },
+          sitePage: {
+            select: { docId: "_id" },
+            resolve: (doc) => {
+              const id = String(doc?.docId ?? "").replace(/^drafts\./, "");
+              const page = PAGE_DOCS.find((p) => p.id === id);
+              return page ? { locations: [{ title: page.title, href: page.href }] } : null;
+            },
+          },
+          servicePage: {
+            select: { id: "serviceId", docId: "_id" },
+            resolve: (doc) => {
+              const slug = (doc?.id as string) || String(doc?.docId ?? "").replace(/^(drafts\.)?servicePage-/, "");
+              const page = SERVICE_PAGE_DOCS.find((p) => p.slug === slug);
+              return page ? { locations: [{ title: page.title, href: `/services/${page.slug}` }] } : null;
+            },
+          },
           siteSettings: {
             message: "Used on every page",
             tone: "positive",
