@@ -6,7 +6,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ArrowUpRight, CalendarCheck, Check, FileCheck, Layers, Star, Timer, Wallet } from "lucide-react";
 import { useContactModal } from "@/components/AppLayoutWrapper";
 import { ReadyForLogoSection } from "@/components/ReadyForLogoSection";
-import { GsapReviewsInfiniteSlider } from "@/components/animations";
+import { GsapReviewsInfiniteSlider } from "@/components/animations/GsapReviewsInfiniteSlider";
 import { SERVICE_ICONS } from "@/components/serviceIcons";
 import { Price } from "@/components/currency/Price";
 import { PageHero } from "@/components/page-kit/PageHero";
