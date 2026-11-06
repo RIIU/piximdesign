@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { Mail, MapPin } from "lucide-react";
 import { CONTACT_EMAIL } from "@/data/studioContent";
-import { COMPANY } from "@/data/company";
+import { getSiteSettings } from "@/sanity/content";
 
 export interface LegalSection {
   id: string;
@@ -42,7 +42,9 @@ const TableOfContents: React.FC<{ sections: LegalSection[] }> = ({ sections }) =
 );
 
 /** Static, server-rendered layout shared by the privacy, terms and refund pages. */
-export const LegalPage: React.FC<LegalPageProps> = ({ title, path, intro, sections }) => (
+export const LegalPage = async ({ title, path, intro, sections }: LegalPageProps) => {
+  const { company } = await getSiteSettings();
+  return (
   <div className="w-full overflow-x-clip">
     {/* Header */}
     <section className="relative pt-32 sm:pt-36 pb-10 sm:pb-14 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
@@ -139,7 +141,7 @@ export const LegalPage: React.FC<LegalPageProps> = ({ title, path, intro, sectio
               </a>
               <span className="inline-flex items-center gap-2 text-slate-300">
                 <MapPin className="w-4 h-4 text-[#FFA133]" />
-                {COMPANY.name}, {COMPANY.address}
+                {company.name}, {company.address}
               </span>
             </div>
           </div>
@@ -148,3 +150,4 @@ export const LegalPage: React.FC<LegalPageProps> = ({ title, path, intro, sectio
     </section>
   </div>
 );
+};
