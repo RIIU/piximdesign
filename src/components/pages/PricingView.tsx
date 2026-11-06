@@ -18,18 +18,40 @@ import { GradientText, SectionHeading } from "@/components/page-kit/shared";
 import { ChipIconBox, FloatingChip, TILE_DARK } from "@/components/page-kit/primitives";
 import { useRevealAnimations } from "@/components/page-kit/useRevealAnimations";
 import type { FaqItem, PackagesContent } from "@/components/page-kit/types";
-import { SERVICES } from "@/data/agencyData";
-import { SERVICE_PRICING, type TierKey } from "@/data/servicePricing";
+import { usePricing, useServices } from "@/content/ContentProvider";
+import { T, usePageContent, type PageContent } from "@/content/page";
+import { type TierKey } from "@/data/servicePricing";
 import { CTA_VIDEOS, OWNERSHIP_FAQ, PAYMENT_FAQ } from "@/data/studioContent";
 
-const PLANS: PackagesContent = {
-  title: (
-    <>
-      Simple Plans, <GradientText>Clear Deliverables</GradientText>
-    </>
-  ),
-  description:
-    "Three starting points that fit most projects. Every plan is confirmed with a fixed quote for your exact scope before work begins.",
+const TIERS: { key: TierKey; name: string }[] = [
+  { key: "basic", name: "Basic" },
+  { key: "standard", name: "Standard" },
+  { key: "premium", name: "Premium" },
+];
+
+export const PRICING_PAGE_DEFAULTS: PageContent = {
+  hero: {
+    eyebrow: "Transparent Pricing",
+    title: "Flexible Plans, *Transparent Pricing*",
+    description:
+      "Predictable scopes and zero surprises. Prices show in Taka for Bangladesh and in US dollars everywhere else. Pick a plan, compare services or build a custom estimate.",
+    primaryLabel: "Get a Custom Quote",
+    secondaryLabel: "Estimate Your Project",
+  },
+  sections: {
+    plans: { label: "Plans – small label", eyebrow: "Plans" },
+    byService: {
+      label: "Pricing by service heading",
+      eyebrow: "By Service",
+      title: "Pricing for *Every Service*",
+      description: "Typical package ranges for each service. Open a service to see exactly what every package includes.",
+    },
+    included: { label: "“Included in every plan” heading", eyebrow: "Included in Every Plan", title: "No Hidden Costs, *Ever*" },
+  },
+  packages: {
+    title: "Simple Plans, *Clear Deliverables*",
+    description:
+      "Three starting points that fit most projects. Every plan is confirmed with a fixed quote for your exact scope before work begins.",
   tiers: {
     basic: {
       usd: "$75 – $180",
@@ -76,15 +98,8 @@ const PLANS: PackagesContent = {
       ],
     },
   },
-};
-
-const TIERS: { key: TierKey; name: string }[] = [
-  { key: "basic", name: "Basic" },
-  { key: "standard", name: "Standard" },
-  { key: "premium", name: "Premium" },
-];
-
-const INCLUDED = [
+  },
+  cards: [
   {
     icon: FileCheck,
     title: "All master files",
@@ -105,9 +120,16 @@ const INCLUDED = [
     title: "Pay your way",
     desc: "bKash, Nagad, Rocket, bank transfer or cards in Bangladesh; cards or bank wire worldwide.",
   },
-];
-
-const FAQS: FaqItem[] = [
+],
+  reviewsTitle: "What Founders Say About Our Value",
+  cta: {
+    titleLead: "Let's Price",
+    titleHighlight: "Your Project",
+    description: "Share your brief and get a clear, fixed quote in Taka or US dollars, with no hidden fees.",
+  },
+  faq: {
+    title: "Pricing Questions, *Answered*",
+    items: [] = [
   {
     q: "Are these prices fixed?",
     a: "The ranges show typical budgets. After a short call we send a fixed quote for your exact scope, and that price stays the same unless you decide to add to the scope.",
@@ -126,13 +148,15 @@ const FAQS: FaqItem[] = [
     a: "Refunds depend on how far the project has progressed: payments for work that hasn't started are refundable, while completed milestones are billed. The full terms are in our Refund Policy, linked at the bottom of every page.",
   },
   OWNERSHIP_FAQ,
-];
+],
+  },
+};
 
 /* ---------- Hero composition ---------- */
 
 const HERO_FEATURES = ["Full master source files", "Brand guidelines book", "Unlimited revisions", "30-day support"];
 
-const HeroVisual = () => (
+const HeroVisual = ({ standard }: { standard: { usd: string; bdt: string; desc: string } }) => (
   <div className="relative mx-auto max-w-md pt-4">
     <div className={`${TILE_DARK} absolute inset-x-6 top-0 bottom-8 rotate-[5deg] opacity-60`} />
     <div className="relative rounded-[28px] border-2 border-[#FF8500] bg-gradient-to-b from-[#FF8500]/[0.16] via-[#0C1E4E] to-[#0C1E4E] p-6 sm:p-7 shadow-[0_30px_70px_-25px_rgba(255,133,0,0.5)]">
@@ -143,9 +167,9 @@ const HeroVisual = () => (
         </span>
       </div>
       <span className="mt-5 block font-agency text-[32px] sm:text-[38px] font-extrabold text-white leading-tight">
-        <Price usd={PLANS.tiers.standard.usd} bdt={PLANS.tiers.standard.bdt} />
+        <Price usd={standard.usd} bdt={standard.bdt} />
       </span>
-      <span className="mt-2 block text-sm text-slate-400">{PLANS.tiers.standard.desc}</span>
+      <span className="mt-2 block text-sm text-slate-400">{standard.desc}</span>
       <div className="my-5 h-px bg-white/[0.08]" />
       <ul className="space-y-2.5">
         {HERO_FEATURES.map((feature) => (
@@ -189,6 +213,10 @@ const HeroVisual = () => (
 /* ---------- Page ---------- */
 
 export const PricingView: React.FC = () => {
+  const SERVICES = useServices();
+  const SERVICE_PRICING = usePricing();
+  const c = usePageContent(PRICING_PAGE_DEFAULTS);
+  const { plans, byService, included } = c.sections;
   const { openContact } = useContactModal();
   const rootRef = useRef<HTMLDivElement>(null);
 
@@ -201,16 +229,12 @@ export const PricingView: React.FC = () => {
       {/* 1. Hero */}
       <PageHero
         crumbs={[{ label: "Home", href: "/" }, { label: "Pricing" }]}
-        eyebrow="Transparent Pricing"
-        title={
-          <>
-            Flexible Plans, <GradientText>Transparent Pricing</GradientText>
-          </>
-        }
-        description="Predictable scopes and zero surprises. Prices show in Taka for Bangladesh and in US dollars everywhere else. Pick a plan, compare services or build a custom estimate."
-        primary={{ label: "Get a Custom Quote", onClick: () => quote("I'd like a custom quote for my project.") }}
-        secondary={{ label: "Estimate Your Project", href: "#estimator" }}
-        visual={<HeroVisual />}
+        eyebrow={c.hero.eyebrow}
+        title={<T text={c.hero.title} />}
+        description={c.hero.description}
+        primary={{ label: c.hero.primaryLabel, onClick: () => quote("I'd like a custom quote for my project.") }}
+        secondary={{ label: c.hero.secondaryLabel, href: "#estimator" }}
+        visual={<HeroVisual standard={c.packages!.tiers.standard} />}
       >
         <div className="hero-reveal mt-7 flex flex-wrap items-center gap-3">
           <span className="text-xs font-semibold uppercase tracking-wider text-slate-400">Show prices in</span>
@@ -224,8 +248,8 @@ export const PricingView: React.FC = () => {
       {/* 3. General plans */}
       <PackageTiers
         id="plans"
-        eyebrow="Plans"
-        packages={PLANS}
+        eyebrow={plans.eyebrow}
+        packages={{ ...c.packages!, title: <T text={c.packages!.title} /> }}
         showCurrencyToggle={false}
         onChoose={(name, price) => openContact(`${name} Plan`, `I'm interested in the ${name} plan (${price}).`)}
         onCustom={() => quote("I'd like a tailored quote for my project.")}
@@ -234,13 +258,9 @@ export const PricingView: React.FC = () => {
       {/* 4. Price ranges per service */}
       <section id="service-pricing" className="relative py-20 sm:py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto scroll-mt-24">
         <SectionHeading
-          eyebrow="By Service"
-          title={
-            <>
-              Pricing for <GradientText>Every Service</GradientText>
-            </>
-          }
-          desc="Typical package ranges for each service. Open a service to see exactly what every package includes."
+          eyebrow={byService.eyebrow ?? ""}
+          title={<T text={byService.title} />}
+          desc={byService.description}
         />
 
         <div className="reveal-up mt-12 overflow-hidden rounded-[28px] border border-[#2651B9]/30 bg-[#0C1E4E]/60">
@@ -310,15 +330,11 @@ export const PricingView: React.FC = () => {
       {/* 6. Included in every plan */}
       <section className="relative py-20 sm:py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
         <SectionHeading
-          eyebrow="Included in Every Plan"
-          title={
-            <>
-              No Hidden Costs, <GradientText>Ever</GradientText>
-            </>
-          }
+          eyebrow={included.eyebrow ?? ""}
+          title={<T text={included.title} />}
         />
         <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-          {INCLUDED.map(({ icon: Icon, title, desc }) => (
+          {c.cards!.map(({ icon: Icon, title, desc }) => (
             <div key={title} className="reveal-up rounded-[28px] border border-[#2651B9]/30 bg-[#0C1E4E]/70 p-6 sm:p-7 transition-colors hover:border-[#FF8500]/45">
               <span className="flex w-11 h-11 items-center justify-center rounded-xl border border-[#FF8500]/30 bg-[#FF8500]/12 text-[#FFA133]">
                 <Icon className="w-5 h-5" />
@@ -332,15 +348,15 @@ export const PricingView: React.FC = () => {
 
       {/* 7. Client reviews */}
       <section className="relative py-10 sm:py-14">
-        <GsapReviewsInfiniteSlider title="What Founders Say About Our Value" subtitle="TRANSPARENT CLIENT REVIEWS" speed={38} />
+        <GsapReviewsInfiniteSlider title={c.reviewsTitle!} subtitle="TRANSPARENT CLIENT REVIEWS" speed={38} />
       </section>
 
       {/* 8. Final CTA */}
       <ReadyForLogoSection
         onOpenContact={(service, note) => openContact(service, note)}
-        titleLead="Let's Price"
-        titleHighlight="Your Project"
-        description="Share your brief and get a clear, fixed quote in Taka or US dollars, with no hidden fees."
+        titleLead={c.cta!.titleLead}
+        titleHighlight={c.cta!.titleHighlight}
+        description={c.cta!.description}
         primaryService="Custom Quote"
         primaryNote="I'd like a fixed quote for my project."
         secondaryService="Pricing Consultation"
@@ -351,12 +367,8 @@ export const PricingView: React.FC = () => {
       {/* 9. FAQ (Placed directly above the closing TakeFirstStepSection banner) */}
       <FaqSplit
         id="payment"
-        title={
-          <>
-            Pricing Questions, <GradientText>Answered</GradientText>
-          </>
-        }
-        faqs={FAQS}
+        title={<T text={c.faq!.title} />}
+        faqs={c.faq!.items}
         onAsk={() => quote("I have a few questions about pricing.")}
       />
     </div>
