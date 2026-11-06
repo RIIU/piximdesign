@@ -5,7 +5,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { ArrowRight } from "lucide-react";
-import { GsapMagneticButton } from "./animations";
+import { GsapMagneticButton } from "@/components/animations/GsapMagneticButton";
 
 interface WhyPiximSectionProps {
   onOpenContact?: (service?: string, notes?: string) => void;
@@ -220,6 +220,28 @@ export const WhyPiximSection: React.FC<WhyPiximSectionProps> = ({ onOpenContact 
         .to(".wgiep-num-3", { color: "#FFA133", scale: 1.15, duration: 0.4 }, 4.0)
         .to(".card-glow-3", { opacity: 0, duration: 0.8, ease: "power2.in" }, 5.5)
         .to(".wgiep-num-3", { color: "#FF8500", scale: 1, duration: 0.4 }, 5.5);
+
+      // ==========================================
+      // Performance: pause the decorative infinite loops while the section is
+      // off-screen and resume them when it scrolls back into view.
+      // ==========================================
+      if (sectionRef.current) {
+        const loops: (gsap.core.Tween | gsap.core.Timeline)[] = [
+          ...gsap
+            .getTweensOf(sectionRef.current.querySelectorAll("*"))
+            .filter((t) => t.repeat() === -1),
+          waveTl,
+        ];
+        const setLoopsActive = (active: boolean) =>
+          loops.forEach((t) => (active ? t.resume() : t.pause()));
+        ScrollTrigger.create({
+          trigger: sectionRef.current,
+          start: "top bottom",
+          end: "bottom top",
+          onToggle: (self) => setLoopsActive(self.isActive),
+        });
+        if (!ScrollTrigger.isInViewport(sectionRef.current)) setLoopsActive(false);
+      }
 
       // ==========================================
       // Entrance Timeline on Scroll / Load

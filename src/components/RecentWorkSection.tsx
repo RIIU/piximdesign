@@ -139,17 +139,39 @@ export const RecentWorkSection: React.FC<RecentWorkProps> = ({ onOpenContact }) 
     };
   }, [activeItem]);
 
+
+  // Performance: server HTML renders a single set of cards. The two extra copies
+  // needed for the seamless infinite loop are added only when the section
+  // approaches the viewport (smaller HTML, faster hydration, same visuals).
+  const [loopCopies, setLoopCopies] = useState(1);
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+    if (typeof IntersectionObserver === "undefined") {
+      setLoopCopies(3);
+      return;
+    }
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setLoopCopies(3);
+          io.disconnect();
+        }
+      },
+      { rootMargin: "400px 0px" }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
   // Triple duplicated list for 100% seamless marquee infinite carousel loop
-  const duplicatedProjects = [
-    ...RECENT_PROJECTS,
-    ...RECENT_PROJECTS,
-    ...RECENT_PROJECTS,
-  ];
+  const duplicatedProjects =
+    loopCopies === 3 ? [...RECENT_PROJECTS, ...RECENT_PROJECTS, ...RECENT_PROJECTS] : RECENT_PROJECTS;
 
   // GSAP continuous smooth infinite carousel setup
   useEffect(() => {
     const track = trackRef.current;
-    if (!track) return;
+    if (!track || loopCopies !== 3) return;
 
     const ctx = gsap.context(() => {
       // 1/3 of the total width for 1 full set of projects
@@ -172,7 +194,7 @@ export const RecentWorkSection: React.FC<RecentWorkProps> = ({ onOpenContact }) 
     }, sectionRef);
 
     return () => ctx.revert();
-  }, []);
+  }, [loopCopies]);
 
   // Pause when off-screen to preserve CPU/GPU performance
   useEffect(() => {
@@ -297,6 +319,10 @@ export const RecentWorkSection: React.FC<RecentWorkProps> = ({ onOpenContact }) 
                 <img
                   src={proj.thumbnailSrc}
                   alt={proj.title}
+                  width={720}
+                  height={450}
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-108"
                 />
 
@@ -435,6 +461,7 @@ export const RecentWorkSection: React.FC<RecentWorkProps> = ({ onOpenContact }) 
                   <img
                     src={activeItem.mediaSrc}
                     alt={activeItem.title}
+                    decoding="async"
                     className="max-h-[65vh] w-auto max-w-full object-contain rounded-lg shadow-2xl"
                   />
                 </div>

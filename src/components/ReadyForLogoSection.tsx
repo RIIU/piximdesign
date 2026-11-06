@@ -2,7 +2,7 @@
 
 import React, { useRef, useState } from "react";
 import { ArrowRight, Send, Volume2, VolumeX, Play } from "lucide-react";
-import { GsapMagneticButton } from "@/components/animations";
+import { GsapMagneticButton } from "@/components/animations/GsapMagneticButton";
 
 interface ReadyForLogoSectionProps {
   onOpenContact?: (service?: string, note?: string) => void;

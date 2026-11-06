@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { ArrowRight, Check, DollarSign, Coins } from "lucide-react";
-import { GsapMagneticButton } from "./animations";
+import { GsapMagneticButton } from "@/components/animations/GsapMagneticButton";
 import { useCurrency } from "@/lib/currency";
 
 interface ProjectEstimatorProps {

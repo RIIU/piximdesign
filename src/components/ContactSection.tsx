@@ -3,7 +3,7 @@
 import React, { useId, useState } from "react";
 import Link from "next/link";
 import { Mail, Send, CheckCircle2, Clock, ShieldCheck, Loader2, AlertCircle, ChevronDown } from "lucide-react";
-import { GsapMagneticButton } from "./animations";
+import { GsapMagneticButton } from "@/components/animations/GsapMagneticButton";
 import { useCurrency } from "@/lib/currency";
 import { COMPANY } from "@/data/company";
 

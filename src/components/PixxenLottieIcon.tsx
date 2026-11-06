@@ -78,26 +78,10 @@ async function getAnimationData(path: string) {
   }
 }
 
-// Preload player and top JSONs immediately when in browser
-if (typeof window !== "undefined") {
-  const preload = () => {
-    getLottieLight();
-    const paths = [
-      "/lottie/branding.json",
-      "/lottie/website-design.json",
-      "/lottie/saas-design.json",
-      "/lottie/mobile-app.json",
-      "/lottie/web-app.json",
-      "/lottie/dashboard-design.json",
-    ];
-    paths.forEach((p) => getAnimationData(p));
-  };
-  if ("requestIdleCallback" in window) {
-    (window as any).requestIdleCallback(preload);
-  } else {
-    setTimeout(preload, 100);
-  }
-}
+// Performance: the Lottie player and JSON files are NOT preloaded globally anymore.
+// Each icon fetches only its own animation when it scrolls near the viewport
+// (see the IntersectionObserver below), so pages without visible icons never
+// download the player or the animation data. The static SVG shows meanwhile.
 
 export const PixxenLottieIcon: React.FC<PixxenLottieIconProps> = ({
   type,
@@ -119,6 +103,8 @@ export const PixxenLottieIcon: React.FC<PixxenLottieIconProps> = ({
 
   useEffect(() => {
     let isMounted = true;
+    let started = false;
+    let isVisible = false;
 
     // Clean up previous instance if any
     if (animRef.current) {
@@ -146,14 +132,14 @@ export const PixxenLottieIcon: React.FC<PixxenLottieIconProps> = ({
               container: containerRef.current,
               renderer: "svg",
               loop: true,
-              autoplay: true,
+              autoplay: isVisible,
               animationData: animData,
             })
           : lottie.loadAnimation({
               container: containerRef.current,
               renderer: "svg",
               loop: true,
-              autoplay: true,
+              autoplay: isVisible,
               path: jsonPath,
             });
 
@@ -165,38 +151,29 @@ export const PixxenLottieIcon: React.FC<PixxenLottieIconProps> = ({
       }
     };
 
-    // If data is already cached, start immediately with 0 delay
-    if (animationDataCache.has(jsonPath)) {
-      startAnimation();
-      return () => {
-        isMounted = false;
-        if (animRef.current) {
-          animRef.current.destroy();
-          animRef.current = null;
-        }
-      };
-    }
-
-    // Otherwise use IntersectionObserver with generous rootMargin
-    let io: IntersectionObserver | null = new IntersectionObserver(
+    // One observer: loads the animation when it gets near the viewport and
+    // pauses it while it is off-screen, so hidden icons cost no CPU.
+    const io = new IntersectionObserver(
       (entries) => {
-        const entry = entries[0];
-        if (entry.isIntersecting) {
-          if (io) {
-            io.disconnect();
-            io = null;
-          }
+        isVisible = entries[0].isIntersecting;
+        if (isVisible && !started) {
+          started = true;
           startAnimation();
+          return;
         }
+        const anim = animRef.current;
+        if (!anim) return;
+        if (isVisible) anim.play();
+        else anim.pause();
       },
-      { rootMargin: "600px 0px" }
+      { rootMargin: "250px 0px" }
     );
 
     io.observe(container);
 
     return () => {
       isMounted = false;
-      if (io) io.disconnect();
+      io.disconnect();
       if (animRef.current) {
         animRef.current.destroy();
         animRef.current = null;
