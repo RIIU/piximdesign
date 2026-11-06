@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { HomeView } from "@/components/pages/HomeView";
+import { HomeContentProvider } from "@/content/ContentProvider";
+import { getHomeContent } from "@/sanity/content";
 import { BASE_OPEN_GRAPH, OG_IMAGE, SITE_DESCRIPTION, SITE_TITLE } from "@/lib/seo";
 
 export const metadata: Metadata = {
@@ -10,6 +12,11 @@ export const metadata: Metadata = {
   twitter: { card: "summary_large_image", title: SITE_TITLE, description: SITE_DESCRIPTION, images: [OG_IMAGE.url] },
 };
 
-export default function Page() {
-  return <HomeView />;
+export default async function Page() {
+  const content = await getHomeContent();
+  return (
+    <HomeContentProvider value={content}>
+      <HomeView />
+    </HomeContentProvider>
+  );
 }

@@ -6,6 +6,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { Play, Pause, Volume2, VolumeX, Maximize2 } from "lucide-react";
 import { LogoCarousel } from "./LogoCarousel";
+import { useHome } from "@/content/ContentProvider";
 
 interface VideoShowcaseSectionProps {
   onOpenContact?: () => void;
@@ -16,6 +17,7 @@ export const VideoShowcaseSection: React.FC<VideoShowcaseSectionProps> = () => {
   const triggerRef = useRef<HTMLDivElement>(null);
   const videoBoxRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const { showcase } = useHome();
 
   const [isPlaying, setIsPlaying] = useState(true);
   const [isMuted, setIsMuted] = useState(true);
@@ -224,8 +226,8 @@ export const VideoShowcaseSection: React.FC<VideoShowcaseSectionProps> = () => {
             <div className="relative aspect-video w-full overflow-hidden">
               <video
                 ref={videoRef}
-                src={shouldLoadVideo && pageReady ? "/video/Grow-Your-Business-with-Creative-Design-_-Pixim-Design-Agency.mp4" : undefined}
-                poster="/video/posters/Grow-Your-Business-with-Creative-Design-_-Pixim-Design-Agency.webp"
+                src={shouldLoadVideo && pageReady ? showcase.videoSrc : undefined}
+                poster={showcase.posterSrc}
                 preload="none"
                 autoPlay
                 muted={isMuted}
@@ -252,7 +254,7 @@ export const VideoShowcaseSection: React.FC<VideoShowcaseSectionProps> = () => {
               <div className="absolute top-4 left-4 sm:top-6 sm:left-6 z-20 flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/60 backdrop-blur-md border border-white/10 text-white text-xs font-semibold pointer-events-none">
                 <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
                 <span className="w-2 h-2 rounded-full bg-emerald-500 -ml-3" />
-                <span>Pixim Showreel</span>
+                <span>{showcase.badge}</span>
               </div>
 
               {/* Bottom Interactive Glass Controls Bar */}
@@ -304,7 +306,7 @@ export const VideoShowcaseSection: React.FC<VideoShowcaseSectionProps> = () => {
                     </button>
 
                     <span className="hidden sm:inline-block text-xs text-slate-300 font-medium">
-                      Grow Your Business with Creative Design
+                      {showcase.title}
                     </span>
                   </div>
 
@@ -326,7 +328,7 @@ export const VideoShowcaseSection: React.FC<VideoShowcaseSectionProps> = () => {
         <div className="mt-6 sm:mt-8 md:mt-10">
           <div className="text-center mb-5 sm:mb-6">
             <span className="text-xs sm:text-sm font-semibold tracking-wide text-slate-300">
-              Trusted By 350+ Global Brands
+              {showcase.trustedText}
             </span>
           </div>
 

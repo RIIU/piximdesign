@@ -7,7 +7,7 @@ import { ArrowRight, CheckCircle2, FileCheck, Handshake, LifeBuoy, MessageCircle
 import { SERVICE_ICONS } from "@/components/serviceIcons";
 import { Eyebrow, GradientText, SectionTitle } from "@/components/page-kit/shared";
 import { AGENCY_STATS, SERVICES } from "@/data/agencyData";
-import { COMPANY } from "@/data/company";
+import { useSettings } from "@/content/ContentProvider";
 import { TeamSection } from "@/components/about/TeamSection";
 import { ProcessSection } from "@/components/about/ProcessSection";
 import { BookingCalendarSection } from "@/components/about/BookingCalendarSection";
@@ -43,7 +43,9 @@ const VALUES = [
 ];
 
 /** Comprehensive about page: story, numbers, core team, process framework, services, values and calendar booking. */
-export const AboutView: React.FC = () => (
+export const AboutView: React.FC = () => {
+  const { company } = useSettings();
+  return (
   <div className="w-full overflow-x-clip">
     {/* Header */}
     <section className="relative pt-32 sm:pt-36 pb-12 sm:pb-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
@@ -65,10 +67,10 @@ export const AboutView: React.FC = () => (
           </ol>
         </nav>
         <h1 className="font-agency text-[38px] sm:text-5xl lg:text-[56px] font-extrabold text-white tracking-tight leading-[1.05]">
-          About {COMPANY.name}
+          About {company.name}
         </h1>
         <p className="mt-4 text-base sm:text-lg text-slate-300 leading-relaxed">
-          We are a branding and digital design studio based in {COMPANY.address}. For over 8 years we have helped 500+ founders
+          We are a branding and digital design studio based in {company.address}. For over 8 years we have helped 500+ founders
           and businesses build memorable brands and high-converting online experiences.
         </p>
       </div>
@@ -109,7 +111,7 @@ export const AboutView: React.FC = () => (
             sizes="(max-width: 1024px) 90vw, 448px"
             className="w-full h-auto rounded-[28px] border border-[#2651B9]/30"
           />
-          <figcaption className="mt-3 text-center text-sm text-slate-400">Design Director, {COMPANY.name}</figcaption>
+          <figcaption className="mt-3 text-center text-sm text-slate-400">Design Director, {company.name}</figcaption>
         </figure>
       </div>
     </section>
@@ -192,3 +194,4 @@ export const AboutView: React.FC = () => (
     <BookingCalendarSection />
   </div>
 );
+};

@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, createContext, useContext } from "react";
 import dynamic from "next/dynamic";
+import { usePathname } from "next/navigation";
 import { ThemeProvider } from "@/context/ThemeContext";
 import { Navbar } from "./Navbar";
 import { Footer } from "./Footer";
@@ -27,6 +28,7 @@ const ContactContext = createContext<ContactContextType>({
 export const useContactModal = () => useContext(ContactContext);
 
 export const AppLayoutWrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const pathname = usePathname();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalService, setModalService] = useState("");
   const [modalNotes, setModalNotes] = useState("");
@@ -53,6 +55,9 @@ export const AppLayoutWrapper: React.FC<{ children: React.ReactNode }> = ({ chil
     setModalService("");
     setModalNotes("");
   };
+
+  // The website editor (/studio) renders full-screen without the site's header, footer and effects.
+  if (pathname?.startsWith("/studio")) return <>{children}</>;
 
   return (
     <ThemeProvider>

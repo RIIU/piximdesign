@@ -5,7 +5,7 @@ import Link from "next/link";
 import { Mail, Send, CheckCircle2, Clock, ShieldCheck, Loader2, AlertCircle, ChevronDown } from "lucide-react";
 import { GsapMagneticButton } from "@/components/animations/GsapMagneticButton";
 import { useCurrency } from "@/lib/currency";
-import { COMPANY } from "@/data/company";
+import { useSettings } from "@/content/ContentProvider";
 
 export interface ServiceArea {
   number: string;
@@ -368,7 +368,9 @@ export const ContactForm: React.FC<ContactFormProps> = ({ initialService = "", i
   );
 };
 
-export const ContactSection: React.FC<ContactFormProps> = ({ initialService = "", initialNotes = "" }) => (
+export const ContactSection: React.FC<ContactFormProps> = ({ initialService = "", initialNotes = "" }) => {
+  const { company } = useSettings();
+  return (
   <section id="contact" className="relative py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto scroll-mt-20">
     <div className="relative p-8 sm:p-14 rounded-3xl bg-white/80 dark:bg-[#0C1E4E]/85 backdrop-blur-xl ring-1 ring-inset ring-white/60 dark:ring-white/[0.08] border border-[#FF8500]/25 dark:border-[#FF8500]/35 shadow-[0_12px_40px_rgba(15,23,42,0.08)] dark:shadow-[0_12px_40px_rgba(8,19,48,0.5)] overflow-hidden">
       {/* Background glow (GPU-native radial gradient) */}
@@ -407,8 +409,8 @@ export const ContactSection: React.FC<ContactFormProps> = ({ initialService = ""
                 </div>
                 <div>
                   <div className="text-xs text-slate-500 dark:text-slate-400">Direct Email</div>
-                  <a href={`mailto:${COMPANY.email}`} className="font-semibold text-slate-900 dark:text-white hover:text-[#FF8500] transition-colors">
-                    {COMPANY.email}
+                  <a href={`mailto:${company.email}`} className="font-semibold text-slate-900 dark:text-white hover:text-[#FF8500] transition-colors">
+                    {company.email}
                   </a>
                 </div>
               </div>
@@ -449,3 +451,4 @@ export const ContactSection: React.FC<ContactFormProps> = ({ initialService = ""
     </div>
   </section>
 );
+};

@@ -5,6 +5,8 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { ArrowUpRight, Play, Globe } from "lucide-react";
+import { useHome } from "@/content/ContentProvider";
+import { RichTitle } from "@/content/RichTitle";
 
 interface StatsBarProps {
   className?: string;
@@ -12,6 +14,7 @@ interface StatsBarProps {
 }
 
 export const StatsBar: React.FC<StatsBarProps> = ({ className = "", onOpenContact }) => {
+  const { stats: content } = useHome();
   const containerRef = useRef<HTMLElement>(null);
 
   useGSAP(
@@ -68,12 +71,14 @@ export const StatsBar: React.FC<StatsBarProps> = ({ className = "", onOpenContac
         {/* Section Header */}
         <div className="stats-header text-center max-w-3xl mx-auto mb-6 sm:mb-8 md:mb-10">
           <h2 className="font-agency text-2xl sm:text-3xl md:text-4xl lg:text-[44px] font-extrabold text-white tracking-tight leading-tight">
-            The Massive <span className="bg-gradient-to-r from-[#FF8500] via-[#FFA229] to-amber-300 bg-clip-text text-transparent">Brand Growth</span> <br />
-            Is Right Here.
+            <RichTitle
+              text={content.title}
+              highlightClassName="bg-gradient-to-r from-[#FF8500] via-[#FFA229] to-amber-300 bg-clip-text text-transparent"
+            />
           </h2>
 
           <p className="font-sherika mt-3 sm:mt-4 text-xs sm:text-sm md:text-base text-slate-300 font-normal leading-relaxed max-w-xl mx-auto px-1">
-            Our data-driven design framework engineered for top-notch market results and explosive business scale.
+            {content.description}
           </p>
         </div>
 
@@ -89,7 +94,7 @@ export const StatsBar: React.FC<StatsBarProps> = ({ className = "", onOpenContac
             <div>
               <span className="text-[#FF8500] text-2xl sm:text-4xl font-serif leading-none block mb-1 sm:mb-2 opacity-80">&ldquo;</span>
               <p className="text-white text-sm sm:text-lg md:text-xl font-medium leading-snug tracking-tight">
-                With senior design sprints, our brand launched faster and scaled revenue seamlessly.
+                {content.quote}
               </p>
             </div>
 
@@ -100,10 +105,10 @@ export const StatsBar: React.FC<StatsBarProps> = ({ className = "", onOpenContac
 
               <div>
                 <div className="font-agency text-2xl sm:text-4xl font-extrabold text-white">
-                  5<span className="text-[#FF8500] ml-0.5">+</span>
+                  {content.years}<span className="text-[#FF8500] ml-0.5">+</span>
                 </div>
                 <div className="text-[11px] sm:text-xs font-medium text-slate-400 mt-0.5">
-                  Years of Services
+                  {content.yearsLabel}
                 </div>
               </div>
 
@@ -258,17 +263,17 @@ export const StatsBar: React.FC<StatsBarProps> = ({ className = "", onOpenContac
               <div className="relative z-10 pt-1 sm:pt-2">
                 {/* 200+ Metric */}
                 <div className="font-agency text-3xl sm:text-5xl md:text-6xl font-black tracking-tight text-[#081330] mb-0.5 sm:mb-1">
-                  200<span className="text-[#081330]/75 ml-0.5">+</span>
+                  {content.clients}<span className="text-[#081330]/75 ml-0.5">+</span>
                 </div>
 
                 {/* Main Title */}
                 <div className="text-xs sm:text-base font-extrabold text-[#081330] leading-tight">
-                  Happy Clients Worldwide
+                  {content.clientsLabel}
                 </div>
 
                 {/* Short Subheading requested by user */}
                 <p className="mt-2 sm:mt-2.5 text-[11px] sm:text-xs text-[#081330]/80 font-medium leading-relaxed max-w-[260px]">
-                  Delivering high-impact brand identities &amp; websites across 18+ countries.
+                  {content.clientsText}
                 </p>
               </div>
 

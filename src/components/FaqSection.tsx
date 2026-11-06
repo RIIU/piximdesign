@@ -2,34 +2,35 @@
 
 import React, { useRef } from "react";
 import { FaqSplit } from "@/components/page-kit/FaqSplit";
-import { GradientText } from "@/components/page-kit/shared";
-import { FAQS } from "@/data/agencyData";
+import { useHome } from "@/content/ContentProvider";
+import { RichTitle } from "@/content/RichTitle";
 import type { FaqItem } from "@/components/page-kit/types";
 import { useRevealAnimations } from "@/components/page-kit/useRevealAnimations";
+
+const GRADIENT_CLASS = "bg-gradient-to-r from-[#FF8500] via-[#FFA229] to-amber-300 bg-clip-text text-transparent";
 
 interface FaqSectionProps {
   onOpenContact?: (service?: string, notes?: string) => void;
 }
 
-const HOME_FAQS: FaqItem[] = FAQS.map((f) => ({
-  q: f.question,
-  a: f.answer,
-}));
 
 export const FaqSection: React.FC<FaqSectionProps> = ({ onOpenContact }) => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const { faq: content } = useHome();
+  const HOME_FAQS: FaqItem[] = content.items.map((f) => ({ q: f.question, a: f.answer }));
   useRevealAnimations(containerRef);
 
   return (
     <div id="faq" ref={containerRef} className="relative w-full">
       <FaqSplit
         title={
-          <>
-            Frequently Asked <br className="hidden sm:inline" />
-            <GradientText>Questions</GradientText>
-          </>
+          <RichTitle
+            text={content.title}
+            breakClassName="hidden sm:inline"
+            highlightClassName={GRADIENT_CLASS}
+          />
         }
-        intro="Clear answers about our consultation, deliverables, mobile responsiveness, and branding packages."
+        intro={content.description}
         faqs={HOME_FAQS}
         onAsk={() =>
           onOpenContact?.(
@@ -37,9 +38,9 @@ export const FaqSection: React.FC<FaqSectionProps> = ({ onOpenContact }) => {
             "Book a 30-minute discovery call from the FAQ section"
           )
         }
-        cardTitle="Talk to a specialist, free."
-        cardText="A 30-minute call to review your goals and recommend the right scope."
-        cardCta="Book a free call"
+        cardTitle={content.cardTitle}
+        cardText={content.cardText}
+        cardCta={content.cardCta}
       />
     </div>
   );

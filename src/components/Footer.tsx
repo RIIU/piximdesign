@@ -5,22 +5,16 @@ import Link from "next/link";
 import { PiximLogo } from "./PiximLogo";
 import { CurrencyToggle } from "./currency/CurrencyToggle";
 import { SocialIcon } from "./SocialIcon";
-import { COMPANY, phoneUrl, whatsappUrl, type SocialLink } from "@/data/company";
+import { phoneUrl, whatsappUrl } from "@/data/company";
+import { useSettings } from "@/content/ContentProvider";
 import { PaymentMethodsSection } from "./PaymentMethodsSection";
 import { useContactModal } from "./AppLayoutWrapper";
 import { ArrowRight, Phone, Mail, MapPin, Clock, Download, ArrowUp } from "lucide-react";
 
-const ALL_SOCIALS: SocialLink[] = [
-  { network: "facebook", label: "Facebook", url: "https://facebook.com/piximdesign" },
-  { network: "instagram", label: "Instagram", url: "https://instagram.com/piximdesign" },
-  { network: "youtube", label: "YouTube", url: "https://youtube.com/@piximdesign" },
-  { network: "behance", label: "Behance", url: "https://behance.net/sabbirbd" },
-  { network: "linkedin", label: "LinkedIn", url: "https://linkedin.com/company/piximdesign" },
-  { network: "x", label: "X (Twitter)", url: "https://twitter.com/piximdesign" },
-];
 
 export const Footer: React.FC = () => {
   const { openContact } = useContactModal();
+  const { company, socials: ALL_SOCIALS, footer } = useSettings();
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -50,12 +44,12 @@ export const Footer: React.FC = () => {
             <div>
               <PiximLogo variant="full" size="md" />
               <p className="mt-4 text-xs sm:text-sm text-slate-300 max-w-sm leading-relaxed">
-                Pixim Design helps Bangladeshi and global brands grow with sharper identities, better creative, modern websites, and high-impact digital design.
+                {footer.about}
               </p>
 
               {/* Social Icons Row (Placed above the button) */}
               <div className="mt-5 sm:mt-6 flex items-center gap-2 sm:gap-2.5 flex-wrap">
-                {[...ALL_SOCIALS, { network: "whatsapp" as const, label: "WhatsApp", url: whatsappUrl() }].map(
+                {[...ALL_SOCIALS, { network: "whatsapp" as const, label: "WhatsApp", url: whatsappUrl(undefined, company.whatsapp) }].map(
                   (social) => (
                     <a
                       key={social.label}
@@ -83,7 +77,7 @@ export const Footer: React.FC = () => {
                   }
                   className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 rounded-full bg-gradient-to-r from-[#FF8500] to-[#FFA133] hover:from-[#e67700] hover:to-[#FF8500] text-white px-6 sm:px-7 py-3.5 text-xs sm:text-sm font-bold tracking-wide shadow-lg shadow-orange-500/25 transition-all duration-200 hover:scale-[1.02] active:scale-95 cursor-pointer"
                 >
-                  <span>Get Free Consultation</span>
+                  <span>{footer.consultationLabel}</span>
                   <ArrowRight className="w-4 h-4" />
                 </button>
               </div>
@@ -191,14 +185,14 @@ export const Footer: React.FC = () => {
               Direct Contact
             </h4>
             <div className="space-y-3.5 text-xs sm:text-sm text-slate-300">
-              {COMPANY.phone && (
+              {company.phone && (
                 <div className="flex items-center gap-3">
                   <Phone className="w-4 h-4 text-[#FFA133] shrink-0" />
                   <a
-                    href={phoneUrl(COMPANY.phone)}
+                    href={phoneUrl(company.phone)}
                     className="hover:text-[#FFA133] transition-colors font-medium"
                   >
-                    {COMPANY.phone}
+                    {company.phone}
                   </a>
                 </div>
               )}
@@ -206,22 +200,22 @@ export const Footer: React.FC = () => {
               <div className="flex items-center gap-3">
                 <Mail className="w-4 h-4 text-[#FFA133] shrink-0" />
                 <a
-                  href={`mailto:${COMPANY.email}`}
+                  href={`mailto:${company.email}`}
                   className="hover:text-[#FFA133] transition-colors break-words font-medium"
                 >
-                  {COMPANY.email}
+                  {company.email}
                 </a>
               </div>
 
               <div className="flex items-start gap-3 leading-relaxed">
                 <MapPin className="w-4 h-4 text-[#FFA133] shrink-0 mt-0.5" />
-                <span className="text-slate-300">{COMPANY.address}</span>
+                <span className="text-slate-300">{company.address}</span>
               </div>
 
-              {COMPANY.hours && (
+              {company.hours && (
                 <div className="flex items-center gap-3">
                   <Clock className="w-4 h-4 text-[#FFA133] shrink-0" />
-                  <span className="text-slate-300">{COMPANY.hours}</span>
+                  <span className="text-slate-300">{company.hours}</span>
                 </div>
               )}
             </div>

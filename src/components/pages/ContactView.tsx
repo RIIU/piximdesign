@@ -3,7 +3,8 @@ import Link from "next/link";
 import { Clock, Mail, MapPin, Phone, Timer, type LucideIcon } from "lucide-react";
 import { ContactForm } from "@/components/ContactSection";
 import { SocialIcon } from "@/components/SocialIcon";
-import { COMPANY, mapUrl, phoneUrl, whatsappUrl } from "@/data/company";
+import { mapUrlFor, phoneUrl, whatsappUrl } from "@/data/company";
+import { getSiteSettings } from "@/sanity/content";
 
 interface ContactRow {
   label: string;
@@ -13,17 +14,20 @@ interface ContactRow {
   icon: LucideIcon | "whatsapp";
 }
 
-const ROWS: ContactRow[] = [
-  { icon: Mail, label: "Email", value: COMPANY.email, href: `mailto:${COMPANY.email}` },
-  ...(COMPANY.phone ? [{ icon: Phone, label: "Phone", value: COMPANY.phone, href: phoneUrl(COMPANY.phone) }] : []),
-  { icon: "whatsapp", label: "WhatsApp", value: "Chat with us on WhatsApp", href: whatsappUrl(), external: true },
-  { icon: MapPin, label: "Office", value: COMPANY.address, href: mapUrl, external: true },
-  ...(COMPANY.hours ? [{ icon: Clock, label: "Office hours", value: COMPANY.hours }] : []),
-  { icon: Timer, label: "Response time", value: COMPANY.responseTime },
-];
 
 /** Simple contact page: details on the left, the brief form on the right. */
-export const ContactView: React.FC = () => (
+export const ContactView = async () => {
+  const { company, socials } = await getSiteSettings();
+  const ROWS: ContactRow[] = [
+    { icon: Mail, label: "Email", value: company.email, href: `mailto:${company.email}` },
+    ...(company.phone ? [{ icon: Phone, label: "Phone", value: company.phone, href: phoneUrl(company.phone) }] : []),
+    { icon: "whatsapp", label: "WhatsApp", value: "Chat with us on WhatsApp", href: whatsappUrl(undefined, company.whatsapp), external: true },
+    { icon: MapPin, label: "Office", value: company.address, href: mapUrlFor(company.address), external: true },
+    ...(company.hours ? [{ icon: Clock, label: "Office hours", value: company.hours }] : []),
+    { icon: Timer, label: "Response time", value: company.responseTime },
+  ];
+
+  return (
   <div className="w-full overflow-x-clip">
     {/* Header */}
     <section className="relative pt-32 sm:pt-36 pb-10 sm:pb-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
@@ -84,11 +88,11 @@ export const ContactView: React.FC = () => (
             ))}
           </ul>
 
-          {COMPANY.socials.length > 0 && (
+          {socials.length > 0 && (
             <div className="mt-4 border-t border-white/[0.07] pt-6">
               <span className="text-xs text-slate-500">Follow us</span>
               <div className="mt-3 flex flex-wrap gap-2.5">
-                {COMPANY.socials.map((social) => (
+                {socials.map((social) => (
                   <a
                     key={social.url}
                     href={social.url}
@@ -118,3 +122,4 @@ export const ContactView: React.FC = () => (
     </section>
   </div>
 );
+};

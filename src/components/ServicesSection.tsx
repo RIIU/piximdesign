@@ -8,12 +8,15 @@ import { useGSAP } from "@gsap/react";
 import { SERVICES } from "@/data/agencyData";
 import { ArrowRight } from "lucide-react";
 import { PixxenLottieIcon } from "./PixxenLottieIcon";
+import { useHome } from "@/content/ContentProvider";
+import { RichTitle } from "@/content/RichTitle";
 
 interface ServicesSectionProps {
   onSelectService?: (serviceTitle: string) => void;
 }
 
 export const ServicesSection: React.FC<ServicesSectionProps> = ({ onSelectService }) => {
+  const { services: content } = useHome();
   const [activeTab, setActiveTab] = useState<string>("all");
   const [hoveredId, setHoveredId] = useState<string | null>(null);
   const sectionRef = useRef<HTMLElement>(null);
@@ -94,13 +97,13 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onSelectServic
       {/* Section Header */}
       <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
         <h2 className="font-agency text-2xl sm:text-3xl md:text-4xl lg:text-[44px] font-extrabold text-[#0F172A] dark:text-white tracking-tight leading-tight">
-          One-Stop Solution For <br />
-          <span className="bg-gradient-to-r from-[#FF8500] via-[#FFA229] to-amber-300 bg-clip-text text-transparent">
-            Your Brand&apos;s Digital Growth
-          </span>
+          <RichTitle
+            text={content.title}
+            highlightClassName="bg-gradient-to-r from-[#FF8500] via-[#FFA229] to-amber-300 bg-clip-text text-transparent"
+          />
         </h2>
         <p className="mt-4 text-slate-400 text-base sm:text-lg">
-          We provide complete branding and digital solutions to turn your idea into a successful online brand. Built with 8+ years of expertise.
+          {content.description}
         </p>
 
         {/* Filter Pills */}
@@ -180,7 +183,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onSelectServic
               {/* Bottom Row: Pixxen-Style Slide-Arrow Action Button */}
               <div className="relative z-10 mt-4 sm:mt-8 pt-3 sm:pt-5 border-t border-[#2651B9]/25 flex items-center justify-between">
                 <span className="text-[11px] sm:text-xs md:text-sm font-bold text-[#FFA133] group-hover:text-white transition-colors">
-                  Explore Service
+                  {content.buttonLabel}
                 </span>
 
                 <div className="w-7 h-7 sm:w-10 sm:h-10 rounded-full bg-[#081330] border border-[#2651B9]/30 group-hover:bg-[#FF8500] group-hover:border-[#FF8500] text-white flex items-center justify-center transition-all duration-300 shadow-sm overflow-hidden shrink-0">

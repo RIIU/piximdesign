@@ -5,111 +5,18 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { Quote, ChevronLeft, ChevronRight, Star, Pause, Play, CheckCircle2 } from "lucide-react";
+import { useHome } from "@/content/ContentProvider";
+import { RichTitle } from "@/content/RichTitle";
 
 interface TestimonialsSectionProps {
   onOpenContact?: () => void;
 }
 
-const TESTIMONIALS_DATA = [
-  {
-    id: "1",
-    author: "Nicolas Jaccard",
-    role: "Principal AI Architect, Orbis International",
-    flag: "🇺🇸",
-    avatarBg: "bg-emerald-600",
-    initials: "NJ",
-    rating: 5,
-    tag: "Telemedicine Platform",
-    review:
-      "We hired Pixim for our telemedicine and e-learning platform. Thanks to them, we're now training 5K+ healthcare professionals effectively with our solution.",
-  },
-  {
-    id: "2",
-    author: "Sharon Winson",
-    role: "General Manager, Permeco Group Ltd",
-    flag: "🇬🇧",
-    avatarBg: "bg-blue-600",
-    initials: "SW",
-    rating: 5,
-    tag: "Enterprise App UX",
-    review:
-      "They paid special attention to how people were using our app and gave it a more organized design. You could tell the difference immediately.",
-  },
-  {
-    id: "3",
-    author: "Nathan Jespersen",
-    role: "Owner, Anytime Fitness",
-    flag: "🇺🇸",
-    avatarBg: "bg-amber-600",
-    initials: "NJ",
-    rating: 5,
-    tag: "Fitness Mobile App",
-    review:
-      "Thank you for such an outstanding UX flow for my fitness app. Pixim went the extra effort and hope to work with them again.",
-  },
-  {
-    id: "4",
-    author: "Henrik Lindqvist",
-    role: "Head of Product, Nordic Tech Labs",
-    flag: "🇳🇴",
-    avatarBg: "bg-rose-600",
-    initials: "HL",
-    rating: 5,
-    tag: "10-Day Rapid Delivery",
-    review:
-      "The velocity and senior execution was unmatched. Delivered our complete brand system and UI screens in 10 days flat.",
-  },
-  {
-    id: "5",
-    author: "Ariful Islam",
-    role: "Founder, Shop BD",
-    flag: "🇧🇩",
-    avatarBg: "bg-purple-600",
-    initials: "AI",
-    rating: 5,
-    tag: "E-Commerce Growth",
-    review:
-      "Creative, responsive, and affordable. Best design agency I have worked with in Bangladesh. They took our brand identity to the next level.",
-  },
-  {
-    id: "6",
-    author: "Zarin Tasnim",
-    role: "Creative Director, Luxe Media",
-    flag: "🇦🇪",
-    avatarBg: "bg-teal-600",
-    initials: "ZT",
-    rating: 5,
-    tag: "Brand & Video Ads",
-    review:
-      "I needed video ads and packaging delivered fast. Pixim delivered within a short turnaround without compromising an ounce of quality.",
-  },
-  {
-    id: "7",
-    author: "Sakib Ahmed",
-    role: "CEO, TechBD",
-    flag: "🇧🇩",
-    avatarBg: "bg-cyan-600",
-    initials: "SA",
-    rating: 5,
-    tag: "SaaS Redesign",
-    review:
-      "Provides professional consultation and top-tier product designs. Their work helped us scale user conversion by 40%.",
-  },
-  {
-    id: "8",
-    author: "Nusrat Jahan",
-    role: "CEO, Organic Glow",
-    flag: "🇸🇬",
-    avatarBg: "bg-orange-600",
-    initials: "NJ",
-    rating: 5,
-    tag: "Packaging & Identity",
-    review:
-      "Fast delivery, world-class packaging and high-quality graphics. Pixim Design is now our permanent design partner for all products.",
-  },
-];
+
 
 export const TestimonialsSection: React.FC<TestimonialsSectionProps> = () => {
+  const { testimonials: content } = useHome();
+  const TESTIMONIALS_DATA = content.items;
   const sectionRef = useRef<HTMLElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const tweenRef = useRef<gsap.core.Tween | null>(null);
@@ -286,11 +193,11 @@ export const TestimonialsSection: React.FC<TestimonialsSectionProps> = () => {
         <div className="testimonial-header flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8 sm:mb-10">
           <div className="max-w-2xl">
             <h2 className="font-agency text-2xl sm:text-3xl md:text-4xl lg:text-[44px] font-extrabold text-white tracking-tight leading-tight">
-              Don&apos;t Just Take Our Word for It
+              <RichTitle text={content.title} />
             </h2>
 
             <p className="font-sherika mt-2.5 sm:mt-3 text-xs sm:text-sm md:text-base text-slate-300 font-normal leading-relaxed">
-              Real feedback from founders and tech leaders we&apos;ve helped scale across the globe.
+              {content.description}
             </p>
           </div>
 
@@ -359,7 +266,7 @@ export const TestimonialsSection: React.FC<TestimonialsSectionProps> = () => {
               <div className="relative z-10">
                 {/* Top Row: Stars */}
                 <div className="flex items-center gap-1 text-[#FFA133] mb-4">
-                  {[...Array(item.rating)].map((_, i) => (
+                  {[...Array(Math.max(0, Math.min(5, Math.round(Number(item.rating) || 5))))].map((_, i) => (
                     <Star key={i} className="w-3.5 h-3.5 fill-[#FFA133] text-[#FFA133]" />
                   ))}
                 </div>
@@ -368,7 +275,7 @@ export const TestimonialsSection: React.FC<TestimonialsSectionProps> = () => {
                 <div className="flex items-center gap-3 mb-4">
                   {/* Rounded avatar pod */}
                   <div
-                    className={`w-11 h-11 rounded-full ${item.avatarBg} text-white font-bold text-xs flex items-center justify-center shrink-0 border border-white/20 shadow-md`}
+                    className={`w-11 h-11 rounded-full ${item.avatarBg || "bg-blue-600"} text-white font-bold text-xs flex items-center justify-center shrink-0 border border-white/20 shadow-md`}
                   >
                     {item.initials}
                   </div>

@@ -5,6 +5,8 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { ArrowRight } from "lucide-react";
+import { useSettings } from "@/content/ContentProvider";
+import { RichTitle } from "@/content/RichTitle";
 
 interface TakeFirstStepSectionProps {
   onOpenContact?: (service?: string, notes?: string) => void;
@@ -14,6 +16,7 @@ export const TakeFirstStepSection: React.FC<TakeFirstStepSectionProps> = ({
   onOpenContact,
 }) => {
   const sectionRef = useRef<HTMLElement>(null);
+  const { ctaBanner: c } = useSettings();
 
   useGSAP(
     () => {
@@ -47,10 +50,10 @@ export const TakeFirstStepSection: React.FC<TakeFirstStepSectionProps> = ({
         {/* Left Column: Kicker + Headline (Aligns perfectly with container left margin) */}
         <div className="min-w-0">
           <span className="text-xs sm:text-sm font-black uppercase tracking-widest text-[#FFA133] font-mono block mb-1.5">
-            READY TO SCALE?
+            {c.kicker}
           </span>
           <h2 className="font-agency text-3xl sm:text-4xl lg:text-[42px] font-extrabold text-white tracking-tight leading-tight">
-            Let&apos;s build something remarkable.
+            <RichTitle text={c.title} highlightClassName="bg-gradient-to-r from-[#FF8500] via-[#FFA229] to-amber-300 bg-clip-text text-transparent" />
           </h2>
         </div>
 
@@ -67,7 +70,7 @@ export const TakeFirstStepSection: React.FC<TakeFirstStepSectionProps> = ({
             }
             className="group inline-flex items-center justify-center gap-2 rounded-full bg-[#FF8500] hover:bg-[#FFA229] text-white font-bold text-sm lg:text-base px-6 sm:px-7 py-3 sm:py-3.5 shadow-[0_0_24px_rgba(255,133,0,0.45)] hover:shadow-[0_0_34px_rgba(255,133,0,0.65)] hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer whitespace-nowrap"
           >
-            <span>Book a Call</span>
+            <span>{c.primaryLabel}</span>
             <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
           </button>
 
@@ -82,7 +85,7 @@ export const TakeFirstStepSection: React.FC<TakeFirstStepSectionProps> = ({
             }
             className="inline-flex items-center justify-center rounded-full bg-white hover:bg-slate-100 text-[#081330] font-bold text-sm lg:text-base px-6 sm:px-7 py-3 sm:py-3.5 shadow-md hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer whitespace-nowrap"
           >
-            <span>Free Audit</span>
+            <span>{c.secondaryLabel}</span>
           </button>
         </div>
       </div>
@@ -103,15 +106,12 @@ export const TakeFirstStepSection: React.FC<TakeFirstStepSectionProps> = ({
         <div className="relative z-10 w-full">
           {/* Headline */}
           <h2 className="font-agency text-3xl sm:text-4xl font-extrabold text-white tracking-tight leading-[1.1] mb-2.5 text-center">
-            Take the{" "}
-            <span className="bg-gradient-to-r from-[#FF8500] via-[#FFA229] to-amber-300 bg-clip-text text-transparent">
-              First Step
-            </span>
+            <RichTitle text={c.mobileTitle} highlightClassName="bg-gradient-to-r from-[#FF8500] via-[#FFA229] to-amber-300 bg-clip-text text-transparent" />
           </h2>
 
           {/* Subtitle */}
           <p className="font-sherika text-xs sm:text-sm text-slate-300 font-normal leading-relaxed max-w-md mx-auto mb-6 text-center">
-            From concept to MVP, from poor marketing strategy to powerful brand exposure – with Pixim, you&apos;re in good hands.
+            {c.mobileText}
           </p>
 
           {/* Buttons: Content-hugged, balanced & centered (No stretching) */}
@@ -130,7 +130,7 @@ export const TakeFirstStepSection: React.FC<TakeFirstStepSectionProps> = ({
               <span className="w-4 h-4 min-[380px]:w-5 min-[380px]:h-5 rounded-full bg-black/25 flex items-center justify-center shrink-0">
                 <ArrowRight className="w-2.5 h-2.5 min-[380px]:w-3 min-[380px]:h-3 text-white transition-transform duration-200 group-hover:translate-x-0.5" />
               </span>
-              <span>BOOK A STRATEGY CALL</span>
+              <span>{c.mobilePrimaryLabel}</span>
             </button>
 
             {/* Secondary Action: Contact Us (Outlined Rectangle) */}
@@ -144,7 +144,7 @@ export const TakeFirstStepSection: React.FC<TakeFirstStepSectionProps> = ({
               }
               className="inline-flex items-center justify-center rounded-xl sm:rounded-2xl border border-white/70 hover:border-white bg-transparent hover:bg-white/10 text-white font-black text-[10.5px] min-[380px]:text-xs uppercase tracking-wider px-3.5 sm:px-5 py-2.5 sm:py-3 shadow-sm active:scale-[0.98] transition-all cursor-pointer whitespace-nowrap shrink-0"
             >
-              <span>CONTACT US</span>
+              <span>{c.mobileSecondaryLabel}</span>
             </button>
           </div>
         </div>

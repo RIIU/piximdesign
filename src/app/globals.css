@@ -64,7 +64,8 @@
 }
 
 /* Global Headings: All headings across all pages strictly use Agency Font */
-h1, h2, h3, h4, h5, h6 {
+/* (not inside the website editor at /studio) */
+:is(h1, h2, h3, h4, h5, h6):not(.sanity-studio *) {
   font-family: var(--font-agency), 'Agency', system-ui, sans-serif !important;
 }
 

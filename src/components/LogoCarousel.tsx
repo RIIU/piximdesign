@@ -1,28 +1,20 @@
 "use client";
 
 import React, { useState } from "react";
+import { useSettings } from "@/content/ContentProvider";
 
 // Client logos from the public/client logo directory
-export const ROW_1_LOGOS = [
-  { id: "elite-motors", name: "Elite Motors", src: "/client logo/elite-motors.webp" },
-  { id: "tripshop", name: "TripShop Travels", src: "/client logo/tripshop.webp" },
-  { id: "grameen-swad", name: "গ্রামীণ স্বাদ", src: "/client logo/grameen-swad.webp" },
-  { id: "zarvila", name: "Zarvila", src: "/client logo/zarvila.webp" },
-  { id: "eon-education", name: "EON Education", src: "/client logo/eon-education.webp" },
-];
 
-export const ROW_2_LOGOS = [
-  { id: "guddi-studio", name: "Guddi Studio", src: "/client logo/guddi-studio.webp" },
-  { id: "optix-photography", name: "Optix Photography", src: "/client logo/optix-photography.webp" },
-  { id: "nextgen-it", name: "NextGen IT", src: "/client logo/nextgen-it.webp" },
-  { id: "minivon-shop", name: "Minivon Shop", src: "/client logo/minivon-shop.webp" },
-  { id: "movexa", name: "Movexa", src: "/client logo/movexa.webp" },
-];
 
-export const CLIENT_LOGOS = [...ROW_1_LOGOS, ...ROW_2_LOGOS];
+
+
 
 export const LogoCarousel: React.FC = () => {
   const [isPaused, setIsPaused] = useState(false);
+  const { clientLogos } = useSettings();
+  const half = Math.ceil(clientLogos.length / 2);
+  const ROW_1_LOGOS = clientLogos.slice(0, half);
+  const ROW_2_LOGOS = clientLogos.slice(half).length ? clientLogos.slice(half) : clientLogos;
 
   // Triple arrays for seamless infinite looping
   const dupRow1 = [...ROW_1_LOGOS, ...ROW_1_LOGOS, ...ROW_1_LOGOS, ...ROW_1_LOGOS];

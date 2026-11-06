@@ -27,9 +27,12 @@ export const COMPANY = {
   ] as SocialLink[],
 };
 
-export const whatsappUrl = (message?: string) =>
-  `https://wa.me/${COMPANY.whatsapp}${message ? `?text=${encodeURIComponent(message)}` : ""}`;
+export const whatsappUrl = (message?: string, number: string = COMPANY.whatsapp) =>
+  `https://wa.me/${number.replace(/\D/g, "")}${message ? `?text=${encodeURIComponent(message)}` : ""}`;
 
 export const phoneUrl = (phone: string) => `tel:${phone.replace(/[^+\d]/g, "")}`;
 
-export const mapUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(COMPANY.address)}`;
+export const mapUrlFor = (address: string) =>
+  `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`;
+
+export const mapUrl = mapUrlFor(COMPANY.address);
