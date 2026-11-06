@@ -2,6 +2,7 @@
 
 import React from "react";
 import { useSettings } from "@/content/ContentProvider";
+import { media } from "@/content/media";
 
 export const ClientLogoWall: React.FC = () => {
   const { clientLogos } = useSettings();
@@ -22,7 +23,7 @@ export const ClientLogoWall: React.FC = () => {
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src={logo.src}
+            src={media(logo.src)}
             alt={logo.name}
             width={300}
             height={120}
