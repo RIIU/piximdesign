@@ -3,7 +3,7 @@
 import React, { useRef } from "react";
 import { useContactModal } from "@/components/AppLayoutWrapper";
 import { ReadyForLogoSection } from "@/components/ReadyForLogoSection";
-import { GsapReviewsInfiniteSlider } from "@/components/animations";
+import { GsapReviewsInfiniteSlider } from "@/components/animations/GsapReviewsInfiniteSlider";
 import { ClientLogoWall } from "@/components/page-kit/ClientLogoWall";
 import { StickyShowcase } from "@/components/page-kit/StickyShowcase";
 import { ProcessTimeline } from "@/components/page-kit/ProcessTimeline";
