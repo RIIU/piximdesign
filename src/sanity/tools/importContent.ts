@@ -21,6 +21,7 @@ import { PROJECTS_PAGE_DEFAULTS } from "@/components/pages/ProjectsView";
 import { ABOUT_PAGE_DEFAULTS } from "@/components/pages/AboutView";
 import { CONTACT_PAGE_DEFAULTS } from "@/content/contactDefaults";
 import React from "react";
+import { MEDIA_MANIFEST } from "@/content/mediaManifest";
 import * as termsLegal from "@/content/legal/terms";
 import * as privacyLegal from "@/content/legal/privacy";
 import * as refundLegal from "@/content/legal/refund";
@@ -348,6 +349,14 @@ export function buildLegalDoc(k: keyof typeof LEGAL) {
   };
 }
 
+export function buildMediaDoc() {
+  return {
+    _id: "mediaLibrary",
+    _type: "mediaLibrary",
+    items: MEDIA_MANIFEST.map((m) => ({ _key: key(), _type: "mediaItem", name: m.name, area: m.area, src: m.src, type: m.type })),
+  };
+}
+
 /** Every document the import can create, in order. */
 export function buildAllDocs(): { _id: string; _type: string; [key: string]: unknown }[] {
   return [
@@ -357,5 +366,6 @@ export function buildAllDocs(): { _id: string; _type: string; [key: string]: unk
     ...Object.keys(SERVICE_CONFIGS).map(buildServicePageDoc),
     ...Object.keys(PAGE_DEFAULTS).map(buildPageDoc),
     ...(Object.keys(LEGAL) as (keyof typeof LEGAL)[]).map(buildLegalDoc),
+    buildMediaDoc(),
   ];
 }
