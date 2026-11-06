@@ -12,6 +12,7 @@ import { T, usePageContent, type PageContent } from "@/content/page";
 import { TeamSection } from "@/components/about/TeamSection";
 import { ProcessSection } from "@/components/about/ProcessSection";
 import { BookingCalendarSection } from "@/components/about/BookingCalendarSection";
+import { media } from "@/content/media";
 
 export const ABOUT_PAGE_DEFAULTS: PageContent = {
   hero: {
@@ -127,7 +128,7 @@ export const AboutView: React.FC = () => {
 
         <figure className="relative mx-auto w-full max-w-md">
           <Image
-            src="/images/consultation/director-card-clean.png"
+            src={media("/images/consultation/director-card-clean.png")}
             alt="Pixim Design's design director"
             width={466}
             height={411}
