@@ -1,4 +1,6 @@
 import { PricingView } from "@/components/pages/PricingView";
+import { PageContentProvider } from "@/content/page";
+import { getPageOverride } from "@/sanity/content";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
 
@@ -9,11 +11,14 @@ export const metadata = pageMetadata({
   path: "/pricing",
 });
 
-export default function Page() {
+export default async function Page() {
+  const override = await getPageOverride("pricing");
   return (
     <>
       <JsonLd data={breadcrumbJsonLd([{ name: "Pricing", path: "/pricing" }])} />
-      <PricingView />
+      <PageContentProvider value={override}>
+        <PricingView />
+      </PageContentProvider>
     </>
   );
 }
