@@ -43,14 +43,14 @@
 
 @font-face {
   font-family: 'Agency';
-  src: url('/fonts/agency.otf') format('opentype');
+  src: url('/fonts/agency.woff2') format('woff2'), url('/fonts/agency.otf') format('opentype');
   font-display: swap;
   font-weight: 400 900;
 }
 
 @font-face {
   font-family: 'Sherika';
-  src: url('/fonts/sherika-regular.otf') format('opentype');
+  src: url('/fonts/sherika-regular.woff2') format('woff2'), url('/fonts/sherika-regular.otf') format('opentype');
   font-display: swap;
   font-weight: 400 700;
 }
