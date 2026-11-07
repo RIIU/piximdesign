@@ -1,5 +1,4 @@
 import type { Metadata, Viewport } from "next";
-import { Plus_Jakarta_Sans, Geist_Mono, Jersey_25 } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
 import { draftMode } from "next/headers";
@@ -16,25 +15,32 @@ import { CURRENCY_BOOTSTRAP_SCRIPT } from "@/lib/currency-bootstrap";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { BASE_OPEN_GRAPH, OG_IMAGE, SITE_DESCRIPTION, SITE_JSON_LD, SITE_NAME, SITE_TITLE, SITE_URL } from "@/lib/seo";
 
-const plusJakartaSans = Plus_Jakarta_Sans({
+// Google fonts are self-hosted (latin subset, from @fontsource, OFL-1.1) instead of
+// using next/font/google: the Hostinger build server's Google Fonts fetch returned
+// font URLs next/font could not parse, which failed the whole build.
+const plusJakartaSans = localFont({
+  src: "../../public/fonts/plus-jakarta-sans-latin-variable.woff2",
   variable: "--font-plus-jakarta",
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800"],
+  weight: "200 800",
+  style: "normal",
   display: "swap",
   preload: true,
 });
 
-const geistMono = Geist_Mono({
+const geistMono = localFont({
+  src: "../../public/fonts/geist-mono-latin-variable.woff2",
   variable: "--font-geist-mono",
-  subsets: ["latin"],
+  weight: "100 900",
+  style: "normal",
   display: "swap",
   preload: false,
 });
 
-const jersey25 = Jersey_25({
+const jersey25 = localFont({
+  src: "../../public/fonts/jersey-25-latin-400.woff2",
   variable: "--font-jersey-25",
-  subsets: ["latin"],
   weight: "400",
+  style: "normal",
   display: "swap",
   preload: false,
 });
